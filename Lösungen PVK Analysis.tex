@@ -323,12 +323,6 @@ $$\lim_{n \rightarrow \infty} \big( 1 - \frac{5}{n-3} \big)^{(n+\sqrt{n})/2}$$
 \item
 $$\liminf_{n \rightarrow \infty} (-1)^n \frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)}$$
 
-\item
-$$\lim_{x \rightarrow 0} \frac{sin(ax)}{x}$$
-
-\item
-$$\lim_{x \rightarrow \infty} \frac{e^x x^5}{x^x}$$
-
 \end{enumerate}
 \end{ex}
 \begin{solution}
@@ -374,45 +368,7 @@ $$\frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)}
 Der Faktor $(-1)^n$ oszilliert zwischen $+1$ und $-1$. Teilfolgen mit geraden Gliedern (bis auf endlich viele Glieder) liefern H\"aufungspunkt $-5/2$. Teilfolgen mit ungeraden Gliedern (bis auf endlich viele Glieder) liefern H\"aufungspunkt $5/2$. Alle anderen Teilfolgen (unendlich viele gerade und unendlich viele ungerade Glieder) k\"onnen nicht konvergieren. Da der Limes Inferior der kleinste H\"aufungspunkt ist, folgt
 
 $$ \liminf_{n \rightarrow \infty} (-1)^n \frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)} = - \frac{5}{2}.$$
-\item
-Es gibt mehrere M\"oglichkeiten dies zu zeigen.
 
-$ \underline{\text{M\"oglichkeit } 1: \text{ Potenzreihe}} $
-
-Es gilt
-$$ \frac{\sin(ax)}{x} = \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} x^{2j}.$$
-
-Wir berechnen
-
-$$ \bigg\vert \frac{(-1)^j a^{2j+1}}{(2j+1)!}  \bigg\vert^{\frac{1}{2j}}
-= \frac{\vert a \vert^{1+\frac{1}{2j}}}{((2j+1)!)^{\frac{1}{j}}} 
-\rightarrow \vert a \vert \cdot 0= 0, \quad \text{ f\"ur } j\rightarrow \infty.$$
-
-Die restlichen Koeffizienten von $\sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} z^{2j}$ sind $0$. Damit ist der Konvergenzradius $\rho= \infty$. Wir setzten
-$$ f(z)= \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} z^{2j} .$$
-Nach Satz 7.2 ist $f$ stetig. Damit gilt
-
-$$ \lim_{x\rightarrow 0} \frac{sin(ax)}{x} = \lim_{x\rightarrow 0} f(x) = f(0)
-= \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} 0^{2j} 
-= \frac{(-1)^0 a^{2\cdot 0+1}}{(2\cdot 0+1)!} = a.$$
-
-$ \underline{\text{M\"oglichkeit } 2: \text{L'Hôpital} } $
-
-Es gilt $\lim_{x\rightarrow 0} \sin(ax)= 0 = \lim_{x\rightarrow 0} x$. Nenner und Z\"ahler sind beide differenzierbar. Mit dem Satz von Hôpital (Satz 8.14) folgt
-
-$$ \lim_{x\rightarrow 0} \frac{\sin(ax)}{x} = \lim_{x\rightarrow 0} \frac{a \cdot \cos(ax)}{1}
-= a \cdot \cos(0)= a.$$
-Wobei wir benutzt haben, dass $\cos$ stetig ist und $\cos(0)=1$.
-\item
-Wir berechnen
-$$ \frac{e^x x^5}{x^x} = e^5 \frac{e^{x-5}}{x^{x-5}}= e^5 \bigg(\frac{e}{x}\bigg)^{x-5}.$$
-
-F\"ur $x\geq 2e$ gilt
-
-$$0 \leq e^5  \bigg(\frac{e}{x}\bigg)^{x-5} \leq \bigg(\frac{1}{2}\bigg)^{x-5} \rightarrow 0,
-\quad \text{ f\"ur } x\rightarrow \infty.$$
-
-Wobei wir benutzt haben, dass $2^{x-5} \rightarrow \infty$ f\"ur $x\rightarrow \infty$. Damit gilt $\lim_{x\rightarrow \infty} \frac{e^x x^5}{x^x}= 0$.
 \end{enumerate}
 \end{solution}
 
@@ -456,10 +412,6 @@ Wahr, das ist die Definition eines H\"aufungspunktes.
 
 \begin{ex}{$(\star)$}
 \begin{enumerate}[i.)]
-\item
-Berechnen Sie den Grenzwert
-
-$$ \lim_{x\rightarrow \infty} \big( x^2+3-\sqrt{x^4+6x^2}  \big)x^2.$$
 
 \item
 Berechnen Sie alle H\"aufungspunkte der Folge
@@ -474,15 +426,7 @@ $$ \lim_{n \rightarrow \infty} (a_1^n + \dots + a_p^n)^{1/n} = \max_{i= 1, \dots
 \end{ex}
 \begin{solution}
 \begin{enumerate}[i.)]
-\item
-Wir berechnen
 
-$$\big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 
-= \frac{\big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)\big(x^2 + 3 + \sqrt{x^4 + 6x^2}\big)x^2}{x^2 + 3 + \sqrt{x^4 + 6x^2}}$$
-
-$$ = \frac{9x^2}{x^2 + 3 + \sqrt{x^4 + 6x^2}} 
-= \frac{9}{1 + \frac{3}{x^2} + \sqrt{1 + \frac{6}{x^2}}} \rightarrow \frac{9}{2}, \quad \text{ f\"ur } x \rightarrow \infty.$$
-ALso $\lim_{x\rightarrow \infty} \big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 = \frac{9}{2}$.
 \item
 Zuerst beobachten wir
 $$ \bigg( 1 +\frac{3}{n} \bigg)^{n+1} = \bigg( 1 +\frac{3}{n} \bigg)^{n} \bigg( 1 +\frac{3}{n} \bigg) \rightarrow e^3 \cdot 1 = e^3, \quad \text{ f\"ur } n \rightarrow \infty.$$
@@ -899,6 +843,75 @@ Dann gilt $z_n \rightarrow 0$. Mit der gleichen Argumentation wie oben, erhalten
 $$\lim_{n \rightarrow \infty} f(y_n) = \lim_{n \rightarrow \infty} f(z_{2n+1})
 = \lim_{n \rightarrow \infty} f(z_n) = \lim_{n \rightarrow \infty} f(z_{2n})
 = \lim_{n \rightarrow \infty} f(x_n) = c.$$
+\end{solution}
+
+\begin{ex} Berechnen Sie die folgenden Grenzwerte
+\begin{enumerate}[i)]
+\item
+$$\lim_{x \rightarrow 0} \frac{sin(ax)}{x}$$
+
+\item
+$$\lim_{x \rightarrow \infty} \frac{e^x x^5}{x^x}$$
+
+\item
+
+$$ \lim_{x\rightarrow \infty} \big( x^2+3-\sqrt{x^4+6x^2}  \big)x^2.$$
+\end{enumerate}
+
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i)]
+\item
+Es gibt mehrere M\"oglichkeiten dies zu zeigen.
+
+$ \underline{\text{M\"oglichkeit } 1: \text{ Potenzreihe}} $
+
+Es gilt
+$$ \frac{\sin(ax)}{x} = \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} x^{2j}.$$
+
+Wir berechnen
+
+$$ \bigg\vert \frac{(-1)^j a^{2j+1}}{(2j+1)!}  \bigg\vert^{\frac{1}{2j}}
+= \frac{\vert a \vert^{1+\frac{1}{2j}}}{((2j+1)!)^{\frac{1}{j}}} 
+\rightarrow \vert a \vert \cdot 0= 0, \quad \text{ f\"ur } j\rightarrow \infty.$$
+
+Die restlichen Koeffizienten von $\sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} z^{2j}$ sind $0$. Damit ist der Konvergenzradius $\rho= \infty$. Wir setzten
+$$ f(z)= \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} z^{2j} .$$
+Nach Satz 7.2 ist $f$ stetig. Damit gilt
+
+$$ \lim_{x\rightarrow 0} \frac{sin(ax)}{x} = \lim_{x\rightarrow 0} f(x) = f(0)
+= \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} 0^{2j} 
+= \frac{(-1)^0 a^{2\cdot 0+1}}{(2\cdot 0+1)!} = a.$$
+
+$ \underline{\text{M\"oglichkeit } 2: \text{L'Hôpital} } $
+
+Es gilt $\lim_{x\rightarrow 0} \sin(ax)= 0 = \lim_{x\rightarrow 0} x$. Nenner und Z\"ahler sind beide differenzierbar. Mit dem Satz von Hôpital (Satz 8.14) folgt
+
+$$ \lim_{x\rightarrow 0} \frac{\sin(ax)}{x} = \lim_{x\rightarrow 0} \frac{a \cdot \cos(ax)}{1}
+= a \cdot \cos(0)= a.$$
+Wobei wir benutzt haben, dass $\cos$ stetig ist und $\cos(0)=1$.
+\item
+Wir berechnen
+$$ \frac{e^x x^5}{x^x} = e^5 \frac{e^{x-5}}{x^{x-5}}= e^5 \bigg(\frac{e}{x}\bigg)^{x-5}.$$
+
+F\"ur $x\geq 2e$ gilt
+
+$$0 \leq e^5  \bigg(\frac{e}{x}\bigg)^{x-5} \leq \bigg(\frac{1}{2}\bigg)^{x-5} \rightarrow 0,
+\quad \text{ f\"ur } x\rightarrow \infty.$$
+
+Wobei wir benutzt haben, dass $2^{x-5} \rightarrow \infty$ f\"ur $x\rightarrow \infty$. Damit gilt $\lim_{x\rightarrow \infty} \frac{e^x x^5}{x^x}= 0$.
+
+\item
+Wir berechnen
+
+$$\big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 
+= \frac{\big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)\big(x^2 + 3 + \sqrt{x^4 + 6x^2}\big)x^2}{x^2 + 3 + \sqrt{x^4 + 6x^2}}$$
+
+$$ = \frac{9x^2}{x^2 + 3 + \sqrt{x^4 + 6x^2}} 
+= \frac{9}{1 + \frac{3}{x^2} + \sqrt{1 + \frac{6}{x^2}}} \rightarrow \frac{9}{2}, \quad \text{ f\"ur } x \rightarrow \infty.$$
+ALso $\lim_{x\rightarrow \infty} \big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 = \frac{9}{2}$.
+
+\end{enumerate}
 \end{solution}
 
 
