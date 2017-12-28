@@ -176,6 +176,30 @@ P_{k+1}( 2 \cos \theta) &= \frac{2 \cos \theta \sin((k+1) \theta)- \sin((k+1) \t
 &= \frac{\sin((k+2) \theta}{\sin \theta }
 \end{align*}
 \end{solution}
+
+\begin{ex} (*) Sei $n \in \NN$ und $a_{jk} \in \mathbb{C}$ für $j = 0,\dots,n + 1$, $k = 0,\dots,n$. Zeigen Sie, dass
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+\end{ex}
+
+\begin{solution} Sei zuerst $n = 0$. Dann erhalten wir einfach
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = a_{00} + a_{10} =  \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+	Nehmen wir nun an, dass die Formel für ein $n \in \NN$ gültig ist. Dann gilt 
+	\begin{align*}
+		\sum_{j = 0}^{n+2}\sum_{k = 0}^{n+1} a_{jk} &= \sum_{j = 0}^{n + 2}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}} \right) \\
+		&= \sum_{j = 0}^{n + 1}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}}\right) + \left( {\sum_{k = 0}^n a_{n+2,k} + a_{n+2,n+1}}\right) \\
+		&= \sum_{j = 0}^{n + 1}\sum_{k = 0}^n a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n + 1}a_{jk} + \sum_{0 \leq k < j \leq n+2} a_{jk}.
+	\end{align*}
+	womit der Induktionsschritt gezeigt wäre. 
+\end{solution}
+
+\newpage
+
 \section{sup, inf, max, min von Mengen}
 \begin{ex} Berechnen Sie das Supremum (kleinste obere Schranke) der Menge 
 \begin{align*}
