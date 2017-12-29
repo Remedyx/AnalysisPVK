@@ -1022,7 +1022,7 @@ und folglich konvergiert die Reihe.
 \newpage
 
 
-\section{Stetigkeit}
+\section{Stetigkeit und Grenzwerte von Funktionen}
 \begin{ex}
 $f:\RR \rightarrow \RR$ stetig und injektiv, dann ist $f$ streng monoton.
 \end{ex}
@@ -1160,528 +1160,143 @@ ALso $\lim_{x\rightarrow \infty} \big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 = \fra
 \end{solution}
 
 
+\begin{ex} Berechnen Sie die folgenden Grenzwerte (möglicherweise $\pm \infty$). 
+\begin{enumerate}[i)]
+\item  \begin{align*}
+\lim_{x \to 0 } x^2 \sin \left( \frac{1}{x} \right) 
+\end{align*}
+\item \begin{align*}
+\lim_{x \to \infty} \frac{2- \cos x}{x+3}
+\end{align*}
+\item \begin{align*}
+\lim_{x \to \infty} \frac{x^2 (2+ \sin^2x)}{x+100}
+\end{align*}
+\item \begin{align*}
+\lim_{x \to 0 } x^2 e^{ \sin^3 \left( \frac{1}{x}\right) } 
+\end{align*}
+\end{enumerate}
+\end{ex}
+
+\begin{solution} Wir verwenden in allen Lösungen, dass die trigonometrischen Funktionen von oben durch $1$ und von unten durch $-1$ beschränkt sind. Wir erhalten dann:
+\begin{enumerate}[i)]
+\item \begin{align*}
+0 \leftarrow -x^2 \leq x^2 \sin \left( \frac{1}{x} \right) \leq x^2 \to 0, \text{ als } x \to 0 
+\end{align*}
+da $x^2 \geq 0$.
+\item Wir haben $-1 \leq \cos (x) \leq 1$ und somit $ 1 \geq - \cos(x) \geq -1 $ also
+\begin{align*}
+0 \leftarrow \frac{1}{x+3} \leq \frac{2- \cos x}{x+3} \leq \frac{3}{x + 3} \to 0  \text{ als } x \to \infty 
+\end{align*}
+\item Es genügt die untere Abschätzung zu betrachten, wir erkennen dass  
+\begin{align*}
+\frac{x^2}{x+100} \leq \frac{x^2 (2 \sin^2 x)}{x+100}
+\end{align*}
+und da die untere Schranke gegen unendlich divergiert, muss auch die obere Schranke nach unendlich divergieren. 
+\item Da die Exponential Funktion monoton wachsend auf $\mathbb{R}$ ist erhalten wir  
+\begin{align*}
+0 \leftarrow x^2 e^{-1} \leq x^2 \exp \left(  \sin^3 \left( \frac{1}{x} \right) \right) \leq x^2 e^1 \to 0, \text{ als } x \to 0 
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+
+
+\begin{ex} Berechnen Sie die folgenden Grenzwerte
+\begin{enumerate}[i)]
+\item \begin{align*}
+ \lim_{x \to 0^+} \left( \sqrt{x^2 +1} \right)^{ \frac{1}{\sin^2 x}} 
+\end{align*}
+\item \begin{align*}
+\lim_{x \to 0^+} x^{ \sqrt{x+4}-2}
+\end{align*}
+\end{enumerate}
+
+\end{ex}
+
+
+
+\begin{solution} Wir verwenden den $e^{\log}$-Trick um diese beiden Aufgaben zu lösen. 
+\begin{enumerate}[i)] 
+\item 
+\begin{align*}
+ \lim_{x \to 0^+} \left( \sqrt{x^2 +1} \right)^{ \frac{1}{\sin^2 x}} = \lim_{ x \to 0^+} \exp \left( \log \left( ( \sqrt{x^2+1})^\frac{1}{\sin^2x} \right) \right) = \lim_{x \to 0^+} \exp \left( \frac{\log \sqrt{x^2+1}}{\sin^2 x} \right) 
+\end{align*}
+Da die Exponentialfunktion stetig ist, dürfen wir den Grenzwert mit der $\exp$-funktion vertauschen (i.e. in ihr Argument hereinziehen). Für den Grenzwert der Funktion im Exponenten erhalten wir mit Hilfe des Satzes von Bernoulli De L'Hopital, dass
+\begin{align*}
+\lim_{x \to 0+} \frac{\log ( \sqrt{x^2+1}}{\sin^2x} = \lim_{x \to 0^+} \frac{\log(x^2+1)}{2 \sin^2 x} = \lim_{x \to 0^+} \frac{\frac{2x}{1+x^2}}{4 \sin x \cos x} &= \lim_{x \to 0^+} \underbrace{\frac{x}{2 \sin x}}_{ \to 1/2} \cdot \underbrace{\frac{1}{(1+x^2) \cos x}}_{ \to 1}   
+\\ & = \frac{1}{2}
+\end{align*}
+und somit erhalten wir für den Grenzwert $e^{1/2}$. 
+
+\item 
+\begin{align*}
+\lim_{x \to 0^+} x^{ \sqrt{x+4}-2} = \lim_{x \to 0^+} \exp \left( \log \left( x^{ \sqrt{x+4}-2} \right) \right) = \lim_{x \to 0^+} \exp \left( (\sqrt{x+4}-2) \log(x) \right) 
+\end{align*}
+Dann berechnen wir den Grenzwert für die Funktion im Exponenten, erneut mit HIlfe des Satzes von Bernoulli- de L'Hopital:
+\begin{align*}
+\lim_{ x \to 0^+} ( \sqrt{4+x}-2) \log(x) & = \lim_{x \to 0^+} \frac{\log (x)}{\frac{1}{\sqrt{x+4}-2}} = \lim_{x \to 0^+} \frac{\frac{1}{x}}{\frac{- \frac{1}{2 \sqrt{x+4}}}{(\sqrt{x+4}-2)^2}} \\
+&= \lim_{x \to 0^+} \frac{-2 \cdot \sqrt{x+4} \cdot ( \sqrt{x+4}-2)^2}{x} \\
+&=  \lim_{x \to 0^+} \frac{-4 ( \sqrt{x+4}-2)^2}{x} = \lim_{x \to 0^+} \frac{-8( \sqrt{x+4}-2) \frac{1}{2 \sqrt{x+4}}}{1} \\
+= & \lim_{x \to 0^+} -8 \underbrace{( \sqrt{x+4}-2)}_{ \to 0} \cdot \underbrace{\frac{1}{2 \sqrt{x+4}}}_{ \to 1/4}  = 0 
+\end{align*}
+Also erhalten wir als Grenzwert $e^0=1$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Berechnen Sie den folgenden Grenzwert 
+\begin{align*}
+\lim_{x \to 0} \frac{1}{x} \int_0^{\tan x} \log(2+t)dt
+\end{align*}
+\begin{solution} Wir haben den Typ $"0/0"$ da $\lim_{x \to 0} \int_0^{ \tan x} \log (2 +t) dt =0$ Dank dem Hauptsatz der Integralrechnung erhalten wir 
+\begin{align*}
+\lim_{x \to 0} \frac{1}{x} \int_0^{\tan x} \log(2+t)dt = \lim_{x \to 0} \frac{\log(2 + \tan (x)) \cdot \frac{1}{\cos^2 (x)}}{1} = \lim_{x \to 0} \frac{\log(2 + \tan(x))}{\cos^2 (x)}= \log(2)
+\end{align*}
+\end{solution}
+\end{ex}
+
+
+\begin{ex} Berechnen Sie den folgenden Grenzwert. Tipp: Verwenden sie einen Fundamentallimes.
+
+\begin{align*}
+\lim_{x \to \infty} \left( \frac{x^2 +2x}{x^2-3x+2}\right)^{ \frac{x^2 +1}{x-3}}
+\end{align*}
+
+\end{ex}
+
+
+\begin{solution} Wir verwenden den Fundamentallimes $\lim_{x \to \infty} \left( 1+\frac{1}{x}\right)^x= e$. Wir berechnen also 
+\begin{align*}
+\lim_{x \to \infty} \left( \frac{x^2 +2x}{x^2-3x+2}\right)^{ \frac{x^2 +1}{x-3}} &= \lim_{x \to \infty} \left( \frac{x^2-3x+2+3x-2+2x}{x^2-3x+2} \right)^\frac{x^2+1}{x-3} \\
+&= \lim_{x \to \infty} \left( 1 + \frac{5x-2}{x^2-3x+2} \right)^\frac{x^2+1}{x-3} \\
+&= \lim_{x \to \infty} \left[ \left( 1 + \frac{1}{\frac{x^2-3x+2}{5x-2}}\right)^\frac{x^2-3x+2}{5x-2}\right]^{ \frac{5x-2}{x^2-3x+2} \frac{x^2+1}{x-3}}
+\end{align*}
+Der Ausdruck in den eckigen Klammern [.] konvergiert gemäss Fundamentallimes gegen $e$, also betrachten wir nurnoch den Exponenten, dieser kann jedoch wie folgt vereinfacht werden
+\begin{align*}
+\frac{5x-2}{x^2-3x+2} \frac{x^2+1}{x-3} =\frac{5x^3-2x^2+5x-2}{x^3-6x^2+12x-6} \to 5 \text{ als } x \to \infty 
+\end{align*}
+Da die höchst auftretenden Potenzen beide Grad $3$ aufweisen. Wir erhalten also den Grenzwert $e^5$. Als kleine Bemerkung, wir haben verwendet, dass wir eine Funktion der folgenden Form betrachten
+\begin{align*}
+\lim_{x \to \infty} f(x)^{g(x)} = \lim_{x \to \infty} f(x)^{\lim g(x)} 
+\end{align*}
+unter der Annahme, dass die beiden Grenzwerte $\lim f(x)$ und $\lim g(x)$ existieren. Dies gilt gemäss dem $e^{\log}$-Trick. In der Tat wir betrachten 
+\begin{align*}
+\lim_{x \to \infty} f(x)^{g(x)} = \lim_{x \to \infty} \exp \left( \log \left( f(x)^{g(x)} \right) \right) = \lim_{x \to \infty} \exp \left( g(x) \log(f(x)) \right) = \exp( \lim g(x) \log ( \lim f(x)))  \\
+= \lim f(x)^{\lim g(x)}
+\end{align*}
+Da sowohl $\exp$ als auch $\log$ stetig sind. 
+\end{solution}
+
 \newpage
 
 
-\section{Potenzreihen und Differentialrechnung}
+\section{Potenzreihen}
 
 
 
-\begin{ex}{$(\star)$}
-Sei $f:\RR \rightarrow \RR$ eine gerade (d.h. $f(x)=f(-x)$ f\"ur alle $x\in \RR$), differenzierbare Funktion. Zeigen Sie, dass $f':\RR \rightarrow \RR$ eine ungerade Funktion ist, d.h. $f'(-x)=-f'(x).$
-\end{ex}
-\begin{solution}
-Sei $x\in \RR$, dann gilt
-$$ f'(-x) = \lim_{h \rightarrow 0} \frac{f(-x+h)-f(-x)}{h} 
-\stackrel{f \text{ gerade}}{=}\lim_{h \rightarrow 0} \frac{f(x-h)-f(x)}{h} 
-= \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{-h} $$
 
-$$= - \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h} = -f'(x).$$
-\end{solution}
 
 
-\begin{ex}
-Beweisen Sie die verallgemeinerte Bernoulli-Ungleichung, diese besagt, dass f\"ur alle $r\geq 1, \ x\geq$ gilt:
-$$ (1+x)^r\geq 1+rx .$$
 
-Hint: Betrachten Sie die Funktion $h(x)=(1+x)^r - (1+rx).$
-\end{ex}
-\begin{solution}
-Die Behauptung ist \"aquivalent zu der Aussage $h(x)\geq 0$ f\"ur alle $x\geq 0$. Zuerst berechnen wir die Ableitung von $h$.
-$$h'(x) = r(1+x)^{r-1} - r = r((1+x)^r -1)\geq 0.$$
-Damit ist $h$ monoton steigend. Da $h(0)= 1^r -1=0$, folgt, dass $h(x)\geq 0$ f\"ur alle $x\geq 0$ und damit die Behauptung.
-\end{solution}
-
-
-
-
-\begin{ex}{$(\star)$}
-Sei $f:\RR \rightarrow \RR$ definiert durch
-$$ f(x)= \left\{\begin{array}{lr}  x^2 \sin\big( \frac{1}{x} \big), & x\neq 0 \\
-0,  & x=0 \end{array}\right. .$$
-\begin{enumerate}[i.)]
-\item
-Zeigen Sie, dass $f$ auf ganz $\RR$ differenzierbar ist und berechnen Sie $f'(x)$ f\"ur alle $x\in \RR$.
-\item
-Ist $f'$ an der Stelle $x=0$ stetig?
-\end{enumerate}
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-F\"ur $x\neq 0$ erhalten wir mit der Kettenregel (Prop. 8.5) und der Produktregel (Satz 8.3), dass $f$ differenzierbar ist und dass gilt
-$$ f'(x)= (x^2)' \sin\bigg(\frac{1}{x}\bigg) + x^2 \bigg(\sin\bigg(\frac{1}{x}\bigg)\bigg)'
-= 2x \sin\bigg(\frac{1}{x}\bigg) + x^2 \bigg(\cos\bigg(\frac{1}{x}\bigg)\bigg) \bigg( \frac{1}{x} \bigg)'$$
-
-$$= 2x \sin\bigg(\frac{1}{x}\bigg) + x^2 \bigg(\cos\bigg(\frac{1}{x^2}\bigg)\bigg) \bigg( \frac{-1}{x^2} \bigg) 
-= 2x \sin\bigg(\frac{1}{x}\bigg) - \cos\bigg(\frac{1}{x}\bigg) .$$
-
-F\"ur $x=0$ berechnen wir
-$$0 \leq \bigg\vert \frac{f(h)-f(0)}{h-0} \bigg\vert 
-= \bigg\vert \frac{h^2 \sin\big(\frac{1}{x}\big) }{h} \bigg\vert
-= \vert h \vert \cdot \bigg\vert \sin\bigg(\frac{1}{x}\bigg) \bigg\vert
-\leq \vert h \vert \rightarrow 0, \quad \text{ f\"ur } h\rightarrow 0.$$
-
-Damit gilt $f'(0) = \lim_{h\rightarrow 0} \bigg\vert \frac{f(h)-f(0)}{h-0} \bigg\vert =0$.
-\item
-$f'$ ist stetig in $x=0$, genau dann wenn gilt $\lim_{h\rightarrow 0}f'(h) = f'(0)$, also
-$$ \lim_{h\rightarrow 0} \bigg[ 2h \sin\bigg(\frac{1}{h}\bigg) - \cos\bigg(\frac{1}{h}\bigg) \bigg]=f'(0)=0.$$
-Aus der Rechnung von $i.)$ folgt $\lim_{h\rightarrow 0} 2h \sin\left(\frac{1}{h}\right)=0$. Damit ist $f'$ stetig in $x=0$, genau dann wenn $\lim_{h \rightarrow 0} \cos\left(\frac{1}{h}\right)=0$. Dies ist jedoch nicht der Fall. Da
-$$ \cos\left(\frac{1}{\bigg( \frac{1}{2n\pi} \bigg)}\right) = \cos(2n\pi) = 1 \quad \text{ und }  \frac{1}{2n\pi} \rightarrow 0 \quad \text{ f\"ur } n \rightarrow \infty.$$
-Also ist $f'$ nicht stetig in $x=0$.
-\end{enumerate}
-\end{solution}
-
-
-
-\begin{ex}
-Sei $\epsilon>0$. Wir definieren $f_{\epsilon}:\RR \rightarrow \RR, f_{\epsilon}(x)= \vert x \vert^{1+\epsilon}$.
-Zeigen Sie, dass $f_{\epsilon}$ auf ganz $\RR$ differenzierbar ist.
-\end{ex}
-\begin{solution}
-Wir wissen, dass der Absolutbetrag ausserhalb von $x=0$ differenzierbar ist. Auch wissen wir, dass $x\mapsto x^{1+\epsilon}$ differenzierbar ist (Seite 90). Die Komposition differenzierbarer Funktionen ist differenzierbar (Kettenregel, Prop. 8.5), also ist $f_{\epsilon}$ in $x\neq 0$ differenzierbar. Nun zeigen wir noch, dass $f_{\epsilon}$ in $x=0$ differenzierbar ist
-
-$$\bigg\vert \frac{f_{\epsilon}(h)- f_{\epsilon}(0)}{h-0} \bigg\vert 
-= \bigg\vert \frac{\vert h \vert^{1+\epsilon}}{h} \bigg\vert 
-= \vert h \vert^{\epsilon} \rightarrow 0, \quad h \rightarrow 0.$$
-Damit gilt $\lim_{h\rightarrow 0} \frac{f_{\epsilon}(h)-f_{\epsilon}(0)}{h-0}=0$, also ist $f_{\epsilon}$ in $x=0$ differenzierbar (mit $f'_{\epsilon}(0)=0$).
-\end{solution}
-
-
-
-
-\begin{ex}
-
-Bestimmen Sie alle Punkte, in denen 
-$$f:\RR \rightarrow \RR, f(x)= \left\{\begin{array}{lr}  x^2 , & x\in \QQ \\
-0,  & x \in \RR \setminus \QQ \end{array}\right.$$
-\begin{enumerate}[i.)]
-\item
-stetig ist.
-\item
-differenzierbar ist.
-\end{enumerate}
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-Wir zeigen, dass $f$ nur in $x=0$ stetig ist.
-
-Sei $x\neq 0$. Da sowohl $\QQ$, als auch $\RR \setminus \QQ$ dicht in $\RR$ liegen (Prop. 2.17 und Seite 62), existieren Folgen $(a_n)_{n\in \NN} \subseteq \QQ$ und $(b_n)_{n \in \NN} \subseteq \RR \setminus \QQ$ mit $\lim_{n\rightarrow \infty} a_n = x =\lim_{n \rightarrow \infty} b_n$. Es gilt 
-$$ \lim_{n\rightarrow \infty} f(a_n) = \lim_{n \rightarrow \infty} 0 = 0 
-\neq x^2 = \lim_{n \rightarrow \infty} b_n^2 = \lim_{n \rightarrow \infty} f(b_n).$$
-Damit ist $f$ nicht stetig in $x\neq 0$. Die gleiche Rechnung zeigt, dass $f$ in $x=0$ stetig ist.
-\item
-Wir zeigen, dass $f$ nur in $x=0$ differenzierbar ist.
-
-Da $f$ nicht stetig ist in $x\neq 0$, ist $f$ auch nicht differenzierbar in $x\neq 0$ (Prop. 8.2). Wir berechnen
-$$ \bigg\vert \frac{f(h)-f(0)}{h-0} \bigg\vert \leq \bigg\vert \frac{h^2}{h} \bigg\vert = \vert h \vert \rightarrow 0,
-\quad h\rightarrow 0.$$
-Damit gilt $\lim_{h\rightarrow 0}\frac{f(h)-f(0)}{h-0}=0$, also ist $f$ in $x=0$ differenzierbar (mit $f'(0)=0$).
-
-Das Ziel dieser Aufgabe war es, daran zu erinneren, dass eine Funktion, die in $x$ differenzierbar ist, nicht in einer ganzen Umgebung von $x$ differenzierbar sein muss. 
-\end{enumerate}
-\end{solution}
-
-
-
-
-\begin{ex}{$(\star)$}
-Berechnen Sie die Ableitungen $f'(x)$ der folgenden Funktionen:
-\begin{enumerate}[i.)]
-\item
-$$ f(x)= \log\bigg(\frac{1 + \sqrt{1-x^2}}{x}\bigg)  \quad \text{ f\"ur } x \in (0,1).$$
-\item
-$$f(x)= \sqrt{\frac{a+bx}{a-bx}}  \quad \text{ f\"ur } a,b>0,  \text{ f\"ur } x\in \left( \frac{-\alpha}{\beta}, \frac{\alpha}{\beta} \right).$$
-\item
-$$f(x) = x^{1/3}(1-x)^{2/3}(1+x)^{1/2}  \quad \text{ f\"ur } x\in (0,1).$$
-\item
-$$f(x)= x^{\sqrt{x}}  \quad \text{ f\"ur } x>0.$$
-\item
-$$f(x) = \log(\tan(x)^{-1/3}) \quad \text{ f\"ur } x\neq k \frac{\pi}{2},\ k \in \ZZ. $$
-\end{enumerate}
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-$$f'(x) \stackrel{\text{Kettenregel}}{=} \frac{1}{\frac{1 + \sqrt{1-x^2}}{x}} \cdot \bigg(\frac{1 + \sqrt{1-x^2}}{x}\bigg)'$$
-$$\stackrel{\text{Quotientenregel}}{=} \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{(1 + \sqrt{1-x^2})'x - (1 + \sqrt{1-x^2})(x)'}{x^2}$$
-
-$$\stackrel{\text{Kettenregel}}{=} \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{\frac{-2x}{2 \sqrt{1-x^2}}\cdot x - (1 + \sqrt{1-x^2})}{x^2}
-= \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{\left(\frac{-x^2 - \sqrt{1-x^2} - (\sqrt{1-x^2})^2}{ \sqrt{1-x^2}}\right)}{x^2}$$
-
-$$ =  \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{\left(\frac{-1 - \sqrt{1-x^2}}{ \sqrt{1-x^2}}\right)}{x^2}
-= \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{-1 - \sqrt{1-x^2}}{x^2 \cdot \sqrt{1-x^2} }
-= \frac{-1}{x\cdot \sqrt{1-x^2} }.$$
-\item
-Man pr\"uft leicht nach, dass 
-$$a-b t >0 \Leftrightarrow t > -\frac{a}{b} \quad \text{ und }
-\quad a+b t >0 \Leftrightarrow t < \frac{a}{b}.$$
-Damit gilt
-$$\frac{a+b t}{a-b t} \geq 0 \Leftrightarrow t\in \left( -\frac{a}{b}, \frac{a}{b} \right].$$
-Wir rechnen
-$$ f'(x)  \stackrel{\text{Kettenregel}}{=} \frac{1}{2\sqrt{\frac{a+bx}{a-bx}}} \cdot \left( \frac{a+bx}{a-bx} \right)' 
-\stackrel{\text{Quotientenregel}}{=} \frac{\sqrt{a-bx}}{2\sqrt{a+bx}} \cdot \frac{b\cdot (a-bx) - (a+bx)\cdot(-b)}{(a-bx)^2}$$
-
-$$= \frac{\sqrt{a-bx}}{2\sqrt{a+bx}} \cdot \frac{b\cdot ((a-bx) + (a+bx))}{(a-bx)^2}
-= \frac{\sqrt{a-bx}}{\sqrt{a+bx}} \cdot \frac{ab}{(a-bx)^2}$$
-\item
-$$f'(x) \stackrel{\text{Produktregel}}{=} \left( x^{1/3} \cdot (1-x)^{2/3} \right)'\cdot (1+x)^{1/2} + x^{1/3} \cdot (1-x)^{2/3} \left( (1+x)^{1/2}\right)'$$
-
-$$\stackrel{\text{Produktregel}}{=} \left( \left(x^{1/3} \right)' \cdot (1-x)^{2/3} + x^{1/3} \left( (1-x)^{2/3} \right)' \right)\cdot (1+x)^{1/2} + x^{1/3} \cdot (1-x)^{2/3} \cdot \frac{1}{2} (1+x)^{-1/2}$$
-
-$$ \stackrel{\text{Kettenregel}}{=} \left( \frac{1}{3} x^{-2/3} \cdot (1-x)^{2/3} - x^{1/3} \cdot \frac{2}{3}(1-x)^{-1/3} \right) \cdot (1+x)^{1/2} + x^{1/3} \cdot (1-x)^{2/3} \cdot \frac{1}{2} (1+x)^{-1/2}$$
-
-$$=\frac{1}{3}x^{-2/3}\cdot (1-x)^{2/3}\cdot (1+x)^{1/2} -\frac{2}{3}x^{1/3}\cdot (1-x)^{-1/3}\cdot (1+x)^{1/2}+ \frac{1}{2} x^{1/3} \cdot (1-x)^{2/3} \cdot (1+x)^{-1/2}$$
-
-$$=\left( \frac{1}{3x^{1/3}} - \frac{2}{3(1-x)^{2/3}} + \frac{1}{2(1+x)^{1/2}} \right)\cdot x^{1/3} \cdot (1-x)^{2/3} \cdot (1+x)^{1/2}.$$
-\item
-$$f'(x)= \left( e^{\sqrt{x} \cdot\log(x)} \right)'
-\stackrel{\text{Produktregel}}{=} \left( \sqrt{x} \cdot\log(x) \right)' \cdot \left( e^{\sqrt{x} \cdot\log(x)} \right)$$
-
-$$\stackrel{Produktregel}{=} \left( (\sqrt{x})' \cdot\log(x) + \sqrt{x} \cdot (\log(x))' \right) \cdot x^{\sqrt{x}}
-= \left( \frac{1}{2\sqrt{x}} \cdot\log(x) + \frac{\sqrt{x}}{x} \right) \cdot x^{\sqrt{x}}$$
-
-$$= \frac{1}{\sqrt{x}}\left(\frac{\log(x)}{2} +1\right) x^{\sqrt{x}} 
-= \left(\frac{\log(x)}{2} +1\right) x^{\sqrt{x}-1/2} .$$
-\item
-$$ f'(x) \stackrel{\text{Kettenregel}}{=} \frac{1}{\tan(x)^{-1/3}} \cdot \left( \tan(x)^{-1/3} \right)'
-\stackrel{\text{Kettenregel}}{=} \tan(x)^{1/3} \cdot \left( -\frac{1}{3} \right) \tan(x)^{-4/3} \cdot \left( \tan(x) \right)'$$
-
-$$ = -\frac{1}{3} \tan(x)^{-1} \cdot \left(1+ \tan(x)^2 \right)
-= -\frac{1}{3} \left( \frac{1}{\tan(x)} + \tan(x) \right).$$
-\end{enumerate}
-\end{solution}
-
-
-
-\begin{ex}{$(\star)$}
-Seien $f,g : (a,b) \rightarrow \RR$ differenzierbare Funktionen.
-\begin{enumerate}[i.)]
-\item
-Zeigen Sie, dass in allen Punkten $x\in (a,b)$ mit $f(x) \neq g(x)$ die Funktion $\max(f,g)$ differenzierbar ist.
-\item
-Unter welcher Bedingung ist $\max(f,g)$ differenzierbar in einem Punkt $x\in (a,b)$ mit $f(x)=g(x)$.
-\end{enumerate}
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-Sei $x\in (a,b)$.
-
-$\underline{ \text{Fall }1:f(x)-g(x) >0}$
-
-Da $f,g$ stetig sind, ist $f-g$ ebenfalls stetig (Prop. 6.3) und damit existiert ein $\delta>0$, sodass gilt $(f-g)|_{(x-\epsilon, x+\epsilon)}>0$. Damit gilt
-$$ \lim_{h\rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}
-= \lim_{h\rightarrow 0} \frac{f(x+h) - f(x)}{h} = f'(x).$$
-
-$\underline{ \text{Fall }2:f(x)-g(x) <0}$
-
-Da $f,g$ stetig sind, ist $f-g$ ebenfalls stetig (Prop. 6.3) und damit existiert ein $\delta>0$, sodass gilt $(f-g)|_{(x-\epsilon, x+\epsilon)}<0$. Damit gilt
-$$ \lim_{h\rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}
-= \lim_{h\rightarrow 0} \frac{g(x+h) - g(x)}{h} = g'(x).$$
-\item
-\begin{claim}
-Sei $x\in (a,b)$:
-$$ \max(f,g) \text{ ist differenzierbar in x } \Leftrightarrow f'(x)=g'(x).$$
-\end{claim}
-\begin{proof}
-$" \Rightarrow "$ Wir zeigen die Kontraposition. Sei $f(x)\neq g(x)$, wir k\"onnen ohne Beschr\"ankung der Allgemeinheit annehmen, dass $f'(x) > g'(x)$ (ansonsten benennen wir unsere Funktionen um). Da $$\lim_{h \rightarrow 0} \frac{(f-g)(x+h)-\overbrace{(f-g)(x)}^{=0}}{h} 
-=\lim_{h \rightarrow 0} \frac{(f-g)(x+h)}{h}= f'(x)-g'(x) >0.$$
-Damit existiert ein $h_0>0$, sodass f\"ur alle $0<h\leq h_0$
-$$\frac{(f-g)(x+h)}{h} >0 \Rightarrow f(x+h)>g(x+h)$$
-und f\"ur $-h_0\leq h <0$
-$$\frac{(f-g)(x+h)}{h} >0 \Rightarrow f(x+h)<g(x+h) .$$
-Damit gilt
-$$ \lim_{h\downarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}
-= \lim_{h\downarrow 0} \frac{f(x+h) - f(x)}{h} = f'(x) \neq g'(x)$$
-
-$$= \lim_{h\downarrow 0} \frac{g(x+h) - g(x)}{h}
-= \lim_{h\uparrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}.$$
-Also existiert $\lim_{h\rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}$ nicht. Deswegen ist $\max(f,g)$ in $x$ nicht differenzierbar.
-
-$"\Leftarrow"$ Sei nun $f'(x)=g'(x)$ f\"ur ein fixes $x\in (a,b)$. Sei $\epsilon>0$.
-
-Da $\lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h}=f'(x)$, existiert ein $\delta_1>0$, sodass f\"ur alle $0 < \vert h \vert < \delta_1$
-$$ \bigg\vert \frac{f(x+h)-f(x)}{h} - f'(x) \bigg\vert < \epsilon.$$
-Da $\lim_{h \rightarrow 0} \frac{g(x+h)-g(x)}{h}=g'(x)$, existiert ein $\delta_2>0$, sodass f\"ur alle $0 < \vert h \vert < \delta_2$
-$$ \bigg\vert \frac{g(x+h)-g(x)}{h} - g'(x) \bigg\vert < \epsilon.$$
-Damit gilt auch f\"ur alle $0 < \vert h \vert < \delta_2$
-$$ \bigg\vert \frac{g(x+h)-f(x)}{h} -f'(x)\bigg\vert 
-\stackrel{f(x)=g(x), \ f'(x)=g'(x)}{=} \bigg\vert \frac{g(x+h)-g(x)}{h} - g'(x) \bigg\vert 
-< \epsilon.$$
-Sei $\delta=\min\{\delta_1, \delta_2 \}$. Dann gilt f\"ur $0<\vert h \vert <\delta$
-$$\bigg\vert \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h} -f'(x)\bigg\vert 
-\stackrel{f(x)=g(x)}{=} \bigg\vert \frac{\max(f,g)(x+h) - f(x)}{h} -f'(x)\bigg\vert$$
-
-$$\leq \max \left\lbrace \underbrace{\bigg\vert \frac{f(x+h) - f(x)}{h} -f'(x)\bigg\vert}_{<\epsilon, \text{ da } \delta\leq \delta_1} \ , \ \underbrace{\bigg\vert \frac{g(x+h) - f(x)}{h} -f'(x)\bigg\vert}_{<\epsilon, \text{ da } \delta \leq \delta_2}  \right\rbrace 
-< \epsilon.$$
-Damit gilt $\lim_{h\in \rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}$ konvergiert (gegen $f'(x)$), also ist $\max(f,g)$ in $x$ differenzierbar.
-\end{proof}
-\end{enumerate}
-\end{solution}
-
-
-\begin{ex}
-Seien $n \in \NN_{\geq 1}$, $f\in C^{n}([0,1], \RR)$ und $b\in \RR$. Seien $0\leq x_1< \dots < x_{n+1}\leq 1$ sodass $f(x_i)=b$ f\"ur alle $i\in \{1, \dots , n+1 \}$. Zeigen Sie, es existiert ein $\xi \in (x_1,x_{n+1})$ sodass $f^{(n)}(\xi)=0$.
-
-Hint: Induktion.
-\end{ex}
-\begin{solution}
-Wir beweisen die Behauptung mittels Induktion \"uber $n$.
-
-Die Induktionsverankerung $n=1$ folgt direkt aus dem Mittelwertsatz (Satz 8.9). Wir nehmen an, die Aussage gilt f\"ur $n\in \NN_{\geq 1}$. Seien jetzt $0\leq x_1 < \dots < x_{n+2}\leq 1$.
-Wir wenden die Induktionsverankerung an, auf die Paare $0\leq x_i < x_{i+1}\leq 1$ f\"ur $i \in \{ 1, \dots , n+1\}$ und erhalten $\xi_{1} < \dots \xi_{n+1}$ mit $x_{i} < \xi_{i} < x_{i+1}$ und 
-$f'(\xi_i)=0$. Die Induktionsannahme liefert uns ein $\xi \in (x_1, x_{n+2})$ mit 
-$f^{(n+1)}(\xi)=0$.
-\end{solution}
-
-
-
-
-\begin{ex}
-Sei $K>0$. Wir definieren
-$$ f_n: [-K, K] \rightarrow \RR, \
-f_n(x):= 
-\left\{\begin{array}{lr} \frac{n}{2}x^2 + \frac{1}{2n} , & x \in (-\frac{1}{n}, \frac{1}{n}) \\
-\vert x \vert,  & \text{sonst}. \end{array}\right. $$
-\begin{enumerate}[i.)]
-\item
-Zeigen Sie, dass $f_n \in C^1([-K,K], \RR)$.
-\item
-Berechnen Sie den Limes von $(f_n)_{n \in \NN \setminus \{0\}}$ in $(C^0([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$.
-\item
-Schliessen Sie, dass $(C^1([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ nicht vollst\"andig ist.
-\end{enumerate}
-\end{ex}
-\begin{solution}
-Diese Aufgabe soll daran erinnern, dass der gleichm\"assige Limes von differenzierbaren Funktionen nicht differenzierbar sein muss. In anderen Worten, der Raum der differenzierbaren Funktionen ist nicht vollst\"andig bez\"uglich der Supremumsnorm. 
-
-Man beachte, dass $(C^1(\RR, \RR), \Vert \cdot \Vert_{C^0(\RR, \RR)})$ kein normierter Vektorraum ist und darum die urspr\"ungliche Aufgabe keinen Sinn macht (zum Beispiel ist $id \in C^1(\RR, \RR)$, aber $\sup_{x\in \RR} \vert id(x) \vert = \sup_{x\in \RR} \vert x \vert =\infty$). Weiter waren die urspr\"unglichen Funktionen nicht einmal stetig und insbesondere also nicht differenzierbar. Damit war auch das Gegenbeispiel zu Aufgabe 30 falsch. Man kann die obigen Funktionen benutzen um ein echtes Gegenbeispiel zu konstruieren.
-\begin{enumerate}[i.)]
-\item
-$f_n$ ist f\"ur $x \neq \pm 1/n$ offensichtlich stetig. Nun m\"ussen wir die Stetigkeit in $\pm 1/n$ beweisen, dazu benutzen wir Prop. 6.13
-
-$$ \lim_{x \downarrow \frac{-1}{n}}f_n(x) 
-= \lim_{x\downarrow \frac{-1}{n}} \frac{n}{2} x^2 + \frac{1}{2n}
-=  \frac{n}{2} \left( \frac{-1}{n} \right)^2 + \frac{1}{2n}
-= \frac{1}{n}
-= \lim_{x\uparrow \frac{-1}{n}} \vert x \vert
-= \lim_{x\uparrow \frac{-1}{n}}f_n(x) .$$
-
-$$ \lim_{x\uparrow \frac{1}{n}}f_n(x) 
-= \lim_{x\uparrow \frac{1}{n}} \frac{n}{2}x^2 + \frac{1}{2n}
-=  \frac{n}{2} \left( \frac{1}{n} \right)^2 + \frac{1}{2n}
-= \frac{1}{n}
-= \lim_{x\downarrow \frac{1}{n}} \vert x \vert
-= \lim_{x\downarrow \frac{1}{n}}f_n(x).$$
-
-
-F\"ur die Differenzierbarkeit reicht es analog Serie 11, Aufgabe 2 zu zeigen, dass $\lim_{x\rightarrow a} f_n'(x)$ existiert f\"ur $a\neq \pm 1/n$. Dazu reicht es zu zeigen (Prop. 6.13), dass gilt $\lim_{x\uparrow a} f_n'(x) = \lim_{x\downarrow a}f_n'(x)$. Dies rechnen wir nun nach
-
-$$ \lim_{x \downarrow \frac{-1}{n}}f'_n(x) 
-= \lim_{x\downarrow \frac{-1}{n}} n x
-=  -1 
-= \lim_{x\uparrow \frac{-1}{n}} -1
-= \lim_{x\uparrow \frac{-1}{n}}f'_n(x) .$$
-
-$$ \lim_{x\uparrow \frac{1}{n}}f'_n(x) = \lim_{x\uparrow \frac{1}{n}}nx = 1 = \lim_{x\downarrow \frac{1}{n}} 1
-= \lim_{x\downarrow \frac{1}{n}}f'_n(x).$$
-
-Wobei wir benutzt haben, dass der Absolutbetrag differenzierbar ist f\"ur $x\neq 0$ und es gilt
-$$ \vert x \vert' = 
-\left\{\begin{array}{lr} 1 , & x>0\\
--1,  & x<0. \end{array}\right. $$
-Es bleibt zu zeigen, dass der Limes am Rand existiert (siehe Seite 97). Wir berechnen f\"ur $n\geq 1/K$
-$$ \lim_{x \downarrow -K} f'(x) 
-= \lim_{x \downarrow -K} \vert x \vert '
-= \lim_{x \downarrow -K} -1
-=-1.$$
-
-$$ \lim_{x \uparrow K} f'(x) 
-= \lim_{x \uparrow K} \vert x \vert '
-= \lim_{x \uparrow K} 1
-=1.$$
-
-und f\"ur $n < 1/K$
-
-$$ \lim_{x \downarrow -K} f'(x) 
-= \lim_{x \downarrow -K} n x
-=-nK.$$
-
-$$ \lim_{x \uparrow K} f'(x) 
-= \lim_{x \uparrow K} n x
-=nK.$$
-\item
-Wir definieren
-$$ f: \RR \rightarrow \RR, 
-f(x)= \ \vert x \vert. $$
-Wir zeigen, dass $f_n \rightarrow f$ bez\"uglich $\Vert \cdot \Vert_{C^0([-K, K], \RR)}$. F\"ur $n\geq 1/K$ gilt
-$$0 \leq \Vert f_n - f \Vert_{C^0([-K,K], \RR)}
-= \sup_{x\in [-K,K]} \vert f_n(x) - f(x) \vert
-= \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert f_n(x) - f(x) \vert$$
-
-$$ \leq  \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \left( \vert f_n(x) \vert + \vert f(x) \vert \right)
-\leq \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert f_n(x) \vert + \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert f(x) \vert$$
-
-$$= \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \Big\vert \frac{n}{2}x^2 + \frac{1}{2n} \Big\vert + \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert x  \vert
-= \frac{n}{2}\left( \frac{1}{n} \right)^2 + \frac{1}{2n} + \frac{1}{n}
-= \frac{2}{n} \rightarrow 0, \quad \text{ f\"ur } n \rightarrow \infty.$$
-\item
-Es gilt $C^1([-K,K], \RR) \subset C^0([-K,K], \RR)$ (Prop. 8.2). Wir wissen aus $ii.)$, dass $(f_n)_{n \in \NN \setminus \{0\}}$ in $(C^0([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ konvergiert. Damit gilt insbesondere, dass $(f_n)_{n \in \NN \setminus \{0\}}$ eine Cauchyfolge in $(C^0([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ und damit auch eine Cauchyfolge in $(C^1([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ ist, da nach $i.)$ $(f_n)_{n \in \NN \setminus \{0\}}\subseteq C^1(\RR, \RR)$. Jedoch gilt $f\notin C^1([-K,K], \RR)$ und damit ist $(C^1([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ nicht vollst\"andig.
-\end{enumerate}
-\end{solution}
-
-
-
-
-\begin{ex}{$(\star)$}
-\begin{enumerate}[i.)]
-\item
-Berechnen Sie die Ableitungen der folgenden Funktionen:
-\begin{enumerate}
-\item
-$$ f(x)= \frac{x^2-2x+1}{3x+2},  \quad x\in \RR \setminus \big\{ -\frac{2}{3} \big\} .$$
-\item
-$$ g(x) = \log((x + \sin(x))^2),  \quad x\in \RR \setminus \{ 0 \}.$$
-\item
-$$ h(x) = x^{\sin(\sqrt{x})}, \quad x>0.$$
-\end{enumerate}
-\item
-Finden Sie alle lokalen Extrema der Funktion $f(x):=(1+x)\sqrt{\vert x \vert}, \ x\in \RR$.
-\end{enumerate}
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-\begin{enumerate}
-\item
-$$ f'(x) 
-\stackrel{\text{Quotientenregel}}{=} \frac{(x^2-2x+1)' \cdot (3x+2) - (x^2-2x+1)\cdot (3x+2)'}{(3x+2)^2}$$
-
-$$ =\frac{(2x-2) \cdot (3x+2) - (x^2-2x+1)\cdot 3}{(3x+2)^2} 
-= \frac{2(x-1)(3x+2) -3(x-1)(x-1)}{(3x+2)^2}$$
-
-$$= \frac{(x-1)(6x+4 -3x+3)}{(3x+2)^2}
-= \frac{(x-1)(3x+7)}{(3x+2)^2}.$$
-\item
-$$g'(x) \stackrel{\text{Kettenregel}}{=} \frac{1}{(x + \sin(x))^2} \cdot \left( (x + \sin(x))^2 \right)'$$
-
-$$\stackrel{\text{Kettenregel}}{=} \frac{1}{(x + \sin(x))^2} \cdot 2( (x + \sin(x))\cdot ( (x + \sin(x))'$$
-
-$$=\frac{1}{(x + \sin(x))^2} \cdot 2( (x + \sin(x))\cdot ( 1+\cos(x))
-= \frac{2+2\cos(x)}{ x + \sin(x) }.$$
-\item
-$$ h'(x) = \left( e^{\sin(\sqrt{x})\cdot \log(x)} \right)' 
-\stackrel{\text{Kettenregel}}{=} \left( \sin(\sqrt{x})\cdot \log(x) \right)' \cdot \left( e^{\sin(\sqrt{x})\cdot \log(x)} \right)$$
-
-$$\stackrel{\text{Produktregel}}{=} \left( \sin(\sqrt{x})' \cdot \log(x) + \sin(\sqrt{x}) \cdot \log(x)' \right) \cdot x^{\sin(\sqrt{x})}$$
-
-$$\stackrel{\text{Kettenregel}}{=} \left(\cos(\sqrt{x})\cdot \left( \sqrt{x} \right)' \cdot \log(x) + \frac{\sin(\sqrt{x})}{x}\right) x^{\sin(\sqrt{x})}$$
-
-$$= \left( \frac{\cos(\sqrt{x})}{2\sqrt{x}}\cdot \log(x) + \frac{\sin(\sqrt{x})}{x} \right) \cdot x^{\sin(\sqrt{x})}.$$
-\end{enumerate}
-\item
-Wir unterscheiden in unserer Analysis drei F\"alle.
-
-$\underline{x=0}$
-
-Zuerst zeigen wir $x=0$ ein lokales Minimum von $f$ ist. Dazu bemerken wir $f(0)=0$. Weiter gilt
-$$ 0<h \Rightarrow f(h) = \underbrace{(1+h)}_{>0} \underbrace{\sqrt{h}}_{>0} >0$$
-und
-$$ -1<h<0 \Rightarrow f(h) = \underbrace{(1+h)}_{>0} \underbrace{\sqrt{-h}}_{>0} >0.$$
-
-$\underline{x>0}$
-
-Nun zeigen wir, dass $f$ keine Extrema in $(0, \infty)$ besitzt. F\"ur $x>0$ gilt $f(x)=(1+x)\sqrt{x}$. $f$ ist hier differenzierbar. Es gilt
-$$ 0=f'(x) \stackrel{\text{Produktregel}}{=} \sqrt{x} + \frac{1+x}{2\sqrt{x}} = \frac{3x+1}{2\sqrt{x}}
-\Leftrightarrow 0=  3x + 1 \Leftrightarrow x= -\frac{1}{3}.$$
-Damit besitzt die Gleichung $f'(x)=0$ in $(0, \infty)$ keine L\"osung. Aus Prop. 8.7 folgt, dass $f$ keine Extrema in $(0, \infty)$ besitzt.
-
-$\underline{x<0}$
-F\"ur $x>0$ gilt $f(x)=(1+x)\sqrt{-x}$. $f$ ist hier differenzierbar. Es gilt
-$$ 0=f'(x) \stackrel{\text{Produktregel, Kettenregel}}{=} \sqrt{-x} - \frac{1+x}{2\sqrt{-x}}
-=-\frac{3x+1}{2\sqrt{-x}}
-\Leftrightarrow 0= -3x - 1 \Leftrightarrow x= -\frac{1}{3}.$$
-
-Es gilt $f'(x)>0$ f\"ur $x<-1/3$ und $f'(x)<0$ f\"ur $-1/3 < x < 0$. Aus Prop. 8.13 folgt, dass $x=-1/3$ ein lokales Maximum von $f$ ist. Dies kann man alternativ auch mit Prop. 8.26 beweisen, da
-$$f''(x)
-\stackrel{\text{Quotientenregel}}{=} -\frac{6\sqrt{-x} +\frac{(3x+1)}{\sqrt{-x}}}{-4x}
-=- \frac{1}{-4x} \cdot \frac{-3x+1}{\sqrt{-x}}$$
-und damit
-$$ f''\left( -\frac{1}{3}\right) = \frac{3}{4}\cdot \frac{3}{\sqrt{\frac{1}{3}}}>0.$$
-
-Damit sind $\{ -1/3, 0\}$ alle lokalen Extrema von $f$.
-\end{enumerate}
-\end{solution}
-
-
-
-
-\begin{ex}
-Zeigen Sie, dass die Exponentialabbildung auf $\RR$ konvex ist und zeigen Sie $e^x\geq 1+x$ f\"ur alle $x\in \RR.$
-\end{ex}
-\begin{solution}
-Es gilt $(e^x)''=e^x>0$. Aus Prop. 8.21 folgt, dass die Exponentialabbildung konvex ist. Aus Prop. 8.20 folgt
-$$ e^z \leq \frac{e^y-e^z}{y-z} \leq e^y, \quad \text{ f\"ur } z\leq y. $$
-Falls $x>0$, setzen wir $z=0, y=x$
-$$ 1= e^0 \leq \frac{e^x - e^0}{x-0} = \frac{e^x-1}{x} \Rightarrow 1+x \leq e^x.$$
-Falls $x<0$, setzen wir $z=x, y=0$
-$$ \frac{1-e^x}{-x} = \frac{e^0 -e^x}{-x} \leq e^0 =1  \Rightarrow 1-e^x \leq -x 
-\Rightarrow 1 +x \leq e^x.$$
-\end{solution}
-
-
-\begin{ex}{$(\star)$}
-Zeigen Sie, dass f\"ur alle $x,y \in \RR$ mit $0\leq y<x$ gilt:
-$$ ny^{n-1} \leq \frac{x^n - y^n}{x-y} \leq n x^{n-1}, \quad \forall n \in \NN \setminus \{0 \}.$$
-\end{ex}
-\begin{solution}
-F\"ur $y=0$ ist die Aussage trivial. 
-Sei $n\in \NN_{\geq 1}$ und $f: \RR_{> 0} \rightarrow \RR, f(x)=x^n$. Es gilt $f^{(2)}(x)= n(n-1)x^{n-2}\geq 0$. Mit Prop. 8.21 ist $f$ konvex und die Aussage folgt aus Prop. 8.20.
-\end{solution}
-
-
-
-
-\begin{ex}{$(\star)$}
-Entscheiden Sie f\"ur jede der folgenden Aussagen, ob Sie wahr oder falsch ist.
-\begin{enumerate}[i.)]
-\item
-Als Folge in $C^0([0,1], \RR)$ hat $f_n(x)=x^n$ keine konvergente Teilfolge.
-\item
-Die Funktion $f:\RR \rightarrow \RR$ definiert durch $f(x)=x^2 \cos(1/x)$ f\"ur $x\neq0$ und $f(0)=0$ ist in $x=0$ differenzierbar 
-\item
-Sei $f:\RR \rightarrow \RR$ konvex. Dann ist $f$ auf $\RR$ differenzierbar.
-\item
-Ist $f:[0,1] \rightarrow \RR$ gleichm\"assig stetig und auf $(0,1)$ differenzierbar, dann ist $f'$ beschr\"ankt.
-\item
-Ist $f:[0,1] \rightarrow \RR$ differenzierbar und es gibt ein $x_0\in (0,1)$ mit $f'(x_0)=0$, so hat $f$ in $x_0$ ein lokales Extremum.
-\end{enumerate} 
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-Wahr. Nehmen wir an, es g\"abe eine gleichm\"assig konvergente Teilfolge $(f_{n_k})_{k\in \NN}$. Diese konvergiert punktweise gegen $f:[0,1]\rightarrow \RR, f(x) = \begin{cases} 0, \quad x\neq 1 \\ 1, \quad x=1 \end{cases}$. Damit $f_{n_k} \rightarrow f$ gleichm\"assig. Da die $f_n$ stetig sind, ist $f$ stetig (Prop. 6.24). Dies ist offensichtlich nicht der Fall, also Widerspruch.
-\item
-Wahr. Es gilt
-$$ 0\leq \bigg\vert \frac{h^2 \cos(\frac{1}{h}) - 0}{h-0} \bigg\vert = \vert h \vert \cdot \big\vert \cos\big(\frac{1}{h}\big) \big\vert \leq \vert h \vert \rightarrow 0, \qquad \text{f\"ur } h\rightarrow 0.$$
-
-Damit gilt $\lim_{h\rightarrow 0} \frac{f(h)- f(0)}{h-0}=0$. Also ist $f$ in $x=0$ differenzierbar (mit $f'(0)=0$).
-\item
-Falsch, der Absolutbetrag ist ein Gegenbeispiel (nicht differenzierbar in $x=0$).
-\item
-Falsch. Gegenbeispiel $f:[0,1] \rightarrow \RR, f(x) = \begin{cases} x^2 \cos(\frac{1}{x^3}), \qquad x\neq 0 \\ 0, \qquad \qquad \qquad x=0.\end{cases}$ Man beweist analog zu $ii.)$, dass $f$ stetig ist. Da $[0,1]$ kompakt ist, ist $f$ gleichm\"assig stetig (Satz 6.22). Mittels der Kettenregel (Prop. 8.5) erhalten wir f\"ur $x\in (0,1):$ $f'(x)= 2x \cos(\frac{1}{x^3})+ \frac{1}{x^2} \sin(\frac{1}{x^3})$. Der erste Term ist durch 1 beschr\"ankt und der zweite ist unbeschr\"ankt, also ist $f'$ unbeschr\"ankt.
-
-Ein alternatives Gegenbeispiel ist $g:[0,1]\rightarrow \RR, \ g(x)=\sqrt{x}$. Wieder folgt aus Satz 6.22, dass $g$ gleichm\"assig stetig ist. Jedoch ist $g'(x)= 1/\sqrt{x}$ unbeschr\"ankt auf $(0,1)$.
-\item
-Falsch, Gegenbeispiel $f(x)=(x-\frac{1}{2})^3$. $f'\big(\frac{1}{2}\big)= 2\cdot (\frac{1}{2} - \frac{1}{2})^2=0$, aber $x=\frac{1}{2}$ ist weder lokales Maximum, noch Minimum von $f$. Da $f\big(\frac{1}{2}\big)= (\frac{1}{2}-\frac{1}{2})^3=0$. 
-
-F\"ur $x<\frac{1}{2}$ gilt $x-\frac{1}{2}<0$ und damit $f(x)=(x-\frac{1}{2})^3<0$.
-
-F\"ur $x>\frac{1}{2}$ gilt $x-\frac{1}{2}>0$ und damit $f(x)=(x-\frac{1}{2})^3>0$.
-\end{enumerate}
-\end{solution}
 
 
 
@@ -1944,6 +1559,545 @@ $f|_{(-\infty,a)}=0$. Wir definieren $g(x):=f(-x)$. Da $f$ und $x\mapsto-x$ anal
 \end{enumerate}
 \end{solution}
 
+
+\newpage 
+
+
+
+\section{Differentialrechnung}
+
+\begin{ex}{$(\star)$}
+Sei $f:\RR \rightarrow \RR$ eine gerade (d.h. $f(x)=f(-x)$ f\"ur alle $x\in \RR$), differenzierbare Funktion. Zeigen Sie, dass $f':\RR \rightarrow \RR$ eine ungerade Funktion ist, d.h. $f'(-x)=-f'(x).$
+\end{ex}
+\begin{solution}
+Sei $x\in \RR$, dann gilt
+$$ f'(-x) = \lim_{h \rightarrow 0} \frac{f(-x+h)-f(-x)}{h} 
+\stackrel{f \text{ gerade}}{=}\lim_{h \rightarrow 0} \frac{f(x-h)-f(x)}{h} 
+= \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{-h} $$
+
+$$= - \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h} = -f'(x).$$
+\end{solution}
+
+
+\begin{ex}
+Beweisen Sie die verallgemeinerte Bernoulli-Ungleichung, diese besagt, dass f\"ur alle $r\geq 1, \ x\geq$ gilt:
+$$ (1+x)^r\geq 1+rx .$$
+
+Hint: Betrachten Sie die Funktion $h(x)=(1+x)^r - (1+rx).$
+\end{ex}
+\begin{solution}
+Die Behauptung ist \"aquivalent zu der Aussage $h(x)\geq 0$ f\"ur alle $x\geq 0$. Zuerst berechnen wir die Ableitung von $h$.
+$$h'(x) = r(1+x)^{r-1} - r = r((1+x)^r -1)\geq 0.$$
+Damit ist $h$ monoton steigend. Da $h(0)= 1^r -1=0$, folgt, dass $h(x)\geq 0$ f\"ur alle $x\geq 0$ und damit die Behauptung.
+\end{solution}
+
+
+\begin{ex}{$(\star)$}
+Sei $f:\RR \rightarrow \RR$ definiert durch
+$$ f(x)= \left\{\begin{array}{lr}  x^2 \sin\big( \frac{1}{x} \big), & x\neq 0 \\
+0,  & x=0 \end{array}\right. .$$
+\begin{enumerate}[i.)]
+\item
+Zeigen Sie, dass $f$ auf ganz $\RR$ differenzierbar ist und berechnen Sie $f'(x)$ f\"ur alle $x\in \RR$.
+\item
+Ist $f'$ an der Stelle $x=0$ stetig?
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+F\"ur $x\neq 0$ erhalten wir mit der Kettenregel (Prop. 8.5) und der Produktregel (Satz 8.3), dass $f$ differenzierbar ist und dass gilt
+$$ f'(x)= (x^2)' \sin\bigg(\frac{1}{x}\bigg) + x^2 \bigg(\sin\bigg(\frac{1}{x}\bigg)\bigg)'
+= 2x \sin\bigg(\frac{1}{x}\bigg) + x^2 \bigg(\cos\bigg(\frac{1}{x}\bigg)\bigg) \bigg( \frac{1}{x} \bigg)'$$
+
+$$= 2x \sin\bigg(\frac{1}{x}\bigg) + x^2 \bigg(\cos\bigg(\frac{1}{x^2}\bigg)\bigg) \bigg( \frac{-1}{x^2} \bigg) 
+= 2x \sin\bigg(\frac{1}{x}\bigg) - \cos\bigg(\frac{1}{x}\bigg) .$$
+
+F\"ur $x=0$ berechnen wir
+$$0 \leq \bigg\vert \frac{f(h)-f(0)}{h-0} \bigg\vert 
+= \bigg\vert \frac{h^2 \sin\big(\frac{1}{x}\big) }{h} \bigg\vert
+= \vert h \vert \cdot \bigg\vert \sin\bigg(\frac{1}{x}\bigg) \bigg\vert
+\leq \vert h \vert \rightarrow 0, \quad \text{ f\"ur } h\rightarrow 0.$$
+
+Damit gilt $f'(0) = \lim_{h\rightarrow 0} \bigg\vert \frac{f(h)-f(0)}{h-0} \bigg\vert =0$.
+\item
+$f'$ ist stetig in $x=0$, genau dann wenn gilt $\lim_{h\rightarrow 0}f'(h) = f'(0)$, also
+$$ \lim_{h\rightarrow 0} \bigg[ 2h \sin\bigg(\frac{1}{h}\bigg) - \cos\bigg(\frac{1}{h}\bigg) \bigg]=f'(0)=0.$$
+Aus der Rechnung von $i.)$ folgt $\lim_{h\rightarrow 0} 2h \sin\left(\frac{1}{h}\right)=0$. Damit ist $f'$ stetig in $x=0$, genau dann wenn $\lim_{h \rightarrow 0} \cos\left(\frac{1}{h}\right)=0$. Dies ist jedoch nicht der Fall. Da
+$$ \cos\left(\frac{1}{\bigg( \frac{1}{2n\pi} \bigg)}\right) = \cos(2n\pi) = 1 \quad \text{ und }  \frac{1}{2n\pi} \rightarrow 0 \quad \text{ f\"ur } n \rightarrow \infty.$$
+Also ist $f'$ nicht stetig in $x=0$.
+\end{enumerate}
+\end{solution}
+
+
+
+
+
+
+
+
+\begin{ex}
+Sei $\epsilon>0$. Wir definieren $f_{\epsilon}:\RR \rightarrow \RR, f_{\epsilon}(x)= \vert x \vert^{1+\epsilon}$.
+Zeigen Sie, dass $f_{\epsilon}$ auf ganz $\RR$ differenzierbar ist.
+\end{ex}
+\begin{solution}
+Wir wissen, dass der Absolutbetrag ausserhalb von $x=0$ differenzierbar ist. Auch wissen wir, dass $x\mapsto x^{1+\epsilon}$ differenzierbar ist (Seite 90). Die Komposition differenzierbarer Funktionen ist differenzierbar (Kettenregel, Prop. 8.5), also ist $f_{\epsilon}$ in $x\neq 0$ differenzierbar. Nun zeigen wir noch, dass $f_{\epsilon}$ in $x=0$ differenzierbar ist
+
+$$\bigg\vert \frac{f_{\epsilon}(h)- f_{\epsilon}(0)}{h-0} \bigg\vert 
+= \bigg\vert \frac{\vert h \vert^{1+\epsilon}}{h} \bigg\vert 
+= \vert h \vert^{\epsilon} \rightarrow 0, \quad h \rightarrow 0.$$
+Damit gilt $\lim_{h\rightarrow 0} \frac{f_{\epsilon}(h)-f_{\epsilon}(0)}{h-0}=0$, also ist $f_{\epsilon}$ in $x=0$ differenzierbar (mit $f'_{\epsilon}(0)=0$).
+\end{solution}
+
+
+
+
+\begin{ex}
+
+Bestimmen Sie alle Punkte, in denen 
+$$f:\RR \rightarrow \RR, f(x)= \left\{\begin{array}{lr}  x^2 , & x\in \QQ \\
+0,  & x \in \RR \setminus \QQ \end{array}\right.$$
+\begin{enumerate}[i.)]
+\item
+stetig ist.
+\item
+differenzierbar ist.
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wir zeigen, dass $f$ nur in $x=0$ stetig ist.
+
+Sei $x\neq 0$. Da sowohl $\QQ$, als auch $\RR \setminus \QQ$ dicht in $\RR$ liegen (Prop. 2.17 und Seite 62), existieren Folgen $(a_n)_{n\in \NN} \subseteq \QQ$ und $(b_n)_{n \in \NN} \subseteq \RR \setminus \QQ$ mit $\lim_{n\rightarrow \infty} a_n = x =\lim_{n \rightarrow \infty} b_n$. Es gilt 
+$$ \lim_{n\rightarrow \infty} f(a_n) = \lim_{n \rightarrow \infty} 0 = 0 
+\neq x^2 = \lim_{n \rightarrow \infty} b_n^2 = \lim_{n \rightarrow \infty} f(b_n).$$
+Damit ist $f$ nicht stetig in $x\neq 0$. Die gleiche Rechnung zeigt, dass $f$ in $x=0$ stetig ist.
+\item
+Wir zeigen, dass $f$ nur in $x=0$ differenzierbar ist.
+
+Da $f$ nicht stetig ist in $x\neq 0$, ist $f$ auch nicht differenzierbar in $x\neq 0$ (Prop. 8.2). Wir berechnen
+$$ \bigg\vert \frac{f(h)-f(0)}{h-0} \bigg\vert \leq \bigg\vert \frac{h^2}{h} \bigg\vert = \vert h \vert \rightarrow 0,
+\quad h\rightarrow 0.$$
+Damit gilt $\lim_{h\rightarrow 0}\frac{f(h)-f(0)}{h-0}=0$, also ist $f$ in $x=0$ differenzierbar (mit $f'(0)=0$).
+
+Das Ziel dieser Aufgabe war es, daran zu erinneren, dass eine Funktion, die in $x$ differenzierbar ist, nicht in einer ganzen Umgebung von $x$ differenzierbar sein muss. 
+\end{enumerate}
+\end{solution}
+
+
+
+
+
+
+
+\begin{ex}{$(\star)$}
+Berechnen Sie die Ableitungen $f'(x)$ der folgenden Funktionen:
+\begin{enumerate}[i.)]
+\item
+$$ f(x)= \log\bigg(\frac{1 + \sqrt{1-x^2}}{x}\bigg)  \quad \text{ f\"ur } x \in (0,1).$$
+\item
+$$f(x)= \sqrt{\frac{a+bx}{a-bx}}  \quad \text{ f\"ur } a,b>0,  \text{ f\"ur } x\in \left( \frac{-\alpha}{\beta}, \frac{\alpha}{\beta} \right).$$
+\item
+$$f(x) = x^{1/3}(1-x)^{2/3}(1+x)^{1/2}  \quad \text{ f\"ur } x\in (0,1).$$
+\item
+$$f(x)= x^{\sqrt{x}}  \quad \text{ f\"ur } x>0.$$
+\item
+$$f(x) = \log(\tan(x)^{-1/3}) \quad \text{ f\"ur } x\neq k \frac{\pi}{2},\ k \in \ZZ. $$
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+$$f'(x) \stackrel{\text{Kettenregel}}{=} \frac{1}{\frac{1 + \sqrt{1-x^2}}{x}} \cdot \bigg(\frac{1 + \sqrt{1-x^2}}{x}\bigg)'$$
+$$\stackrel{\text{Quotientenregel}}{=} \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{(1 + \sqrt{1-x^2})'x - (1 + \sqrt{1-x^2})(x)'}{x^2}$$
+
+$$\stackrel{\text{Kettenregel}}{=} \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{\frac{-2x}{2 \sqrt{1-x^2}}\cdot x - (1 + \sqrt{1-x^2})}{x^2}
+= \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{\left(\frac{-x^2 - \sqrt{1-x^2} - (\sqrt{1-x^2})^2}{ \sqrt{1-x^2}}\right)}{x^2}$$
+
+$$ =  \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{\left(\frac{-1 - \sqrt{1-x^2}}{ \sqrt{1-x^2}}\right)}{x^2}
+= \frac{x}{1 + \sqrt{1-x^2}} \cdot \frac{-1 - \sqrt{1-x^2}}{x^2 \cdot \sqrt{1-x^2} }
+= \frac{-1}{x\cdot \sqrt{1-x^2} }.$$
+\item
+Man pr\"uft leicht nach, dass 
+$$a-b t >0 \Leftrightarrow t > -\frac{a}{b} \quad \text{ und }
+\quad a+b t >0 \Leftrightarrow t < \frac{a}{b}.$$
+Damit gilt
+$$\frac{a+b t}{a-b t} \geq 0 \Leftrightarrow t\in \left( -\frac{a}{b}, \frac{a}{b} \right].$$
+Wir rechnen
+$$ f'(x)  \stackrel{\text{Kettenregel}}{=} \frac{1}{2\sqrt{\frac{a+bx}{a-bx}}} \cdot \left( \frac{a+bx}{a-bx} \right)' 
+\stackrel{\text{Quotientenregel}}{=} \frac{\sqrt{a-bx}}{2\sqrt{a+bx}} \cdot \frac{b\cdot (a-bx) - (a+bx)\cdot(-b)}{(a-bx)^2}$$
+
+$$= \frac{\sqrt{a-bx}}{2\sqrt{a+bx}} \cdot \frac{b\cdot ((a-bx) + (a+bx))}{(a-bx)^2}
+= \frac{\sqrt{a-bx}}{\sqrt{a+bx}} \cdot \frac{ab}{(a-bx)^2}$$
+\item
+$$f'(x) \stackrel{\text{Produktregel}}{=} \left( x^{1/3} \cdot (1-x)^{2/3} \right)'\cdot (1+x)^{1/2} + x^{1/3} \cdot (1-x)^{2/3} \left( (1+x)^{1/2}\right)'$$
+
+$$\stackrel{\text{Produktregel}}{=} \left( \left(x^{1/3} \right)' \cdot (1-x)^{2/3} + x^{1/3} \left( (1-x)^{2/3} \right)' \right)\cdot (1+x)^{1/2} + x^{1/3} \cdot (1-x)^{2/3} \cdot \frac{1}{2} (1+x)^{-1/2}$$
+
+$$ \stackrel{\text{Kettenregel}}{=} \left( \frac{1}{3} x^{-2/3} \cdot (1-x)^{2/3} - x^{1/3} \cdot \frac{2}{3}(1-x)^{-1/3} \right) \cdot (1+x)^{1/2} + x^{1/3} \cdot (1-x)^{2/3} \cdot \frac{1}{2} (1+x)^{-1/2}$$
+
+$$=\frac{1}{3}x^{-2/3}\cdot (1-x)^{2/3}\cdot (1+x)^{1/2} -\frac{2}{3}x^{1/3}\cdot (1-x)^{-1/3}\cdot (1+x)^{1/2}+ \frac{1}{2} x^{1/3} \cdot (1-x)^{2/3} \cdot (1+x)^{-1/2}$$
+
+$$=\left( \frac{1}{3x^{1/3}} - \frac{2}{3(1-x)^{2/3}} + \frac{1}{2(1+x)^{1/2}} \right)\cdot x^{1/3} \cdot (1-x)^{2/3} \cdot (1+x)^{1/2}.$$
+\item
+$$f'(x)= \left( e^{\sqrt{x} \cdot\log(x)} \right)'
+\stackrel{\text{Produktregel}}{=} \left( \sqrt{x} \cdot\log(x) \right)' \cdot \left( e^{\sqrt{x} \cdot\log(x)} \right)$$
+
+$$\stackrel{Produktregel}{=} \left( (\sqrt{x})' \cdot\log(x) + \sqrt{x} \cdot (\log(x))' \right) \cdot x^{\sqrt{x}}
+= \left( \frac{1}{2\sqrt{x}} \cdot\log(x) + \frac{\sqrt{x}}{x} \right) \cdot x^{\sqrt{x}}$$
+
+$$= \frac{1}{\sqrt{x}}\left(\frac{\log(x)}{2} +1\right) x^{\sqrt{x}} 
+= \left(\frac{\log(x)}{2} +1\right) x^{\sqrt{x}-1/2} .$$
+\item
+$$ f'(x) \stackrel{\text{Kettenregel}}{=} \frac{1}{\tan(x)^{-1/3}} \cdot \left( \tan(x)^{-1/3} \right)'
+\stackrel{\text{Kettenregel}}{=} \tan(x)^{1/3} \cdot \left( -\frac{1}{3} \right) \tan(x)^{-4/3} \cdot \left( \tan(x) \right)'$$
+
+$$ = -\frac{1}{3} \tan(x)^{-1} \cdot \left(1+ \tan(x)^2 \right)
+= -\frac{1}{3} \left( \frac{1}{\tan(x)} + \tan(x) \right).$$
+\end{enumerate}
+\end{solution}
+
+
+
+\begin{ex}{$(\star)$}
+Seien $f,g : (a,b) \rightarrow \RR$ differenzierbare Funktionen.
+\begin{enumerate}[i.)]
+\item
+Zeigen Sie, dass in allen Punkten $x\in (a,b)$ mit $f(x) \neq g(x)$ die Funktion $\max(f,g)$ differenzierbar ist.
+\item
+Unter welcher Bedingung ist $\max(f,g)$ differenzierbar in einem Punkt $x\in (a,b)$ mit $f(x)=g(x)$.
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Sei $x\in (a,b)$.
+
+$\underline{ \text{Fall }1:f(x)-g(x) >0}$
+
+Da $f,g$ stetig sind, ist $f-g$ ebenfalls stetig (Prop. 6.3) und damit existiert ein $\delta>0$, sodass gilt $(f-g)|_{(x-\epsilon, x+\epsilon)}>0$. Damit gilt
+$$ \lim_{h\rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}
+= \lim_{h\rightarrow 0} \frac{f(x+h) - f(x)}{h} = f'(x).$$
+
+$\underline{ \text{Fall }2:f(x)-g(x) <0}$
+
+Da $f,g$ stetig sind, ist $f-g$ ebenfalls stetig (Prop. 6.3) und damit existiert ein $\delta>0$, sodass gilt $(f-g)|_{(x-\epsilon, x+\epsilon)}<0$. Damit gilt
+$$ \lim_{h\rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}
+= \lim_{h\rightarrow 0} \frac{g(x+h) - g(x)}{h} = g'(x).$$
+\item
+\begin{claim}
+Sei $x\in (a,b)$:
+$$ \max(f,g) \text{ ist differenzierbar in x } \Leftrightarrow f'(x)=g'(x).$$
+\end{claim}
+\begin{proof}
+$" \Rightarrow "$ Wir zeigen die Kontraposition. Sei $f(x)\neq g(x)$, wir k\"onnen ohne Beschr\"ankung der Allgemeinheit annehmen, dass $f'(x) > g'(x)$ (ansonsten benennen wir unsere Funktionen um). Da $$\lim_{h \rightarrow 0} \frac{(f-g)(x+h)-\overbrace{(f-g)(x)}^{=0}}{h} 
+=\lim_{h \rightarrow 0} \frac{(f-g)(x+h)}{h}= f'(x)-g'(x) >0.$$
+Damit existiert ein $h_0>0$, sodass f\"ur alle $0<h\leq h_0$
+$$\frac{(f-g)(x+h)}{h} >0 \Rightarrow f(x+h)>g(x+h)$$
+und f\"ur $-h_0\leq h <0$
+$$\frac{(f-g)(x+h)}{h} >0 \Rightarrow f(x+h)<g(x+h) .$$
+Damit gilt
+$$ \lim_{h\downarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}
+= \lim_{h\downarrow 0} \frac{f(x+h) - f(x)}{h} = f'(x) \neq g'(x)$$
+
+$$= \lim_{h\downarrow 0} \frac{g(x+h) - g(x)}{h}
+= \lim_{h\uparrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}.$$
+Also existiert $\lim_{h\rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}$ nicht. Deswegen ist $\max(f,g)$ in $x$ nicht differenzierbar.
+
+$"\Leftarrow"$ Sei nun $f'(x)=g'(x)$ f\"ur ein fixes $x\in (a,b)$. Sei $\epsilon>0$.
+
+Da $\lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h}=f'(x)$, existiert ein $\delta_1>0$, sodass f\"ur alle $0 < \vert h \vert < \delta_1$
+$$ \bigg\vert \frac{f(x+h)-f(x)}{h} - f'(x) \bigg\vert < \epsilon.$$
+Da $\lim_{h \rightarrow 0} \frac{g(x+h)-g(x)}{h}=g'(x)$, existiert ein $\delta_2>0$, sodass f\"ur alle $0 < \vert h \vert < \delta_2$
+$$ \bigg\vert \frac{g(x+h)-g(x)}{h} - g'(x) \bigg\vert < \epsilon.$$
+Damit gilt auch f\"ur alle $0 < \vert h \vert < \delta_2$
+$$ \bigg\vert \frac{g(x+h)-f(x)}{h} -f'(x)\bigg\vert 
+\stackrel{f(x)=g(x), \ f'(x)=g'(x)}{=} \bigg\vert \frac{g(x+h)-g(x)}{h} - g'(x) \bigg\vert 
+< \epsilon.$$
+Sei $\delta=\min\{\delta_1, \delta_2 \}$. Dann gilt f\"ur $0<\vert h \vert <\delta$
+$$\bigg\vert \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h} -f'(x)\bigg\vert 
+\stackrel{f(x)=g(x)}{=} \bigg\vert \frac{\max(f,g)(x+h) - f(x)}{h} -f'(x)\bigg\vert$$
+
+$$\leq \max \left\lbrace \underbrace{\bigg\vert \frac{f(x+h) - f(x)}{h} -f'(x)\bigg\vert}_{<\epsilon, \text{ da } \delta\leq \delta_1} \ , \ \underbrace{\bigg\vert \frac{g(x+h) - f(x)}{h} -f'(x)\bigg\vert}_{<\epsilon, \text{ da } \delta \leq \delta_2}  \right\rbrace 
+< \epsilon.$$
+Damit gilt $\lim_{h\in \rightarrow 0} \frac{\max(f,g)(x+h) - \max(f,g)(x)}{h}$ konvergiert (gegen $f'(x)$), also ist $\max(f,g)$ in $x$ differenzierbar.
+\end{proof}
+\end{enumerate}
+\end{solution}
+
+
+
+
+\begin{ex}
+Seien $n \in \NN_{\geq 1}$, $f\in C^{n}([0,1], \RR)$ und $b\in \RR$. Seien $0\leq x_1< \dots < x_{n+1}\leq 1$ sodass $f(x_i)=b$ f\"ur alle $i\in \{1, \dots , n+1 \}$. Zeigen Sie, es existiert ein $\xi \in (x_1,x_{n+1})$ sodass $f^{(n)}(\xi)=0$.
+
+Hint: Induktion.
+\end{ex}
+\begin{solution}
+Wir beweisen die Behauptung mittels Induktion \"uber $n$.
+
+Die Induktionsverankerung $n=1$ folgt direkt aus dem Mittelwertsatz (Satz 8.9). Wir nehmen an, die Aussage gilt f\"ur $n\in \NN_{\geq 1}$. Seien jetzt $0\leq x_1 < \dots < x_{n+2}\leq 1$.
+Wir wenden die Induktionsverankerung an, auf die Paare $0\leq x_i < x_{i+1}\leq 1$ f\"ur $i \in \{ 1, \dots , n+1\}$ und erhalten $\xi_{1} < \dots \xi_{n+1}$ mit $x_{i} < \xi_{i} < x_{i+1}$ und 
+$f'(\xi_i)=0$. Die Induktionsannahme liefert uns ein $\xi \in (x_1, x_{n+2})$ mit 
+$f^{(n+1)}(\xi)=0$.
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+\begin{ex}
+Sei $K>0$. Wir definieren
+$$ f_n: [-K, K] \rightarrow \RR, \
+f_n(x):= 
+\left\{\begin{array}{lr} \frac{n}{2}x^2 + \frac{1}{2n} , & x \in (-\frac{1}{n}, \frac{1}{n}) \\
+\vert x \vert,  & \text{sonst}. \end{array}\right. $$
+\begin{enumerate}[i.)]
+\item
+Zeigen Sie, dass $f_n \in C^1([-K,K], \RR)$.
+\item
+Berechnen Sie den Limes von $(f_n)_{n \in \NN \setminus \{0\}}$ in $(C^0([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$.
+\item
+Schliessen Sie, dass $(C^1([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ nicht vollst\"andig ist.
+\end{enumerate}
+\end{ex}
+\begin{solution}
+Diese Aufgabe soll daran erinnern, dass der gleichm\"assige Limes von differenzierbaren Funktionen nicht differenzierbar sein muss. In anderen Worten, der Raum der differenzierbaren Funktionen ist nicht vollst\"andig bez\"uglich der Supremumsnorm. 
+
+Man beachte, dass $(C^1(\RR, \RR), \Vert \cdot \Vert_{C^0(\RR, \RR)})$ kein normierter Vektorraum ist und darum die urspr\"ungliche Aufgabe keinen Sinn macht (zum Beispiel ist $id \in C^1(\RR, \RR)$, aber $\sup_{x\in \RR} \vert id(x) \vert = \sup_{x\in \RR} \vert x \vert =\infty$). Weiter waren die urspr\"unglichen Funktionen nicht einmal stetig und insbesondere also nicht differenzierbar. Damit war auch das Gegenbeispiel zu Aufgabe 30 falsch. Man kann die obigen Funktionen benutzen um ein echtes Gegenbeispiel zu konstruieren.
+\begin{enumerate}[i.)]
+\item
+$f_n$ ist f\"ur $x \neq \pm 1/n$ offensichtlich stetig. Nun m\"ussen wir die Stetigkeit in $\pm 1/n$ beweisen, dazu benutzen wir Prop. 6.13
+
+$$ \lim_{x \downarrow \frac{-1}{n}}f_n(x) 
+= \lim_{x\downarrow \frac{-1}{n}} \frac{n}{2} x^2 + \frac{1}{2n}
+=  \frac{n}{2} \left( \frac{-1}{n} \right)^2 + \frac{1}{2n}
+= \frac{1}{n}
+= \lim_{x\uparrow \frac{-1}{n}} \vert x \vert
+= \lim_{x\uparrow \frac{-1}{n}}f_n(x) .$$
+
+$$ \lim_{x\uparrow \frac{1}{n}}f_n(x) 
+= \lim_{x\uparrow \frac{1}{n}} \frac{n}{2}x^2 + \frac{1}{2n}
+=  \frac{n}{2} \left( \frac{1}{n} \right)^2 + \frac{1}{2n}
+= \frac{1}{n}
+= \lim_{x\downarrow \frac{1}{n}} \vert x \vert
+= \lim_{x\downarrow \frac{1}{n}}f_n(x).$$
+
+
+F\"ur die Differenzierbarkeit reicht es analog Serie 11, Aufgabe 2 zu zeigen, dass $\lim_{x\rightarrow a} f_n'(x)$ existiert f\"ur $a\neq \pm 1/n$. Dazu reicht es zu zeigen (Prop. 6.13), dass gilt $\lim_{x\uparrow a} f_n'(x) = \lim_{x\downarrow a}f_n'(x)$. Dies rechnen wir nun nach
+
+$$ \lim_{x \downarrow \frac{-1}{n}}f'_n(x) 
+= \lim_{x\downarrow \frac{-1}{n}} n x
+=  -1 
+= \lim_{x\uparrow \frac{-1}{n}} -1
+= \lim_{x\uparrow \frac{-1}{n}}f'_n(x) .$$
+
+$$ \lim_{x\uparrow \frac{1}{n}}f'_n(x) = \lim_{x\uparrow \frac{1}{n}}nx = 1 = \lim_{x\downarrow \frac{1}{n}} 1
+= \lim_{x\downarrow \frac{1}{n}}f'_n(x).$$
+
+Wobei wir benutzt haben, dass der Absolutbetrag differenzierbar ist f\"ur $x\neq 0$ und es gilt
+$$ \vert x \vert' = 
+\left\{\begin{array}{lr} 1 , & x>0\\
+-1,  & x<0. \end{array}\right. $$
+Es bleibt zu zeigen, dass der Limes am Rand existiert (siehe Seite 97). Wir berechnen f\"ur $n\geq 1/K$
+$$ \lim_{x \downarrow -K} f'(x) 
+= \lim_{x \downarrow -K} \vert x \vert '
+= \lim_{x \downarrow -K} -1
+=-1.$$
+
+$$ \lim_{x \uparrow K} f'(x) 
+= \lim_{x \uparrow K} \vert x \vert '
+= \lim_{x \uparrow K} 1
+=1.$$
+
+und f\"ur $n < 1/K$
+
+$$ \lim_{x \downarrow -K} f'(x) 
+= \lim_{x \downarrow -K} n x
+=-nK.$$
+
+$$ \lim_{x \uparrow K} f'(x) 
+= \lim_{x \uparrow K} n x
+=nK.$$
+\item
+Wir definieren
+$$ f: \RR \rightarrow \RR, 
+f(x)= \ \vert x \vert. $$
+Wir zeigen, dass $f_n \rightarrow f$ bez\"uglich $\Vert \cdot \Vert_{C^0([-K, K], \RR)}$. F\"ur $n\geq 1/K$ gilt
+$$0 \leq \Vert f_n - f \Vert_{C^0([-K,K], \RR)}
+= \sup_{x\in [-K,K]} \vert f_n(x) - f(x) \vert
+= \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert f_n(x) - f(x) \vert$$
+
+$$ \leq  \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \left( \vert f_n(x) \vert + \vert f(x) \vert \right)
+\leq \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert f_n(x) \vert + \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert f(x) \vert$$
+
+$$= \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \Big\vert \frac{n}{2}x^2 + \frac{1}{2n} \Big\vert + \sup_{x\in \left(\frac{-1}{n}, \frac{1}{n}\right)} \vert x  \vert
+= \frac{n}{2}\left( \frac{1}{n} \right)^2 + \frac{1}{2n} + \frac{1}{n}
+= \frac{2}{n} \rightarrow 0, \quad \text{ f\"ur } n \rightarrow \infty.$$
+\item
+Es gilt $C^1([-K,K], \RR) \subset C^0([-K,K], \RR)$ (Prop. 8.2). Wir wissen aus $ii.)$, dass $(f_n)_{n \in \NN \setminus \{0\}}$ in $(C^0([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ konvergiert. Damit gilt insbesondere, dass $(f_n)_{n \in \NN \setminus \{0\}}$ eine Cauchyfolge in $(C^0([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ und damit auch eine Cauchyfolge in $(C^1([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ ist, da nach $i.)$ $(f_n)_{n \in \NN \setminus \{0\}}\subseteq C^1(\RR, \RR)$. Jedoch gilt $f\notin C^1([-K,K], \RR)$ und damit ist $(C^1([-K,K], \RR), \Vert \cdot \Vert_{C^0([-K,K], \RR)})$ nicht vollst\"andig.
+\end{enumerate}
+\end{solution}
+
+
+
+
+
+\begin{ex}{$(\star)$}
+\begin{enumerate}[i.)]
+\item
+Berechnen Sie die Ableitungen der folgenden Funktionen:
+\begin{enumerate}
+\item
+$$ f(x)= \frac{x^2-2x+1}{3x+2},  \quad x\in \RR \setminus \big\{ -\frac{2}{3} \big\} .$$
+\item
+$$ g(x) = \log((x + \sin(x))^2),  \quad x\in \RR \setminus \{ 0 \}.$$
+\item
+$$ h(x) = x^{\sin(\sqrt{x})}, \quad x>0.$$
+\end{enumerate}
+\item
+Finden Sie alle lokalen Extrema der Funktion $f(x):=(1+x)\sqrt{\vert x \vert}, \ x\in \RR$.
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+\begin{enumerate}
+\item
+$$ f'(x) 
+\stackrel{\text{Quotientenregel}}{=} \frac{(x^2-2x+1)' \cdot (3x+2) - (x^2-2x+1)\cdot (3x+2)'}{(3x+2)^2}$$
+
+$$ =\frac{(2x-2) \cdot (3x+2) - (x^2-2x+1)\cdot 3}{(3x+2)^2} 
+= \frac{2(x-1)(3x+2) -3(x-1)(x-1)}{(3x+2)^2}$$
+
+$$= \frac{(x-1)(6x+4 -3x+3)}{(3x+2)^2}
+= \frac{(x-1)(3x+7)}{(3x+2)^2}.$$
+\item
+$$g'(x) \stackrel{\text{Kettenregel}}{=} \frac{1}{(x + \sin(x))^2} \cdot \left( (x + \sin(x))^2 \right)'$$
+
+$$\stackrel{\text{Kettenregel}}{=} \frac{1}{(x + \sin(x))^2} \cdot 2( (x + \sin(x))\cdot ( (x + \sin(x))'$$
+
+$$=\frac{1}{(x + \sin(x))^2} \cdot 2( (x + \sin(x))\cdot ( 1+\cos(x))
+= \frac{2+2\cos(x)}{ x + \sin(x) }.$$
+\item
+$$ h'(x) = \left( e^{\sin(\sqrt{x})\cdot \log(x)} \right)' 
+\stackrel{\text{Kettenregel}}{=} \left( \sin(\sqrt{x})\cdot \log(x) \right)' \cdot \left( e^{\sin(\sqrt{x})\cdot \log(x)} \right)$$
+
+$$\stackrel{\text{Produktregel}}{=} \left( \sin(\sqrt{x})' \cdot \log(x) + \sin(\sqrt{x}) \cdot \log(x)' \right) \cdot x^{\sin(\sqrt{x})}$$
+
+$$\stackrel{\text{Kettenregel}}{=} \left(\cos(\sqrt{x})\cdot \left( \sqrt{x} \right)' \cdot \log(x) + \frac{\sin(\sqrt{x})}{x}\right) x^{\sin(\sqrt{x})}$$
+
+$$= \left( \frac{\cos(\sqrt{x})}{2\sqrt{x}}\cdot \log(x) + \frac{\sin(\sqrt{x})}{x} \right) \cdot x^{\sin(\sqrt{x})}.$$
+\end{enumerate}
+\item
+Wir unterscheiden in unserer Analysis drei F\"alle.
+
+$\underline{x=0}$
+
+Zuerst zeigen wir $x=0$ ein lokales Minimum von $f$ ist. Dazu bemerken wir $f(0)=0$. Weiter gilt
+$$ 0<h \Rightarrow f(h) = \underbrace{(1+h)}_{>0} \underbrace{\sqrt{h}}_{>0} >0$$
+und
+$$ -1<h<0 \Rightarrow f(h) = \underbrace{(1+h)}_{>0} \underbrace{\sqrt{-h}}_{>0} >0.$$
+
+$\underline{x>0}$
+
+Nun zeigen wir, dass $f$ keine Extrema in $(0, \infty)$ besitzt. F\"ur $x>0$ gilt $f(x)=(1+x)\sqrt{x}$. $f$ ist hier differenzierbar. Es gilt
+$$ 0=f'(x) \stackrel{\text{Produktregel}}{=} \sqrt{x} + \frac{1+x}{2\sqrt{x}} = \frac{3x+1}{2\sqrt{x}}
+\Leftrightarrow 0=  3x + 1 \Leftrightarrow x= -\frac{1}{3}.$$
+Damit besitzt die Gleichung $f'(x)=0$ in $(0, \infty)$ keine L\"osung. Aus Prop. 8.7 folgt, dass $f$ keine Extrema in $(0, \infty)$ besitzt.
+
+$\underline{x<0}$
+F\"ur $x>0$ gilt $f(x)=(1+x)\sqrt{-x}$. $f$ ist hier differenzierbar. Es gilt
+$$ 0=f'(x) \stackrel{\text{Produktregel, Kettenregel}}{=} \sqrt{-x} - \frac{1+x}{2\sqrt{-x}}
+=-\frac{3x+1}{2\sqrt{-x}}
+\Leftrightarrow 0= -3x - 1 \Leftrightarrow x= -\frac{1}{3}.$$
+
+Es gilt $f'(x)>0$ f\"ur $x<-1/3$ und $f'(x)<0$ f\"ur $-1/3 < x < 0$. Aus Prop. 8.13 folgt, dass $x=-1/3$ ein lokales Maximum von $f$ ist. Dies kann man alternativ auch mit Prop. 8.26 beweisen, da
+$$f''(x)
+\stackrel{\text{Quotientenregel}}{=} -\frac{6\sqrt{-x} +\frac{(3x+1)}{\sqrt{-x}}}{-4x}
+=- \frac{1}{-4x} \cdot \frac{-3x+1}{\sqrt{-x}}$$
+und damit
+$$ f''\left( -\frac{1}{3}\right) = \frac{3}{4}\cdot \frac{3}{\sqrt{\frac{1}{3}}}>0.$$
+
+Damit sind $\{ -1/3, 0\}$ alle lokalen Extrema von $f$.
+\end{enumerate}
+\end{solution}
+
+
+
+
+
+
+\begin{ex}
+Zeigen Sie, dass die Exponentialabbildung auf $\RR$ konvex ist und zeigen Sie $e^x\geq 1+x$ f\"ur alle $x\in \RR.$
+\end{ex}
+\begin{solution}
+Es gilt $(e^x)''=e^x>0$. Aus Prop. 8.21 folgt, dass die Exponentialabbildung konvex ist. Aus Prop. 8.20 folgt
+$$ e^z \leq \frac{e^y-e^z}{y-z} \leq e^y, \quad \text{ f\"ur } z\leq y. $$
+Falls $x>0$, setzen wir $z=0, y=x$
+$$ 1= e^0 \leq \frac{e^x - e^0}{x-0} = \frac{e^x-1}{x} \Rightarrow 1+x \leq e^x.$$
+Falls $x<0$, setzen wir $z=x, y=0$
+$$ \frac{1-e^x}{-x} = \frac{e^0 -e^x}{-x} \leq e^0 =1  \Rightarrow 1-e^x \leq -x 
+\Rightarrow 1 +x \leq e^x.$$
+\end{solution}
+
+
+\begin{ex}{$(\star)$}
+Zeigen Sie, dass f\"ur alle $x,y \in \RR$ mit $0\leq y<x$ gilt:
+$$ ny^{n-1} \leq \frac{x^n - y^n}{x-y} \leq n x^{n-1}, \quad \forall n \in \NN \setminus \{0 \}.$$
+\end{ex}
+\begin{solution}
+F\"ur $y=0$ ist die Aussage trivial. 
+Sei $n\in \NN_{\geq 1}$ und $f: \RR_{> 0} \rightarrow \RR, f(x)=x^n$. Es gilt $f^{(2)}(x)= n(n-1)x^{n-2}\geq 0$. Mit Prop. 8.21 ist $f$ konvex und die Aussage folgt aus Prop. 8.20.
+\end{solution}
+
+
+
+
+\begin{ex}{$(\star)$}
+Entscheiden Sie f\"ur jede der folgenden Aussagen, ob Sie wahr oder falsch ist.
+\begin{enumerate}[i.)]
+\item
+Als Folge in $C^0([0,1], \RR)$ hat $f_n(x)=x^n$ keine konvergente Teilfolge.
+\item
+Die Funktion $f:\RR \rightarrow \RR$ definiert durch $f(x)=x^2 \cos(1/x)$ f\"ur $x\neq0$ und $f(0)=0$ ist in $x=0$ differenzierbar 
+\item
+Sei $f:\RR \rightarrow \RR$ konvex. Dann ist $f$ auf $\RR$ differenzierbar.
+\item
+Ist $f:[0,1] \rightarrow \RR$ gleichm\"assig stetig und auf $(0,1)$ differenzierbar, dann ist $f'$ beschr\"ankt.
+\item
+Ist $f:[0,1] \rightarrow \RR$ differenzierbar und es gibt ein $x_0\in (0,1)$ mit $f'(x_0)=0$, so hat $f$ in $x_0$ ein lokales Extremum.
+\end{enumerate} 
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wahr. Nehmen wir an, es g\"abe eine gleichm\"assig konvergente Teilfolge $(f_{n_k})_{k\in \NN}$. Diese konvergiert punktweise gegen $f:[0,1]\rightarrow \RR, f(x) = \begin{cases} 0, \quad x\neq 1 \\ 1, \quad x=1 \end{cases}$. Damit $f_{n_k} \rightarrow f$ gleichm\"assig. Da die $f_n$ stetig sind, ist $f$ stetig (Prop. 6.24). Dies ist offensichtlich nicht der Fall, also Widerspruch.
+\item
+Wahr. Es gilt
+$$ 0\leq \bigg\vert \frac{h^2 \cos(\frac{1}{h}) - 0}{h-0} \bigg\vert = \vert h \vert \cdot \big\vert \cos\big(\frac{1}{h}\big) \big\vert \leq \vert h \vert \rightarrow 0, \qquad \text{f\"ur } h\rightarrow 0.$$
+
+Damit gilt $\lim_{h\rightarrow 0} \frac{f(h)- f(0)}{h-0}=0$. Also ist $f$ in $x=0$ differenzierbar (mit $f'(0)=0$).
+\item
+Falsch, der Absolutbetrag ist ein Gegenbeispiel (nicht differenzierbar in $x=0$).
+\item
+Falsch. Gegenbeispiel $f:[0,1] \rightarrow \RR, f(x) = \begin{cases} x^2 \cos(\frac{1}{x^3}), \qquad x\neq 0 \\ 0, \qquad \qquad \qquad x=0.\end{cases}$ Man beweist analog zu $ii.)$, dass $f$ stetig ist. Da $[0,1]$ kompakt ist, ist $f$ gleichm\"assig stetig (Satz 6.22). Mittels der Kettenregel (Prop. 8.5) erhalten wir f\"ur $x\in (0,1):$ $f'(x)= 2x \cos(\frac{1}{x^3})+ \frac{1}{x^2} \sin(\frac{1}{x^3})$. Der erste Term ist durch 1 beschr\"ankt und der zweite ist unbeschr\"ankt, also ist $f'$ unbeschr\"ankt.
+
+Ein alternatives Gegenbeispiel ist $g:[0,1]\rightarrow \RR, \ g(x)=\sqrt{x}$. Wieder folgt aus Satz 6.22, dass $g$ gleichm\"assig stetig ist. Jedoch ist $g'(x)= 1/\sqrt{x}$ unbeschr\"ankt auf $(0,1)$.
+\item
+Falsch, Gegenbeispiel $f(x)=(x-\frac{1}{2})^3$. $f'\big(\frac{1}{2}\big)= 2\cdot (\frac{1}{2} - \frac{1}{2})^2=0$, aber $x=\frac{1}{2}$ ist weder lokales Maximum, noch Minimum von $f$. Da $f\big(\frac{1}{2}\big)= (\frac{1}{2}-\frac{1}{2})^3=0$. 
+
+F\"ur $x<\frac{1}{2}$ gilt $x-\frac{1}{2}<0$ und damit $f(x)=(x-\frac{1}{2})^3<0$.
+
+F\"ur $x>\frac{1}{2}$ gilt $x-\frac{1}{2}>0$ und damit $f(x)=(x-\frac{1}{2})^3>0$.
+\end{enumerate}
+\end{solution}
 
 
 \end{document}
