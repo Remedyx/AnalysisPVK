@@ -124,7 +124,7 @@ $$ \frac{4^{2}-3^1}{13} = \frac{13}{13}=1 \in \NN.$$
 Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass $ \frac{4^{2n}-3^n}{13} \in \NN $.
 
 Dann berechnen wir
-$$ \frac{4^{2(n+1)}-3^(n+1)}{13} = \frac{4^2(4^{2n}-3^n)}{13} + \frac{(4^2-3)3^n}{13}
+$$ \frac{4^{2(n+1)}-3^{(n+1)}}{13} = \frac{4^2(4^{2n}-3^n)}{13} + \frac{(4^2-3)3^n}{13}
 = 4^2 \underbrace{\frac{4^{2n}-3^n}{13}}_{\in \NN \text{ nach IA}} + 3^n \in \NN.$$
 \end{solution}
 \begin{ex} \
@@ -266,7 +266,7 @@ Da diese Aussage immer wahr ist, folgern wir, dass $2$ in der Tat eine obere Sch
 \end{align*}
 gilt und somit $2- \epsilon$ keine obere Schranke von $S$ ist. Es gilt jedoch offensichtlich
 \begin{align*}
-2- \epsilon < \frac{2n+1}{n+1} \iff - \epsilon \frac{2n+1}{n+1}-2 \iff \epsilon > \frac{1}{n+1} \iff n > \frac{1}{\epsilon}-1 
+2- \epsilon < \frac{2n+1}{n+1} \iff - \epsilon< \frac{2n+1}{n+1}-2 \iff \epsilon > \frac{1}{n+1} \iff n > \frac{1}{\epsilon}-1 
 \end{align*}
 Wählen wir also $n \in \mathbb{N}$ sodass $n > \frac{1}{\epsilon}-1$, dann gilt $2- \epsilon < \frac{2n+1}{n+1}$, somit haben wir gezeigt, dass $\sup S=2$. Um etwas präziser zu zeigen, dass $2 \notin S$ gilt, nehmen wir an, dass eine natürliche Zahl $n \in \mathbb{N}$ existiert sodass 
 \begin{align*}
@@ -989,6 +989,16 @@ Offensichtlich gilt, dass $k^5+1 \geq k^5$ und somit $\frac{1}{k^5+1} \leq \frac
 \sum_{k=1}^n \frac{2k^2 +2k+3}{6k^5+6} \leq \sum_{k=1}^n \frac{1}{k^3} + \sum_{k=1}^n \frac{1}{k^4} + \sum_{k=1}^n \frac{1}{k^5}
 \end{align*}
 Lassen wir nun $n \to \infty$, dann erkennen wir die konvergenten Reihen,  wir schliessen dass die Reihe konvergiert. 
+\\\\
+Alternative können wir auch das Vergleichskriterium verwenden, denn es gilt 
+\begin{align*}
+\sum_{n=1}^\infty \frac{2n^2 + 2n +3}{6n^5 +6} \sim \sum_{n=1}^\infty \frac{1}{n^3}
+\end{align*}
+Wir berechnen hierfür 
+\begin{align*}
+\lim_{n \to \infty} \frac{a_n}{b_n} = \lim_{n \to \infty} \frac{\frac{2n^2 + 2n +3}{6n^5 + 6}}{\frac{1}{n^3}} = \lim_{ n \to \infty} \frac{n^3(2n^2+2n+3)}{6n^5+6}= \lim_{n \to \infty} \frac{2n^5}{6n^5}= \frac{1}{3} \in (0, \infty)
+\end{align*}
+wobei wir verwendet haben, dass die Dominanten Terme die der Ordnung $n^5$ sind, somit verhält sich die Reihe Vergleichbar mit der konvergenten Reihe $\sum \frac{1}{n^3}$. 
 \end{solution}
 
 
@@ -1023,6 +1033,44 @@ und folglich konvergiert die Reihe.
 
 
 \section{Stetigkeit und Grenzwerte von Funktionen}
+
+
+
+\begin{ex}
+Zeigen Sie, mit Hilfe der Definition der Stetigkeit, dass die folgende Funktion in $x=1$ stetig ist
+\begin{align*}
+h: \begin{cases} \mathbb{R} \setminus \lbrace -1 \rbrace & \longrightarrow \mathbb{R} \\
+x & \longmapsto \frac{x^2+x+1}{x+1} \end{cases}
+\end{align*}
+\end{ex}
+
+
+
+\begin{solution}
+Sei $ \epsilon >0$ fest aber beliebig, es sei $\delta$ sodass $0< |x-1| < \delta$, und wir können stets ohne Einschränkung annehmen, dass $\delta < 1$. Wir betrachten den Ausdruck
+\begin{align*}
+|h(x)-h(1)| &= \left| \frac{x^2 + x +1}{x+1} - \frac{3}{2} \right| = \left| \frac{2x^2+2x+2-3x-3}{2(x+1)} \right| = \left| \frac{x^2- \frac{1}{2}x- \frac{1}{2}}{x+1} \right| \\
+& = \left| \frac{ \left( x + \frac{1}{2}\right) (x-1)}{x+1} \right| = \frac{ \left| x + \frac{1}{2}\right| |x-1|}{|x+1|} < \frac{\left|x + \frac{1}{2} \right|}{|x+1|} \delta 
+\end{align*}
+Wir wollen also die Terme $x+ \frac{1}{2}$ und $x+1$ kontrollieren. Aus $|x-1| < \delta$ erhalten wir jedoch sofort 
+\begin{align*}
+\left| x + \frac{1}{2} \right| = \left| x -1 +1 + \frac{1}{2} \right| \leq |x-1| + \frac{3}{2} < \delta + \frac{3}{2}< \frac{5}{2}
+\end{align*}
+Es bleibt also nur noch der Ausdruck $|x+1|$. Da wir per Annahme $0 < |x-1| < \delta$ haben,  also $x$ sich beliebig nahe an $1$ befindet, muss sich $x+1$ beliebig Nahe an $2$ befinden, also haben wir 
+\begin{align*}
+2 -\delta < |x+1| < 2 - \delta
+\end{align*}
+und da $\delta <1$ haben wir $|x+1| >1$, also erhalten wir
+\begin{align*}
+|h(x)-h(1)| < \frac{\left| x + \frac{1}{2} \right|}{|x+1|} \delta < \frac{5}{2} \delta \overset{!}< \epsilon \iff \delta < \epsilon \frac{2}{5}
+\end{align*} 
+Wir wählen also für ein beliebiges $\epsilon >0$ ein $\delta$ derart, dass $0 < \delta < \min \lbrace \frac{2\epsilon}{5},1 \rbrace$ und erhalten dass dann $h$ stetig an der Stelle $x=1$ ist, d.h. wir haben formal gezeigt, dass
+\begin{align*}
+\lim_{x \to 1} h(x) = \lim_{x \to 1} \frac{x^2 + x+1}{x+1} = \frac{3}{2}
+\end{align*}
+\end{solution}
+
+
 \begin{ex}
 $f:\RR \rightarrow \RR$ stetig und injektiv, dann ist $f$ streng monoton.
 \end{ex}
