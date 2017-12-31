@@ -27,6 +27,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{polynom}
 
 \usepackage{tikz}
 \usetikzlibrary{intersections}
@@ -2165,6 +2166,31 @@ F\"ur $x>\frac{1}{2}$ gilt $x-\frac{1}{2}>0$ und damit $f(x)=(x-\frac{1}{2})^3>0
 
 \end{ex}
 
+
+\begin{solution}
+\begin{enumerate}[i.)]
+\item 
+Falsch. Sei z.B. $f(a)=1$ und $f(x)=0 ~~ \forall x \in (a,b]$. Dann ist $f$ nicht konstant null, aber das Integral schon.\\
+Bemerkung: Falls $f$ zusätzlich noch stetig ist, wäre die Aussage wahr.
+
+\item
+Wahr, Theorem aus Vorlesung, bekannt als die Monotonie des Integrals. 
+
+\item
+Falsch. Der negative Teil von $f$ muss nur eine kleinere Fläche haben, als der positive Teil, z.B. $f:[-1,3] \rightarrow \RR, ~ x \mapsto x$. Dann gilt
+$$\int_{-1}^3 \! f(x) \, \mathrm{d}x ~=~ \frac{1}{2}x^2 \Big|^3_{-1} = ~\frac{9}{2} - \frac{1}{2} ~= 4 >0$$
+und $f(-1)=-1 <0$.
+
+\item
+Wahr. Wir benutzen das Integralkriterium für Reihen (Satz 10.5.11). Das liefert uns die Konvergenz der Reihe, sobald wir gezeigt haben, dass $\int_{0}^{\infty} \! g(x) \, \mathrm{d}x < \infty$, wobei $g(x):=f(n)$ falls $x \in [n,n+1)$. Da $f$ monoton fallend ist, gilt $g(x) = f(n) \leq f(n-1) \leq f(x-1) ~ \forall x \in [n,n+1), n\in \NN$. Also gilt $g(x) \leq f(x-1)  ~ \forall x \in [0,\infty)$ und deshalb $$\int_{0}^{\infty} \! g(x) \, \mathrm{d}x
+=\int_{0}^{1} \! g(x) \, \mathrm{d}x + \int_{1}^{\infty} \! g(x) \, \mathrm{d}x
+ \leq  a_0 +  \int_{1}^{\infty} \! f(x-1) \, \mathrm{d}x
+ = a_0 +  \int_{0}^{\infty} \! f(x) \, \mathrm{d}x <\infty.$$
+\end{enumerate}
+\end{solution}
+
+
+
 \begin{ex} Es sei $t \in \mathbb{R}_1$. Berechnen Sie die folgenden Integrale. 
 \begin{enumerate}[i)]
 \item \begin{align*}
@@ -2191,10 +2217,185 @@ F\"ur $x>\frac{1}{2}$ gilt $x-\frac{1}{2}>0$ und damit $f(x)=(x-\frac{1}{2})^3>0
 \item \begin{align*}
 \int_0^1 \ln (1 +x^2 )dx 
 \end{align*}
-
+\item \begin{align*}
+\int_2^4 \frac{x^4 +x^3 +x^2+1}{x^2+x-2}
+\end{align*}
 \end{enumerate}
 
 \end{ex}
+
+
+
+
+
+
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wir benutzen zwei mal partielle Integration (PI).
+\begin{equation}
+\begin{aligned}
+\int_1^t \! x^2 \left( \ln(x) \right) ^2 \, \mathrm{d}x 
+& \stackrel{PI}{=} \frac{1}{3}x^3\left( \ln(x) \right) ^2 {\Bigg|} ^t_1 - \int_1^t \! \frac{1}{3}x^3 ~ 2 \frac{1}{x}~ \ln(x) \, \mathrm{d}x\\
+&=\frac{1}{3}t^3\left( \ln(t) \right) ^2-\int_1^t \! \frac{2}{3}x^2 ~ \ln(x) \, \mathrm{d}x\\
+& \stackrel{PI}{=}\frac{1}{3}t^3\left( \ln(t) \right) ^2 - \left( \frac{2}{9} x^3 \ln(x){\Bigg|} ^t_1 - \int_1^t \! \frac{2}{9}x^3 ~ \frac{1}{x} \, \mathrm{d}x
+\right)\\
+&= \frac{1}{3}t^3\left( \ln(t) \right) ^2 - \frac{2}{9} t^3 \ln(t) + \int_1^t \! \frac{2}{9}x^2 \, \mathrm{d}x\\
+&= \frac{1}{3}t^3\left( \ln(t) \right) ^2 - \frac{2}{9} t^3 \ln(t) + \frac{2}{27}x^3{\Bigg|} ^t_1\\
+&= \frac{1}{3}t^3\left( \ln(t) \right) ^2 - \frac{2}{9} t^3 \ln(t) + \frac{2}{27}t^3 -\frac{2}{27}.
+\notag
+\end{aligned}
+\end{equation}
+
+\item
+\underline{1. Möglichkeit: Partialbruchzerlegung}\\
+Wir bemerken, dass $x^2+3x+2= (x+2)(x+1)$ und suchen nun $a,b \in \RR$ mit
+$$ \frac{2x+3}{x^2+3x+2} = \frac{a}{x+2} + \frac{b}{x+1} = \frac{a(x+1) +b(x+2)}{x^2+3x+2} = \frac{x(a+b) +(a+2b)}{x^2+3x+2}.$$
+Wir vergleichen die Koeffizienten von den Zählern vom ersten und dem letzten Bruch und kommen auf das Gleichungssystem
+$\begin{cases} 2=a+b \\ 3=a+2b \end{cases}$.\\
+Das hat die Lösung $a=1=b$ und wir schliessen daraus, dass
+\begin{equation}
+\begin{aligned}
+\int_1^3 \! \frac{2x+3}{x^2+3x+2} \, \mathrm{d}x 
+&= \int_1^3 \! \frac{1}{x+2} + \frac{1}{x+1} \, \mathrm{d}x = \Big( \ln(x+2) + \ln(x+1) \Big){\Bigg|} ^3_1\\
+&= \ln\big((x+2)(x+1)\big){\Bigg|} ^3_1
+= \ln(20)-\ln(6)= \ln\left(\frac{20}{6}\right)= \ln\left(\frac{10}{3}\right).
+\notag
+\end{aligned}
+\end{equation}
+\underline{2. Möglichkeit: Substitution}\\
+Sei $u(x):= x^2+3x+2$. Dann gilt $u'(x)= 2x+3$, was genau dem Zähler entspricht. Wir rechnen also
+$$\int_1^3 \! \frac{2x+3}{x^2+3x+2} \, \mathrm{d}x 
+= \int_1^3 \! \frac{u'(x)}{u(x)} \, \mathrm{d}x 
+= \int_{u(1)}^{u(3)} \! \frac{1}{u} \, \mathrm{d}u
+= \ln(u) {\Bigg|} ^{3^2+3\cdot3+2}_{1^2 +3\cdot1+2}
+= \ln(20)-\ln(6)=  \ln\left(\frac{10}{3}\right).$$
+
+\item
+Wir benutzen zwei mal partielle Integration (PI) um wieder zum ursprünglichen Integral zu kommen.
+\begin{flalign}
+& \int_0^t \! \sin(3x)\cos(5x) \, \mathrm{d}x &
+\notag
+\end{flalign}
+\begin{equation}
+\begin{aligned}
+&\stackrel{PI}{=} -\frac{1}{3}\cos(3x)\cos(5x) \Big|^t_0 -  \int_0^t \! \left(-\frac{1}{3}\cos(3x)\right)\left(-5\sin(5x)\right) \, \mathrm{d}x \\
+&= -\frac{1}{3}\cos(3t)\cos(5t) +\frac{1}{3} -  \int_0^t  \frac{5}{3}\cos(3x)\sin(5x) \,\mathrm{d}x \\
+&\stackrel{PI}{=} -\frac{1}{3}\cos(3t)\cos(5t) +\frac{1}{3} - \frac{5}{3}\left(\frac{1}{3}\sin(3x)\sin(5x) \Big|^t_0 - \int_0^t  \frac{1}{3}\sin(3x)\cdot 5\cos(5x) \,\mathrm{d}x \right)\\
+&= -\frac{1}{3}\cos(3t)\cos(5t) +\frac{1}{3} - \frac{5}{9}\sin(3t)\sin(5t) + \frac{25}{9}\int_0^t  \sin(3x)\cos(5x) \,\mathrm{d}x 
+\notag
+\end{aligned}
+\end{equation}
+Nun subtrahieren wir den letzten Term und bekommen
+$$ (1-\frac{25}{9}) \int_0^t \! \sin(3x)\cos(5x) \, \mathrm{d}x = -\frac{1}{3}\cos(3t)\cos(5t) +\frac{1}{3} - \frac{5}{9}\sin(3t)\sin(5t).$$
+Teilen wir durch $-\frac{16}{9}$, liefert uns das das gewünschte Resultat
+$$\int_0^t \! \sin(3x)\cos(5x) \, \mathrm{d}x =
+\frac{3}{16}\cos(3t)\cos(5t) -\frac{3}{16} + \frac{5}{16}\sin(3t)\sin(5t).$$
+
+\item
+Wir benutzen die Substitutionsmethode mit $u(x):= \ln(x^8+6)$. Dann gilt $u'(x)=\frac{8x^7}{x^8+6}$ und wir erkennnen, dass
+\begin{equation}
+\begin{aligned}
+\int_{-2}^3 \! \frac{56x^7\cos(\ln(x^8+6))}{x^8+6} \, \mathrm{d}x
+&= \int_{-2}^3 \! 7u'(x)\cos(u(x)) \, \mathrm{d}x 
+= 7 \int_{u(-2)}^{u(3)} \! \cos(u) \, \mathrm{d}u \\
+&=7\sin(u) \Big|^{\ln(6567)}_{\ln(262)}
+= 7\sin(\ln 6567)-7\sin(\ln 262)
+\notag
+\end{aligned}
+\end{equation}
+
+\item
+Wir benutzen den Additionssatz und $\sin^2(x)+\cos^2(x)=1$ für
+$$1+\cos(x) = 1+\cos\left(\frac{x}{2}+\frac{x}{2}\right) = 1+\cos^2\left(\frac{x}{2} \right) - \sin^2\left(\frac{x}{2} \right)= \cos^2\left(\frac{x}{2} \right)+\cos^2\left(\frac{x}{2} \right) = 2\cos^2\left(\frac{x}{2} \right),$$
+und deshalb ist
+$$\left(\tan\left(\frac{x}{2} \right) \right)' = \frac{1/2}{\cos^2\left(\frac{x}{2} \right)} = \frac{1}{1+\cos(x)}.$$
+Wir berechnen nun das Integral
+\begin{equation}
+\begin{aligned}
+\int_0^3 \! \frac{\cos(x)}{1+\cos(x)} \, \mathrm{d}x 
+&=\int_0^3 \! \frac{1+\cos(x)-1}{1+\cos(x)} \, \mathrm{d}x 
+= \int_0^3 \! 1-\frac{1}{1+\cos(x)} \, \mathrm{d}x\\
+&= \left( x-\tan\left(\frac{x}{2}\right) \right)\Big|^3_0
+=3-\tan\left(\frac{3}{2}\right). 
+\notag
+\end{aligned}
+\end{equation}
+
+\item
+Die Funktion ist als Produkt einer ungeraden Funktion mit einer geraden Funktion ungerade, nämlich sei $f(x):={\cos(3x)}\sqrt{x^4+3x^2+4}$. Dann gilt für $x \in [-1,1]$
+$$f(-x)={\cos(-3x)}\sqrt{(-x)^4+3(-x)^2+4} = -{\cos(3x)}\sqrt{x^4+3x^2+4} = -f(x).$$
+Dann gilt
+\begin{equation}
+\begin{aligned}
+\int_{-1}^1 \! {\cos(3x)}\sqrt{x^4+3x^2+4} \, \mathrm{d}x
+ &= \int_{-1}^1 \! f(x) \, \mathrm{d}x 
+= \int_{-1}^0 \! f(x) \, \mathrm{d}x+\int_{0}^1 \! f(x) \, \mathrm{d}x\\
+&=\int_{0}^1 \! f(-x) \, \mathrm{d}x+\int_{0}^1 \! f(x) \, \mathrm{d}x\\
+&=-\int_{0}^1 \! f(x) \, \mathrm{d}x+\int_{0}^1 \! f(x) \, \mathrm{d}x = 0.
+\notag
+\end{aligned}
+\end{equation}
+
+\item
+Wir benutzen die dritte binomische Formel.
+\begin{equation}
+\begin{aligned}
+\int_0^1 \! \frac{1}{\sqrt{x+1}+ \sqrt{x+2}} \, \mathrm{d}x
+&= \int_0^1 \! \frac{1}{\sqrt{x+1}+ \sqrt{x+2}}\frac{\sqrt{x+1}- \sqrt{x+2}}{\sqrt{x+1}- \sqrt{x+2}} \, \mathrm{d}x\\[.3cm]
+&= \int_0^1 \! \frac{\sqrt{x+1}- \sqrt{x+2}}{x+1- (x+2)} \, \mathrm{d}x\\[.1cm]
+&=\int_0^1 \! -(\sqrt{x+1}- \sqrt{x+2})\, \mathrm{d}x\\
+&= \bigg( -\frac{1}{2\sqrt{x+1}} + \frac{1}{2\sqrt{x+2}} \bigg) \Bigg|^1_0\\
+&= -\frac{1}{2\sqrt{2}} + \frac{1}{2\sqrt{3}} +  \frac{1}{2} - \frac{1}{2\sqrt{2}}\\[.1cm]
+&= -\frac{1}{\sqrt{2}} + \frac{1}{2\sqrt{3}} +  \frac{1}{2}. 
+\notag
+\end{aligned}
+\end{equation}
+
+
+\item
+Wir integrieren partiell.
+\begin{equation}
+\begin{aligned}
+\int_{0}^1 \! \ln(1+x^2) \cdot 1\, \mathrm{d}x &= \ln(1+x^2)x \Big|^1_0 - \int_{0}^1 \! \frac{2x}{1+x^2}\cdot x~ \, \mathrm{d}x \\
+&= \ln(2) - \int_{0}^1 \! \frac{2(x^2+1)-2}{1+x^2} \, \mathrm{d}x\\
+&= \ln(2) - \int_{0}^1 \!2- \frac{2}{1+x^2} \, \mathrm{d}x\\
+&= \ln(2) - \big( 2x-2\arctan(x) \big) \Big|^1_0\\
+&= \ln(2)-2+\frac{\pi}{2} .
+\notag
+\end{aligned}
+\end{equation}
+
+\item Da der Grad des Zählers grösser ist als der Grad des Nenners müssen wir zuerst eine Polynomdivision durchführen, wir erhalten 
+\begin{align*}
+\frac{x^4+x^3+x^2+1}{x^2+x-2} = x^2 + 3 + \frac{-3x+7}{x^2+x-2}
+\end{align*}
+Weil  \\ \\ 
+\polylongdiv[style=C]{x^4+x^3+x^2+1}{x^2+x-2}
+\\
+Für den zweiten Term verwenden wir Partialbruch Zerlegunng, wir verwenden den Ansatz
+\begin{align*}
+\frac{-3x+7}{x^2+x-2}= \frac{-3x+7}{(x+2)(x-1)} = \frac{A}{x+2} + \frac{B}{x-1}
+\end{align*}
+Wir erhalten also nach Multiplikation mit $(x+2)(x-1)$ die Aussage
+\begin{align*}
+A(x-1)+B(x+2)=-3x+7
+\end{align*}
+Setzen wir $x=1$ erhalten wir $B= \frac{4}{3}$ und für $x=-2$ erhalten wir $A= - \frac{13}{3}$ 
+\end{enumerate}
+Somit haben wir gezeigt, dass 
+\begin{align*}
+\frac{x^4+x^3+x^2+1}{x^2+x-2}= x^2 + 3 - \frac{13}{3} \frac{1}{x+2} + \frac{4}{3} \frac{1}{x-1}
+\end{align*}
+Nun liefert die Integrations über die Grenzen schliesslich
+\begin{align*}
+\int_2^4  \frac{x^4+x^3+x^2+1}{x^2+x-2}dx &= \left. \frac{x^3}{3} + 3x - \frac{13}{3} \ln (x+2) \frac{4}{3} \ln ( x-1) \right|_{x=2}^{x=4} \\ 
+&= \frac{74}{3} + \ln \left( \frac{16 \sqrt[3]{2}}{27} \right)
+\end{align*}
+\end{solution}
+
+
+
 
 \end{document}
 
