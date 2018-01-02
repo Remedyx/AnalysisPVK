@@ -1560,8 +1560,6 @@ $\{ z \in \CC \ : \ \vert z \vert < \rho  \}$ stetig.
 Sei $\rho>0$ der Konvergenzradius von $f(z)= \sum_{n\geq 0} a_n z^n$. Dann
 
 $p_m(z)= \sum_{n=0}^m a_n z^n \rightarrow f(z)$ gleichm\"assig auf $\{ z \in \CC \ : \ \vert z \vert \leq r  \}$ f\"ur alle $r<\rho$.
-\item
-Es existiert eine analytische Funktion $f: \RR \rightarrow \RR$ mit $f(x)= 0$ f\"ur alle $\vert x \vert >2$ und $f(x)=1$ f\"ur alle $\vert x \vert \leq 1$.
 \end{enumerate}
 \end{ex}
 \begin{solution}
@@ -1576,37 +1574,11 @@ $$ \sup_{\vert z \vert \leq r} \vert f(z) - p_m(z) \vert
 \leq \sup_{\vert z \vert \leq r}  \sum_{n\geq m+1} \vert a_n \vert \cdot \vert z^n \vert$$
 
 $$= \sum_{n\geq m+1} \vert a_n \vert \cdot r^n \rightarrow 0, \quad \text{ f\"ur } m \rightarrow \infty.$$
-\item
-Falsch. Siehe n\"achste Aufgabe.
+
 \end{enumerate}
 \end{solution}
 
 
-
-
-
-\begin{ex}
-Seien $a\in \RR, \epsilon>0,$ und $f:\RR \rightarrow \RR$ analytisch mit $f|_{(a, a+\epsilon)}=0$. Wir wollen zeigen, dass $f=0$.
-\begin{enumerate}[i.)]
-\item
-Zeigen Sie $\{ x\in \RR_{> a} \ :  \ f|_{(a,x)}=0 \} \neq \emptyset. $
-\item
-Definieren Sie $b:=\sup \{ x\in \RR_{> a} \ :  \ f|_{(a,x)} \}$. Nutzen Sie das Identit\"atsprinzip um (mittels Widerspruchsbeweis) zu zeigen, dass $b=\infty$.
-\item
-Schliessen Sie, dass $f=0$.
-\end{enumerate}
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-Nach Voraussetzung $\epsilon \in \{ x\in \RR_{> a} \ :  \ f|_{(a,x)}=0 \}$ und damit $\{ x\in \RR_{> a} \ :  \ f|_{(a,x)}=0 \}\neq \emptyset$.
-\item
-Annahme $b\neq \infty$. Dann ist $f(b)=0$, da $f|_{(a,b)}=0$ und $f$ stetig (da $f$ analytisch, Kor. 8.31). Aus dem Identit\"atsprinzip (Prop. 8.33) folgt, dass $f$ in einer Umgebung von $b$ identisch gleich Null ist. Damit existiert ein $\delta >0$, sodass $f|_{(b-\delta, b+\delta)}=0$. Dann gilt jedoch $f|_{(a, b+\delta)}=0$ Dies ist ein Widerspruch dazu, dass $b=\sup \{ x\in \RR_{> a} \ :  \ f|_{(a,x)} \}$.
-\item
-Aus $ii.)$ folgt, dass $f|_{(a,\infty)}=0$. Wir m\"ussen nur noch zeigen, dass 
-$f|_{(-\infty,a)}=0$. Wir definieren $g(x):=f(-x)$. Da $f$ und $x\mapsto-x$ analytisch sind und die Komposition analytischer Funktionen analytisch ist (siehe Seite 110), folgt, dass $g$ analytisch ist. Es gilt $g|_{(-a-\epsilon, -a)}= f|_{(a, a+\epsilon)}=0$. Aus $ii.)$ folgt, dass $g|_{(-a, \infty)}=0$ und damit $f|_{(-\infty, a)}=0$.
-\end{enumerate}
-\end{solution}
 
 
 \newpage 
@@ -2145,6 +2117,56 @@ Falsch, Gegenbeispiel $f(x)=(x-\frac{1}{2})^3$. $f'\big(\frac{1}{2}\big)= 2\cdot
 F\"ur $x<\frac{1}{2}$ gilt $x-\frac{1}{2}<0$ und damit $f(x)=(x-\frac{1}{2})^3<0$.
 
 F\"ur $x>\frac{1}{2}$ gilt $x-\frac{1}{2}>0$ und damit $f(x)=(x-\frac{1}{2})^3>0$.
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex} Sei im folgenden $f:[a,b] \to \mathbb{R}$ stetig und auf $(a,b)$ differenzierbar. 
+\begin{enumerate}[i)]
+\item Verwenden Sie den Satz von Rolle um den Mittelwertsatz zu beweisen.
+\item Sei $f'(x)=0$ für alle $x \in (a,b)$, dann gilt $f(x)$ ist auf $(a,b)$ konstant.
+\item Beweisen Sie die folgende Identität 
+\begin{align*}
+\arctan(x) + \arccos(x) = \frac{\pi}{2}
+\end{align*}
+\item Es gilt $f'(x) >0$ für alle $x \in (a,b)$, dann ist $f$ auf $(a,b)$ monoton wachsend. 
+\end{enumerate}
+
+\end{ex}
+
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item Wir definieren die Hilfsfunktion $g(x):= f(x)-rx$ wobei $r= \frac{f(b)-f(a)}{b-a}$, es gilt dann $g(a)=g(b)$ weil 
+\begin{align*}
+g(x)=f(x)-rx= f(x)- \frac{f(b)-f(a)}{b-a}x  =  \frac{f(x)(b-a)- (f(b)-f(a))x}{b-a} 
+\end{align*}
+Desweiteren erfüllt $g$ die Annahme von Rolle's Theorem, also stetig auf $[a,b]$ und differenzierbar auf $(a,b)$. Also existiert eine $c \in (a,b)$ sodass $g'(c)=0$ gilt. Also
+\begin{align*}
+g'(c)=0 = f'(c)-r \iff f'(x) = \frac{f(b)-f(a)}{b-a}
+\end{align*}
+\item Seien $x_1,x_2 \in (a,b)$ beliebig. Die Voraussetzungen für den Mittelwertsatz sind erfüllt,  also erhalten wir die Existenz eines $c \in (a,b)$ mit 
+\begin{align*}
+\underbrace{f'(c)}_{=0} = \frac{f(x_2)-f(x_1)}{x_2-x_1} \implies f(x_2)=f(x_1)
+\end{align*}
+Also folgt, dass $f$ auf $(a,b)$ konstant sein muss. 
+\item Wir definieren $f(x)= \arctan (x) + \arccos(x)$, wir erhalten dann
+\begin{align*}
+f'(x)= \frac{1}{1+x^2 }- \frac{1}{1+x^2}=0
+\end{align*}
+Also muss gemäss ii) $f$ konstant auf ganz $\mathbb{R}$ sein. Wir bestimmen die Konstante indem wir $f$ an der Stelle $x=1$ auswerten, wir erhalten dann 
+\begin{align*}
+f(1)=\arctan(1) + \arccos(1)= \frac{\pi}{4}+ \frac{\pi}{4} = \frac{\pi}{2}
+\end{align*}
+Wir erhalten also
+\begin{align*}
+\arctan(x) + \arccos(x) = \frac{\pi}{2}
+\end{align*}
+\item Wir verwenden erneut den Mittelwertsatz welchen wir in Aufgabe i) bewiesen haben. Wir haben die Existenz eines $c \in (a,b)$ sodass 
+\begin{align*}
+\underbrace{f'(c)}_{>0}= \frac{f(x_2)-f(x_1)}{x_2-x_1} \tag{*}
+\end{align*}
+Da aber natürlich auch $x_2-x_1>0$ gilt, folgt aus (*), dass $f(x_2)-f(x_1)>0$ also $f(x_2)>f(x_1)$ und somit ist $f$ auf $(a,b)$ monoton wachsend. 
 \end{enumerate}
 \end{solution}
 
