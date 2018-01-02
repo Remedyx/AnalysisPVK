@@ -59,147 +59,8 @@
 \author{MB \& LB, Vorlage gemäss SeSc}
 \maketitle
 
-Die Verweise auf Theoreme und Propositionen beziehen sich auf das Skript der Vorlesung, welches Sie $\href{http://www.math.uzh.ch/index.php?ve_vo_det&key2=2513&keySemId=31}{hier}$ finden k\"onnen. Die Verweise auf Serien beziehen sich auf das HS 15. Es handelt sich bei dieser Übungssammlung um eine Überarbeite Version der von SeSc zur Verfügung gestellten Vorlage. 
+Die Verweise auf Theoreme und Propositionen beziehen sich auf das Skript der Vorlesung, welches Sie $\href{http://www.math.uzh.ch/index.php?ve_vo_det&key2=2513&keySemId=31}{hier}$ finden k\"onnen. Die Verweise auf Serien beziehen sich auf das HS 15. Es handelt sich bei dieser Übungssammlung um eine überarbeitete Version der von SeSc zur Verfügung gestellten Vorlage. 
 
-\section{Vollständige Induktion}
-
-\begin{ex}
-\begin{enumerate}[i.)] \
-\item
-Beweisen Sie die Bernoulli-Ungleichung 
-
-\begin{center}
-$\forall x >-1 \ \forall n\in \NN: (1+x)^n \geq 1+nx $
-\end{center}
-
-mittels Induktion.
-
-\item
-Seien $n\in \NN_{\geq2}$ und $x_1, \dots , x_n \geq 0$. Zeigen Sie
-
-\begin{center}
-$$\prod_{i=1}^n (1+x_i) \geq 1 + \sum_{i=1}^n x_i$$.
-\end{center}
-\end{enumerate}
-\end{ex}
-\begin{solution}
-\begin{enumerate}[i.)]
-\item
-Sei $x>-1$.
-Zuerst zeigen wir den Fall $n=0$. 
-$$ (1+x)^0=1 = 1+ 0\cdot x. $$
-Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass 
-$(1+x)^{n} \geq 1+nx$ (IA). 
-
-Dann berechnen wir
-$$ (1+x)^{n+1} = (1+x)(1+x)^n \stackrel{\text{IA, }  x>-1}{\geq} (1+x)(1+nx)= 1+(n+1)x+nx^2 \geq 1 + (n+1)x.$$ 
-\item
-Zuerst zeigen wir den Fall $n=2$. Seien $x_1, x_2 \geq 0$.
-$$ \prod_{i=1}^2 (1+x_i) = 1 + (x_1+x_2) + x_1\cdot x_2 
-\stackrel{x_1, x_1 \geq 0}{\geq} 1 + (x_1+x_2) = 1 + \sum_{i=1}^2 x_i.$$
-Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass 
-$\prod_{i=1}^n (1+x_i) \geq 1 + \sum_{i=1}^n x_i$ f\"ur alle $x_1, \dots, x_n \geq 0$ (IA).
-
-Dann berechnen wir f\"ur $x_1, \dots, x_{n+1} \geq 0$
-$$ \prod_{i=1}^{n+1} (1+x_i) = (1+x_{n+1}) \cdot \prod_{i=1}^{n} (1+x_i)
-\stackrel{\text{IA}}{\geq} (1+x_{n+1})(1 + \sum_{i=1}^n x_i)$$
-
-$$= 1 + \sum_{i=1}^{n+1} x_i + x_{n+1}\cdot \sum_{i=1}^n x_i
-\stackrel{x_i \geq 0}{\geq} 1 + \sum_{i=1}^{n+1} x_i.$$
-\end{enumerate}
-\end{solution}
-
-
-
-
-\begin{ex}{$(\star)$}
-Zeigen Sie, dass
-
-$$ \frac{4^{2n}-3^n}{13} \in \NN $$
-
-f\"ur alle $n \in \NN_{\geq 1}$.
-\end{ex}
-\begin{solution}
-Zuerst zeigen wir den Fall $n=1$.
-$$ \frac{4^{2}-3^1}{13} = \frac{13}{13}=1 \in \NN.$$
-Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass $ \frac{4^{2n}-3^n}{13} \in \NN $.
-
-Dann berechnen wir
-$$ \frac{4^{2(n+1)}-3^{(n+1)}}{13} = \frac{4^2(4^{2n}-3^n)}{13} + \frac{(4^2-3)3^n}{13}
-= 4^2 \underbrace{\frac{4^{2n}-3^n}{13}}_{\in \NN \text{ nach IA}} + 3^n \in \NN.$$
-\end{solution}
-\begin{ex} \
- \begin{enumerate}[i)]
- \item Zeigen Sie, dass der kleinste, nicht triviale Teiler einer natürlichen Zahlen $n \in \mathbb{N}_{ \geq 2}$ stets eine Primzahl ist. Hier ist keine vollständige Induktion notwendig, ein Beweis per Widerspruch genügt völlig. 
- \item Zeigen Sie, dass jede natürliche Zahl $n \in \mathbb{N}_{ \geq 2}$ als Produkt von Primzahlen in der kanonischen Form $n=p_1^{a_1} \cdot p_2^{a_2} \cdots p_k^{a_k}$ wobei $p_1 < p_2 < \dots < p_k \in \mathbb{P}$ und $a_1, \dots , a_k  \in \mathbb{N}_0$ geschrieben werden kann. Diese Darstellung ist desweiteren eindeutig, dies muss jedoch nicht gezeigt werden. 
-\end{enumerate}
-\end{ex}
-\begin{solution} \
-\begin{enumerate}[i)] 
-\item Zum Widerspruch sei $d_0$ der kleinste,  nicht triviale Teiler von $n \in \mathbb{N}_{ \geq 2}$ ohne dabei eine Primzahl zu sein. Da nun $d_0$ keine Primzahl ist, existiert per Definition eine Zahl $v$ wobei $1<v<d_0$ sodass $v \mid d_0$, per Transitivität gilt dann aber auch $v \mid n$ da bereits $d_0 \mid n$. Dies ist ein Widerspruch zur ANnahme, dass $d_0$ der kleinste, nicht triviale Teiler von $n$ war. 
-
-\item Für $n=2$ ist $n$ eine Primzahl und die Aussage somit trivial Wahr. Für den Induktionsschritt nehmen wir an,  dass wir für jede natürliche Zahl $n \in \mathbb{N}_{ \geq 2}$ die Darstellung $n = p_1^{a_1} \cdots p_k^{a_k}$ wie in der Aufgabenstellung haben. Falls nun $n+1$ eine Primzahl ist, so gibt es nicht zu zeigen,  ist $n+1$ jedoch keine Primzahl so muss gelten $n+1=mq$ wobei $1< m \leq q \leq n$, aber für solche Zahlen haben wir per Induktionsannahme kanonische Darstellungen der Form $m =  p_1^{b_1} \cdots p_k^{b_k}$ und $q= s_1^{c_1} \cdots s_l^{c_l}$ haben wobei $p_1 < \cdots < p_k$ und $s_1 < \cdots < s_l$ alles Primzahlen sind und die Exponenten natürliche Zahlen. Zusammenfassen der Primzahlen und Neuanordnung/Neubeschriftung liefert dann die Aussage. 
-\end{enumerate}
-\end{solution}
-\begin{ex}[* Trig Heavy] Wir definieren die Chebyshev Polynome für alle $x \in \mathbb{R}$ wie folgt
- \begin{align*}
- P_0(x)&= 1 \\
- P_1(x)&=x \\
- P_{n+1}(x)& = xP_n(x) -P_{n-1}(x), \text{ für } n \in \mathbb{N}
- \end{align*}
- Zeigen Sie, dass gilt:
- \begin{align*}
- P_n(2 \cos ( \theta)) = \frac{\sin ( (n+1) \theta)}{\sin( \theta)}, \ \theta \in (0, \pi ) 
- \end{align*}
-\end{ex}
-\begin{solution} Wir zeigen die  beiden Fälle $n=0$ und $n=1$, da wir in dem Induktionsschritt sowohl $k=n$ und $k=n-1$ benötigen werden. Für $n=0$ haben wir die triviale Aussage
-\begin{align*}
-1 = P_0(2 \cos \theta) = \frac{\sin \theta}{\sin \theta}=1
-\end{align*}
-Für $n=1$ haben wir die Aussage 
-\begin{align*}
-2 \cos  \theta = P_1( 2 \cos \theta) = \frac{\sin 2 \theta}{\sin \theta} = \frac{2 \sin \theta \cos \theta}{\sin \theta}= 2 \cos \theta
-\end{align*}
-Nehmen wir nun an, dass die Aussage für $n=k$ und $n=k-1$ für $k>0$ wahr ist,  i.e. wir haben die beiden Gleichungen
-\begin{align*}
-P_k(2 \cos \theta) = \frac{\sin ( (k+1) \theta)}{\sin \theta}, \text{ und } P_{k-1}( 2 \cos \theta) = \frac{\sin (k \theta)}{\sin \theta }
-\end{align*}
-Per definition von $P_{k+1}$ haben wir nun 
-\begin{align*}
-P_{k+1}(2 \cos \theta) &= 2 \cos \theta P_k(2 \cos \theta) - P_{k-1}( 2 \cos \theta) \\
-&= 2 \cos \theta \frac{\sin((k+1) \theta)}{\sin \theta} - \frac{\sin(k \theta)}{\sin \theta}
-\end{align*}
-Wir schreiben $k \theta = (k+1) \theta - \theta $ und erhalten
-\begin{align*}
-P_{k+1}( 2 \cos \theta) &= \frac{2 \cos \theta \sin((k+1) \theta)- \sin((k+1) \theta- \theta)}{\sin \theta } \\
-&= \frac{2 \cos \theta \sin((k+1)\theta)- \cos \theta \sin((k+)\theta) + \cos((k+1)\theta) \sin \theta}{\sin \theta} \\
-&= \frac{\cos \theta \sin ((k+1)\theta)+ \cos((k+1)\theta) \sin \theta}{\sin \theta} \\
-&= \frac{\sin((k+2) \theta}{\sin \theta }
-\end{align*}
-\end{solution}
-
-\begin{ex} (*) Sei $n \in \NN$ und $a_{jk} \in \mathbb{C}$ für $j = 0,\dots,n + 1$, $k = 0,\dots,n$. Zeigen Sie, dass
-	\begin{equation*}
-		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
-	\end{equation*}
-\end{ex}
-
-\begin{solution} Sei zuerst $n = 0$. Dann erhalten wir einfach
-	\begin{equation*}
-		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = a_{00} + a_{10} =  \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
-	\end{equation*}
-	Nehmen wir nun an, dass die Formel für ein $n \in \NN$ gültig ist. Dann gilt 
-	\begin{align*}
-		\sum_{j = 0}^{n+2}\sum_{k = 0}^{n+1} a_{jk} &= \sum_{j = 0}^{n + 2}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}} \right) \\
-		&= \sum_{j = 0}^{n + 1}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}}\right) + \left( {\sum_{k = 0}^n a_{n+2,k} + a_{n+2,n+1}}\right) \\
-		&= \sum_{j = 0}^{n + 1}\sum_{k = 0}^n a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
-		&= \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
-		&= \sum_{0 \leq j \leq k \leq n + 1}a_{jk} + \sum_{0 \leq k < j \leq n+2} a_{jk}.
-	\end{align*}
-	womit der Induktionsschritt gezeigt wäre. 
-\end{solution}
-
-\newpage
 
 \section{sup, inf, max, min von Mengen}
 \begin{ex} Berechnen Sie das Supremum (kleinste obere Schranke) der Menge 
@@ -294,6 +155,148 @@ Wir wählen $x= 1 + \frac{\epsilon}{2}$, dann gilt offensichtlich
 da per Annahme $1+ \epsilon$ eine untere Schranke von $S$ war. Also ist $1+ \epsilon$ keine untere Schranke von $S$ und somit haben wir gezeigt,  dass $1$ die grösste untere Schranke von $S$ ist. 
 
 \end{solution}
+
+\section{Vollständige Induktion}
+
+\begin{ex}
+\begin{enumerate}[i.)] \
+\item
+Beweisen Sie die Bernoulli-Ungleichung 
+
+\begin{center}
+$\forall x >-1 \ \forall n\in \NN: (1+x)^n \geq 1+nx $
+\end{center}
+
+mittels Induktion.
+
+\item
+Seien $n\in \NN_{\geq2}$ und $x_1, \dots , x_n \geq 0$. Zeigen Sie
+
+\begin{center}
+$$\prod_{i=1}^n (1+x_i) \geq 1 + \sum_{i=1}^n x_i$$.
+\end{center}
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Sei $x>-1$.
+Zuerst zeigen wir den Fall $n=0$. 
+$$ (1+x)^0=1 = 1+ 0\cdot x. $$
+Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass 
+$(1+x)^{n} \geq 1+nx$ (IA). 
+
+Dann berechnen wir
+$$ (1+x)^{n+1} = (1+x)(1+x)^n \stackrel{\text{IA, }  x>-1}{\geq} (1+x)(1+nx)= 1+(n+1)x+nx^2 \geq 1 + (n+1)x.$$ 
+\item
+Zuerst zeigen wir den Fall $n=2$. Seien $x_1, x_2 \geq 0$.
+$$ \prod_{i=1}^2 (1+x_i) = 1 + (x_1+x_2) + x_1\cdot x_2 
+\stackrel{x_1, x_1 \geq 0}{\geq} 1 + (x_1+x_2) = 1 + \sum_{i=1}^2 x_i.$$
+Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass 
+$\prod_{i=1}^n (1+x_i) \geq 1 + \sum_{i=1}^n x_i$ f\"ur alle $x_1, \dots, x_n \geq 0$ (IA).
+
+Dann berechnen wir f\"ur $x_1, \dots, x_{n+1} \geq 0$
+$$ \prod_{i=1}^{n+1} (1+x_i) = (1+x_{n+1}) \cdot \prod_{i=1}^{n} (1+x_i)
+\stackrel{\text{IA}}{\geq} (1+x_{n+1})(1 + \sum_{i=1}^n x_i)$$
+
+$$= 1 + \sum_{i=1}^{n+1} x_i + x_{n+1}\cdot \sum_{i=1}^n x_i
+\stackrel{x_i \geq 0}{\geq} 1 + \sum_{i=1}^{n+1} x_i.$$
+\end{enumerate}
+\end{solution}
+
+
+
+
+\begin{ex}
+Zeigen Sie, dass
+
+$$ \frac{4^{2n}-3^n}{13} \in \NN $$
+
+f\"ur alle $n \in \NN_{\geq 1}$.
+\end{ex}
+\begin{solution}
+Zuerst zeigen wir den Fall $n=1$.
+$$ \frac{4^{2}-3^1}{13} = \frac{13}{13}=1 \in \NN.$$
+Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass $ \frac{4^{2n}-3^n}{13} \in \NN $.
+
+Dann berechnen wir
+$$ \frac{4^{2(n+1)}-3^{(n+1)}}{13} = \frac{4^2(4^{2n}-3^n)}{13} + \frac{(4^2-3)3^n}{13}
+= 4^2 \underbrace{\frac{4^{2n}-3^n}{13}}_{\in \NN \text{ nach IA}} + 3^n \in \NN.$$
+\end{solution}
+\begin{ex} \
+ \begin{enumerate}[i)]
+ \item Zeigen Sie, dass der kleinste, nicht triviale Teiler einer natürlichen Zahl $n \in \mathbb{N}_{ \geq 2}$ stets eine Primzahl ist. Hier ist keine vollständige Induktion notwendig, ein Beweis per Widerspruch genügt völlig. 
+ \item Zeigen Sie, dass jede natürliche Zahl $n \in \mathbb{N}_{ \geq 2}$ als Produkt von Primzahlen in der kanonischen Form $n=p_1^{a_1} \cdot p_2^{a_2} \cdots p_k^{a_k}$ wobei $p_1 < p_2 < \dots < p_k \in \mathbb{P}$ und $a_1, \dots , a_k  \in \mathbb{N}_0$ geschrieben werden kann. Diese Darstellung ist desweiteren eindeutig, dies muss jedoch nicht gezeigt werden. 
+\end{enumerate}
+\end{ex}
+\begin{solution} \
+\begin{enumerate}[i)] 
+\item Zum Widerspruch sei $d_0$ der kleinste,  nicht triviale Teiler von $n \in \mathbb{N}_{ \geq 2}$ ohne dabei eine Primzahl zu sein. Da nun $d_0$ keine Primzahl ist, existiert per Definition eine Zahl $v$ wobei $1<v<d_0$ sodass $v \mid d_0$, per Transitivität gilt dann aber auch $v \mid n$ da bereits $d_0 \mid n$. Dies ist ein Widerspruch zur Annahme, dass $d_0$ der kleinste, nicht triviale Teiler von $n$ war. 
+
+\item Für $n=2$ ist $n$ eine Primzahl und die Aussage somit trivial Wahr. Für den Induktionsschritt nehmen wir an,  dass wir für jede natürliche Zahl $n \in \mathbb{N}_{ \geq 2}$ die Darstellung $n = p_1^{a_1} \cdots p_k^{a_k}$ wie in der Aufgabenstellung haben. Falls nun $n+1$ eine Primzahl ist, so gibt es nicht zu zeigen,  ist $n+1$ jedoch keine Primzahl so muss gelten $n+1=mq$ wobei $1< m \leq q \leq n$, aber für solche Zahlen haben wir per Induktionsannahme kanonische Darstellungen der Form $m =  p_1^{b_1} \cdots p_k^{b_k}$ und $q= s_1^{c_1} \cdots s_l^{c_l}$ haben wobei $p_1 < \cdots < p_k$ und $s_1 < \cdots < s_l$ alles Primzahlen sind und die Exponenten natürliche Zahlen. Zusammenfassen der Primzahlen und Neuanordnung/Neubeschriftung liefert dann die Aussage. 
+\end{enumerate}
+\end{solution}
+\begin{ex}[* Trig Heavy] Wir definieren die Chebyshev Polynome für alle $x \in \mathbb{R}$ wie folgt
+ \begin{align*}
+ P_0(x)&= 1 \\
+ P_1(x)&=x \\
+ P_{n+1}(x)& = xP_n(x) -P_{n-1}(x), \text{ für } n \in \mathbb{N}
+ \end{align*}
+ Zeigen Sie, dass gilt:
+ \begin{align*}
+ P_n(2 \cos ( \theta)) = \frac{\sin ( (n+1) \theta)}{\sin( \theta)}, \ \theta \in (0, \pi ) 
+ \end{align*}
+\end{ex}
+\begin{solution} Wir zeigen die  beiden Fälle $n=0$ und $n=1$, da wir in dem Induktionsschritt sowohl $k=n$ und $k=n-1$ benötigen werden. Für $n=0$ haben wir die triviale Aussage
+\begin{align*}
+1 = P_0(2 \cos \theta) = \frac{\sin \theta}{\sin \theta}=1
+\end{align*}
+Für $n=1$ haben wir die Aussage 
+\begin{align*}
+2 \cos  \theta = P_1( 2 \cos \theta) = \frac{\sin 2 \theta}{\sin \theta} = \frac{2 \sin \theta \cos \theta}{\sin \theta}= 2 \cos \theta
+\end{align*}
+Nehmen wir nun an, dass die Aussage für $n=k$ und $n=k-1$ für $k>0$ wahr ist,  i.e. wir haben die beiden Gleichungen
+\begin{align*}
+P_k(2 \cos \theta) = \frac{\sin ( (k+1) \theta)}{\sin \theta}, \text{ und } P_{k-1}( 2 \cos \theta) = \frac{\sin (k \theta)}{\sin \theta }
+\end{align*}
+Per Definition von $P_{k+1}$ haben wir nun 
+\begin{align*}
+P_{k+1}(2 \cos \theta) &= 2 \cos \theta P_k(2 \cos \theta) - P_{k-1}( 2 \cos \theta) \\
+&= 2 \cos \theta \frac{\sin((k+1) \theta)}{\sin \theta} - \frac{\sin(k \theta)}{\sin \theta}
+\end{align*}
+Wir schreiben $k \theta = (k+1) \theta - \theta $ und erhalten
+\begin{align*}
+P_{k+1}( 2 \cos \theta) &= \frac{2 \cos \theta \sin((k+1) \theta)- \sin((k+1) \theta- \theta)}{\sin \theta } \\
+&= \frac{2 \cos \theta \sin((k+1)\theta)- \cos \theta \sin((k+)\theta) + \cos((k+1)\theta) \sin \theta}{\sin \theta} \\
+&= \frac{\cos \theta \sin ((k+1)\theta)+ \cos((k+1)\theta) \sin \theta}{\sin \theta} \\
+&= \frac{\sin((k+2) \theta}{\sin \theta }
+\end{align*}
+\end{solution}
+
+\begin{ex} (*) Sei $n \in \NN$ und $a_{jk} \in \mathbb{C}$ für $j = 0,\dots,n + 1$, $k = 0,\dots,n$. Zeigen Sie, dass
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+\end{ex}
+
+\begin{solution} Sei zuerst $n = 0$. Dann erhalten wir einfach
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = a_{00} + a_{10} =  \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+	Nehmen wir nun an, dass die Formel für ein $n \in \NN$ gültig ist. Dann gilt 
+	\begin{align*}
+		\sum_{j = 0}^{n+2}\sum_{k = 0}^{n+1} a_{jk} &= \sum_{j = 0}^{n + 2}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}} \right) \\
+		&= \sum_{j = 0}^{n + 1}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}}\right) + \left( {\sum_{k = 0}^n a_{n+2,k} + a_{n+2,n+1}}\right) \\
+		&= \sum_{j = 0}^{n + 1}\sum_{k = 0}^n a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n + 1}a_{jk} + \sum_{0 \leq k < j \leq n+2} a_{jk}.
+	\end{align*}
+	womit der Induktionsschritt gezeigt wäre. 
+\end{solution}
+
+\newpage
+
+
 \section{Folgen}
 \begin{ex}
 Seien $m\in \NN$, $(x_i)_{i\in \NN} \subseteq \RR^m$ und $x\in \RR^m$.
@@ -323,7 +326,7 @@ $x_n=(-1)^n$ konvergiert nicht. Sei $(x_{n_i})_{i\in \NN}$ eine Teilfolge von $(
 $A_1:=\{n_i\in \NN \ : \ n_i \text{ ist ungerade } \}$ oder $A_2:=\{n_i\in \NN \ : \ n_i \text{ ist gerade } \}$ abz\"ahlbar unendlich. W\"ahle $i\in \{1,2 \}$ sodass $A_i$ unendlich ist, dann ist $(x_l)_{l\in A_i}$ eine konvergente Teilfolge von $(x_{n_i})_{i\in \NN}$ (mit Grenzwert $(-1)^i$).
 \end{enumerate}
 \end{solution}
-\begin{ex}{$(\star)$} Sei $(z_n)_{n\in \NN} \subseteq \CC$, $z\in \CC$. Entscheiden Sie f\"ur jede Aussage, ob sie wahr ist oder falsch.
+\begin{ex} Sei $(z_n)_{n\in \NN} \subseteq \CC$, $z\in \CC$. Entscheiden Sie f\"ur jede Aussage, ob sie wahr ist oder falsch.
 
 
 \begin{enumerate}[i.)]
@@ -391,7 +394,7 @@ Falsch, Gegenbeispiel $x_n= (-1)^n$.
 \end{solution}
 
 
-\begin{ex}{$(\star)$}
+\begin{ex}
 Berechnen Sie die folgenden Grenzwerte:
 
 \begin{enumerate}[i.)]
@@ -453,7 +456,7 @@ $$ \liminf_{n \rightarrow \infty} (-1)^n \frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)}
 \end{enumerate}
 \end{solution}
 
-\begin{ex}{$(\star)$}
+\begin{ex}
 Entscheiden Sie f\"ur jede Aussage, ob sie wahr oder falsch ist.
 
 Sei $(a_n)_{n\in \NN}\subseteq \RR$ mit H\"aufungspunkt $h\in \RR$.
@@ -608,13 +611,10 @@ Damit gilt $\lim_{n\rightarrow \infty} a_n = a = x^2=  \frac{25}{4}$.
 \begin{ex}{$(\star)$}
 \begin{enumerate}[i.)]
 \item
-Berechnen Sie die folgenden Grenzwerte:
-\begin{enumerate}
-\item
+Berechnen Sie den folgenden Grenzwert:
+
 $$ \lim_{n \rightarrow \infty} \log \bigg( \Big( \frac{n}{n+1} \Big)^n \bigg).$$
-\item
-$$ \lim_{x \rightarrow 0} \bigg( \frac{1}{e^x-1} - \frac{1}{x} \bigg).$$
-\end{enumerate}
+
 
 \item
 Berechnen Sie alle H\"aufungspunkte der komplexen Folge
@@ -630,8 +630,6 @@ $$\lim_{n \rightarrow \infty} \bigg[ (n+1) \cos\bigg( \frac{1}{n+1} \bigg) - n \
 \begin{solution}
 \begin{enumerate}[i.)]
 \item
-\begin{enumerate}
-\item
 Wir berechnen 
 $$\bigg(\frac{n}{n+1} \bigg)^n 
 = \bigg(1-\frac{1}{n+1} \bigg)^n
@@ -640,23 +638,7 @@ Aus der Stetigkeit des Logaritmus folgt
 $$ \lim_{n \rightarrow \infty} \log \bigg( \Big( \frac{n}{n+1} \Big)^n \bigg)
 = \log \bigg( \lim_{n \rightarrow \infty} \bigg(\frac{n}{n+1} \bigg)^n \bigg)
 = \log(e^{-1})= -1.$$
-\item
-Aus dem Satz \"uber das Lagrang'sche Restglied (Satz 8.25) wissen wir, dass gilt
-$$ e^x= 1 + x + \frac{x^2}{2} + e^{\xi_x} \cdot \frac{x^3}{6},$$
-wobei $\xi_x \in [0,x]$ f\"ur $x>0$ und $\xi_x \in [x,0]$ f\"ur $x<0$. Damit folgt
-$$  \frac{1}{e^x-1} - \frac{1}{x} 
-=  \frac{1}{x + \frac{x^2}{2} + e^{\xi_x} \cdot \frac{x^3}{6}} - \frac{1}{x} 
-= \frac{1}{x} \bigg( \frac{1}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} - 1 \bigg)
-= \frac{1}{x} \bigg( \frac{-\frac{x}{2} - e^{\xi_x} \cdot \frac{x^2}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} \bigg)$$
 
-$$=  \frac{-\frac{1}{2} - e^{\xi_x} \cdot \frac{x}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}}$$
-
-Da $\vert \xi_x \vert\leq \vert x \vert$, gilt $\xi_x \rightarrow 0$ f\"ur $x \rightarrow 0$. Damit erhalten wir mit der Stetigkeit der Exponentialfunktion
-$$ \lim_{x \rightarrow 0} \bigg( \frac{1}{e^x-1} - \frac{1}{x} \bigg)
-=   \lim_{x \rightarrow 0}  \frac{-\frac{1}{2} - e^{\xi_x} \cdot \frac{x}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} 
-=  \frac{-\frac{1}{2}- e^0\cdot 0}{1+ \frac{0}{2} + e^0\cdot \frac{0^2}{6} }
-= -\frac{1}{2}.$$
-\end{enumerate}
 \item
 Wir berechnen
 $$ (n^4 - n^2 + 2)^{1/n} = (n^{1/n})^4 \cdot (1 - \frac{1}{n^2} + \frac{2}{n^4})^{1/n} 
@@ -697,7 +679,7 @@ $$= \cos(0) +0 = 1.$$
 \end{enumerate}
 \end{solution}
 
-\begin{ex} \
+\begin{ex}[*] \
 \begin{enumerate}[i)]
 \item Es sei $(a_n)_{n \in \mathbb{N}}$ eine reelle Folge derart, dass für ihre Inkremente gilt $|a_{n+1}-a_n| \leq 2^{-n}$. Zeigen Sie, dass $(a_n)_{n \in \mathbb{N}}$ eine Cauchy Folge ist. Bedeutet dies, dass $(a_n)_{n \in \mathbb{N}}$ konvergiert? Warum? 
 \item Es sei $(a_n)_{n \in \mathbb{N}}$ eine reelle Folge, welche rekursiv definiert ist mittels 
@@ -991,7 +973,7 @@ Offensichtlich gilt, dass $k^5+1 \geq k^5$ und somit $\frac{1}{k^5+1} \leq \frac
 \end{align*}
 Lassen wir nun $n \to \infty$, dann erkennen wir die konvergenten Reihen,  wir schliessen dass die Reihe konvergiert. 
 \\\\
-Alternative können wir auch das Vergleichskriterium verwenden, denn es gilt 
+Alternativ können wir auch das Vergleichskriterium verwenden, denn es gilt 
 \begin{align*}
 \sum_{n=1}^\infty \frac{2n^2 + 2n +3}{6n^5 +6} \sim \sum_{n=1}^\infty \frac{1}{n^3}
 \end{align*}
@@ -1072,6 +1054,39 @@ Wir wählen also für ein beliebiges $\epsilon >0$ ein $\delta$ derart, dass $0 
 \end{solution}
 
 
+\begin{ex} Sind die 3 nachfolgenden Funktionen Lipschitz-stetig?
+\begin{enumerate}[i)]
+\item $f:(0, \infty) \to \mathbb{R}, \ x \mapsto \frac{1}{1+x^2}$
+\item $f:[0,1) \to \mathbb{R}, \ x \mapsto \sqrt{x}$ 
+\item $f: \mathbb{R} \to \mathbb{R}, \ x \mapsto \sin x$
+\item Finden Sie eine Funktion, welche gleichmässig stetig, aber nicht Lipschitz-stetig ist.
+\item Finden Sie eine Funktion, die Lipschitz-stetig, aber nicht diferenzierbar ist.
+
+\end{enumerate}
+
+\end{ex}
+
+
+\begin{solution} 
+\begin{enumerate}[i)]
+
+\item \begin{align*}
+|f'(x)| = \left| \frac{-2x}{(1+x^2)^2}\right| \leq 1 \implies \text{ Ableitung beschränkt} \implies f \text{ ist Lipschitz-stetig}.
+\end{align*}
+
+\item Für die Ableitung an der Stelle $x=0$ gilt \begin{align*}
+\lim_{x \to 0} |f'(x)| = \lim_{x \to 0} \left| \frac{1}{2 \sqrt{x}} \right| = \infty
+\end{align*}
+Also ist die Ableitung an der Stelle $x=0$ unbeschränkt und somit ist $f$ nicht Lipschitz-stetig.
+\item Offensichtlich ist die Ableitung durch die $\cos$ Funktion gegeben, welche durch $1$ beschränkt ist und somit ist $f$ Lipschitz-stetig.
+\item Wir definieren $f: [0,1] \to \mathbb{R}, \ x \mapsto \sqrt{x}$, dann ist $f$ gleichmässig stetig, aber nicht Lipschitz.
+\item Die Betragsfunktion $f: \mathbb{R} \to \mathbb{R}, \ x \mapsto |x|$ ist ein möglicher Kandidat. 
+\end{enumerate}
+
+
+\end{solution}
+
+
 \begin{ex}
 $f:\RR \rightarrow \RR$ stetig und injektiv, dann ist $f$ streng monoton.
 \end{ex}
@@ -1120,7 +1135,7 @@ $f(x)= \begin{cases} 0,  \qquad \quad \ x\in [0, 1/2) \\ x-1/2 , \ \ x\in [1/2, 
 Sei $f:\RR \rightarrow \RR$ stetig und beschr\"ankt, dann besitzt $f$ einen Fixpunkt.
 \end{ex}
 \begin{solution}
-Wir definieren $a:=\inf_{x\in \RR} f(x)$ und $b:=\sup_{x\in \RR} f(x)$. Dann gilt $Im(f) \subseteq [a,b]$ und wir k\"onnen $f$ einschr\"anken auf $f:[a,b] \rightarrow [a,b]$. Da $f$ stetig ist, folgt die Behauptung aus \"Ubungsblatt 9, Aufgabe 2a.
+Wir definieren $a:=\inf_{x\in \RR} f(x)$ und $b:=\sup_{x\in \RR} f(x)$. Dann gilt $Im(f) \subseteq [a,b]$ und wir k\"onnen $f$ einschr\"anken auf $f:[a,b] \rightarrow [a,b]$. Da $f$ stetig ist, folgt die Behauptung dem Fixpunktsatz.
 \end{solution}
 
 
@@ -1579,7 +1594,26 @@ $$= \sum_{n\geq m+1} \vert a_n \vert \cdot r^n \rightarrow 0, \quad \text{ f\"ur
 \end{solution}
 
 
+\begin{ex} Berechnen Sie den folgenden Grenzwert mit Hilfe der Lagran'schen Fehlerabschätzung $$ \lim_{x \rightarrow 0} \bigg( \frac{1}{e^x-1} - \frac{1}{x} \bigg).$$
+\end{ex}
 
+\begin{solution}
+Aus dem Satz \"uber das Lagrang'sche Restglied (Satz 8.25) wissen wir, dass gilt
+$$ e^x= 1 + x + \frac{x^2}{2} + e^{\xi_x} \cdot \frac{x^3}{6},$$
+wobei $\xi_x \in [0,x]$ f\"ur $x>0$ und $\xi_x \in [x,0]$ f\"ur $x<0$. Damit folgt
+$$  \frac{1}{e^x-1} - \frac{1}{x} 
+=  \frac{1}{x + \frac{x^2}{2} + e^{\xi_x} \cdot \frac{x^3}{6}} - \frac{1}{x} 
+= \frac{1}{x} \bigg( \frac{1}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} - 1 \bigg)
+= \frac{1}{x} \bigg( \frac{-\frac{x}{2} - e^{\xi_x} \cdot \frac{x^2}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} \bigg)$$
+
+$$=  \frac{-\frac{1}{2} - e^{\xi_x} \cdot \frac{x}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}}$$
+
+Da $\vert \xi_x \vert\leq \vert x \vert$, gilt $\xi_x \rightarrow 0$ f\"ur $x \rightarrow 0$. Damit erhalten wir mit der Stetigkeit der Exponentialfunktion
+$$ \lim_{x \rightarrow 0} \bigg( \frac{1}{e^x-1} - \frac{1}{x} \bigg)
+=   \lim_{x \rightarrow 0}  \frac{-\frac{1}{2} - e^{\xi_x} \cdot \frac{x}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} 
+=  \frac{-\frac{1}{2}- e^0\cdot 0}{1+ \frac{0}{2} + e^0\cdot \frac{0^2}{6} }
+= -\frac{1}{2}.$$
+\end{solution}
 
 \newpage 
 
@@ -1601,7 +1635,7 @@ $$= - \lim_{h \rightarrow 0} \frac{f(x+h)-f(x)}{h} = -f'(x).$$
 
 
 \begin{ex}
-Beweisen Sie die verallgemeinerte Bernoulli-Ungleichung, diese besagt, dass f\"ur alle $r\geq 1, \ x\geq$ gilt:
+Beweisen Sie die verallgemeinerte Bernoulli-Ungleichung, diese besagt, dass f\"ur alle $r\geq 1, \ x\geq 0$ gilt:
 $$ (1+x)^r\geq 1+rx .$$
 
 Hint: Betrachten Sie die Funktion $h(x)=(1+x)^r - (1+rx).$
@@ -2411,7 +2445,7 @@ Somit haben wir gezeigt, dass
 \end{align*}
 Nun liefert die Integrations über die Grenzen schliesslich
 \begin{align*}
-\int_2^4  \frac{x^4+x^3+x^2+1}{x^2+x-2}dx &= \left. \frac{x^3}{3} + 3x - \frac{13}{3} \ln (x+2) \frac{4}{3} \ln ( x-1) \right|_{x=2}^{x=4} \\ 
+\int_2^4  \frac{x^4+x^3+x^2+1}{x^2+x-2}dx &= \left. \frac{x^3}{3} + 3x - \frac{13}{3} \ln (x+2)+ \frac{4}{3} \ln ( x-1) \right|_{x=2}^{x=4} \\ 
 &= \frac{74}{3} + \ln \left( \frac{16 \sqrt[3]{2}}{27} \right)
 \end{align*}
 \end{solution}
