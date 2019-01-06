@@ -307,7 +307,7 @@ was zu zeigen war.
 
 \begin{ex}{($\star$)} Es seien $0 \leq x_i \leq \pi$ für $i=1, \dots , n \in \mathbb{N}$. Zeigen Sie folgende Ungleichung für alle $n \in \mathbb{N}$ mit Hilfe der Vorwärts-Rückwärts Induktion: 
 \begin{align*}
-\sin x_1 + \sin x_2 + \dots + \sin x_n \leq n \sin \left( \frac{x_1 + \dots + x_n}{n}\right)
+\sin x_1 + \sin x_2 + \dots + \sin x_n \leq n \sin \left( \frac{x_1 + \dots + x_n}{n}\right).
 \end{align*}
 \end{ex}
 
@@ -377,7 +377,7 @@ also $P(k+1) \rightsquigarrow P(k)$. Gemäss dem Prinzip der Cauchy-Induktion is
 
 \begin{ex}{$(\star)$} Zeigen Sie mit Hilfe der Cauchy-Induktion die folgende Ungleichung, bekannt als Cauchy's Ungleichung (oder auch arithmetisches Mittel dominiert das geometrische Mittel): Es seien $a_1, a_2, \dots , a_n \in \mathbb{R}_{ \geq 0}$, dann gilt
 \begin{align*}
-\frac{a_1 + a_2 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \cdot a_2 \cdot ... \cdot a_n}
+\frac{a_1 + a_2 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \cdot a_2 \cdot ... \cdot a_n}.
 \end{align*}
 \end{ex}
 
@@ -605,6 +605,7 @@ Es existiert eine Teilfolge von $(a_n)_{n\in \NN}$, die gegen $h$ konvergiert.
 $\forall \ \epsilon >0 \ \forall N\in \NN \ \exists n>N: \vert a_n - h\vert < \epsilon$.
 \end{enumerate}
 \end{ex}
+\newpage 
 \begin{solution}
 \begin{enumerate}[i.)]
 \item
@@ -1385,7 +1386,7 @@ da $x^2 \geq 0$.
 \end{align*}
 \item Es genügt die untere Abschätzung zu betrachten, wir erkennen dass: 
 \begin{align*}
-\frac{x^2}{x+100} \leq \frac{x^2 (2 \sin^2 x)}{x+100}.
+\frac{x^2}{x+100} \leq \frac{x^2 (2+ \sin^2 x)}{x+100}.
 \end{align*}
 und da die untere Schranke gegen unendlich divergiert, muss auch die obere Schranke nach unendlich divergieren. 
 \item Da die Exponential Funktion monoton wachsend auf $\mathbb{R}$ ist erhalten wir: 
@@ -1414,7 +1415,7 @@ und da die untere Schranke gegen unendlich divergiert, muss auch die obere Schra
 \begin{enumerate}[i)] 
 \item 
 \begin{align*}
- \lim_{x \rightarrow 0^+} \left( \sqrt{x^2 +1} \right)^{ \frac{1}{\sin^2 x}} = \lim_{ x \rightarrow 0^+} \exp \left( \log \left( ( \sqrt{x^2+1})^\frac{1}{\sin^2x} \right) \right) = \lim_{x \rightarrow 0^+} \exp \left( \frac{\log \sqrt{x^2+1}}{\sin^2 x} \right). 
+ \lim_{x \rightarrow 0^+} \left( \sqrt{x^2 +1} \right)^{ \frac{1}{\sin^2 x}} = \lim_{ x \rightarrow 0^+} \exp \left( \log \left[ \left( \sqrt{x^2+1}\right)^\frac{1}{\sin^2x} \right] \right) = \lim_{x \rightarrow 0^+} \exp \left( \frac{\log \sqrt{x^2+1}}{\sin^2 x} \right). 
 \end{align*}
 Da die Exponentialfunktion stetig ist, dürfen wir den Grenzwert mit der $\exp$-Funktion vertauschen (i.e. in ihr Argument hereinziehen). Für den Grenzwert der Funktion im Exponenten erhalten wir mit Hilfe des Satzes von Bernoulli De L'Hopital, dass:
 \begin{align*}
@@ -1651,7 +1652,7 @@ $$ \rho
 Die Koeffizienten sind:
 $$ a_n = \begin{cases} 0, \qquad \qquad \ n \text{ keine Quadratzahl} \\ 4n^{5/2} 3^{\sqrt{n}}, \quad n \text{ Quadratzahl.}   \end{cases} $$
 Wir berechnen:
-$$ \vert a_{n^2} \vert^{1/n^2} =\vert 4n^{5/2}\cdot 3^{\sqrt{n}} \vert^{1/n}
+$$ \vert a_{n^2} \vert^{1/n} =\vert 4n^{5/2}\cdot 3^{\sqrt{n}} \vert^{1/n}
 = \underbrace{4^{1/n}}_{\longrightarrow 1} \cdot \underbrace{\left( n^{1/n} \right)^{5/2}}_{\longrightarrow 1^{5/2}=1} \cdot \underbrace{e^{\log(3)/\sqrt{n}}}_{\longrightarrow e^0=1} \longrightarrow 1, \quad \text{ f\"ur } n \longrightarrow \infty.$$
 Damit erhalten wir:
 $$ \rho = \frac{1}{\limsup_{n \rightarrow \infty} \vert a_n \vert^{1/n}} 
