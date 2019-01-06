@@ -42,11 +42,11 @@
 \newcommand\ZZ{\mathbb{Z}}
 
 \begin{document}
-\title{PVK Analysis - Lösungen}
-\author{MB \& LB, Vorlage gemäss SeSc}
+\title{PVK Analysis I}
+\author{Marco Bertenghi \& Lukas Burch, Vorlage gemäss Severin Schraven}
 \maketitle
 
-Die Verweise auf Theoreme und Propositionen beziehen sich auf das Skript der Vorlesung, welches Sie $\href{http://www.math.uzh.ch/index.php?ve_vo_det&key2=2513&keySemId=31}{hier}$ finden k\"onnen. Die Verweise auf Serien beziehen sich auf das HS 15.
+Die Verweise auf Theoreme und Propositionen beziehen sich auf das Skript der Vorlesung, welches Sie $\href{http://www.math.uzh.ch/index.php?ve_vo_det&key2=2513&keySemId=31}{hier}$ finden k\"onnen. Die Verweise auf Serien beziehen sich auf das HS 15. Mit (*) markierte Aufgaben, sind im allgemeinen anspruchsvoller.
 
 
 \section{sup, inf, max, min von Mengen}
@@ -73,13 +73,13 @@ Unsere Bemühungen lassen nun schliessen, dass $\sup M = \max M = 1$ gelten muss
 $A$ unbeschr\"ankt $\Longleftrightarrow$ $\sup A = \infty$.
 
 \item
-$A$ ist endlich $\Longrightarrow$ $max A = sup A$.
+$A$ ist endlich $\Longrightarrow$ $\max A = \sup A$.
 
 \item
-$min A$ existiert $\Longrightarrow$ $min A = -max(-A)$.
+$\min A$ existiert $\Longrightarrow$ $\min A = -\max(-A)$.
 
 \item
-$sup A \notin A$.
+$\sup A \notin A$.
 
 \end{enumerate}
 \end{ex}
@@ -92,7 +92,7 @@ Wahr.
 \item
 Wahr. Sei $x\in A$, dann gilt $-x\in -A$. Damit $x=-(-x)\geq - \max(-A)$. Da $- \max(-A)\in A$, folgt die Aussage.
 \item
-Falsch. $A=\{ 42 \}$. Dann ist $sup A = 42 \in A$.
+Falsch. $A=\{ 42 \}$. Dann ist $\sup A = 42 \in A$.
 \end{enumerate}
 \end{solution}
 
@@ -280,6 +280,147 @@ P_{k+1}( 2 \cos \theta) &= \frac{2 \cos \theta \sin((k+1) \theta)- \sin((k+1) \t
 	womit der Induktionsschritt gezeigt wäre. 
 \end{solution}
 
+
+
+
+\begin{ex} Zeigen Sie die \textbf{Vorwärts-Rückwärts Induktion} (auch bekannt als Cauchy-Induktion): Es sei $P(n)$ eine Aussage für $n \in \mathbb{N}_{ \geq 2}$. Falls $P(2)$ wahr ist und 
+\begin{enumerate}
+\item Aus $P(k)$ lässt sich $P(2k)$ folgern (Vorwärts Schritt).
+\item Aus $P(k+1)$ lässt sich $P(k)$ folgern (Rückwärts Schritt).
+\end{enumerate}
+Dann gilt die Aussage $P(n)$ für alle $n \in \mathbb{N}_{ \geq 2}$.
+\end{ex}
+\begin{solution} Da $P(2)=P(2^1)$ wahr ist, folgt aus der Eigenschaft 1 (E1) für $k=2$, dass $P(2\cdot 2)=P(2^2)$ wahr ist. Durch wiederholte Anwendung von (E1) erhalten wir, dass aus $P(2^k)$ stets $P(2^{k+1})$ folgt für $k \in \mathbb{N}$. Mit Hilfe der (standard) vollständigen Induktion erhalten wir dann die Aussage,
+\begin{align*}
+P(2^r) \text{ ist wahr für all } r \in \mathbb{N}. \tag{*}
+\end{align*}
+Wenden wir nur die Eigenschaft 2 (E2) auf (*) an, erhalten wir zuerst, dass $P(2^r-1)$ wahr ist für all $r \in \mathbb{N}$, und erneut durch sukzessive Anwendung von (E2) dass $P(2^r-m)$ wahr ist, also auch $P(2^r-(m+1))$ für alle $r,m \in \mathbb{N}$ mit $m < 2^r$. Wir haben also 
+\begin{align*}
+P(2^r-(m+1)) \text{ ist wahr für alle }r,m \in \mathbb{N} \text{ sodass } m < 2^r. \tag{**}
+\end{align*}
+Es ist jedoch offensichtlich, dass für all $n \in \mathbb{N}_{\geq 2}$ $r,m \in \mathbb{N}$ existieren, sodass $n= 2^r-(m+1)$ mit $m<2^r$. Also erhalten wir dank (**), dass 
+\begin{align*}
+P(n) \text{ ist wahr für alle } n \in \mathbb{N}_{ \geq 2}
+\end{align*}
+was zu zeigen war.
+\end{solution}
+
+\begin{ex}{($\star$)} Es seien $0 \leq x_i \leq \pi$ für $i=1, \dots , n \in \mathbb{N}$. Zeigen Sie folgende Ungleichung für alle $n \in \mathbb{N}$ mit Hilfe der Vorwärts-Rückwärts Induktion: 
+\begin{align*}
+\sin x_1 + \sin x_2 + \dots + \sin x_n \leq n \sin \left( \frac{x_1 + \dots + x_n}{n}\right)
+\end{align*}
+\end{ex}
+
+
+\begin{solution} Wir verwenden die Vorwärts-Rückwärts Induktion. Da wir die Aussage jedoch für alle $n \in \mathbb{N}$ (inklusive $n=1$) zeigen wollen, müssen wir den Fall $n=1$ zusätzlich analysieren, dieser ist jedoch trivial. \\
+\\
+$\bullet$ Für $n=2$ erhalten wir 
+\begin{align*}
+\sin x_1 + \sin x_2 = 2 \sin \left( \frac{x_1 + x_2}{2}\right) \underbrace{\cos \left( \frac{x_1-x_2}{2}\right)}_{ \leq 1} \leq 2 \sin \left( \frac{x_1 + x_2}{2}\right)
+\end{align*}
+womit die Aussage $P(2)$ verifiziert wurde. 
+\\
+\\
+$\bullet$ Um den Vorwärts Schritt zu verifizieren nehmen wir an, dass wir für $k \in \mathbb{N}$ folgende Ungleichung haben:
+\begin{align*}
+\sin x_1 + \dots + \sin x_k \leq k \sin \left( \frac{x_1 + \dots + x_k}{k}\right) \tag{*}
+\end{align*}
+falls wir diese Aussagen mit $P(k)$ bezeichnen, müssen wir zeigen, dass sich aus dieser $P(2k)$ herleiten lässt, also dass gilt:
+\begin{align*}
+\sin x_1 + \dots + \sin x_k + \sin x_{k+1} + \dots + \sin x_{2k} \leq 2k \sin \left( \frac{x_1 + \dots + x_{2k}}{2k}\right).
+\end{align*}
+Wir verwenden (*) für die $k$ Zahlen $x_{k+1} , x_{k+2}, \dots , x_{2k}$ und erhalten per Annahme 
+\begin{align*}
+\sin x_{k+1} + \dots + \sin x_{2k} \leq k \sin \left( \frac{x_{k+1}+ \dots + x_{2k}}{k}\right). \tag{**}
+\end{align*}
+Kombinieren wir (*) und (**) erhalten wir 
+\begin{align*}
+\sin x_1 + \dots + \sin x_{2k} \leq k \left[ \sin \left( \frac{x_1 + \dots + x_k}{k}\right) + \sin \left( \frac{x_{k+1}+ \dots + x_{2k}}{k}\right) \right]. \tag{***}
+\end{align*}
+Es gilt jedoch, dass 
+\begin{align*}
+\frac{x_1 + \dots + x_k}{k}, \frac{x_{k+1} + \dots + x_{2k}}{k} \in [0, \pi]
+\end{align*}
+also können wir auf den geklammerten Term in (***) oben die Induktionsannahme für $n=2$ anwenden und erhalten 
+\begin{align*}
+\sin \left( \frac{x_1 + \dots + x_k}{k}\right) + \sin \left( \frac{x_{k+1} + \dots + x_{2k}}{k}\right) &\overset{P(2)} \leq 2 \sin \left( \frac{\frac{x_1 + \dots + x_k}{k}+ \frac{x_{k+1} + \dots + x_{2k}}{k}}{2}\right)  \\
+&= 2 \sin \left( \frac{x_1 + \dots + x_{2k}}{2k}\right).
+\end{align*}
+Aus obiger Überlegung und (***) erhalten wir also schliesslich:
+\begin{align*}
+\sin x_1 + \dots + \sin x_{2k} \leq 2k \sin \left( \frac{x_1 + \dots + x_{2k}}{2k}\right),
+\end{align*}
+also $P(k) \rightsquigarrow P(2k)$. 
+\\
+\\
+$\bullet$ Um den Rückwärts Schritt zu verifizieren nehmen wir an, dass wir für $k \in \mathbb{N}$ folgende Ungleichung haben: 
+\begin{align*}
+\sin x_1 + \dots + \sin x_{k+1} \leq (k+1) \sin \left( \frac{x_1 + \dots + x_{k+1}}{k+1}\right). \tag{$\bigstar$}
+\end{align*}
+Wir wollen $P(k+1) \rightsquigarrow P(k)$ nachweisen. Wir verwenden $(\bigstar)$ für die spezielle Wahl 
+\begin{align*}
+x_{k+1}:= \frac{x_1 + \dots + x_k}{k} \in [0, \pi]
+\end{align*}
+und erhalten: 
+\begin{align*}
+\sin x_1 + \dots + \sin x_k + \sin \left( \frac{x_1 + \dots + x_k}{k}\right) &\leq (k+1) \sin \left( \frac{x_1 + \dots + x_k + \frac{x_1 + \dots + x_k}{k}}{k+1}\right) \\
+& = (k+1) \sin \left( \frac{x_1 + \dots + x_k}{k}\right) \\
+& = k \sin \left( \frac{x_1 + \dots + x_k}{k}\right) + \sin \left( \frac{x_1 + \dots + x_k}{k}\right),
+\end{align*}
+kürzen wir auf beiden Seiten der Ungleichung den letzten Term erhalten wir schliesslich 
+\begin{align*}
+\sin x_1 + \dots + \sin x_k \leq k \sin \left( \frac{x_1 + \dots + x_k}{k}\right)
+\end{align*}
+also $P(k+1) \rightsquigarrow P(k)$. Gemäss dem Prinzip der Cauchy-Induktion ist die Aussage somit für alle $n \in \mathbb{N}$ vollständig bewiesen. 
+\end{solution}
+
+
+\begin{ex}{$(\star)$} Zeigen Sie mit Hilfe der Cauchy-Induktion die folgende Ungleichung, bekannt als Cauchy's Ungleichung (oder auch arithmetisches Mittel dominiert das geometrische Mittel): Es seien $a_1, a_2, \dots , a_n \in \mathbb{R}_{ \geq 0}$, dann gilt
+\begin{align*}
+\frac{a_1 + a_2 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \cdot a_2 \cdot ... \cdot a_n}
+\end{align*}
+\end{ex}
+
+
+\begin{solution} Wir folgen dem selben Rezept wie in der vorherigen Aufgabe. \\
+\\
+$\bullet \ n=1$ ist trivial. 
+\\\\
+$\bullet \ n=2$ wir haben: 
+\begin{align*}
+\left( \frac{a_1 + a_2}{2}\right)^2- a_1a_2& = \frac{1}{4}( a_1^2 + 2 a_1 a_2 + a_2^2) -a_1a_2 \\
+&= \frac{1}{4}( a_1^2-2a_1a_2+a_2^2) = \left( \frac{a_1-a_2}{2}\right)^2 \geq 0,
+\end{align*}
+oder äquivalent dazu 
+\begin{align*}
+ \left( \frac{a_1+a_2}{2}\right) \geq \sqrt{ a_1a_2}.
+\end{align*}
+$\bullet \ P(n) \rightsquigarrow P(2n):$ 
+\begin{align*}
+\frac{a_1 + \dots + a_n + a_{n+1} + \dots + a_{2n}}{2n}&= \frac{\frac{a_1 + \dots + a_n}{n} + \frac{a_{n+1}+ \dots + a_{2n}}{n}}{2} \\
+&\overset{P(n)} \geq  \frac{\sqrt[n]{a_1 \cdot ... \cdot a_n} + \sqrt[n]{a_{n+1} \cdot ...\cdot a_{2n}}}{2} \\
+& \overset{P(2)}\geq \sqrt{ \sqrt[n]{a_1 \cdot ... \cdot a_n} \cdot \sqrt[n]{a_{n+1} \cdot ... \cdot a_{2n}}} \\
+&= \sqrt[2n]{a_1 \cdot ... \cdot a_n \cdot a_{n+1} \cdot ... \cdot a_{2n}}.
+\end{align*}
+$\bullet \ P(n+1) \rightsquigarrow P(n):$ Wir nehmen $P(n+1)$ an, d.h. es gilt 
+\begin{align*}
+\frac{a_1 + \dots + a_n + a_{n+1}}{n+1} \geq \sqrt[n+1]{a_1 \cdot ... \cdot a_n \cdot a_{n+1}}. \tag{*}
+\end{align*}
+Wir treffen in (*) die spezielle Wahl
+\begin{align*}
+a_{n+1} = \frac{a_1 \dots + a_n}{n},
+\end{align*}
+und erhalten:
+\begin{align*}
+\frac{a_1 + \dots + a_n + \frac{a_1 + \dots + a_n}{n}}{n+1} = \frac{a_1 + \dots + a_n}{n} \geq \sqrt[n+1]{a_1 \cdot ... \cdot a_n \cdot \left( \frac{a_1 + \dots + a_n}{n}\right)}
+\\
+\implies \left( \frac{a_1 + \dots + a_n}{n}\right)^{n+1} \geq a_1 \cdot ... \cdot a_n \cdot \left( \frac{a_1 + \dots + a_n}{n}\right) \\
+\implies \frac{a_1 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \cdot ... \cdot a_n}.
+\end{align*}
+Gemäss dem Prinzip der Cauchy-Induktion gilt die Aussage somit für alle $n \in \mathbb{N}$. 
+\end{solution}
+
+
 \newpage
 
 
@@ -385,10 +526,10 @@ Berechnen Sie die folgenden Grenzwerte:
 
 \begin{enumerate}[i.)]
 \item
-$$ \limsup_{n \rightarrow \infty} (\sqrt{n^2+n}-n).$$
+$$ \limsup_{n \rightarrow \infty} \left(\sqrt{n^2+n}-n\right).$$
 
 \item
-$$\lim_{n \rightarrow \infty} \big( 1 - \frac{5}{n-3} \big)^{(n+\sqrt{n})/2}.$$
+$$\lim_{n \rightarrow \infty} \left( 1 - \frac{5}{n-3} \right)^{(n+\sqrt{n})/2}.$$
 
 \item
 $$\liminf_{n \rightarrow \infty} (-1)^n \frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)}.$$
@@ -402,27 +543,27 @@ F\"ur $n>0$ haben wir:
 $$ \sqrt{n^2 + n} -n = \frac{(\sqrt{n^2 +n} -n)(\sqrt{n^2 +n}+n)}{\sqrt{n^2 +n}+n} 
 = \frac{n}{\sqrt{n^2 +n}+n} = \frac{1}{\sqrt{1 +\frac{1}{n}}+1}.$$
 Damit haben wir:
-$$\lim_{n \rightarrow \infty} (\sqrt{n^2+n}-n)= \frac{1}{2}.$$
+$$\lim_{n \rightarrow \infty} \left(\sqrt{n^2+n}-n\right)= \frac{1}{2}.$$
 Also insbesondere:
-$$\limsup_{n \rightarrow \infty} (\sqrt{n^2+n}-n)=\frac{1}{2}.$$
+$$\limsup_{n \rightarrow \infty} \left(\sqrt{n^2+n}-n\right)=\frac{1}{2}.$$
 \item
 Wir schreiben:
-$$ \big( 1 - \frac{5}{n-3} \big)^{(n+\sqrt{n})/2} 
-= \underbrace{\sqrt{\big( 1 - \frac{5}{n-3} \big)^{n-3}}}_{\Longrightarrow \sqrt{e^{-5}}=e^{-5/2}} \cdot \underbrace{\sqrt{\big( 1 - \frac{5}{n-3} \big)^{3}}}_{\Longrightarrow \sqrt{1^3}=1} \cdot \sqrt{\big( 1 - \frac{5}{n-3} \big)^{\sqrt{n}}} .$$
+$$ \left( 1 - \frac{5}{n-3} \right)^{(n+\sqrt{n})/2} 
+= \underbrace{\sqrt{\left( 1 - \frac{5}{n-3} \right)^{n-3}}}_{\Longrightarrow \sqrt{e^{-5}}=e^{-5/2}} \cdot \underbrace{\sqrt{\left( 1 - \frac{5}{n-3} \right)^{3}}}_{\Longrightarrow \sqrt{1^3}=1} \cdot \sqrt{\left( 1 - \frac{5}{n-3} \right)^{\sqrt{n}}} .$$
 
 \begin{claim}
-$$\lim_{n \rightarrow \infty} \big( 1 - \frac{5}{n-3} \big)^{\sqrt{n}}=1.$$
+$$\lim_{n \rightarrow \infty} \left( 1 - \frac{5}{n-3} \right)^{\sqrt{n}}=1.$$
 \end{claim}
 \begin{proof}
-$$ \log\bigg((1- \frac{5}{n-3})^{\sqrt{n}}\bigg) = \frac{\sqrt{n}}{n-3} \log\bigg((1- \frac{5}{n-3})^{n-3}\bigg) \Longrightarrow 0 \cdot \log(e^{-5})=0.$$
+$$ \log\bigg(\left[1- \frac{5}{n-3}\right]^{\sqrt{n}}\bigg) = \frac{\sqrt{n}}{n-3} \log\bigg(\left[1- \frac{5}{n-3}\right]^{n-3}\bigg) \Longrightarrow 0 \cdot \log(e^{-5})=0.$$
 Damit erhalten wir:
-$$ \big( 1 - \frac{5}{n-3} \big)^{\sqrt{n}} = e^{\log\big((1- \frac{5}{n-3})^{\sqrt{n}}\big)} 
+$$ \left( 1 - \frac{5}{n-3} \right)^{\sqrt{n}} = e^{\log\big((1- \frac{5}{n-3})^{\sqrt{n}}\big)} 
 \Longrightarrow e^0=1. $$
 \end{proof}
 
 
 Wenn wir alles zusammensetzen, erhalten wir:
-$$ \lim_{n \rightarrow \infty} \big( 1 - \frac{5}{n-3} \big)^{(n+\sqrt{n})/2}
+$$ \lim_{n \rightarrow \infty} \left( 1 - \frac{5}{n-3} \right)^{(n+\sqrt{n})/2}
 = e^{-5/2} \cdot 1 \cdot \sqrt{1} = e^{-5/2}.$$
 \item
 Zuerst zeigen wir:
@@ -479,9 +620,6 @@ Wahr, das ist die Definition eines H\"aufungspunktes.
 \end{enumerate}
 \end{solution}
 
-
-\newpage
-
 \begin{ex}{$(\star)$}
 \begin{enumerate}[i.)]
 
@@ -504,16 +642,16 @@ Zuerst beobachten wir:
 $$ \bigg( 1 +\frac{3}{n} \bigg)^{n+1} = \bigg( 1 +\frac{3}{n} \bigg)^{n} \bigg( 1 +\frac{3}{n} \bigg) \longrightarrow e^3 \cdot 1 = e^3, \quad \text{ f\"ur } n \longrightarrow \infty.$$
 
 F\"ur $k\in \NN$ und $j\in \{ 1, 3 \}$ gilt:
-$$ \sin\bigg(\frac{2k \pi}{2}\bigg) = 0 \text{ und } \sin\bigg(\frac{(4k + j)\pi}{2}\bigg)= (-1)^{j+1}.$$
+$$ \sin\bigg(\frac{2k \pi}{2}\bigg) = 0 \text{ und } \sin\bigg(\frac{(4k + j)\pi}{2}\bigg)= \begin{cases} 1, &\text{ für } j=1 \\ -1, & \text{ für } j=3 \end{cases}.$$
 
 Damit sind $0, -e^3$ und $e^3$ die H\"aufungspunkte von $\sin \Big(\frac{\pi n}{2} \Big) \bigg( 1 + \frac{3}{n} \bigg)^{n+1}$.
 \item
 Wir berechnen:
 $$ \max_{i\in \{1,\dots, p \}} a_i = \bigg(\max_{i\in \{1,\dots, p \}} a_i^n \bigg)^{1/n}
 \leq (a_1^n + \dots + a_p^n)^{1/n} 
-\leq \bigg(n \cdot \max_{i\in \{1,\dots, p \}} a_i^n \bigg)^{1/n}$$
+\leq \bigg(p \cdot \max_{i\in \{1,\dots, p \}} a_i^n \bigg)^{1/n}$$
 
-$$= n^{1/n} \max_{i\in \{1,\dots, p \}} a_i \longrightarrow \max_{i\in \{1,\dots, p \}} a_i, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+$$= p^{1/n} \max_{i\in \{1,\dots, p \}} a_i \longrightarrow \max_{i\in \{1,\dots, p \}} a_i, \quad \text{ f\"ur } n \longrightarrow \infty.$$
 Aus dem Sandwichsatz (Prop. 3.8) folgt $\lim_{n \rightarrow \infty} (a_1^n + \dots + a_p^n)^{1/n} = \max_{i= 1, \dots , p} a_i .$
 \end{enumerate}
 \end{solution}
@@ -532,7 +670,6 @@ Zeigen Sie, dass $(a_k)_{k\in \NN}$ konvergiert.
 Berechnen Sie den Grenzwert von $(a_k)_{k\in \NN}$.
 \end{enumerate}
 \end{ex}
-
 
 \begin{solution}
 \begin{enumerate}[i.)]
@@ -597,6 +734,25 @@ Damit gilt $\lim_{n\rightarrow \infty} a_n = a = x^2=  \frac{25}{4}$.
 \end{solution}
 
 
+\begin{ex}{$(\star)$} Zeigen Sie, dass 
+\begin{align*}
+\lim_{n \to \infty} \sqrt[n]{n!}= \infty.
+\end{align*}
+\end{ex}
+
+\begin{solution} Per Definition ist die Exponential gegeben als 
+\begin{align*}
+e^x = \sum_{n=0}^\infty \frac{x^n}{n!}.
+\end{align*}
+Es gilt dementsprechend für alle $x \in \mathbb{R}$, dass
+\begin{align*}
+e^x \geq \frac{x^n}{n!},
+\end{align*}
+insbesondere also für $x=n \in \mathbb{N}$ auch das
+\begin{align*}
+e^n \geq \frac{n^n}{n!} \implies n! \geq \left( \frac{n}{e}\right)^n \implies \sqrt[n]{n!} \geq\frac{n}{e} \xrightarrow{n \to \infty} \infty.
+\end{align*}
+\end{solution}
 
 \begin{ex}{$(\star)$}
 \begin{enumerate}[i.)]
@@ -624,19 +780,23 @@ Wir berechnen:
 $$\bigg(\frac{n}{n+1} \bigg)^n 
 = \bigg(1-\frac{1}{n+1} \bigg)^n
 = \bigg(1-\frac{1}{n+1} \bigg)^{n+1} \cdot \frac{1}{1-\frac{1}{n+1}} \longrightarrow e^{-1}\cdot \frac{1}{1}= e^{-1}, \quad \text{ f\"ur } n \longrightarrow \infty.$$
-Aus der Stetigkeit des Logaritmus folgt:
+Aus der Stetigkeit des Logarithmus folgt:
 $$ \lim_{n \rightarrow \infty} \log \bigg( \Big( \frac{n}{n+1} \Big)^n \bigg)
 = \log \bigg( \lim_{n \rightarrow \infty} \bigg(\frac{n}{n+1} \bigg)^n \bigg)
 = \log(e^{-1})= -1.$$
 
 \item
 Wir berechnen:
-$$ (n^4 - n^2 + 2)^{1/n} = (n^{1/n})^4 \cdot (1 - \frac{1}{n^2} + \frac{2}{n^4})^{1/n} 
+$$ (n^4 - n^2 + 2)^{1/n} = (n^{1/n})^4 \cdot \left(1 - \frac{1}{n^2} + \frac{2}{n^4}\right)^{1/n} 
 \longrightarrow 1^4 \cdot 1 = 1, \quad \text{ f\"ur } n\longrightarrow \infty.$$
-und
+wobei wir verwendet  haben, dass
+\begin{align*}
+\left( 1- \frac{1}{n^2} + \frac{2}{n^4}\right)^{1/n} = \exp \left( \frac{1}{n}\log\left[ 1- \frac{1}{n^2}+ \frac{2}{n^4}\right] \right) \xrightarrow{n \to \infty}  \exp(0)=1.
+\end{align*}
+Desweiteren
 $$\frac{n + e}{2n + 1} = \frac{n}{2n+1} + \frac{e}{2n+1} = \frac{1}{2+\frac{1}{n}} + \frac{e}{2n+1} \longrightarrow \frac{1}{2}, \quad \text{ f\"ur } n\longrightarrow \infty.$$
 
-Wir erinneren uns daran, dass gilt:
+Wir erinnern uns daran, dass gilt:
 
 $$\sin\Big(\frac{\pi n}{2}\Big) = \begin{cases} 0, \qquad \text{f\"ur } n=2k,\ k\in \NN \\ 1, \qquad \text{f\"ur } n=4k+1,\ k\in \NN  \\ -1, \quad \  \text{f\"ur } n=4k+3,\ k\in \NN.\end{cases}$$
 Daraus folgt:
@@ -709,12 +869,12 @@ Die Behauptung folgt also dank Teil i).
 
 \item Es sei $c:= a_2-a_1$. Wir verwenden die Darstellung von $a_n$ als Teleskopische Summe. Wir betrachten also:
 \begin{align*}
-a_n  &= a_1 + \sum_{k=1}^n (a_{k+1}-a_k) = a_1 + \sum_{k=1}^n (-1)^{k-1} \frac{c}{2^{k-1}} \\
-& = a_1 + c\sum_{k=0}^{n-1} \left( \frac{-1}{2} \right)^k.
+a_n  &= a_1 + \sum_{k=1}^{n-1} (a_{k+1}-a_k) = a_1 + \sum_{k=1}^{n-1} (-1)^{k-1} \frac{c}{2^{k-1}} \\
+& = a_1 + c\sum_{k=0}^{n-2} \left( \frac{-1}{2} \right)^k.
 \end{align*}
 Lassen wir nun $n \longrightarrow \infty$ streben und verwenden die Geometrische Reihe mit $r= -1/2$ erhalten wir:
 \begin{align*}
-\lim_{n \rightarrow \infty} a_n = a_1 + c \frac{1}{1-(-1/2)} = a_1 + c \frac{2}{3} = a_1 + \frac{2}{3}(a_2-a_1) = \frac{a_1-2a_2}{3}.
+\lim_{n \rightarrow \infty} a_n = a_1 + c \frac{1}{1-(-1/2)} = a_1 + c \frac{2}{3} = a_1 + \frac{2}{3}(a_2-a_1) = \frac{a_1+2a_2}{3}.
 \end{align*}
 \end{enumerate}
 
@@ -802,9 +962,9 @@ Wir zeigen, dass $\sum_{k\geq 2} \frac{\sin(k\pi/2)}{\log(k)}$ nicht absolut kon
 $$\forall j \in \NN: 2j +1 > \log(2j+1).$$
 \end{claim}
 \begin{proof}
-Wir definieren $h(x)= 2x+1-\log(2x+1)$. 
+Wir definieren $h: \mathbb{R}_+ \cup \{0\} \to \mathbb{R}$ als $h(x)= 2x+1-\log(2x+1)$. 
 
-Dann gilt $h(0)=1$ und $h'(x)= 2 - \frac{1}{2x+1} >0$.
+Dann gilt $h(0)=1$ und $h'(x)= 2 - \frac{2}{2x+1} >0$.
 \end{proof}
 Damit erhalten wir:
 $$\sum_{k\geq 2} \bigg\vert \frac{\sin(k\pi/2)}{\log(k)} \bigg\vert
@@ -825,6 +985,7 @@ Aus dem Quotientenkriterium (Satz 4.12) folgt, dass $\sum_{k\geq 1} \frac{2^k k!
 \end{solution}
 
 
+ 
 \begin{ex}{$(\star)$}
 Untersuchen Sie die folgenden Reihen auf Konvergenz und absolute Konvergenz:
 
@@ -881,7 +1042,7 @@ $$ \frac{\bigg(\frac{(n+1)^{3n+3}}{((n+1)!)^2} \bigg)}{\bigg(\frac{n^{3n}}{(n!)^
 = \frac{(n+1)^{3n}}{n^{3n}} \cdot (n+1)^3 \cdot \frac{1}{(n+1)^2}$$
 
 $$=\underbrace{\bigg(\Big( 1+ \frac{1}{n} \Big)^{n}\bigg)^3}_{\longrightarrow e^3, \text{ f\"ur } n\longrightarrow \infty} \cdot \underbrace{(n+1)}_{\longrightarrow \infty, \text{ f\"ur } n \longrightarrow \infty} \longrightarrow \infty.$$
-Aus dem Qutientenkriterium (Satz 4.12) folgt, dass $\sum_{n\geq 0} \frac{\exp(3n \log(n))}{(n!)^2}$ nicht absolut konvergiert. Da alle Terme nichtnegativ sind (dann ist absolute Konvergenz und Konvergenz das gleiche), folgt, dass $\sum_{n\geq 0} \frac{\exp(3n \log(n))}{(k!)^2}$ nicht konvergiert.
+Aus dem Quotientenkriterium (Satz 4.12) folgt, dass $\sum_{n\geq 0} \frac{\exp(3n \log(n))}{(n!)^2}$ nicht absolut konvergiert. Da alle Terme nichtnegativ sind (dann ist absolute Konvergenz und Konvergenz das gleiche), folgt, dass $\sum_{n\geq 0} \frac{\exp(3n \log(n))}{(k!)^2}$ nicht konvergiert.
 \end{enumerate}
 \end{solution}
 
@@ -921,11 +1082,11 @@ $$= \lim_{n\rightarrow \infty} \bigg(1+ \sum_{k=2}^{n-1} \frac{1}{k} - \sum_{k=2
 \sum_{n=2}^\infty \frac{1}{\log(n)^s}< \infty &\iff \sum_{n=2} ^\infty  2^n \frac{1}{\log(2^n)^s}< \infty  \\
 & \iff \frac{1}{\log(2)^s} \sum_{n=2}^\infty \frac{2^n}{n^s} < \infty.
 \end{align*}
-Jedoch konvergiert die letzte Reihe nicht, da $\lim \frac{2^n }{n^s} = \infty$ keine Nullfolge ist für alle $s >0$. Also existiert kein $s>0$ sodass die Reihe konvergiert. 
+Jedoch konvergiert die letzte Reihe nicht, da $\lim \frac{2^n }{n^s} = \infty$ keine Nullfolge ist für alle $s >0$ (da die exponential Funktion $2^n= \exp(n \log(2))$ schneller wächst als jedes Polynom beliebigen Grades). Also existiert kein $s>0$ sodass die Reihe konvergiert. 
 \item
 \begin{align*}
 \sum_{n=2}^\infty \frac{1}{n \log^s(n)}< \infty &\iff \sum_{n=2}^\infty 2^n \frac{1}{2^n\log^s(2^n)}< \infty \\
-& \iff C\sum_{n=2}^\infty \frac{1}{n^s}< \infty.
+& \iff C\sum_{n=2}^\infty \frac{1}{n^s}< \infty, \text{ wobei } C:= \frac{1}{\log^s(2)}.
 \end{align*}
 Die letzte Reihe konvergiert genau dann wenn $s > 1$ .
 \end{enumerate}
@@ -941,7 +1102,7 @@ Die letzte Reihe konvergiert genau dann wenn $s > 1$ .
 
 \begin{solution} Für $n \in \mathbb{N}$ betrachten wir die Partialsumme:
 \begin{align*}
-\sum_{k=1}^n \frac{2k^2 +2k+3}{6k^5+6} = \frac{1}{3} \sum_{k=1}^n \frac{k^2}{k^5+1} + \frac{1}{3} \sum_{k=1}^\infty \frac{k}{k^5+1} + \frac{1}{2} \sum_{k=1}^n \frac{1}{k^5 +1}. 
+\sum_{k=1}^n \frac{2k^2 +2k+3}{6k^5+6} = \frac{1}{3} \sum_{k=1}^n \frac{k^2}{k^5+1} + \frac{1}{3} \sum_{k=1}^n \frac{k}{k^5+1} + \frac{1}{2} \sum_{k=1}^n \frac{1}{k^5 +1}. 
 \end{align*}
 Offensichtlich gilt, dass $k^5+1 \geq k^5$ und somit $\frac{1}{k^5+1} \leq \frac{1}{k^5}$, wir erhalten also die Abschätzung:
 \begin{align*}
@@ -961,7 +1122,7 @@ Wobei wir verwendet haben, dass die dominanten Terme die der Ordnung $n^5$ sind,
 \end{solution}
 
 
-\begin{ex} Zeigen Sie, dass die folgende Reihe konvergiert:
+\begin{ex} Zeigen Sie mit Hilfe des Integralkriteriums, dass die folgende Reihe konvergiert:
 \begin{align*}
 \sum_{n=0}^\infty \frac{1}{n^2+1}.
 \end{align*}
@@ -970,7 +1131,7 @@ Wobei wir verwendet haben, dass die dominanten Terme die der Ordnung $n^5$ sind,
 
 \begin{solution} Wir verwenden das Integralkriterium, d.h. wir betrachten das Integral:
 \begin{align*}
-\int_0^\infty \frac{1}{x^2 +1}dx = \left. \tan^{-1}\right|_{x=0}^\infty = \frac{\pi}{2} < \infty.   
+\int_0^\infty \frac{1}{x^2 +1}dx = \left. \tan^{-1}(x)\right|_{x=0}^{x=\infty} = \frac{\pi}{2} < \infty.   
 \end{align*}
 Also konvergiert die Reihe, was zu zeigen war. 
 \end{solution}
@@ -1098,6 +1259,9 @@ $f(x)= \begin{cases} 0,  \qquad \quad \ x\in [0, 1/2) \\ x-1/2 , \ \ x\in [1/2, 
 \end{solution}
 
 
+
+
+
 \begin{ex}
 Beweisen Sie, falls $f:\RR \longrightarrow \RR$ stetig und beschr\"ankt ist, dann besitzt $f$ einen Fixpunkt.
 \end{ex}
@@ -1124,7 +1288,7 @@ $$\lim_{n \rightarrow \infty} f(y_n) = \lim_{n \rightarrow \infty} f(z_{2n+1})
 \begin{ex} Berechnen Sie die folgenden Grenzwerte:
 \begin{enumerate}[i)]
 \item
-$$\lim_{x \rightarrow 0} \frac{sin(ax)}{x}.$$
+$$\lim_{x \rightarrow 0} \frac{\sin(ax)}{x}.$$
 
 \item
 $$\lim_{x \rightarrow \infty} \frac{e^x x^5}{x^x}.$$
@@ -1190,7 +1354,7 @@ Also $\lim_{x\rightarrow \infty} \big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 = \fra
 \end{enumerate}
 \end{solution}
 
-\newpage 
+ 
 
 \begin{ex} Berechnen Sie die folgenden Grenzwerte (möglicherweise $\pm \infty$):
 \begin{enumerate}[i)]
@@ -1243,6 +1407,7 @@ und da die untere Schranke gegen unendlich divergiert, muss auch die obere Schra
 \end{enumerate}
 
 \end{ex}
+
 
 
 \begin{solution} Wir verwenden den $e^{\log}$-Trick um diese beiden Aufgaben zu lösen: 
@@ -2355,4 +2520,3 @@ Nun liefert die Integration über die Grenzen schliesslich:
 
 
 \end{document}
-
