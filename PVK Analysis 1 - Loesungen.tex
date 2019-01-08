@@ -904,7 +904,7 @@ Lassen wir nun $n \longrightarrow \infty$ streben und verwenden die Geometrische
 \end{ex}
 
 
-\begin{solution} Dank dem Cauchy'schen Kondensationssatz wissen wir, dass für eine nicht-negative, nicht-wachsende Folge $f(n)$ von reellen Zahlen gilt $\sum f(n) < \infty \iff \sum 2^n f(2^n)$ also erhalten wir:
+\begin{solution} Dank dem Cauchy'schen Kondensationssatz wissen wir, dass für eine nicht-negative, nicht-wachsende Folge $f(n)$ von reellen Zahlen gilt $\sum f(n) < \infty \iff \sum 2^n f(2^n) <\infty$ also erhalten wir:
 \begin{enumerate}[i)]
 \item 
 \begin{align*}
@@ -915,7 +915,7 @@ da $a_n=1$ keine Nullfolge ist.
 \begin{align*}
 \sum_{n=1}^\infty 2^n \frac{1}{(2^n)^2 } = \sum_{n=1}^\infty \frac{1}{2^n}< \infty.
 \end{align*}
-da geometrische Reihe mit $r= \frac{1}{2}$. 
+da geometrische Reihe mit $r= \frac{1}{2}<1$. 
 
 \item Wir erhalten durch den Cauchy'schen Kondensationssatz die Reihe:
 \begin{align*}
@@ -1066,7 +1066,7 @@ $$= \lim_{n\rightarrow \infty} \bigg(1+ \sum_{k=2}^{n-1} \frac{1}{k} - \sum_{k=2
 \begin{ex} \ \begin{enumerate}[i)]
 \item Existiert ein $s >0$ sodass die nachfolgende Reihe konvergiert?
 \begin{align*}
-\sum_{n=2}^\infty \frac{1}{\log(n)^s}.
+\sum_{n=2}^\infty \frac{1}{\log^s(n)}.
 \end{align*}
 \item Für welche $s \in \mathbb{R}$ ist die nachfolgende Reihe konvergent?
 \begin{align*}
@@ -1080,8 +1080,8 @@ $$= \lim_{n\rightarrow \infty} \bigg(1+ \sum_{k=2}^{n-1} \frac{1}{k} - \sum_{k=2
 \begin{enumerate}[i)]
 \item 
 \begin{align*}
-\sum_{n=2}^\infty \frac{1}{\log(n)^s}< \infty &\iff \sum_{n=2} ^\infty  2^n \frac{1}{\log(2^n)^s}< \infty  \\
-& \iff \frac{1}{\log(2)^s} \sum_{n=2}^\infty \frac{2^n}{n^s} < \infty.
+\sum_{n=2}^\infty \frac{1}{\log^s(n)}< \infty &\iff \sum_{n=2} ^\infty  2^n \frac{1}{\log^s(2^n)}< \infty  \\
+& \iff \frac{1}{\log^s(2)} \sum_{n=2}^\infty \frac{2^n}{n^s} < \infty.
 \end{align*}
 Jedoch konvergiert die letzte Reihe nicht, da $\lim \frac{2^n }{n^s} = \infty$ keine Nullfolge ist für alle $s >0$ (da die exponential Funktion $2^n= \exp(n \log(2))$ schneller wächst als jedes Polynom beliebigen Grades). Also existiert kein $s>0$ sodass die Reihe konvergiert. 
 \item
@@ -1192,7 +1192,7 @@ Wir wählen also für ein beliebiges $\epsilon >0$ ein $\delta$ derart, dass $0 
 \begin{ex} Sind die 3 nachfolgenden Funktionen Lipschitz-stetig?
 \begin{enumerate}[i)]
 \item $f:(0, \infty) \longrightarrow \mathbb{R}, \ x \longmapsto \frac{1}{1+x^2}$.
-\item $f:[0,1) \longrightarrow \mathbb{R}, \ x \longmapsto \sqrt{x}$ .
+\item $f:(0,1) \longrightarrow \mathbb{R}, \ x \longmapsto \sqrt{x}$ .
 \item $f: \mathbb{R} \longrightarrow \mathbb{R}, \ x \longmapsto \sin x$.
 \item Finden Sie eine Funktion, welche gleichmässig stetig, aber nicht Lipschitz-stetig ist.
 \item Finden Sie eine Funktion, die Lipschitz-stetig, aber nicht differenzierbar ist.
@@ -1209,11 +1209,11 @@ Wir wählen also für ein beliebiges $\epsilon >0$ ein $\delta$ derart, dass $0 
 |f'(x)| = \left| \frac{-2x}{(1+x^2)^2}\right| \leq 1 \implies \text{ Ableitung beschränkt} \implies f \text{ ist Lipschitz-stetig}.
 \end{align*}
 Wir haben hierbei verwendet, dass gemäss Bernoulli Ungleichung $(1+x^2)^2 \geq 1 + 2x^2$. Desweiteren gilt $1+2x^2 \geq 2x$ weil $1-2x+2x^2 = (1-x)^2 + x^2 \geq 0$. Somit haben wir gezeigt, dass $(1+x^2)^2 \geq 2x$ und folglich die Behauptung. 
-\item Für die Ableitung an der Stelle $x=0$ gilt:
+\item Für den Grenzwert der Ableitung an der Stelle $x=0^+$ gilt:
 \begin{align*}
-\lim_{x \rightarrow 0} |f'(x)| = \lim_{x \rightarrow 0} \left| \frac{1}{2 \sqrt{x}} \right| = \infty.
+\lim_{x \rightarrow 0^+} |f'(x)| = \lim_{x \rightarrow 0^+} \left| \frac{1}{2 \sqrt{x}} \right| = \infty.
 \end{align*}
-Also ist die Ableitung an der Stelle $x=0$ unbeschränkt und somit ist $f$ nicht Lipschitz-stetig.
+Also ist die Ableitung an der Stelle $x=0^+$ unbeschränkt und somit ist $f$ nicht Lipschitz-stetig.
 \item Offensichtlich ist die Ableitung durch die $\cos$ Funktion gegeben, welche durch $1$ beschränkt ist und somit ist $f$ Lipschitz-stetig.
 \item Wir definieren $f: [0,1] \longrightarrow \mathbb{R}, \ x \longmapsto \sqrt{x}$, dann ist $f$ gleichmässig stetig, aber nicht Lipschitz.
 \item Die Betragsfunktion $f: \mathbb{R} \longrightarrow \mathbb{R}, \ x \longmapsto |x|$ ist ein möglicher Kandidat. 
@@ -1228,7 +1228,7 @@ Beweisen Sie, falls $f:\RR \longrightarrow \RR$ stetig und injektiv ist, dann is
 \end{ex}
 \begin{solution}
 Wir nehmen an, dass $f$ nicht streng monoton ist. Dann existieren $x_1 < x_2 < x_3$, sodass $f(x_1) \leq f(x_2) \geq f(x_3)$ oder $f(x_1)\geq f(x_2) \leq f(x_3)$. Es gibt nun de facto vier F\"alle, die man untersuchen muss. Man kann es mittels \"Uberlegen auf einen Fall reduzieren. Falls jemandem dieses "ohne Beschr\"ankung der Allgemeinheit" nicht zusagt, so soll er dies in Gedanken durch "man zeigt analog" ersetzen und es zeigen. Dies ist eine gute \"Ubung.\\
-Ohne Beschr\"ankung der Allgemeinheit k\"onnen wir annhemen, dass gilt $f(x_1) \leq f(x_2) \geq f(x_3)$. Falls dies nicht der Fall ist, betrachten wir $g: \RR \longrightarrow \RR,~ g(x):=\ -f(x)$. $g$ ist stetig und injektiv, desweiteren ist $g$ genau dann streng monoton, wenn $f$ es ist.\\
+Ohne Beschr\"ankung der Allgemeinheit k\"onnen wir annehmen, dass gilt $f(x_1) \leq f(x_2) \geq f(x_3)$. Falls dies nicht der Fall ist, betrachten wir $g: \RR \longrightarrow \RR,~ g(x):=\ -f(x)$. $g$ ist stetig und injektiv, desweiteren ist $g$ genau dann streng monoton, wenn $f$ es ist.\\
 Desweiteren k\"onnen wir ohne Beschr\"ankung der Allgemeinheit annehmen, dass $f(x_1) \leq f(x_3)$. Andernfalls betrachten wir $h: \RR \longrightarrow \RR,\ h(x):=f(-x)$.\\
 Wir haben nun alles auf den Fall $f(x_1)\leq f(x_3) \leq f(x_2)$ reduziert. Aus dem Zwischenwertsatz (Satz 6.16) folgt, dass es ein $\xi \in (x_1, x_2)$ gibt, sodass $f(x_3)= f(\xi)$, dies steht im Widerspruch, dass $f$ injektiv ist.
 \end{solution} 
