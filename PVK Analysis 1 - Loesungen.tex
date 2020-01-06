@@ -1151,6 +1151,157 @@ und folglich konvergiert die Reihe.
 \end{solution}
 \newpage
 
+\section{Topologie: Metrische Räume}
+\begin{ex} Sei $(X,d)$ ein metrischer Raum. Beweise, dass auch $(X,d')$ mit  $d': X \times X \to \mathbb{R}$ spezifiziert als 
+\begin{align*}
+d'(x,y):= \frac{d(x,y)}{1+d(x,y)}
+\end{align*}
+ein metrischer Raum ist.
+\end{ex}
+\begin{solution} Wir müssen lediglich zeigen, dass $d'$ die drei definierenden Eigenschaften einer Metrik erfüllt, wir werden dazu selbstverständlich die Eigenschaft ausnützen, dass $d$ bereits eine Metrik auf $X$ ist. Seien also $x,y,z \in X$ fest aber beliebig:
+\begin{enumerate}
+\item Offensichtlich gilt, $d'(x,y) \geq 0$, weil $d(x,y) \geq 0$. Ausserdem gilt 
+\begin{align*}
+d'(x,y)= \frac{d(x,y)}{1+d(x,y)}=0 \iff d(x,y)=0 \iff x=y
+\end{align*}
+weil $d$ eine Metrik auf $X$ ist. 
+\item Die Symmetrie folgt aus der Eigenschaft weil $d$ eine Metrik ist. Bemerke:
+\begin{align*}
+d'(x,y)= \frac{d(x,y)}{1+d(x,y)}= \frac{d(y,x)}{1+d(y,x)}=d'(y,x).
+\end{align*}
+\item Die Dreiecksungslgleichung ist der schwierigste Teil. Da $d$ eine Metrik auf $X$ ist folgt $d(x,z) \leq d(x,y)+d(y,z)$. Also gilt auch
+\begin{align*}
+d'(x,z) = \frac{d(x,z)}{1+d(x,z)} \leq \frac{d(x,y)+d(y,z)}{1+d(x,z)}.
+\end{align*}
+Wir bemerken, dass die Abbildung $f(r):= \frac{r}{1+r}$ monoton wachsend ist. Seien dazu $r_1 \leq r_2$, wir wollen zeigen, dass $f(r_1) \leq f(r_2)$. Wir bemerken, dass 
+\begin{align*}
+f(r_1) = \frac{r_1}{1+r_1}= 1- \frac{1}{1+r_1}
+\end{align*}
+und wir haben
+\begin{align*}
+1+r_1 \leq 1+r_2 \implies \frac{1}{1+r_1} \geq \frac{1}{1+r_2} \implies - \frac{1}{1+r_1} \leq -\frac{1}{1+r_2}
+\end{align*}
+und daher 
+\begin{align*}
+f(r_1) = 1- \frac{1}{1+r_1} \leq 1 - \frac{1}{1+r_2} = \frac{r_2}{1+r_2}=f(r_2).
+\end{align*}
+Da wir $d(x,z) \leq d(x,y)+d(y,z)$ haben benützen wir obige Ungleichung für $r_1= d(x,z)$ und $r_2=d(x,y)+d(y,z)$. Dies liefert nun 
+\begin{align*}
+d'(x,z)= \frac{d(x,z)}{1+d(x,z)} \leq \frac{d(x,y)+d(y,z)}{1+d(x,y)+d(y,z)} = \frac{d(x,y)}{1+d(x,y)+d(y,z)}+ \frac{d(y,z)}{1+d(x,y)+d(y,z)}.
+\end{align*}
+Nun schätzen wir einzelnen Terme ab. Da $d(x,y) \geq 0$ und $d(y,z) \geq 0$ gilt
+\begin{align*}
+\frac{d(x,y)}{1+d(x,y)+\underbrace{d(y,z)}_{\geq 0}} \leq \frac{d(x,y)}{1+d(x,y)}=d'(x,y)
+\end{align*}
+und analog
+\begin{align*}
+\frac{d(y,z)}{1+\underbrace{d(x,y)}_{ \geq 0}+d(y,z)} \leq \frac{d(y,z)}{1+d(y,z)}=d'(y,z).
+\end{align*}
+Zusammenfassend folgt nun die Dreiecksungleichung $d'(x,z) \leq d'(x,y) + d'(y,z)$. Somit definiert $d'$ eine Metrik auf $X$ und $(X,d'$) ist auch ein metrischer Raum bezüglich $d'$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Sei $X$ eine beliebige nicht leere Menge und definierne $d: X \times X \to \mathbb{R}$ als 
+\begin{align*}
+d(x,y):= \begin{cases} 0 & \text{falls } x=y \\ 1 & \text{falls } x \neq y. \end{cases}
+\end{align*}
+\begin{enumerate}[i)]
+\item Zeige, dass $(X,d)$ ein metrischer Raum ist.
+\item Zeige dass eine Folge $(a_n)_{n \in \mathbb{N}}$ in $X$ genau dann bezgülich $d$ konvergiert, wenn sie konstakt ist ab einem (endlichen) Index $N \in \mathbb{N}$.
+\item Folgere, dass $(X,d)$ vollständig ist
+\item Welche Teilmengen von $X$ sind offen? Welche sind abgeschlossen? Was ist also die Topologie $\tau \subset \mathcal{P}(X)$ auf $X?$
+\item Sei $(M,d')$ ein beliebiger metrischer Raum und $f:X \to M$ eine beliebige Funktion. Zeige, dass $f$ stetig ist.
+\item Zeige dass $K \subset X$ ist kompakt, genau dann wenn $K$ endlich ist. 
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item 
+\begin{enumerate}
+\item Per Definition ist klar, dass $d(x,y) \geq 0$ und $d(x,y)=0$ genau dann wenn $x=y$.
+\item Die Symmetrie ist ebenfalls trivial.
+\item Für die Dreiecksungleichung müssen wir zwei Fälle unterscheiden: 
+\begin{itemize}
+\item Falls $x=z$, dann ist $d(x,z)=0$ und $d(x,z) \leq d(x,y)+d(y,z)$ ist trivial wahr für alle Fälle (es gibt hier zwei weitere Situationen) denn $d(x,y),d(y,z) \in \{0,1\}$.
+\item Falls $x \neq z$, dann ist $d(x,z)=1$ und es gibt 3 Unterfälle:
+\begin{itemize}
+\item $x=y \neq z \implies 1=d(x,z) \leq d(x,y)+d(y,z) = 0+1=1$.
+\item $x \neq y=z \implies 1=d(x,z) \leq d(x,y)+d(y,z) = 1+0 =1$.
+\item $x \neq y \neq z \implies d(x,z) \leq d(x,y)+ d(y,z) = 1+1=2$. 
+\end{itemize} 
+\end{itemize}
+In allen Situationen ist also die Dreiecksungleichung erfüllt. 
+\end{enumerate}
+\item Wir verwenden die Notation "für fast alle $n \in \mathbb{N}$ was soviel bedeutet wie "für alle bis auf endlich viele". Da $d(a_n,a) \in \{0,1\}$ folgt 
+\begin{align*}
+a_n \xrightarrow[n \to \infty]{d} a  \iff d(a_n,a) \xrightarrow[n\to \infty]{} 0 &\iff d(a_n,a)=0 \text{ für fast alle } n \in \mathbb{N} \\
+& \iff a_n = a \text{ für fast alle }n \in \mathbb{N} \\
+& \iff a_n \text{ ist konstant ($=a$) ab einem Index } N \in \mathbb{N}.
+\end{align*}
+\item Sei $(x_n)_{n \in \mathbb{N}}$ eine Cauchy Folge in $X$, dann gibt es zu jedem $\epsilon >0$ ein $N \in \mathbb{N}$ sodass für alle $n,m$ grösser als $N$ gilt $d(x_n,x_m) < \epsilon$. Wähle nun $\epsilon=1/2$, dann gilt $d(x_n,x_m)=0$ und somit muss (analog wie in vorheriger Aufgaben) $x_n$ konstant für $n$ grösser als $N$ sein. Laut vorheriger Teilaufgabe beduetet dies, dass die Folge konvergiert und somit ist jede Cauchy Folge konvergent, also $(X,d)$ ein vollständiger metrischer Raum. 
+\item Sei $A \subset X$ und $x \in A$ beliebig. Für $\epsilon = 1/2$ ist der Ball um $x$ mit Radius $\epsilon$ 
+\begin{align*}
+B_\epsilon(x)= \{ y \in X : d(x,y) < \epsilon\} = \{x\} \subset A.
+\end{align*}
+Damit ist $A$ offen. Also sind alle Teilmengen von $X$ offen und daher auch alle abgeschlossen weil $A^c$ offen impliziert $A$ abgeschlossen. Folglich können wir sagen $\tau = \mathcal{P}(X)$. 
+\item Mittels der topologischen Charakterisierung von Stetigkeit wissen wir: $f$ stetig $\iff f^{-1}(U) \subset X$ offen für alle $U \subset M$ offen. Da aber sowieso alle Teilmengen von $X$ offen sind, insbesondere also auch $f^{-1}(U)$, ist $f$ stetig.
+\item Sei einerseits $K=\{x_1, \dots , x_n\}$ endlich und $K \subset \bigcup_i U_i$ eine offene Überdeckung von $K$. Wähle $U_{i_j}$ sodass $x_j \in U_{i_j}$. Dann ist $K \subset U_{i_1} \cup \dots \cup U_{i_n}$ eine endliche offene Teilüberdeckung. Also ist $K$ kompakt.  \\
+Sei andererseits $K$ kompakt. $K \subset \bigcup_{a \in K} \{a\}$ ist eine offene Überdeckung, da die Singleton-Mengen offen sind (sogar jede Teilmenge ist offen). Diese hat also eine endliche Teilüberdeckung $K \subset \{a_1 \} \cup \dots \cup \{a_n\}$. Also muss $K$ endlich sein. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Zeige, dass für alle $v \in \mathbb{R}^n$ gilt:
+\begin{align*}
+\|v\|_\infty = \lim_{p \to \infty} \|v\|_p.
+\end{align*}
+\end{ex}
+
+\begin{solution} Wir bemerken, dass einerseits.
+\begin{align*}
+\|v\|_\infty = \max_{j=1, \dots ,n} |v_j| = \left( \max_{j=1,  \dots ,n} |v_j|^p \right)^{1/p} \leq \left( |v_1|^p + \dots + |v_n|^p \right)^{1/p} = \|v\|_p.
+\end{align*}
+Andererseits haben wir:
+\begin{align*}
+\|v\|_p = ( |v_1|^p + \dots + |v_n|^p)^{1/p} \leq ( \|v\|_\infty^p + \dots + \|v\|_\infty^p)^{1/p} = n^{1/p} \|v\|_\infty.
+\end{align*}
+Zusammenführend haben wir also gezeigt, dass gilt:
+\begin{align*}
+\|v\|_\infty \leq \|v\|_p \leq n^{1/p} \|v\|_\infty.
+\end{align*}
+Da $\lim_{p \to \infty} n^{1/p}=1$ folgt aus dem Sandwich theorem die Behauptung. 
+\end{solution}
+
+\begin{ex} Beweise die Cauchy-Schwarz Ungleichung, das heisst für alle $v,w \in \mathbb{R}^n$ gilt
+\begin{align*}
+\sum_{i=1}^n |v_i||w_i| \leq \sqrt{\sum_{i=1}^n |v_i|^2} \sqrt{\sum_{i=1}^n |w_i|^2}.
+\end{align*}
+\end{ex}
+
+\begin{solution} Für $v=0$ oder $w=0$ ist die Cauchy-SChwarz-Ungleichung trivialerweise erfüllt. Seien also $v,w \neq 0$ und wir verwenden die (standard) Notation:
+\begin{align*}
+\|v\|_2:= \sqrt{\sum_{i=1}^n |v_i|^2}.
+\end{align*}
+Bemerke, dass $(x-y)^2 \geq 0 \iff 2xy \leq x^2+y^2$. Wir verwenden diese Ungleichung mit 
+\begin{align*}
+x:= \frac{|v_i|}{\|v\|_2}, \text{ und } y:= \frac{|w_i|}{\|w\|_2}.
+\end{align*}
+Wir erhalten:
+\begin{align*}
+2 \frac{|v_i||w_i|}{\|v\|_2\|w\|_2} \leq \frac{|v_i|^2}{\|v\|_2^2}+ \frac{|w_i|^2}{\|w\|_2^2}.
+\end{align*}
+Summation beider Seiten von $i=1, \dots , n$ liefert
+\begin{align*}
+\frac{2}{\|v\|_2 \|w\|_2} \sum_{i=1}^n |v_i| |w_i| \leq \sum_{i=1}^n \frac{|v_i|^2}{\|v\|_2^2} + \sum_{i=1}^n \frac{|w_i|^2}{\|w\|_2^2} = \frac{\|v\|_2^2}{\|v\|_2^2}+ \frac{\|w\|_2^2}{\|w\|_2^2}= 1+1=2.
+\end{align*}
+Also
+\begin{align*}
+\frac{2}{\|v\|_2 \|w\|_2} \sum_{i=1}^n |v_i| |w_i| \leq 2 \implies \sum_{i=1}^n |v_i||w_i| \leq \|v\|_2 \|w\|_2,
+\end{align*}
+ziehen der Wurzel auf beiden Seiten liefert nun die gewünschte Ungleichung von Cauchy-Schwarz. 
+\end{solution}
+\newpage
+
 
 \section{Stetigkeit und Grenzwerte von Funktionen}
 
