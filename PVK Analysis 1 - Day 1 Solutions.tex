@@ -917,13 +917,13 @@ Lassen wir nun $N \to \infty$ so folgt die Behauptung.
 
 \begin{solution} Da $\sum a_n$ konvergiert, gilt gemäss dem Cauchy'schen Verdichtungssatz auch, dass $\sum 2^n a_{2^n}$ konvergiert. Also muss $2^na_{2^n}$ eine Nullfolge sein, das heisst 
 \begin{align*}
-2^n a_{2^n} \xrightarrow{n \to \infty} 0. 
+2^n a_{2^n} \xrightarrow{n \to \infty} 0. \tag{$\star$}
 \end{align*}
 Sei nun $k \in \mathbb{N}$ sodass $2^n < k <2^{n+1}$, da $(a_n)_{n \in \mathbb{N}}$ monoton fallend ist folgt dann
 \begin{align*}
 2^n a_{2^{n+1}} \leq k a_k \leq 2^{n+1} a_{2^n}.
 \end{align*}
-Für $k \to \infty$ gilt automatisch $2^n, 2^{n+1} \to \infty$ und die Aussage folgt dank dem Sandwich-Lemma. 
+Für $n \to \infty$ strebt auch $k \to \infty$ und aus obiger Ungleichung folgt mit dem Sandwich Theorem und ($\star$) die Behauptung. 
 \end{solution}
 
 \begin{ex} Verwenden Sie den Cauchy'schen Verdichtungssatz (Kondensationssatz) um zu zeigen, dass die nachfolgenden Reihen divergieren respektive konvergieren:
