@@ -1300,6 +1300,179 @@ Also
 \end{align*}
 ziehen der Wurzel auf beiden Seiten liefert nun die gewünschte Ungleichung von Cauchy-Schwarz. 
 \end{solution}
+
+\begin{ex} Sei $Q$ der Raum der quadratsummierbaren reellen Folgen $(a_n)_{n \in \mathbb{N}}$, d.h. für welche die Reihe $\sum_{n=1}^\infty a_n^2$ konvergiert. Zeige, dass
+\begin{align*}
+d((a_n), (b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2}
+\end{align*}
+eine Metrik auf $Q$ definiert. \\
+Hinweis: Verwende die Cauchy-Schwarz Ungleichung um die Dreiecksungleichung zu beweisen.
+\end{ex}
+
+\begin{solution} Seien $(a_n), (b_n), (c_n) \in Q$ drei beliebige quadratsummierbare Folgen.
+\begin{enumerate}
+\item Offensichtlich gilt $d((a_n), (b_n)) \geq 0$ und es gilt 
+\begin{align*}
+d((a_n),(b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} =0 &\iff (a_n-b_n)^2 =0 \text{ für alle } n \in \mathbb{N} \\
+& \iff a_n=b_n \text{ für alle } n \in \mathbb{N} \\
+& \iff (a_n)=(b_n).
+\end{align*}
+\item Bemerke
+\begin{align*}
+d((a_n),(b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} = \sqrt{\sum_{n=1}^\infty (b_n-a_n)^2} = d((b_n),(a_n)),
+\end{align*}
+und somit ist die Symmetrie erfüllt.
+\item Dies ist der schwierigste Teil der Aufgabe. 
+\begin{align*}
+d((a_n),(c_n))&= \sqrt{ \sum_{n=1}^\infty (a_n-c_n)^2} = \sqrt{ \sum_{n=1}^\infty (a_n-b_n+b_n-c_n)^2} \\
+&= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2 + 2 \sum_{n=1}^\infty (a_n-b_n)(b_n-c_n) + \sum_{n=1}^\infty (b_n-c_n)^2}.
+\end{align*}
+Nun verwenden wir die Cauchy-Schwarz-Ungleichung, um den mittleren Term abzuschätzen:
+\begin{align*}
+\sum_{n=1}^\infty (a_n-b_n)(b_n-c_n) & \leq \sum_{n=1}^\infty |a_n-b_n||b_n-c_n| \\
+& \leq \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2}.
+\end{align*}
+Wir erhalten somit:
+\begin{align*}
+d((a_n),(b_n)) & \leq \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2 + 2 \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} + \sum_{n=1}^\infty (b_n-c_n)^2} \\
+& = \sqrt{ \left( \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} + \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} \right)^2} \\
+&= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} + \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} = d((a_n),(b_n))+ d((b_n),(c_n)).
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Betrachte den $\mathbb{R}^n$ mit der Euklidischen Metrik. Zeige oder widerlege:
+\begin{enumerate}[i)]
+\item $X:= \{(x,y) \in \mathbb{R}^2 \mid x^2-y^2+2xy=5\}$ ist abgeschlossen. \textit{Hinweis}: Urbilder abgeschlossener Mengen unter stetigen Funktionen sind abgeschlossen.
+\item $Y:= \{ \frac{\cos x}{x} \in \mathbb{R} \mid x \in \mathbb{N} \setminus \{0\}\} $ ist abgeschlossen. 
+\end{enumerate}
+\end{ex}
+
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Wahr. Sei $f(x,y)=x^2-y^2+2xy$. Dann ist $f$ stetig als Summe von Produkten stetiger Funktionen. Die Singleton Menge $\{5\}$ ist abgeschlossen in $\mathbb{R}$ und es folgt, dass $X= f^{-1}(\{5\})$ ebenfalls abgeschlossen ist. 
+\item Falsch. Es gilt:
+\begin{align*}
+\left| \frac{\cos (n)}{n} \right| \leq \frac{1}{n} \xrightarrow{n \to \infty} 0.
+\end{align*}
+Wäre $Y$ abgeschlossen, so müsste nach dem Folgenkriterium $0 \in Y$ gelten. Das ist aber nicht der Fall, weil 
+\begin{align*}
+\cos (x)=0 \iff x = n \pi + \frac{\pi}{2}, \quad n \in \mathbb{Z}
+\end{align*}
+und Zahlen der Form $n \pi + \frac{\pi}{2}$ sind irrational, insbesondere also nicht in $Y$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex}
+\begin{enumerate}[i.)]
+\item Sei $(X,d)$ ein metrischer Raum. Zeigen Sie:
+\begin{enumerate}
+\item
+die umgekehrte Dreiecksungleichung
+$$ \vert d(x,y) - d(y, z) \vert \leq d(x, z).$$
+\item
+die verallgemeinerte Dreicksungleichung
+$$ d(x_n, x_1) \leq \sum_{i=1}^{n-1} d(x_{i+1}, x_i) .$$
+\item
+die Vierecksungleichung
+$$ \vert d(x,y) - d(u,v) \vert \leq d(x,u) + d(y,v) .$$
+\end{enumerate}
+
+\item Sei $(Y, \Vert \cdot \Vert)$ ein normierter $\RR$-Vektorraum. Zeigen Sie:
+\begin{enumerate}
+\item
+die umgekehrte Dreiecksungleichung
+$$ \big\vert \ \Vert x \Vert - \Vert y \Vert \ \big\vert \leq \Vert x -y \Vert .$$
+\item
+die verallgemeinerte Dreiecksungleichung
+$$ \Vert x_n - x_1 \Vert \leq \sum_{i=1}^{n-1} \Vert x_{i+1} - x_i \Vert .$$
+\end{enumerate}
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+\begin{enumerate}
+\item
+Die Dreicksungleichung liefert uns f\"ur $x,y,z \in X$:
+$$d(x, y) \leq d(x, z) + d(y,z) \Rightarrow d(x,y) - d(y,z) \leq d(x,z) .$$
+Tauschen wir die Rollen von $x$ und $y$, so erhalten wir $-(d(x,y) - d(y,z)) = d(y,z) - d(x,y) \leq d(x,z)$. Dammit erhalten wir $ \vert d(x,y) - d(y, z) \vert \leq d(x, z).$
+\item
+Wir beweisen dies mit Induktion \"uber $n$. Die Induktionsverankerung $n=2$ ist trivial. Wir nehmen nun an, dass die Behauptung wahr ist f\"ur ein $n\in \NN_{\geq 2}$. Dann gilt
+$$ d(x_{n+1}, x_1) \leq d(x_{n+1}, x_n) + d(x_n, x_1) 
+\stackrel{\text{IV}}{\leq} d(x_{n+1}, x_n) + \sum_{i=1}^{n-1} d(x_{i+1}, x_i) = \sum_{i=1}^{n} d(x_{i+1}, x_i).$$ 
+\item
+Seien $x,y,u, v \in X$. Wir wenden zweimal die Dreicksungleichung an und erhalten
+$$ d(x,y) \leq d(x,u) + d(u,y) \leq  d(x,u) + d(u,v) + d(v, y).$$
+Wir folgern
+$$ d(x,y) - d(u, v) \leq d(x,u) + d(y, v). $$
+Tauschen wir die Rollen von $x$ und $u$ und auch $y$ und $v$, so erhalten wir
+$$- (d(x,y) - d(u, v)) = d(u,v) - d(x,y) \leq  d(x,u) + d(y, v).$$
+Damit erhalten wir $\vert d(x,y) - d(u,v) \vert \leq d(x,u) + d(y,v)$.
+\end{enumerate}
+\item
+Folgt direkt aus $i.)$ mit $d(x,y)= \Vert x -y \Vert$.
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}
+Seien $(M_1, d_1), (M_2, d_2)$ metrische R\"aume. Sei $f: M_1 \rightarrow M_2$ gleichm\"assig stetig. Zeigen Sie:
+Ist $(a_n)_{n\in \NN}$ eine Cauchy-Folge in $M_1$ $\Rightarrow$ $(f(a_n))_{n\in \NN}$ ist eine Cauchy-Folge in $M_2$.
+\end{ex}
+\begin{solution}
+Sei $\epsilon>0$. Da $f$ gleichm\"assig stetig ist, existiert $\delta>0$, sodass
+\begin{align}
+\forall x,y \in M_1: d_1(x,y)<\delta \Rightarrow d_2(f(x),f(y))<\epsilon.
+\end{align}
+Da $(a_n)_{n\in \NN}$ eine Cauchyfolge bez\"uglich $d_1$ ist, gilt
+\begin{align}
+\exists N \in \NN \ \forall n,m\geq N: d_1(a_n, a_m)<\delta.
+\end{align}
+Kombinieren wir $(2)$ und $(3)$, so erhalten wir
+$$ \exists N\in \NN \ \forall n,m \geq N: d_2(f(a_n), f(a_m)) < \epsilon.$$
+Da $\epsilon>0$ beliebig war, folgt, dass $(f(a_n))_{n\in \NN}$ eine Cauchyfolge bez\"uglich $d_2$ ist.
+\end{solution}
+
+\begin{ex} In dieser Aufgabe wollen wir zeigen, dass $\ell_p \subset \ell_q$ für $0 <p \leq q$. 
+\begin{enumerate}[i)]
+\item Zeige zuerst, dass für $0< a \leq 1$ folgende Ungleichung gilt:
+\begin{align*}
+\left( \sum_{n=1}^\infty |a_n| \right)^a \leq \sum_{n=1}^\infty |a_n|^a.
+\end{align*}
+\item Folgere dass $\|a\|_q \leq \|a \|_p$.
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item Die Ungleichung ist trivial für $a=1$. Weiterin ist die Ungleichung trivial falls die Folge $(a_n)_{n \in \mathbb{N}}$ identisch Null ist und dies ist genau der Fall falls 
+\begin{align*}
+\sum_{n=1}^\infty |a_n|=0.
+\end{align*}
+Sei also $\sum_{n=1}^\infty |a_n| \neq 0$. Bemerke weiterhin, dass für $x \in (0,1]$ and $a \in (0,1)$ gilt $x^a \geq x$. Dies ist wahr weil $x =1$ die Ungleichung trivial ist und für $x \in (0,1)$ haben wir
+\begin{align*}
+x^a \geq x \iff  \log (x^a) \geq \log (x) \iff a \log(x) \geq \log (x) \iff a \leq 1.
+\end{align*}
+Es folgt nun
+\begin{align*}
+\frac{\sum_{n=1}^\infty |a_n|^a}{\left( \sum_{k=1}^\infty |a_k|\right)^a} = \sum_{n=1}^\infty \frac{|a_n|^a}{\left( \sum_{k=1}^\infty |a_k|\right)^a} = \sum_{n=1}^\infty \left( \frac{|a_n|}{\sum_{k=1}^\infty |a_k|}\right)^a \geq \sum_{n=1}^\infty \frac{|a_n|}{\sum_{k=1}^\infty |a_k|} = \frac{\sum_{n=1}^\infty |a_n|}{\sum_{k=1}^\infty |a_k|}=1.
+\end{align*}
+Aus obiger Ungleichung folgt nun die Behauptung:
+\begin{align*}
+\left( \sum_{n=1}^\infty |a_n| \right)^a \leq \sum_{n=1}^\infty |a_n|^a.
+\end{align*}
+\item Sei nun $0 < p \leq q$, dann gilt für $a = p/q$ natürlich $0<a \leq 1$. Mit Teilaufgabe i) erhalten wir:
+\begin{align*}
+\left( \sum_n |a_n|^q \right)^{1/q} = \left( \sum_n |a_n|^q \right)^{p/qp}  = \left[\left( \sum_{n} |a_n|^q \right)^a\right]^{1/p} &\overset{i)}\leq \left( \sum_n |a_n|^{aq} \right)^{1/p} \\
+&= \left( \sum_{n} |a_n|^{q (p/q)} \right)^{1/p} \\
+&= \left( \sum_n |a_n|^p \right)^{1/p}.
+\end{align*}
+Dies zeigt nun, dass $\ell_p \subset \ell_q$ für $p \leq q$. 
+\end{enumerate}
+\end{solution}
+
 \newpage
 
 
