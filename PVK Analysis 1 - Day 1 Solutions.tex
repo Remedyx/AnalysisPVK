@@ -1,0 +1,1253 @@
+\documentclass[a4paper, 20]{exam}
+
+\printanswers % If you want to print answers
+%\noprintanswers % If you don't want to print answers
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{bbm}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{polynom}
+
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{mydef}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{nonexample}{Non-example}
+\newtheorem{ex}{Aufgabe}
+\newtheorem{claim}{Behauptung}
+
+\definecolor{SolutionColor}{rgb}{0.8,0.9,1} % light blue
+%\shadedsolutions % defines the style of the solution environment
+\framedsolutions % defines the style of the solution environment
+% Defines the title of the solution environment:
+\renewcommand{\solutiontitle}{\noindent\textbf{Solution:}\par\noindent}
+
+
+\newcommand\CC{\mathbb{C}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\ZZ{\mathbb{Z}}
+
+\begin{document}
+\title{PVK Analysis I}
+\author{Marco Bertenghi \& Lukas Burch, Vorlage gemäss Severin Schraven}
+\maketitle
+
+Die Verweise auf Theoreme und Propositionen beziehen sich auf das Skript der Vorlesung, welches Sie $\href{http://www.math.uzh.ch/index.php?ve_vo_det&key2=2513&keySemId=31}{hier}$ finden k\"onnen. Die Verweise auf Serien beziehen sich auf das HS 15. Mit (*) markierte Aufgaben, sind im allgemeinen anspruchsvoller.
+
+
+\section{sup, inf, max, min von Mengen}
+\begin{ex} Berechnen Sie das Supremum (kleinste obere Schranke) der Menge: 
+\begin{align*}
+S:= \left\lbrace \frac{n}{n+1} : n \in \mathbb{N} \right\rbrace = \left\lbrace \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \dots \right \rbrace .
+\end{align*}
+Was gilt für das Supremum der Menge $M:= S \cup \lbrace 1 \rbrace$?
+\end{ex}
+\begin{solution} Um zu zeigen, dass eine reelle Zahl $M$ die kleinste obere Schranke einer Menge $S$ ist, geht man normalerweise in 2 Schritten vor. 
+\begin{enumerate}
+\item Zeige, dass $M$ eine obere Schranke von $S$ ist, i.e. zeige, dass $M \geq s$ für alle $s \in S$. 
+\item Zeige,  dass $M$ die kleinste obere Schranke von $S$ ist. Meist geschieht dies per Widerspruch, man nimmt an, dass ein $\epsilon >0$ existiert, sodass $M- \epsilon$ nach wie vor eine obere Schranke von $S$ ist. Man findet dann ein Element $s \in S$ mit $s> M- \epsilon$, was zeigt, dass $M- \epsilon$ keine obere Schranke von $S$ ist. 
+\end{enumerate}
+Wir stellen nun fest, dass jedes Element $s \in S$ kleiner als $1$ ist,  da $\frac{n}{n+1} <1$. Wir behaupten,  dass $1$ das Supremum der Menge ist. Nehme zum Widerspruch an, dass $1$ nicht die kleinste obere Schranke von $S$ ist, d.h. es existiert $\epsilon >0$ sodass $1- \epsilon$ auch eine obere Schranke von $S$ ist. 
+\\\\
+Wähle $n_0 \in \mathbb{N}$ sodass $n_0 > \frac{1}{\epsilon}-1$, dann gilt $1- \epsilon < \frac{n_0}{n_0+1}$ was zeigt, dass $1- \epsilon$ keine obere Schranke von $S$ ist, da $\epsilon >0$ beliebig war, muss $1$ die kleinste obere Schranke von $S$ sein.
+\\\\
+Unsere Bemühungen lassen nun schliessen, dass $\sup M = \max M = 1$ gelten muss, da $1$ das Supremum der Menge $S$ ist und insbesondere gilt $ 1 \in M$. 
+\end{solution}
+\begin{ex} Es sei $A \subset \mathbb{R}$ und $A \neq \emptyset$, desweiteren definieren wir $-A:= \lbrace x \in \mathbb{R} : -x \in A \rbrace$.  Entscheiden Sie für jede Aussage, ob sie wahr oder falsch ist: 
+\begin{enumerate}[i.)]
+\item
+$A$ unbeschr\"ankt $\Longleftrightarrow$ $\sup A = \infty$.
+
+\item
+$A$ ist endlich $\Longrightarrow$ $\max A = \sup A$.
+
+\item
+$\min A$ existiert $\Longrightarrow$ $\min A = -\max(-A)$.
+
+\item
+$\sup A \notin A$.
+
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Falsch, Gegenbeispiel $A=(-\infty, 0]$ ist unbeschr\"ankt, aber $sup A =0$. 
+\item
+Wahr.
+\item
+Wahr. Sei $x\in A$, dann gilt $-x\in -A$. Damit $x=-(-x)\geq - \max(-A)$. Da $- \max(-A)\in A$, folgt die Aussage.
+\item
+Falsch. $A=\{ 42 \}$. Dann ist $\sup A = 42 \in A$.
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Finden Sie das max, min, sup und inf der folgenden Menge und beweisen Sie ihre Aussage:
+\begin{align*}
+S:= \left\lbrace \frac{2n+1}{n+1} : n \in \mathbb{N}_{ \geq 1} \right\rbrace = \left \lbrace \frac{3}{2}, \frac{5}{3}, \frac{7}{4}, \frac{9}{5}, \frac{11}{6}, \dots \right\rbrace .
+\end{align*}
+\end{ex}
+
+\begin{solution} Der kleinste Term scheint $\frac{3}{2}$ zu sein und es scheint kein kleineres Element zu geben, aber alle Elemente sind kleiner als $2$ und da $\lim \frac{2n+1}{n+1}=2$ behaupten wir folgende Aussagen: \\
+a) Es gibt kein Maximum, b) $\sup S =2$ und c) $\min S= \inf S = \frac{3}{2}$. 
+\\\\
+Wir beginnen mit dem Supremum, können wir nähmlich zeigen, dass $\sup S=2$ dann kann $S$ kein Maximum besitzen, da $2 \notin S$. Es gilt offensichtlich:
+\begin{align*}
+\frac{2n+1}{n+1} < 2 \iff 2n+1 < 2n+2 \iff 1 <2.
+\end{align*}
+Da diese Aussage immer wahr ist, folgern wir, dass $2$ in der Tat eine obere Schranke von $S$ ist. Nun zeigen wir, dass $2$ die kleinste obere Schranke von $S$ ist. Falls $2$ nicht die kleinste obere Schranke von $S$ wäre, so würde $ \epsilon >0$ existieren sodass $2 - \epsilon $ eine obere Schranke von $S$ ist. Wir behaupten, es existiert eine natürliche Zahl $n \in \mathbb{N}$ sodass:
+\begin{align*}
+2- \epsilon < \frac{2n+1}{n+1}.
+\end{align*}
+gilt und somit $2- \epsilon$ keine obere Schranke von $S$ ist. Es gilt jedoch offensichtlich:
+\begin{align*}
+2- \epsilon < \frac{2n+1}{n+1} \iff - \epsilon< \frac{2n+1}{n+1}-2 \iff \epsilon > \frac{1}{n+1} \iff n > \frac{1}{\epsilon}-1 .
+\end{align*}
+Wählen wir also $n \in \mathbb{N}$ sodass $n > \frac{1}{\epsilon}-1$, dann gilt $2- \epsilon < \frac{2n+1}{n+1}$, somit haben wir gezeigt, dass $\sup S=2$. Um etwas präziser zu zeigen, dass $2 \notin S$ gilt, nehmen wir an, dass eine natürliche Zahl $n \in \mathbb{N}$ existiert sodass:
+\begin{align*}
+2 = \frac{2n+1}{n+1} \iff 2(n+1)=2n+1 \iff 2=1.
+\end{align*}
+was natürlich ein Widerspruch ist,  also $2 \notin S$ und somit existiert kein Maximum. 
+\\\\
+Schliesslich zeigen wir, dass $\min S = \frac{3}{2}$. Offensichtlich gilt $\frac{3}{2} \in S$. Es genügt also zu zeigen, dass $\frac{3}{2}$ eine untere Schranke von $S$ ist, wir haben aber offensichtlich
+\begin{align*}
+\frac{2n+1}{n+1} \geq \frac{3}{2} \iff 2(2n+1) \geq 3(n+1) \iff  n \geq 1.
+\end{align*}
+Was natürlich wahr ist für alle $n \in \mathbb{N}_{ \geq 1}$ wie in der Menge von $S$ spezifiert, also gilt $\min S= \frac{3}{2}$. 
+\end{solution}
+
+
+\begin{ex} Es sei $S:= (1, 5]$. Beweisen Sie, dass $\inf S=1$.
+\end{ex}
+\begin{solution} Per Definition von $S$ erfüllt jedes $x \in S$ die Ungleichung $1 < x \leq 5$ und somit ist $1$ natürlich eine untere Schranke von $S$. Wir wollen zeigen, dass $1$ die grösste untere Schranke von $S$ ist, insbesondere bedeutet dies das Wort "offensichtlich" möglichst zu vermeiden. 
+\\\\
+Wir nehmen also an, dass $1$ nicht die grösste untere Schranke von $S$ ist, dann existiert ein $\epsilon >0$ sodass $1+ \epsilon$ eine untere Schranke von $S$ ist. Um ein Widerspruch zu erhalten finden wir ein Element $x \in S$, sodass $1<x<1+ \epsilon$, was zeigt, dass $1+ \epsilon$ keine untere Schranke von $S$ sein kann. 
+\\\\
+Wir wählen $x= 1 + \frac{\epsilon}{2}$, dann gilt offensichtlich:
+\begin{align*}
+1 <x < 1 + \epsilon \leq 5.
+\end{align*}
+da per Annahme $1+ \epsilon$ eine untere Schranke von $S$ war. Also ist $1+ \epsilon$ keine untere Schranke von $S$ und somit haben wir gezeigt,  dass $1$ die grösste untere Schranke von $S$ ist. 
+
+\end{solution}
+\newpage 
+\section{Vollständige Induktion}
+
+\begin{ex} \
+\begin{enumerate}[i.)]  
+\item
+Beweisen Sie die Bernoulli-Ungleichung: 
+
+\begin{center}
+$\forall x >-1 \ ,\ \forall n\in \NN: (1+x)^n \geq 1+nx. $
+\end{center}
+
+mittels Induktion.
+
+\item
+Seien $n\in \NN_{\geq2}$ und $x_1, \dots , x_n \geq 0$. Zeigen Sie:
+\begin{center}
+$$\prod_{i=1}^n (1+x_i) \geq 1 + \sum_{i=1}^n x_i.$$
+\end{center}
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Sei $x>-1$.
+Zuerst zeigen wir den Fall $n=0$:
+$$ (1+x)^0=1 = 1+ 0\cdot x. $$
+Sei $n\in \NN$ beliebig, aber fix, sodass 
+$(1+x)^{n} \geq 1+nx$ (IA). 
+
+Dann berechnen wir
+$$ (1+x)^{n+1} = (1+x)(1+x)^n \stackrel{\text{IA, }  x>-1}{\geq} (1+x)(1+nx)= 1+(n+1)x+nx^2 \geq 1 + (n+1)x.$$ 
+\item
+Zuerst zeigen wir den Fall $n=2$. Seien $x_1, x_2 \geq 0$, dann
+$$ \prod_{i=1}^2 (1+x_i) = 1 + (x_1+x_2) + x_1\cdot x_2 
+\stackrel{x_1, x_1 \geq 0}{\geq} 1 + (x_1+x_2) = 1 + \sum_{i=1}^2 x_i.$$
+Sei $n\in \NN_{\geq 2}$ beliebig, aber fix, sodass 
+$\prod_{i=1}^n (1+x_i) \geq 1 + \sum_{i=1}^n x_i$ f\"ur alle $x_1, \dots, x_n \geq 0$ (IA).
+
+Dann berechnen wir f\"ur $x_1, \dots, x_{n+1} \geq 0$:
+$$ \prod_{i=1}^{n+1} (1+x_i) = (1+x_{n+1}) \cdot \prod_{i=1}^{n} (1+x_i)
+\stackrel{\text{IA}}{\geq} (1+x_{n+1})(1 + \sum_{i=1}^n x_i)$$
+
+$$= 1 + \sum_{i=1}^{n+1} x_i + x_{n+1}\cdot \sum_{i=1}^n x_i
+\stackrel{x_i \geq 0}{\geq} 1 + \sum_{i=1}^{n+1} x_i.$$
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}
+Zeigen Sie, dass:
+
+$$ \frac{4^{2n}-3^n}{13} \in \NN .$$
+
+f\"ur alle $n \in \NN_{\geq 1}$.
+\end{ex}
+\begin{solution}
+Zuerst zeigen wir den Fall $n=1$:
+$$ \frac{4^{2}-3^1}{13} = \frac{13}{13}=1 \in \NN.$$
+Sei $n\in \NN_{\geq 1}$ beliebig, aber fix, sodass $ \frac{4^{2n}-3^n}{13} \in \NN $.
+
+Dann berechnen wir:
+$$ \frac{4^{2(n+1)}-3^{(n+1)}}{13} = \frac{4^2(4^{2n}-3^n)}{13} + \frac{(4^2-3)3^n}{13}
+= 4^2 \underbrace{\frac{4^{2n}-3^n}{13}}_{\in \NN \text{ nach IA}} + 3^n \in \NN.$$
+\end{solution}
+\begin{ex} \
+ \begin{enumerate}[i)]
+ \item Zeigen Sie, dass der kleinste, nicht triviale Teiler einer natürlichen Zahl $n \in \mathbb{N}_{ \geq 2}$ stets eine Primzahl ist. Hier ist keine vollständige Induktion notwendig, ein Beweis per Widerspruch genügt völlig. 
+ \item Zeigen Sie, dass jede natürliche Zahl $n \in \mathbb{N}_{ \geq 2}$ als Produkt von Primzahlen in der kanonischen Form $n=p_1^{a_1} \cdot p_2^{a_2} \cdots p_k^{a_k}$, wobei $p_1 < p_2 < \dots < p_k \in \mathbb{P}$ und $a_1, \dots , a_k  \in \mathbb{N}_0$, geschrieben werden kann. Diese Darstellung ist desweiteren eindeutig, dies muss jedoch nicht gezeigt werden. 
+\end{enumerate}
+\end{ex}
+\begin{solution} \
+\begin{enumerate}[i)] 
+\item Zum Widerspruch sei $d_0$ der kleinste,  nicht triviale Teiler von $n \in \mathbb{N}_{ \geq 2}$ ohne dabei eine Primzahl zu sein. Da nun $d_0$ keine Primzahl ist, existiert per Definition eine Zahl $v$ wobei $1<v<d_0$ sodass $v \mid d_0$, per Transitivität gilt dann aber auch $v \mid n$ da bereits $d_0 \mid n$. Dies ist ein Widerspruch zur Annahme, dass $d_0$ der kleinste, nicht triviale Teiler von $n$ war. 
+
+\item Für $n=2$ ist $n$ eine Primzahl und die Aussage somit trivial Wahr. Für den Induktionsschritt nehmen wir an,  dass wir für jede natürliche Zahl $n \in \mathbb{N}_{ \geq 2}$ die Darstellung $n = p_1^{a_1} \cdots p_k^{a_k}$ wie in der Aufgabenstellung haben. Falls nun $n+1$ eine Primzahl ist, so gibt es nichts zu zeigen,  ist $n+1$ jedoch keine Primzahl so muss gelten $n+1=mq$ wobei $1< m \leq q \leq n$, aber für solche Zahlen haben wir per Induktionsannahme kanonische Darstellungen der Form $m =  p_1^{b_1} \cdots p_k^{b_k}$ und $q= s_1^{c_1} \cdots s_l^{c_l}$ haben wobei $p_1 < \cdots < p_k$ und $s_1 < \cdots < s_l$ alles Primzahlen sind und die Exponenten natürliche Zahlen. Zusammenfassen der Primzahlen und Neuanordnung/Neubeschriftung liefert dann die Aussage. 
+\end{enumerate}
+\end{solution}
+\begin{ex}[$\star$ Trig Heavy] Wir definieren die Chebyshev Polynome für alle $x \in \mathbb{R}$ wie folgt:
+ \begin{align*}
+ P_0(x)&= 1. \\
+ P_1(x)&=x. \\
+ P_{n+1}(x)& = xP_n(x) -P_{n-1}(x), \text{ für } n \in \mathbb{N}.
+ \end{align*}
+ Zeigen Sie, dass gilt:
+ \begin{align*}
+ P_n(2 \cos ( \theta)) = \frac{\sin ( (n+1) \theta)}{\sin( \theta)}, \ \theta \in (0, \pi ) .
+ \end{align*}
+\end{ex}
+\begin{solution} Wir zeigen die  beiden Fälle $n=0$ und $n=1$, da wir in dem Induktionsschritt sowohl $k=n$ und $k=n-1$ benötigen werden. Für $n=0$ haben wir die triviale Aussage:
+\begin{align*}
+1 = P_0(2 \cos \theta) = \frac{\sin \theta}{\sin \theta}=1.
+\end{align*}
+Für $n=1$ haben wir die Aussage:
+\begin{align*}
+2 \cos  \theta = P_1( 2 \cos \theta) = \frac{\sin 2 \theta}{\sin \theta} = \frac{2 \sin \theta \cos \theta}{\sin \theta}= 2 \cos \theta.
+\end{align*}
+Nehmen wir nun an, dass die Aussage für $n=k$ und $n=k-1$ für $k>0$ wahr ist,  i.e. wir haben die beiden Gleichungen:
+\begin{align*}
+P_k(2 \cos \theta) = \frac{\sin ( (k+1) \theta)}{\sin \theta}, \text{ und } P_{k-1}( 2 \cos \theta) = \frac{\sin (k \theta)}{\sin \theta }.
+\end{align*}
+Per Definition von $P_{k+1}$ haben wir nun: 
+\begin{align*}
+P_{k+1}(2 \cos \theta) &= 2 \cos \theta P_k(2 \cos \theta) - P_{k-1}( 2 \cos \theta) \\
+&= 2 \cos \theta \frac{\sin((k+1) \theta)}{\sin \theta} - \frac{\sin(k \theta)}{\sin \theta}.
+\end{align*}
+Wir schreiben $k \theta = (k+1) \theta - \theta $ und erhalten:
+\begin{align*}
+P_{k+1}( 2 \cos \theta) &= \frac{2 \cos \theta \sin((k+1) \theta)- \sin((k+1) \theta- \theta)}{\sin \theta } \\
+&= \frac{2 \cos \theta \sin((k+1)\theta)- \cos \theta \sin((k+1)\theta) + \cos((k+1)\theta) \sin \theta}{\sin \theta} \\
+&= \frac{\cos \theta \sin ((k+1)\theta)+ \cos((k+1)\theta) \sin \theta}{\sin \theta} \\
+&= \frac{\sin((k+2) \theta}{\sin \theta }.
+\end{align*}
+\end{solution}
+
+\begin{ex} {$(\star)$} Sei $n \in \NN$ und $a_{jk} \in \mathbb{C}$ für $j = 0,\dots,n + 1$, $k = 0,\dots,n$. Zeigen Sie, dass:
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+\end{ex}
+
+\begin{solution} Sei zuerst $n = 0$. Dann erhalten wir einfach:
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = a_{00} + a_{10} =  \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+	Nehmen wir nun an, dass die Formel für ein $n \in \NN$ gültig ist. Dann gilt: 
+	\begin{align*}
+		\sum_{j = 0}^{n+2}\sum_{k = 0}^{n+1} a_{jk} &= \sum_{j = 0}^{n + 2}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}} \right) \\
+		&= \sum_{j = 0}^{n + 1}\left( {\sum_{k = 0}^n a_{jk} + a_{j,n+1}}\right) + \left( {\sum_{k = 0}^n a_{n+2,k} + a_{n+2,n+1}}\right) \\
+		&= \sum_{j = 0}^{n + 1}\sum_{k = 0}^n a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n + 1}a_{jk} + \sum_{0 \leq k < j \leq n+2} a_{jk}.
+	\end{align*}
+	womit der Induktionsschritt gezeigt wäre. 
+\end{solution}
+
+
+
+
+\begin{ex} Zeigen Sie die \textbf{Vorwärts-Rückwärts Induktion} (auch bekannt als Cauchy-Induktion): Es sei $P(n)$ eine Aussage für $n \in \mathbb{N}_{ \geq 2}$. Falls $P(2)$ wahr ist und 
+\begin{enumerate}
+\item Aus $P(k)$ lässt sich $P(2k)$ folgern (Vorwärts Schritt).
+\item Aus $P(k+1)$ lässt sich $P(k)$ folgern (Rückwärts Schritt).
+\end{enumerate}
+Dann gilt die Aussage $P(n)$ für alle $n \in \mathbb{N}_{ \geq 2}$.
+\end{ex}
+\begin{solution} Da $P(2)=P(2^1)$ wahr ist, folgt aus der Eigenschaft 1 (E1) für $k=2$, dass $P(2\cdot 2)=P(2^2)$ wahr ist. Durch wiederholte Anwendung von (E1) erhalten wir, dass aus $P(2^k)$ stets $P(2^{k+1})$ folgt für $k \in \mathbb{N}$. Mit Hilfe der (standard) vollständigen Induktion erhalten wir dann die Aussage,
+\begin{align*}
+P(2^r) \text{ ist wahr für all } r \in \mathbb{N}. \tag{*}
+\end{align*}
+Wenden wir nur die Eigenschaft 2 (E2) auf (*) an, erhalten wir zuerst, dass $P(2^r-1)$ wahr ist für all $r \in \mathbb{N}$, und erneut durch sukzessive Anwendung von (E2) dass $P(2^r-m)$ wahr ist, also auch $P(2^r-(m+1))$ für alle $r,m \in \mathbb{N}$ mit $m < 2^r$. Wir haben also 
+\begin{align*}
+P(2^r-(m+1)) \text{ ist wahr für alle }r,m \in \mathbb{N} \text{ sodass } m < 2^r. \tag{**}
+\end{align*}
+Es ist jedoch offensichtlich, dass für all $n \in \mathbb{N}_{\geq 2}$ $r,m \in \mathbb{N}$ existieren, sodass $n= 2^r-(m+1)$ mit $m<2^r$. Also erhalten wir dank (**), dass 
+\begin{align*}
+P(n) \text{ ist wahr für alle } n \in \mathbb{N}_{ \geq 2}
+\end{align*}
+was zu zeigen war.
+\end{solution}
+
+\begin{ex}{($\star$)} Es seien $0 \leq x_i \leq \pi$ für $i=1, \dots , n \in \mathbb{N}$. Zeigen Sie folgende Ungleichung für alle $n \in \mathbb{N}$ mit Hilfe der Vorwärts-Rückwärts Induktion: 
+\begin{align*}
+\sin x_1 + \sin x_2 + \dots + \sin x_n \leq n \sin \left( \frac{x_1 + \dots + x_n}{n}\right).
+\end{align*}
+\end{ex}
+
+
+\begin{solution} Wir verwenden die Vorwärts-Rückwärts Induktion. Da wir die Aussage jedoch für alle $n \in \mathbb{N}$ (inklusive $n=1$) zeigen wollen, müssen wir den Fall $n=1$ zusätzlich analysieren, dieser ist jedoch trivial. \\
+\\
+$\bullet$ Für $n=2$ erhalten wir 
+\begin{align*}
+\sin x_1 + \sin x_2 = 2 \sin \left( \frac{x_1 + x_2}{2}\right) \underbrace{\cos \left( \frac{x_1-x_2}{2}\right)}_{ \leq 1} \leq 2 \sin \left( \frac{x_1 + x_2}{2}\right)
+\end{align*}
+womit die Aussage $P(2)$ verifiziert wurde. 
+\\
+\\
+$\bullet$ Um den Vorwärts Schritt zu verifizieren nehmen wir an, dass wir für $k \in \mathbb{N}$ folgende Ungleichung haben:
+\begin{align*}
+\sin x_1 + \dots + \sin x_k \leq k \sin \left( \frac{x_1 + \dots + x_k}{k}\right) \tag{*}
+\end{align*}
+falls wir diese Aussagen mit $P(k)$ bezeichnen, müssen wir zeigen, dass sich aus dieser $P(2k)$ herleiten lässt, also dass gilt:
+\begin{align*}
+\sin x_1 + \dots + \sin x_k + \sin x_{k+1} + \dots + \sin x_{2k} \leq 2k \sin \left( \frac{x_1 + \dots + x_{2k}}{2k}\right).
+\end{align*}
+Wir verwenden (*) für die $k$ Zahlen $x_{k+1} , x_{k+2}, \dots , x_{2k}$ und erhalten per Annahme 
+\begin{align*}
+\sin x_{k+1} + \dots + \sin x_{2k} \leq k \sin \left( \frac{x_{k+1}+ \dots + x_{2k}}{k}\right). \tag{**}
+\end{align*}
+Kombinieren wir (*) und (**) erhalten wir 
+\begin{align*}
+\sin x_1 + \dots + \sin x_{2k} \leq k \left[ \sin \left( \frac{x_1 + \dots + x_k}{k}\right) + \sin \left( \frac{x_{k+1}+ \dots + x_{2k}}{k}\right) \right]. \tag{***}
+\end{align*}
+Es gilt jedoch, dass 
+\begin{align*}
+\frac{x_1 + \dots + x_k}{k}, \frac{x_{k+1} + \dots + x_{2k}}{k} \in [0, \pi]
+\end{align*}
+also können wir auf den geklammerten Term in (***) oben die Induktionsannahme für $n=2$ anwenden und erhalten 
+\begin{align*}
+\sin \left( \frac{x_1 + \dots + x_k}{k}\right) + \sin \left( \frac{x_{k+1} + \dots + x_{2k}}{k}\right) &\overset{P(2)} \leq 2 \sin \left( \frac{\frac{x_1 + \dots + x_k}{k}+ \frac{x_{k+1} + \dots + x_{2k}}{k}}{2}\right)  \\
+&= 2 \sin \left( \frac{x_1 + \dots + x_{2k}}{2k}\right).
+\end{align*}
+Aus obiger Überlegung und (***) erhalten wir also schliesslich:
+\begin{align*}
+\sin x_1 + \dots + \sin x_{2k} \leq 2k \sin \left( \frac{x_1 + \dots + x_{2k}}{2k}\right),
+\end{align*}
+also $P(k) \rightsquigarrow P(2k)$. 
+\\
+\\
+$\bullet$ Um den Rückwärts Schritt zu verifizieren nehmen wir an, dass wir für $k \in \mathbb{N}$ folgende Ungleichung haben: 
+\begin{align*}
+\sin x_1 + \dots + \sin x_{k+1} \leq (k+1) \sin \left( \frac{x_1 + \dots + x_{k+1}}{k+1}\right). \tag{$\bigstar$}
+\end{align*}
+Wir wollen $P(k+1) \rightsquigarrow P(k)$ nachweisen. Wir verwenden $(\bigstar)$ für die spezielle Wahl 
+\begin{align*}
+x_{k+1}:= \frac{x_1 + \dots + x_k}{k} \in [0, \pi]
+\end{align*}
+und erhalten: 
+\begin{align*}
+\sin x_1 + \dots + \sin x_k + \sin \left( \frac{x_1 + \dots + x_k}{k}\right) &\leq (k+1) \sin \left( \frac{x_1 + \dots + x_k + \frac{x_1 + \dots + x_k}{k}}{k+1}\right) \\
+& = (k+1) \sin \left( \frac{x_1 + \dots + x_k}{k}\right) \\
+& = k \sin \left( \frac{x_1 + \dots + x_k}{k}\right) + \sin \left( \frac{x_1 + \dots + x_k}{k}\right),
+\end{align*}
+kürzen wir auf beiden Seiten der Ungleichung den letzten Term erhalten wir schliesslich 
+\begin{align*}
+\sin x_1 + \dots + \sin x_k \leq k \sin \left( \frac{x_1 + \dots + x_k}{k}\right)
+\end{align*}
+also $P(k+1) \rightsquigarrow P(k)$. Gemäss dem Prinzip der Cauchy-Induktion ist die Aussage somit für alle $n \in \mathbb{N}$ vollständig bewiesen. 
+\end{solution}
+
+
+\begin{ex}{$(\star)$} Zeigen Sie mit Hilfe der Cauchy-Induktion die folgende Ungleichung, bekannt als Cauchy's Ungleichung (oder auch arithmetisches Mittel dominiert das geometrische Mittel): Es seien $a_1, a_2, \dots , a_n \in \mathbb{R}_{ \geq 0}$, dann gilt
+\begin{align*}
+\frac{a_1 + a_2 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \cdot a_2 \cdot ... \cdot a_n}.
+\end{align*}
+\end{ex}
+
+
+\begin{solution} Wir folgen dem selben Rezept wie in der vorherigen Aufgabe. \\
+\\
+$\bullet \ n=1$ ist trivial. 
+\\\\
+$\bullet \ n=2$ wir haben: 
+\begin{align*}
+\left( \frac{a_1 + a_2}{2}\right)^2- a_1a_2& = \frac{1}{4}( a_1^2 + 2 a_1 a_2 + a_2^2) -a_1a_2 \\
+&= \frac{1}{4}( a_1^2-2a_1a_2+a_2^2) = \left( \frac{a_1-a_2}{2}\right)^2 \geq 0,
+\end{align*}
+oder äquivalent dazu 
+\begin{align*}
+ \left( \frac{a_1+a_2}{2}\right) \geq \sqrt{ a_1a_2}.
+\end{align*}
+$\bullet \ P(n) \rightsquigarrow P(2n):$ 
+\begin{align*}
+\frac{a_1 + \dots + a_n + a_{n+1} + \dots + a_{2n}}{2n}&= \frac{\frac{a_1 + \dots + a_n}{n} + \frac{a_{n+1}+ \dots + a_{2n}}{n}}{2} \\
+&\overset{P(n)} \geq  \frac{\sqrt[n]{a_1 \cdot ... \cdot a_n} + \sqrt[n]{a_{n+1} \cdot ...\cdot a_{2n}}}{2} \\
+& \overset{P(2)}\geq \sqrt{ \sqrt[n]{a_1 \cdot ... \cdot a_n} \cdot \sqrt[n]{a_{n+1} \cdot ... \cdot a_{2n}}} \\
+&= \sqrt[2n]{a_1 \cdot ... \cdot a_n \cdot a_{n+1} \cdot ... \cdot a_{2n}}.
+\end{align*}
+$\bullet \ P(n+1) \rightsquigarrow P(n):$ Wir nehmen $P(n+1)$ an, d.h. es gilt 
+\begin{align*}
+\frac{a_1 + \dots + a_n + a_{n+1}}{n+1} \geq \sqrt[n+1]{a_1 \cdot ... \cdot a_n \cdot a_{n+1}}. \tag{*}
+\end{align*}
+Wir treffen in (*) die spezielle Wahl
+\begin{align*}
+a_{n+1} = \frac{a_1 \dots + a_n}{n},
+\end{align*}
+und erhalten:
+\begin{align*}
+\frac{a_1 + \dots + a_n + \frac{a_1 + \dots + a_n}{n}}{n+1} = \frac{a_1 + \dots + a_n}{n} \geq \sqrt[n+1]{a_1 \cdot ... \cdot a_n \cdot \left( \frac{a_1 + \dots + a_n}{n}\right)}
+\\
+\implies \left( \frac{a_1 + \dots + a_n}{n}\right)^{n+1} \geq a_1 \cdot ... \cdot a_n \cdot \left( \frac{a_1 + \dots + a_n}{n}\right) \\
+\implies \frac{a_1 + \dots + a_n}{n} \geq \sqrt[n]{a_1 \cdot ... \cdot a_n}.
+\end{align*}
+Gemäss dem Prinzip der Cauchy-Induktion gilt die Aussage somit für alle $n \in \mathbb{N}$. 
+\end{solution}
+
+
+\newpage
+
+
+\section{Folgen}
+\begin{ex}
+Seien $(x_i)_{i\in \NN} \subseteq \RR$ und $x\in \RR$.
+\begin{enumerate}[i.)]
+\item
+Zeigen Sie, falls jede Teilfolge $(x_{n_i})_{i\in \NN}$ eine Teilfolge $(x_{n_{i_j}})_{j\in \NN}$ besitzt, die gegen x konvergiert, dann gilt $\lim_{n \rightarrow \infty} x_n= x$.
+\item
+Finden Sie eine Folge $(x_n)_{n\in \NN}$ so, dass f\"ur jede Teilfolge 
+$( x_{n_i})_{i \in \NN}$ eine konvergente Teilfolge $ (x_{n_{i_j}})_{j\in \NN}$ 
+existiert, aber $(x_n)_{n \in \NN}$ nicht konvergiert.
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+$\underline{\text{Version } 1}$
+
+Seien $(x_n)_{n\in \NN}$ und $x\in \RR$ wie in der Aufgabenstellung. Wir nehmen an, dass $(x_n)_{n\in \NN}$ nicht gegen $x$ konvergiert, d.h.
+$$ \exists \epsilon >0 \ \forall N\in \NN \ \exists n\geq N : \vert x_n - x \vert \geq \epsilon. $$
+Wir w\"ahlen ein $\epsilon >0$ und eine Teilfolge $(x_{n_i})_{i\in \NN}$, sodass f\"ur alle $i\in \NN$ gilt $\vert x_{n_i} -x \vert \geq \epsilon$. Dies ist ein Widerspruch dazu, dass eine Teilfolge $(x_{n_{i_j}})_{j\in \NN}$ existiert mit $\lim_{j \rightarrow \infty} x_{n_{i_j}}$.
+
+$\underline{\text{Version } 2}$
+
+Wir wissen, es gibt Teilfolgen $(x_{n_i})_{i \in \NN}, \ (x_{m_i})_{i \in \NN} \subseteq \RR$, sodass $\lim_{i \rightarrow \infty} x_{n_i}= \liminf_{n \rightarrow \infty} x_n$ und $\lim_{i \rightarrow \infty} x_{m_i}= \limsup_{n \rightarrow \infty} x_n$. Da jeweils eine Teilfolge von den obigen Reihen gegen $x$ konvergiert und der Limes konvergenter Folgen gleich der Limes seiner Teilfolgen ist (Prop. 3.19), gilt $\liminf_{n \rightarrow \infty} x_n = x = \limsup_{n \rightarrow \infty} x_n$. Aus Satz 3.13 folgt $\lim_{n \rightarrow \infty} x_n = \limsup_{n \rightarrow \infty} x_n =x$.
+\item
+$x_n=(-1)^n$ konvergiert nicht. Sei $(x_{n_i})_{i\in \NN}$ eine Teilfolge von $(x_n)_{n\in \NN}$, dann ist
+$A_1:=\{n_i\in \NN \ : \ n_i \text{ ist ungerade } \}$ oder $A_2:=\{n_i\in \NN \ : \ n_i \text{ ist gerade } \}$ abz\"ahlbar unendlich. W\"ahle $i\in \{1,2 \}$ sodass $A_i$ unendlich ist, dann ist $(x_l)_{l\in A_i}$ eine konvergente Teilfolge von $(x_{n_i})_{i\in \NN}$ (mit Grenzwert $(-1)^i$).
+\end{enumerate}
+\end{solution}
+\begin{ex} Sei $(z_n)_{n\in \NN} \subseteq \CC$, $z\in \CC$. Entscheiden Sie f\"ur jede Aussage, ob sie wahr oder falsch ist:
+
+
+\begin{enumerate}[i.)]
+\item
+$z_n \longrightarrow z \Longleftrightarrow Re(z_n) \longrightarrow Re(z)$ und $Im(z_n) \longrightarrow Im(z)$.
+
+\item
+$\vert z_n \vert \longrightarrow \vert z \vert \Longrightarrow z_n \longrightarrow z$.
+
+\item
+$z_n \longrightarrow z \Longrightarrow \vert z_n \vert \longrightarrow \vert z \vert$.
+
+\item
+$z_n \in \RR$ f\"ur alle $n\in \NN$ und $z_n \longrightarrow z$ $\Longrightarrow$ $z\in \RR$. 
+
+\end{enumerate}
+
+\end{ex}
+\begin{solution}
+
+\begin{enumerate}[i.)]
+\item
+Wahr, siehe Seite 53.
+\item
+Falsch, Gegenbeispiel $z_n=(-1)^n, z=i$.
+\item
+Wahr, folgt aus der umgekehrten Dreiecksungleichung und dem Sandwichsatz:\\
+$0\leq \big\vert \ \vert z_n \vert - \vert z \vert \ \big\vert \leq \vert z_n - z \vert \longrightarrow 0$.
+\item
+Wahr, folgt aus der ersten Aussage.
+\end{enumerate}
+
+\end{solution}
+
+
+\begin{ex}
+Seien $m\in \NN_{\geq 1}$, $(x_n)_{n\in \NN}, (y_n)_{n\in \NN} \subseteq \RR^m$ and $\lambda \in \RR$. Entscheiden Sie f\"ur jede der folgenden Aufgaben, ob sie wahr oder falsch sind (mit Beweis oder Gegenbeispiel):
+
+\begin{enumerate}[i.)]
+\item
+$(\Vert x_n \Vert)_{n \in \NN}$ konvergiert $\Longrightarrow$ $(x_n)_{n\in \NN}$ konvergiert.
+
+\item
+$(x_n\cdot y_n)_{n\in \NN}$ konvergiert $\Longrightarrow$  $(x_n)_{n\in \NN}$ konvergiert.
+
+\item
+$(\lambda x_n)_{n\in \NN}$ konvergiert $\Longrightarrow$  $(x_n)_{n\in \NN}$ konvergiert.
+
+\item
+Jede beschr\"ankte Folge konvergiert.
+
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Falsch, Gegenbeispiel $x_n=(-1)^n$.
+\item
+Falsch, Gegenbeispiel $x_n = n, y_n= \frac{1}{n}$. Alternativ $x_n=(-1)^n, y_n=0$.
+\item
+Falsch, Gegenbeispiel $\lambda = 0, x_n=(-1)^n$.
+\item
+Falsch, Gegenbeispiel $x_n= (-1)^n$.
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}
+Berechnen Sie die folgenden Grenzwerte:
+
+\begin{enumerate}[i.)]
+\item
+$$ \limsup_{n \rightarrow \infty} \left(\sqrt{n^2+n}-n\right).$$
+
+\item
+$$\lim_{n \rightarrow \infty} \left( 1 - \frac{5}{n-3} \right)^{(n+\sqrt{n})/2}.$$
+
+\item
+$$\liminf_{n \rightarrow \infty} (-1)^n \frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)}.$$
+
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+F\"ur $n>0$ haben wir:
+$$ \sqrt{n^2 + n} -n = \frac{(\sqrt{n^2 +n} -n)(\sqrt{n^2 +n}+n)}{\sqrt{n^2 +n}+n} 
+= \frac{n}{\sqrt{n^2 +n}+n} = \frac{1}{\sqrt{1 +\frac{1}{n}}+1}.$$
+Damit haben wir:
+$$\lim_{n \rightarrow \infty} \left(\sqrt{n^2+n}-n\right)= \frac{1}{2}.$$
+Also insbesondere:
+$$\limsup_{n \rightarrow \infty} \left(\sqrt{n^2+n}-n\right)=\frac{1}{2}.$$
+\item
+Wir schreiben:
+$$ \left( 1 - \frac{5}{n-3} \right)^{(n+\sqrt{n})/2} 
+= \underbrace{\sqrt{\left( 1 - \frac{5}{n-3} \right)^{n-3}}}_{\Longrightarrow \sqrt{e^{-5}}=e^{-5/2}} \cdot \underbrace{\sqrt{\left( 1 - \frac{5}{n-3} \right)^{3}}}_{\Longrightarrow \sqrt{1^3}=1} \cdot \sqrt{\left( 1 - \frac{5}{n-3} \right)^{\sqrt{n}}} .$$
+
+\begin{claim}
+$$\lim_{n \rightarrow \infty} \left( 1 - \frac{5}{n-3} \right)^{\sqrt{n}}=1.$$
+\end{claim}
+\begin{proof}
+$$ \log\bigg(\left[1- \frac{5}{n-3}\right]^{\sqrt{n}}\bigg) = \frac{\sqrt{n}}{n-3} \log\bigg(\left[1- \frac{5}{n-3}\right]^{n-3}\bigg) \Longrightarrow 0 \cdot \log(e^{-5})=0.$$
+Damit erhalten wir:
+$$ \left( 1 - \frac{5}{n-3} \right)^{\sqrt{n}} = e^{\log\big((1- \frac{5}{n-3})^{\sqrt{n}}\big)} 
+\Longrightarrow e^0=1. $$
+\end{proof}
+
+
+Wenn wir alles zusammensetzen, erhalten wir:
+$$ \lim_{n \rightarrow \infty} \left( 1 - \frac{5}{n-3} \right)^{(n+\sqrt{n})/2}
+= e^{-5/2} \cdot 1 \cdot \sqrt{1} = e^{-5/2}.$$
+\item
+Zuerst zeigen wir:
+\begin{claim}
+$$ \lim_{n\rightarrow \infty} \frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)}= -\frac{5}{2}.$$
+\end{claim}
+\begin{proof}
+Wir berechnen
+$$\frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)}
+= \frac{\frac{\sqrt{n}}{n^3}-5}{1 + 1 (1+\frac{1}{n})(1+\frac{2}{n})} 
+\longrightarrow -\frac{5}{2}, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+\end{proof}
+Der Faktor $(-1)^n$ oszilliert zwischen $+1$ und $-1$. Teilfolgen mit geraden Gliedern (bis auf endlich viele Glieder) liefern H\"aufungspunkt $-5/2$. Teilfolgen mit ungeraden Gliedern (bis auf endlich viele Glieder) liefern H\"aufungspunkt $5/2$. Alle anderen Teilfolgen (unendlich viele gerade und unendlich viele ungerade Glieder) k\"onnen nicht konvergieren. Da der Limes Inferior der kleinste H\"aufungspunkt ist, folgt:
+
+$$ \liminf_{n \rightarrow \infty} (-1)^n \frac{\sqrt{n}-5n^3}{n^3 + n(n+1)(n+2)} = - \frac{5}{2}.$$
+
+\end{enumerate}
+\end{solution}
+
+\begin{ex}
+Entscheiden Sie f\"ur jede Aussage, ob sie wahr oder falsch ist:
+
+Sei $(a_n)_{n\in \NN}\subseteq \RR$ mit H\"aufungspunkt $h\in \RR$.
+
+\begin{enumerate}[i.)]
+\item
+$h$ ist der Grenzwert von $(a_n)_{n\in \NN}$.
+
+\item
+$h$ ist der einzige H\"aufungspunkt in $\RR$ $\Longrightarrow$ $a_n \longrightarrow h$.
+
+\item
+$(a_n)_{n\in \NN}$ konvergiert $\Longrightarrow$ $a_n \longrightarrow h$.
+
+\item
+Es existiert eine Teilfolge von $(a_n)_{n\in \NN}$, die gegen $h$ konvergiert.
+
+\item
+$\forall \ \epsilon >0 \ \forall N\in \NN \ \exists n>N: \vert a_n - h\vert < \epsilon$.
+\end{enumerate}
+\end{ex}
+\newpage 
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Falsch, Gegenbeispiel $(-1)^n$ und $h=1$.
+\item
+Falsch, Gegenbeispiel $a_{2n}=0, \ a_{2n+1}=n$ und $h=0$.
+\item
+Wahr, Kor. 3.17.
+\item
+Wahr, Prop. 3.20.
+\item
+Wahr, das ist die Definition eines H\"aufungspunktes.
+\end{enumerate}
+\end{solution}
+
+\begin{ex}{$(\star)$}
+\begin{enumerate}[i.)]
+
+\item
+Berechnen Sie alle H\"aufungspunkte der Folge:
+
+$$ a_n = \sin \Big(\frac{\pi n}{2} \Big) \bigg( 1 + \frac{3}{n} \bigg)^{n+1} .$$
+
+\item
+Seien $a_i >0$ f\"ur alle $i= 1, \dots , p.$ Zeigen Sie, dass:
+
+$$ \lim_{n \rightarrow \infty} (a_1^n + \dots + a_p^n)^{1/n} = \max_{i= 1, \dots , p} a_i .$$
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+
+\item
+Zuerst beobachten wir:
+$$ \bigg( 1 +\frac{3}{n} \bigg)^{n+1} = \bigg( 1 +\frac{3}{n} \bigg)^{n} \bigg( 1 +\frac{3}{n} \bigg) \longrightarrow e^3 \cdot 1 = e^3, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+
+F\"ur $k\in \NN$ und $j\in \{ 1, 3 \}$ gilt:
+$$ \sin\bigg(\frac{2k \pi}{2}\bigg) = 0 \text{ und } \sin\bigg(\frac{(4k + j)\pi}{2}\bigg)= \begin{cases} 1, &\text{ für } j=1 \\ -1, & \text{ für } j=3 \end{cases}.$$
+
+Damit sind $0, -e^3$ und $e^3$ die H\"aufungspunkte von $\sin \Big(\frac{\pi n}{2} \Big) \bigg( 1 + \frac{3}{n} \bigg)^{n+1}$.
+\item
+Wir berechnen:
+$$ \max_{i\in \{1,\dots, p \}} a_i = \bigg(\max_{i\in \{1,\dots, p \}} a_i^n \bigg)^{1/n}
+\leq (a_1^n + \dots + a_p^n)^{1/n} 
+\leq \bigg(p \cdot \max_{i\in \{1,\dots, p \}} a_i^n \bigg)^{1/n}$$
+
+$$= p^{1/n} \max_{i\in \{1,\dots, p \}} a_i \longrightarrow \max_{i\in \{1,\dots, p \}} a_i, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+Aus dem Sandwichsatz (Prop. 3.8) folgt $\lim_{n \rightarrow \infty} (a_1^n + \dots + a_p^n)^{1/n} = \max_{i= 1, \dots , p} a_i .$
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}{$(\star)$}
+Sei eine reelle Folge $(a_k)_{k\in \NN}$ rekursiv definiert durch:
+
+$$ a_0=1,  \quad a_{k+1} = \sqrt{\vert a_k \vert} + \frac{15}{4} \text{ f\"ur } k\in \NN.$$
+
+\begin{enumerate}[i.)]
+\item
+Zeigen Sie, dass $(a_k)_{k\in \NN}$ konvergiert.
+
+\item
+Berechnen Sie den Grenzwert von $(a_k)_{k\in \NN}$.
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Die Idee ist, dass wir zeigen, dass $(a_n)_{n\in \NN}$ monoton steigend und beschr\"ankt ist (Prop. 3.11 erledigt den Rest).
+Zuerst beobachten wir, dass $a_0=1>0$ und f\"ur $n\in \NN\setminus \{0\}$ gilt $a_{n}\geq \frac{15}{4}>0$. Damit gilt f\"ur alle $n\in \NN$: $a_n>0$.
+Wir wollen nun, die Monotonie zeigen, d.h. wir versuchen zu zeigen, dass:
+\begin{align}
+1\leq \frac{a_{k+1}}{a_k} = \frac{1}{\sqrt{a_k}} + \frac{15}{4}\cdot \frac{1}{a_k}
+\stackrel{a_k>0}{\Longleftrightarrow} a_k \leq \sqrt{a_k} + \frac{15}{4} .
+\end{align} 
+Wir versuchen nun zu erraten, welche Art von Absch\"atzung wir zeigen m\"ussen. Da $a_k>0$ k\"onnen wir (f\"ur ein beliebiges, aber festes k) schreiben $a_k= x^2$ f\"ur ein $x>0$. Dann gilt:
+
+$$ (1) \Longleftrightarrow x+\frac{15}{4} \geq x^2.$$
+Geometrisch sieht dies so aus:
+\begin{center}
+\begin{tikzpicture}
+\draw[very thin, gray] (0, 0) grid (7.8,7.8); 
+\draw[->] (0,0) -- (8,0) node[right] {$ x$};
+\draw[->] (0,0) -- (0, 8) node[above] {$f(x)$};
+\draw[red, domain= 0:2.8] plot (\x, {\x^2})
+	node[above] {$f(x)=x^2 $};
+\draw[blue, domain = 0: 4] plot (\x, {\x + 3.75})
+	node[right, fill=white] {$f(x)=x + \frac{15}{4} $};
+\foreach \x in {1, 2, 3, 4, 5, 6, 7}
+	\draw[xshift= \x cm] (0, 2pt) -- (0, -2pt) node[below, fill=white] {$\x$};
+	
+\foreach \y in {1, 2, 3, 4, 5, 6, 7}
+	\draw[yshift= \y cm] (2pt, 0) -- (-2pt, 0) node[left, fill=white] {$\y$};
+\draw[dashed] (2.5, 6.25) -- (2.5,0);
+\draw (2.5, 2pt) -- (2.5, -2pt) node[below, fill= white] {$x_0$};
+\end{tikzpicture}
+\end{center}
+
+Also gilt $(1)$ solange $x\leq x_0$. F\"ur $x_0$ gilt $x_0^2= x_0+\frac{15}{4}$. Wir m\"ussen also $x_0^2-x_0-\frac{15}{4}=0$ l\"osen. Mittels der L\"osungsformel f\"ur quadratische Gleichungen erhalten wir :
+$$x_0= \frac{1 \pm \sqrt{1-4(-\frac{15}{4})}}{2}=\frac{1\pm 4}{2}.$$
+Da $x_0>0$ folgt $x_0=\frac{5}{2}$.
+
+D.h. f\"ur $a_k\leq x_0^2= \frac{25}{4}$ ist $(1)$ erf\"ullt, die Folge also monoton wachsend. Wir zeigen nun die
+\begin{claim}
+$$\forall k\in \NN: a_k \leq \frac{25}{4}.$$
+\end{claim}
+\begin{proof}
+Induktion \"uber $k$. Der Induktionsanfang $k=0$ ist einfach $a_0=1<\frac{25}{4}$. Wir nehmen nun an, dass f\"ur ein beliebiges, aber festes $k\in \NN$ gilt $a_k \leq \frac{25}{4}$. Dann berechnen wir:
+$$ a_{k+1} = \sqrt{a_k} + \frac{15}{4} 
+\leq \sqrt{\frac{25}{4}} + \frac{15}{4}
+= \frac{5}{2} + \frac{15}{4} = \frac{25}{4}.$$
+
+Damit haben wir gezeigt, dass $(1)$ immer erf\"ullt ist, d.h. $(a_k)_{k \in \NN}$ ist monoton wachsend. Weiter haben wir gezeigt, dass $0<a_k \leq 25/4$. Also ist $(a_k)_{k\in \NN}$ monoton und beschr\"ankt, also konvergent.
+\end{proof}
+\item
+Wir haben in $i.)$ gezeigt, dass $a:=\lim_{n\rightarrow \infty} a_n\geq 0$. Es gilt:
+$$ a =  \lim_{n\rightarrow \infty} a_n= \lim_{n\rightarrow \infty} a_{n+1}
+= \lim_{n\rightarrow \infty} \sqrt{a_n} + \frac{15}{4}
+\stackrel{\sqrt{\cdot} \text{ stetig}}{=} \sqrt{\lim_{n\rightarrow \infty} a_n} +\frac{15}{4}
+= \sqrt{a} + \frac{15}{4}.$$
+Wir setzen $x=\sqrt{a}$, dann gilt
+$$ x^2= x + \frac{15}{4} \Longrightarrow x^2 -x - \frac{15}{4} = 0 
+\stackrel{x= \sqrt{a}\geq 0}{\Longrightarrow} x = \frac{1+\sqrt{1-4\cdot (-\frac{15}{4})}}{2}= \frac{5}{2}.$$
+Damit gilt $\lim_{n\rightarrow \infty} a_n = a = x^2=  \frac{25}{4}$.
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}{$(\star)$} Zeigen Sie, dass 
+\begin{align*}
+\lim_{n \to \infty} \sqrt[n]{n!}= \infty.
+\end{align*}
+\end{ex}
+
+\begin{solution} Per Definition ist die Exponential gegeben als 
+\begin{align*}
+e^x = \sum_{n=0}^\infty \frac{x^n}{n!}.
+\end{align*}
+Es gilt dementsprechend für alle $x \in \mathbb{R}$, dass
+\begin{align*}
+e^x \geq \frac{x^n}{n!},
+\end{align*}
+insbesondere also für $x=n \in \mathbb{N}$ auch das
+\begin{align*}
+e^n \geq \frac{n^n}{n!} \implies n! \geq \left( \frac{n}{e}\right)^n \implies \sqrt[n]{n!} \geq\frac{n}{e} \xrightarrow{n \to \infty} \infty.
+\end{align*}
+\end{solution}
+
+\begin{ex}{$(\star)$}
+\begin{enumerate}[i.)]
+\item
+Berechnen Sie den folgenden Grenzwert:
+
+$$ \lim_{n \rightarrow \infty} \log \bigg( \Big( \frac{n}{n+1} \Big)^n \bigg).$$
+
+
+\item
+Berechnen Sie alle H\"aufungspunkte der komplexen Folge:
+
+$$ z_n = (n^4 - n^2 + 2)^{1/n} \sin\bigg( \frac{\pi n}{2} \bigg) + i \frac{n + e}{2n + 1}(-1)^n. $$
+
+\item
+Zeigen Sie:
+
+$$\lim_{n \rightarrow \infty} \bigg[ (n+1) \cos\bigg( \frac{1}{n+1} \bigg) - n \cos\bigg( \frac{1}{n} \bigg) \bigg]  =1.$$
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wir berechnen:
+$$\bigg(\frac{n}{n+1} \bigg)^n 
+= \bigg(1-\frac{1}{n+1} \bigg)^n
+= \bigg(1-\frac{1}{n+1} \bigg)^{n+1} \cdot \frac{1}{1-\frac{1}{n+1}} \longrightarrow e^{-1}\cdot \frac{1}{1}= e^{-1}, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+Aus der Stetigkeit des Logarithmus folgt:
+$$ \lim_{n \rightarrow \infty} \log \bigg( \Big( \frac{n}{n+1} \Big)^n \bigg)
+= \log \bigg( \lim_{n \rightarrow \infty} \bigg(\frac{n}{n+1} \bigg)^n \bigg)
+= \log(e^{-1})= -1.$$
+
+\item
+Wir berechnen:
+$$ (n^4 - n^2 + 2)^{1/n} = (n^{1/n})^4 \cdot \left(1 - \frac{1}{n^2} + \frac{2}{n^4}\right)^{1/n} 
+\longrightarrow 1^4 \cdot 1 = 1, \quad \text{ f\"ur } n\longrightarrow \infty.$$
+wobei wir verwendet  haben, dass
+\begin{align*}
+\left( 1- \frac{1}{n^2} + \frac{2}{n^4}\right)^{1/n} = \exp \left( \frac{1}{n}\log\left[ 1- \frac{1}{n^2}+ \frac{2}{n^4}\right] \right) \xrightarrow{n \to \infty}  \exp(0)=1.
+\end{align*}
+Desweiteren
+$$\frac{n + e}{2n + 1} = \frac{n}{2n+1} + \frac{e}{2n+1} = \frac{1}{2+\frac{1}{n}} + \frac{e}{2n+1} \longrightarrow \frac{1}{2}, \quad \text{ f\"ur } n\longrightarrow \infty.$$
+
+Wir erinnern uns daran, dass gilt:
+
+$$\sin\Big(\frac{\pi n}{2}\Big) = \begin{cases} 0, \qquad \text{f\"ur } n=2k,\ k\in \NN \\ 1, \qquad \text{f\"ur } n=4k+1,\ k\in \NN  \\ -1, \quad \  \text{f\"ur } n=4k+3,\ k\in \NN.\end{cases}$$
+Daraus folgt:
+
+$$z_{2k} \longrightarrow \frac{i}{2}, \quad \text{ f\"ur } k \longrightarrow \infty,$$
+
+$$z_{4k+1} \longrightarrow 1-\frac{i}{2}, \quad \text{ f\"ur } k \longrightarrow \infty,$$
+
+$$z_{4k+3} \longrightarrow -1-\frac{i}{2}, \quad \text{ f\"ur } k \longrightarrow \infty,$$
+Da diese drei Teilfolgen die ganze Folge \"uberdecken, kann es keine anderen H\"aufungspunkte geben. Damit sind  die H\"aufungspunkte von
+$((n^4 - n^2 + 2)^{1/n} \sin\left( \frac{\pi n}{2} \right) + i \frac{n + e}{2n + 1}(-1)^n)_{n\in \NN}$ gerade die Elemente von $\{ \frac{i}{2}, 1-\frac{i}{2}, -1-\frac{i}{2}\}$.
+\item
+Wir berechnen:
+$$(n+1)\cos\Big(\frac{1}{n+1}\Big) -n \cos\Big(\frac{1}{n}\Big)
+= \cos\Big(\frac{1}{n+1}\Big) + n\bigg( \cos\Big(\frac{1}{n+1}\Big) - \cos\Big(\frac{1}{n}\Big) \bigg).$$
+Wir k\"ummern uns zuerst um den zweiten Term. Der Mittelwertsatz (Satz 8.9) sagt uns, dass ein $\xi \in (\frac{1}{n+1}, \frac{1}{n})$ existiert, sodass:
+$$ \cos\Big(\frac{1}{n}\Big) - \cos\Big(\frac{1}{n+1}\Big) 
+= -\sin(\xi) \bigg( \frac{1}{n} - \frac{1}{n+1} \bigg) 
+= -\sin(\xi) \bigg( \frac{1}{n\cdot(n+1)} \bigg).$$
+Also gilt:
+
+$$0\leq \bigg\vert n\bigg( \cos\Big(\frac{1}{n+1}\Big) - \cos\Big(\frac{1}{n}\Big) \bigg) \bigg\vert
+= \bigg\vert -\sin(\xi) \cdot \frac{1}{n+1} \bigg\vert 
+\leq  \frac{1}{n+1} \longrightarrow 0, \quad \text{ f\"ur } n\longrightarrow \infty.$$
+Damit gilt:
+$$ \lim_{n \rightarrow \infty} \bigg[ (n+1) \cos\bigg( \frac{1}{n+1} \bigg) - n \cos\bigg( \frac{1}{n} \bigg) \bigg] 
+=  \lim_{n \rightarrow \infty} \cos\Big(\frac{1}{n+1}\Big) + \lim_{n \rightarrow \infty}  n\bigg( \cos\Big(\frac{1}{n+1}\Big) - \cos\Big(\frac{1}{n}\Big) \bigg)$$
+
+$$= \cos(0) +0 = 1.$$
+\end{enumerate}
+\end{solution}
+
+\begin{ex}[$\star$] \
+\begin{enumerate}[i)]
+\item Es sei $(a_n)_{n \in \mathbb{N}}$ eine reelle Folge derart, dass für ihre Inkremente gilt $|a_{n+1}-a_n| \leq 2^{-n}$. Zeigen Sie, dass $(a_n)_{n \in \mathbb{N}}$ eine Cauchy Folge ist. Bedeutet dies, dass $(a_n)_{n \in \mathbb{N}}$ konvergiert? Warum? 
+\item Es sei $(a_n)_{n \in \mathbb{N}}$ eine reelle Folge, welche rekursiv definiert ist mittels: 
+\begin{align*}
+a_{n+2} = \frac{a_n+a_{n+1}}{2}, \text{ für alle } n \in \mathbb{N}.
+\end{align*}
+Zeigen Sie, dass dies eine Cauchy Folge ist. Verwenden Sie Teil i). 
+\item Berechnen Sie den Grenzwert der Folge aus Teil ii).
+\end{enumerate}
+
+\end{ex}
+
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item Sei $ \epsilon >0$ fest aber beliebig. Seien $m \leq n$ beliebige natürliche Zahlen, wir setzen $k= n-m \geq 0$ und betrachten den Ausdruck $|a_m-a_{m+k}|$, falls $k=1$ dann wissen wir bereits, dass $|a_m-a_{m+k}| \leq 2^{-m}$. Verwenden wir nun sukzessive die Dreicksungleichung erhalten wir:
+\begin{align*}
+|a_m-a_{m+k}| &= |(a_m-a_{m+1}) + (a_{m+1}-a_{m+2}) + \dots + (a_{m+k-1}-a_{m+k})| \\
+& \leq |a_m-a_{m+1}| + |a_{m+1}-a_{m+2}| + \dots + |a_{m+k-1}-a_{m+k}|\\
+& \leq 2^{-m} + 2^{-(m+1)} + \dots + 2^{-(m+k-1)} < \sum_{k=m}^\infty \frac{1}{2^k} = \frac{1}{2^{m-1}}.
+\end{align*}
+Dies zeigt, dass falls $m,n \geq n_0$ dann haben wir stets die Ungleichung:
+\begin{align*}
+|a_m-a_n| < \frac{1}{2^{m-1}} \leq \frac{1}{2^{n_0-1}}.
+\end{align*}
+Wir wählen also $n_0 \in \mathbb{N}$ derart, dass $\frac{1}{2^{n_0-1}} \leq \epsilon$ oder äquivalent $n_0 \geq \log_2 \frac{2}{\epsilon}$. Wir wissen nun, dass $(a_n)_{n \in \mathbb{N}}$ eine Cauchy Folge in $\mathbb{R}$ ist, da $\mathbb{R}$ vollständig ist konvergiert diese Cauchy Folge auch. 
+
+\item Wir bemerken, dass per Definition gilt:
+\begin{align*}
+a_{n+2}-a_{n+1} = - \frac{a_{n+1}-a_n}{2} = \dots = (-1)^n  \frac{a_2-a_1}{2^n}.
+\end{align*}
+Folglich gilt für alle $n \in \mathbb{N}$ für die Inkremente:
+\begin{align*}
+|a_{n+2}-a_{n+1}| \leq |a_2-a_1| 2^{-n}.
+\end{align*}
+Die Behauptung folgt also dank Teil i). 
+
+\item Es sei $c:= a_2-a_1$. Wir verwenden die Darstellung von $a_n$ als Teleskopische Summe. Wir betrachten also:
+\begin{align*}
+a_n  &= a_1 + \sum_{k=1}^{n-1} (a_{k+1}-a_k) = a_1 + \sum_{k=1}^{n-1} (-1)^{k-1} \frac{c}{2^{k-1}} \\
+& = a_1 + c\sum_{k=0}^{n-2} \left( \frac{-1}{2} \right)^k.
+\end{align*}
+Lassen wir nun $n \longrightarrow \infty$ streben und verwenden die Geometrische Reihe mit $r= -1/2$ erhalten wir:
+\begin{align*}
+\lim_{n \rightarrow \infty} a_n = a_1 + c \frac{1}{1-(-1/2)} = a_1 + c \frac{2}{3} = a_1 + \frac{2}{3}(a_2-a_1) = \frac{a_1+2a_2}{3}.
+\end{align*}
+\end{enumerate}
+
+\end{solution}
+
+\newpage
+\section{Reihen}
+
+\begin{ex} Wir wollen den Cauchy'schen Verdichtungssatz (Kondensationssatz von Cauchy) beweisen. 
+Sei $(a_n)_{n \in \mathbb{N}}$ eine nicht-negative Folge von monoton fallenden Termen. Zeige, dass 
+\begin{align*}
+\sum_{n=1}^\infty a_n < \infty \iff \sum_{n=1}^\infty 2^n f(2^n) < \infty.
+\end{align*}
+\end{ex}
+
+\begin{solution} Es sei $\sum_{n=1}^\infty a_n$ konvergent. Dann gilt, weil $(a_n)_{n \in \mathbb{N}}$ nicht-negativ und monoton fallend ist:
+\begin{align*}
+a_1 + \frac{1}{2} \sum_{n=1}^K 2^n a_{2^n} &= a_1 + a_2 + 2a_4 + 4 a_8 + \dots + 2^{K-1} a_{2^K} \\
+& \leq a_1 + a_2 + a_3 + a_4 + \dots + a_{2^{K-1}+1} + \dots + a_{2^K-1} + a_{2^K} \\
+& \leq \sum_{n=1}^\infty a_n < \infty. 
+\end{align*}
+Um obige Ungleichung besser zu verstehen,  bemerke dass $2a_4 = a_4 + a_4 \leq a_3 + a_4$, analog $4a_8=a_8 + a_8 + a_8 + a_8 \leq a_5 + a_6 + a_7 + a_8$ usw. Für $K \to \infty$ zeigt dies, dass 
+\begin{align*}
+\sum_{n=1}^\infty 2^n a_{2^n} < \infty. 
+\end{align*}
+Nehme nun an, dass $\sum_{n=1}^\infty 2^n a_{2^n}$ konvergent ist. Wir erhalten 
+\begin{align*}
+\sum_{n=1}^N a_n& = a_1 +a_2 + a_3 + \dots + a_N \\
+& \leq a_1 + (a_2 + a_3) + (a_4 + a_5 + a_6 + a_7) + \dots + (a_{2^N} + \dots + a_{2^{N+1}-1}) \\ 
+& \leq a_1 +2 a_2 + 4a_4 + \dots + 2^N a_{2^N} \\
+& \leq a_1 + \sum_{n=1}^\infty 2^n a_{2^n}< \infty.
+\end{align*}
+Lassen wir nun $N \to \infty$ so folgt die Behauptung. 
+\end{solution}
+
+\begin{ex}\label{ex:Olivier} Es sei $(a_n)_{n \in \mathbb{N}}$ eine Folge monoton fallender, nicht-negativer reellen Zahlen. Zeige dass falls $\sum_{n=1}^\infty a_n $ konvergiert, dann gilt $n a_n \to 0$ als $n \to \infty$. Hinweis: Verwende den Cauchy'schen Verdichtungssatz. 
+\end{ex}
+
+
+\begin{solution} Da $\sum a_n$ konvergiert, gilt gemäss dem Cauchy'schen Verdichtungssatz auch, dass $\sum 2^n a_{2^n}$ konvergiert. Also muss $2^na_{2^n}$ eine Nullfolge sein, das heisst 
+\begin{align*}
+2^n a_{2^n} \xrightarrow{n \to \infty} 0. 
+\end{align*}
+Sei nun $k \in \mathbb{N}$ sodass $2^n < k <2^{n+1}$, da $(a_n)_{n \in \mathbb{N}}$ monoton fallend ist folgt dann
+\begin{align*}
+2^n a_{2^{n+1}} \leq k a_k \leq 2^{n+1} a_{2^n}.
+\end{align*}
+Für $k \to \infty$ gilt automatisch $2^n, 2^{n+1} \to \infty$ und die Aussage folgt dank dem Sandwich-Lemma. 
+\end{solution}
+
+\begin{ex} Verwenden Sie den Cauchy'schen Verdichtungssatz (Kondensationssatz) um zu zeigen, dass die nachfolgenden Reihen divergieren respektive konvergieren:
+\begin{enumerate}[i)]
+\item \begin{align*}
+\sum_{n=1}^\infty \frac{1}{n}.
+\end{align*}
+\item \begin{align*}
+\sum_{n=1}^\infty \frac{1}{n^2}.
+\end{align*}
+
+\item 
+\begin{align*}
+ \sum_{n=1}^\infty \frac{1}{n^s}, \text{ wobei } s >1. 
+\end{align*}
+
+\end{enumerate}
+
+\end{ex}
+
+
+\begin{solution} Dank dem Cauchy'schen Kondensationssatz wissen wir, dass für eine nicht-negative, nicht-wachsende Folge $f(n)$ von reellen Zahlen gilt $\sum f(n) < \infty \iff \sum 2^n f(2^n) <\infty$ also erhalten wir:
+\begin{enumerate}[i)]
+\item 
+\begin{align*}
+\sum_{n=1}^\infty 2^n \frac{1}{2^n} = \sum_{n=1}^\infty 1 = \infty.
+\end{align*}
+da $a_n=1$ keine Nullfolge ist.
+\item 
+\begin{align*}
+\sum_{n=1}^\infty 2^n \frac{1}{(2^n)^2 } = \sum_{n=1}^\infty \frac{1}{2^n}< \infty.
+\end{align*}
+da geometrische Reihe mit $r= \frac{1}{2}<1$. 
+
+\item Wir erhalten durch den Cauchy'schen Kondensationssatz die Reihe:
+\begin{align*}
+ \sum_{n=1}^\infty 2^n \frac{1}{(2^n)^s} = \sum_{n=1}^\infty 2^n \frac{1}{2^{ns}} = \sum_{n=1}^\infty \left(\frac{1}{2^{s-1}}\right)^n < \infty.
+\end{align*}
+Da $s>1$ und wir erneut eine geometrische Reihe erhalten mit $0 \leq r = 2^{1-s} <1$. 
+\end{enumerate}
+
+\end{solution}
+
+
+\begin{ex} \  \begin{enumerate}[i)]
+\item Sei $(a_n)_{n \in \mathbb{N}}$ monoton wachsend,  $a_n >0$. Zeige, die Reihe 
+\begin{align*}
+\sum_n \left( \frac{a_{n+1}}{a_n}-1 \right)
+\end{align*}
+konvergiert genau dann, wenn $(a_n)_{n \in \mathbb{N}}$ beschränkt ist.
+\item Es sei $(a_n)_{n \in \mathbb{N}}$ eine monoton fallende Nullfolge. Zeige dass gilt:
+\begin{align*}
+\sum_{n=1}^\infty \frac{a_n}{1+na_n} < \infty \iff \sum_{n=1}^\infty a_n < \infty. 
+\end{align*} 
+Hinweis: Verwende Aufgabe \ref{ex:Olivier}.
+\end{enumerate}
+\end{ex}
+
+\begin{solution} 
+\begin{enumerate}[i)]
+\item Nehme zum Widerspruch an, dass $(a_n)_{n \in \mathbb{N}}$ unbeschränkt ist. Da $(a_n)_{n \in \mathbb{N}}$ monoton wächst, gilt für $m >n$:
+\begin{align*}
+\sum_{k=n}^m \left( \frac{a_{k+1}}{a_k}-1 \right) & = \frac{a_{m+1}-a_m}{a_m} + \dots + \frac{a_{n+1}-a_n}{a_n} \\
+& \geq \frac{1}{a_m}[ (a_{m+1}-a_m) + \dots + (a_{n+1}-a_n)] \\
+& = \frac{1}{a_m}(a_{m+1}-a_n) \geq 1 - \frac{a_n}{a_m}.
+\end{align*}
+Da $(a_n)_{n \in \mathbb{N}}$ unbeschränkt ist, gibt es zu jedem $a_n$ ein $m>n$ mit $a_m > 2a_n$, also mit $1- \frac{a_n}{a_m}> \frac{1}{2}$. Also gibt es zu jedem $n$ ein $m>n$ mit der Eigenschaft
+\begin{align*}
+\sum_{k=n}^m \left( \frac{a_{k+1}}{a_k}-1 \right) > \frac{1}{2}.
+\end{align*}
+Mit dem Cauchy-Kriterium folgt, dass die Divergenz der Reihe 
+\begin{align*}
+\sum_n \left( \frac{a_{n+1}}{a_n}-1 \right)
+\end{align*}
+was ein Widerspruch ist. 
+\\\\
+Sei nun andererseits $(a_n)_{n \in \mathbb{N}}$ monoton wachsend und beschränkt. Dann ist $\sum (a_{n+1}-a_n)$ eine konvergente Teleskop-Reihe. Wegen
+\begin{align*}
+0 \leq \frac{a_{n+1}}{a_n}-1 = \frac{a_{n+1}-a_n}{a_n} \leq \frac{1}{a_1}(a_{n+1}-a_n)
+\end{align*}
+folgt die Konvergenz der Reihe $\sum \left( \frac{a_{n+1}}{a_n}-1 \right)$ aus dem Majoranten-Kriterium. 
+\item Es konvergiere $\sum_n a_n $. Wegen $0 \leq \frac{a_n}{1+na_n} \leq a_n$ $(a_n \geq 0)$ folgt also die "$\Longleftarrow$" Implikation aus dem Majorantenkriterium. 
+\\\\
+Es gelte andererseits, dass $\sum_{n=1}^\infty \frac{a_n}{1+na_n}$ konvergiere. Sobald ein $a_{n_0}=0$ ist, so sind von dort an alle $a_n=0$ und die Behauptung ist trivial, es seien also alle $a_n >0$. Da $(a_n)_{n \in \mathbb{N}}$ monoton fallend ist, ist $1/a_n$ monoton wachsend und wir schliessen dass 
+\begin{align*}
+\frac{a_n}{1+na_n}= \frac{1}{n+ 1/a_n}
+\end{align*}
+monoton fallend ist. Dank Aufgabe \ref{ex:Olivier} gilt also $b_n:= n \frac{a_n}{1+a_n} \to 0$ als $n \to \infty$ und da 
+\begin{align*}
+na_n = \frac{b_n}{1-b_n}
+\end{align*}
+folgt auch $na_n \to 0$ für $n \to \infty$. Also gilt $0 < na_n < 1$ ab einem Index $n_0$ und daher für alle $n \geq n_0$ 
+\begin{align*}
+\frac{a_n}{1+na_n} \geq \frac{a_n}{2}
+\end{align*} 
+Nach dem Majorantenkriterium folgt nun, dass die Reihe $\sum \frac{a_n}{2}$ und damit auch die Reihe $\sum a_n$ konvergent ist. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex}{$(\star)$}
+Bestimmen Sie f\"ur die folgenden Reihen, ob sie konvergent und ob sie absolut konvergent sind:
+
+\begin{enumerate}[i.)]
+\item
+$$\sum_{k\geq 0} \frac{2k}{3k^3+1}.$$
+
+\item
+$$\sum_{k\geq 2} \frac{\sin(k\pi/2)}{\log(k)}.$$
+
+\item
+$$\sum_{k\geq 1} \frac{2^k k!}{k^k}.$$
+
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wir berechnen f\"ur $k\geq 1$:
+
+$$ \bigg\vert \frac{2k}{3k^3+1} \bigg\vert = \frac{2k}{3k^3+1}
+\leq \frac{2k}{3k^3} \leq \frac{1}{k^2}.$$
+Wir wissen, dass $\sum_{k\geq 1} \frac{1}{k^2}$ konvergiert (siehe Seite 43, Anwendung des Cauchy Verdichtungskriterium), folgt mit dem Majorantenkriterium (Prop. 4.8), dass $\sum_{k\geq 0} \frac{2k}{3k^3+1}$ absolut konvergiert.
+\item
+Es gilt f\"ur $k\in \NN$ gilt $\sin(k\pi)=0$ und $\sin((2k+1)\pi /2)=(-1)^k$. Damit gilt:
+$$ \sum_{k\geq 2} \frac{\sin(k\pi/2)}{\log(k)} 
+= \sum_{k\geq 1} \frac{\sin((2k+1)\pi/2)}{\log(2k+1)} 
+= \sum_{k\geq 1} \frac{(-1)^k}{\log(2k+1)}.$$ 
+
+Da $\frac{1}{\log(2k+1)}>0$ und die Folge $\frac{1}{\log(2k+1)}$ monoton fallend ist mit  $\lim_{k\rightarrow \infty} \frac{1}{\log(2k+1)}=0$, folgt aus dem Leibnizkriterium (Prop. 4.15), dass $\sum_{k\geq 2} \frac{\sin(k\pi/2)}{\log(k)}$ konvergiert.
+
+Wir zeigen, dass $\sum_{k\geq 2} \frac{\sin(k\pi/2)}{\log(k)}$ nicht absolut konvergiert. Dazu brauchen wir die folgende
+\begin{claim}
+$$\forall j \in \NN: 2j +1 > \log(2j+1).$$
+\end{claim}
+\begin{proof}
+Wir definieren $h: \mathbb{R}_+ \cup \{0\} \to \mathbb{R}$ als $h(x)= 2x+1-\log(2x+1)$. 
+
+Dann gilt $h(0)=1$ und $h'(x)= 2 - \frac{2}{2x+1} >0$.
+\end{proof}
+Damit erhalten wir:
+$$\sum_{k\geq 2} \bigg\vert \frac{\sin(k\pi/2)}{\log(k)} \bigg\vert
+= \sum_{k\geq 1} \bigg\vert \frac{(-1)^k}{\log(2k+1)} \bigg\vert 
+= \sum_{k\geq 1} \frac{1}{\log(2k+1)}
+> \sum_{k\geq 1} \frac{1}{2k+1}.$$
+Da die harmonische Reihe divergiert, divergiert $\sum_{k\geq 2} \bigg\vert \frac{\sin(k\pi/2)}{\log(k)} \bigg\vert$, d.h. $\sum_{k\geq 2} \frac{\sin(k\pi/2)}{\log(k)}$ konvergiert nicht absolut.
+\item
+Sei $a_n=\frac{2^{k}k!}{k^{k}}$. Wir berechnen:
+$$ \frac{\vert a_{n+1} \vert}{\vert a_n \vert} 
+= \frac{2^{k+1}(k+1)!}{(k+1)^{k+1}} \cdot \frac{k^{k}}{2^{k}k!}
+= 2(k+1) \frac{k^k}{(k+1)^{k+1}} = 2 \bigg( \frac{k}{k+1} \bigg)^{k}
+= 2 \bigg(1-\frac{1}{k+1}\bigg)^k$$
+
+$$ = 2 \bigg(1-\frac{1}{k+1}\bigg)^{k+1} \frac{1}{1-\frac{1}{k+1}} \longrightarrow 2 e^{-1} = \frac{2}{e}, \quad \text{ f\"ur } k \longrightarrow \infty.$$
+Aus dem Quotientenkriterium (Satz 4.12) folgt, dass $\sum_{k\geq 1} \frac{2^k k!}{k^k}$ absolut konvergiert.
+\end{enumerate}
+\end{solution}
+
+
+ 
+\begin{ex}{$(\star)$}
+Untersuchen Sie die folgenden Reihen auf Konvergenz und absolute Konvergenz:
+
+\begin{enumerate}[i.)]
+\item
+$$ \sum_{n\geq 0} (-1)^n \frac{\sqrt{n}}{n+1}.$$
+
+\item
+$$ \sum_{n\geq 0} \bigg( \frac{n+5}{3n-2} \bigg)^{3n}.$$
+
+\item
+$$ \sum_{n\geq 0} \frac{\exp(3n \log(n))}{(n!)^2}.$$
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wir berechnen f\"ur $n\in \NN$:
+$$ \frac{\sqrt{n+1}}{n+2} < \frac{\sqrt{n}}{n+1} 
+\Longleftrightarrow \frac{n+1}{(n+2)^2} < \frac{n}{(n+1)^2}$$
+
+$$\Longleftrightarrow n^3+3n^2+3n+1= (n+1)^3 < (n+2)^2 n = n^3+4n^2+4n
+\Longleftrightarrow 0 < n^2+n-1.$$
+Also ist $(\frac{\sqrt{n}}{n+1})_{n \in \NN}$ monoton fallend. Damit k\"onnen wir das Leibnizkriterium (Prop. 4.15) anwenden, und damit konvergiert $ \sum_{n\geq 0} (-1)^n \frac{\sqrt{n}}{n+1}$.
+
+Wir zeigen, dass $ \sum_{n\geq 0} (-1)^n \frac{\sqrt{n}}{n+1}$ nicht absolut konvergiert. Dazu berechnen wir f\"ur $n \in \NN \setminus \{0\}$:
+$$ \bigg\vert (-1)^n \frac{\sqrt{n}}{n+1} \bigg\vert = \frac{\sqrt{n}}{n+1}
+\geq \frac{\sqrt{n}}{2n} = \frac{1}{2\sqrt{n}}.$$
+Wir wissen (Anwendung des Verdichtungskriteriums, S. 43), dass $\sum_{n\geq 1} \frac{1}{\sqrt{n}}$ divergiert, damit divergiert auch $\sum_{n\geq 1} \frac{1}{2\sqrt{n}}$. Und schliesslich divergiert deswegen 
+$\sum_{n\geq 0} \bigg\vert (-1)^n \frac{\sqrt{n}}{n+1} \bigg\vert$. Also ist $\sum_{n\geq 0} \bigg\vert (-1)^n \frac{\sqrt{n}}{n+1} \bigg\vert$ nicht absolut konvergent.
+\item
+Wir berechnen:
+$$ \limsup_{n\rightarrow \infty} \bigg\vert \Big( \frac{n+5}{3n-2} \Big)^{3n} \bigg\vert^{1/n} 
+= \limsup_{n\rightarrow \infty} \bigg( \frac{n+5}{3n-2} \bigg)^{3}
+= \limsup_{n\rightarrow \infty} \bigg( \frac{1+\frac{5}{n}}{3-\frac{2}{n}} \bigg)^{3} = \bigg(\frac{1}{3} \bigg)^3= \frac{1}{27} <1.$$
+Aus dem Wurzelkriterium (Satz 4.11) folgt, dass $\sum_{n\geq 0} \left( \frac{n+5}{3n-2} \right)^{3n}$ absolut konvergiert.
+\item
+Zuerst bemerken wir, dass $\frac{e^{3n \log(n)}}{(n!)^2}= \frac{n^{3n}}{(n!)^2}$. Es gibt verschiedene Arten, um zu zeigen, dass die Reihe divergiert. Hier sind zwei M\"oglichkeiten:
+
+$\underline{\text{M\"oglichkeit }1: \text{ Nullfolgenkriterium}}$ 
+
+$$\frac{e^{3n \log(n)}}{(n!)^2}= \frac{n^{3n}}{(n!)^2}
+= n^n \cdot \bigg(\frac{n^n}{n!}\bigg)^2 
+= n^n \cdot \bigg(\frac{n^n}{1 \cdot 2 \cdot \dots \cdots n}\bigg)^2
+\geq n^n \cdot 1^2 \geq 1.$$
+
+Damit ist $(\frac{e^{3n \log(n)}}{(n!)^2})_{n \in \NN}$ keine Nullfolge und mit dem Nullfolgenkriterium (Prop. 4.2) folgt, dass $\sum_{n\geq 0} \frac{\exp(3n \log(n))}{(n!)^2}$ divergiert.
+
+$\underline{\text{M\"oglichkeit }2: \text{ Quotientenkriterium}}$
+
+Wir berechnen:
+$$ \frac{\bigg(\frac{(n+1)^{3n+3}}{((n+1)!)^2} \bigg)}{\bigg(\frac{n^{3n}}{(n!)^2} \bigg)} 
+= \frac{(n+1)^{3n+3}}{n^{3n}} \cdot \frac{(n!)^2}{((n+1)!)^2}
+= \frac{(n+1)^{3n}}{n^{3n}} \cdot (n+1)^3 \cdot \frac{1}{(n+1)^2}$$
+
+$$=\underbrace{\bigg(\Big( 1+ \frac{1}{n} \Big)^{n}\bigg)^3}_{\longrightarrow e^3, \text{ f\"ur } n\longrightarrow \infty} \cdot \underbrace{(n+1)}_{\longrightarrow \infty, \text{ f\"ur } n \longrightarrow \infty} \longrightarrow \infty.$$
+Aus dem Quotientenkriterium (Satz 4.12) folgt, dass $\sum_{n\geq 0} \frac{\exp(3n \log(n))}{(n!)^2}$ nicht absolut konvergiert. Da alle Terme nichtnegativ sind (dann ist absolute Konvergenz und Konvergenz das gleiche), folgt, dass $\sum_{n\geq 0} \frac{\exp(3n \log(n))}{(k!)^2}$ nicht konvergiert.
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}{$(\star)$}
+Berechnen Sie:
+
+$$ \lim_{n \rightarrow \infty} \bigg( \frac{1}{1\cdot 2} + \frac{1}{2\cdot 3} + \frac{1}{3 \cdot 4} + \dots + \frac{1}{(n-1)\cdot n} \bigg).$$
+\end{ex}
+\begin{solution}
+Wir berechnen:
+$$ \lim_{n\rightarrow \infty} \sum_{k=1}^{n-1} \frac{1}{k\cdot (k+1)}
+= \lim_{n\rightarrow \infty} \sum_{k=1}^{n-1} \left(\frac{1}{k}- \frac{1}{k+1} \right)
+= \lim_{n\rightarrow \infty} \bigg(\frac{1}{1}+ \sum_{k=2}^{n-1} \frac{1}{k} - \sum_{k=1}^{n-1} \frac{1}{k+1}\bigg)$$
+
+$$= \lim_{n\rightarrow \infty} \bigg(1+ \sum_{k=2}^{n-1} \frac{1}{k} - \sum_{k=2}^{n-1} \frac{1}{k} -\frac{1}{n}\bigg)
+= \lim_{n\rightarrow \infty} \bigg( 1 - \frac{1}{n} \bigg)= 1.$$
+\end{solution}
+
+\begin{ex} \ \begin{enumerate}[i)]
+\item Existiert ein $s >0$ sodass die nachfolgende Reihe konvergiert?
+\begin{align*}
+\sum_{n=2}^\infty \frac{1}{\log^s(n)}.
+\end{align*}
+\item Für welche $s \in \mathbb{R}$ ist die nachfolgende Reihe konvergent?
+\begin{align*}
+\sum_{n=2}^\infty \frac{1}{n \log^s (n) }.
+\end{align*}
+\end{enumerate}
+
+\end{ex}
+
+\begin{solution} Wir verwenden das Cauchy Kondensationsverfahren:
+\begin{enumerate}[i)]
+\item 
+\begin{align*}
+\sum_{n=2}^\infty \frac{1}{\log^s(n)}< \infty &\iff \sum_{n=2} ^\infty  2^n \frac{1}{\log^s(2^n)}< \infty  \\
+& \iff \frac{1}{\log^s(2)} \sum_{n=2}^\infty \frac{2^n}{n^s} < \infty.
+\end{align*}
+Jedoch konvergiert die letzte Reihe nicht, da $\lim \frac{2^n }{n^s} = \infty$ keine Nullfolge ist für alle $s >0$ (da die exponential Funktion $2^n= \exp(n \log(2))$ schneller wächst als jedes Polynom beliebigen Grades). Also existiert kein $s>0$ sodass die Reihe konvergiert. 
+\item
+\begin{align*}
+\sum_{n=2}^\infty \frac{1}{n \log^s(n)}< \infty &\iff \sum_{n=2}^\infty 2^n \frac{1}{2^n\log^s(2^n)}< \infty \\
+& \iff C\sum_{n=2}^\infty \frac{1}{n^s}< \infty, \text{ wobei } C:= \frac{1}{\log^s(2)}.
+\end{align*}
+Die letzte Reihe konvergiert genau dann wenn $s > 1$ .
+\end{enumerate}
+
+\end{solution}
+
+
+\begin{ex} Zeigen Sie, dass die nachfolgende Reihe konvergiert:
+\begin{align*}
+ \sum_{k=1}^\infty \frac{2k^2+2k+3}{6k^5+6}.
+\end{align*}
+\end{ex}
+
+\begin{solution} Für $n \in \mathbb{N}$ betrachten wir die Partialsumme:
+\begin{align*}
+\sum_{k=1}^n \frac{2k^2 +2k+3}{6k^5+6} = \frac{1}{3} \sum_{k=1}^n \frac{k^2}{k^5+1} + \frac{1}{3} \sum_{k=1}^n \frac{k}{k^5+1} + \frac{1}{2} \sum_{k=1}^n \frac{1}{k^5 +1}. 
+\end{align*}
+Offensichtlich gilt, dass $k^5+1 \geq k^5$ und somit $\frac{1}{k^5+1} \leq \frac{1}{k^5}$, wir erhalten also die Abschätzung:
+\begin{align*}
+\sum_{k=1}^n \frac{2k^2 +2k+3}{6k^5+6} \leq \sum_{k=1}^n \frac{1}{k^3} + \sum_{k=1}^n \frac{1}{k^4} + \sum_{k=1}^n \frac{1}{k^5}.
+\end{align*}
+Lassen wir nun $n \longrightarrow \infty$, dann erkennen wir die konvergenten Reihen,  wir schliessen dass die Reihe konvergiert. 
+\\\\
+Alternativ können wir auch das Vergleichskriterium verwenden, denn es gilt:
+\begin{align*}
+\sum_{n=1}^\infty \frac{2n^2 + 2n +3}{6n^5 +6} \sim \sum_{n=1}^\infty \frac{1}{n^3}.
+\end{align*}
+Wir berechnen hierfür:
+\begin{align*}
+\lim_{n \rightarrow \infty} \frac{a_n}{b_n} = \lim_{n \rightarrow \infty} \frac{\frac{2n^2 + 2n +3}{6n^5 + 6}}{\frac{1}{n^3}} = \lim_{ n \rightarrow \infty} \frac{n^3(2n^2+2n+3)}{6n^5+6}= \frac{1}{3} \in (0, \infty).
+\end{align*}
+Wobei wir verwendet haben, dass die dominanten Terme die der Ordnung $n^5$ sind, somit verhält sich die Reihe vergleichbar mit der konvergenten Reihe $\sum \frac{1}{n^3}$. 
+\end{solution}
+
+
+\begin{ex} Zeigen Sie mit Hilfe des Integralkriteriums, dass die folgende Reihe konvergiert:
+\begin{align*}
+\sum_{n=0}^\infty \frac{1}{n^2+1}.
+\end{align*}
+\end{ex}
+
+
+\begin{solution} Wir verwenden das Integralkriterium, d.h. wir betrachten das Integral:
+\begin{align*}
+\int_0^\infty \frac{1}{x^2 +1}dx = \left. \tan^{-1}(x)\right|_{x=0}^{x=\infty} = \frac{\pi}{2} < \infty.   
+\end{align*}
+Also konvergiert die Reihe, was zu zeigen war. 
+\end{solution}
+
+\begin{ex} Bestimmen Sie, ob die nachfolgende Reihe konvergiert:
+\begin{align*}
+\sum_{n=0}^\infty ne^{-n^2}.
+\end{align*}
+\end{ex}
+
+\begin{solution} Wir verwenden den Integraltest und erhalten:
+\begin{align*}
+\int_0^\infty xe^{-x^2} ~dx = \left. - \frac{1}{2}e^{-x^2}\right|_{x=0}^{x=\infty} = \frac{1}{2} < \infty.
+\end{align*}
+und folglich konvergiert die Reihe. 
+\end{solution}
+\newpage
+
+
+
+
+\end{document}
