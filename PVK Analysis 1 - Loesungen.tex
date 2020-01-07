@@ -884,6 +884,47 @@ Lassen wir nun $n \longrightarrow \infty$ streben und verwenden die Geometrische
 \newpage
 \section{Reihen}
 
+\begin{ex} Wir wollen den Cauchy'schen Verdichtungssatz (Kondensationssatz von Cauchy) beweisen. 
+Sei $(a_n)_{n \in \mathbb{N}}$ eine nicht-negative Folge von monoton fallenden Termen. Zeige, dass 
+\begin{align*}
+\sum_{n=1}^\infty a_n < \infty \iff \sum_{n=1}^\infty 2^n f(2^n) < \infty.
+\end{align*}
+\end{ex}
+
+\begin{solution} Es sei $\sum_{n=1}^\infty a_n$ konvergent. Dann gilt, weil $(a_n)_{n \in \mathbb{N}}$ nicht-negativ und monoton fallend ist:
+\begin{align*}
+a_1 + \frac{1}{2} \sum_{n=1}^K 2^n a_{2^n} &= a_1 + a_2 + 2a_4 + 4 a_8 + \dots + 2^{K-1} a_{2^K} \\
+& \leq a_1 + a_2 + a_3 + a_4 + \dots + a_{2^{K-1}+1} + \dots + a_{2^K-1} + a_{2^K} \\
+& \leq \sum_{n=1}^\infty a_n < \infty. 
+\end{align*}
+Um obige Ungleichung besser zu verstehen,  bemerke dass $2a_4 = a_4 + a_4 \leq a_3 + a_4$, analog $4a_8=a_8 + a_8 + a_8 + a_8 \leq a_5 + a_6 + a_7 + a_8$ usw. Für $K \to \infty$ zeigt dies, dass 
+\begin{align*}
+\sum_{n=1}^\infty 2^n a_{2^n} < \infty. 
+\end{align*}
+Nehme nun an, dass $\sum_{n=1}^\infty 2^n a_{2^n}$ konvergent ist. Wir erhalten 
+\begin{align*}
+\sum_{n=1}^N a_n& = a_1 +a_2 + a_3 + \dots + a_N \\
+& \leq a_1 + (a_2 + a_3) + (a_4 + a_5 + a_6 + a_7) + \dots + (a_{2^N} + \dots + a_{2^{N+1}-1}) \\ 
+& \leq a_1 +2 a_2 + 4a_4 + \dots + 2^N a_{2^N} \\
+& \leq a_1 + \sum_{n=1}^\infty 2^n a_{2^n}< \infty.
+\end{align*}
+Lassen wir nun $N \to \infty$ so folgt die Behauptung. 
+\end{solution}
+
+\begin{ex}\label{ex:Olivier} Es sei $(a_n)_{n \in \mathbb{N}}$ eine Folge monoton fallender, nicht-negativer reellen Zahlen. Zeige dass falls $\sum_{n=1}^\infty a_n $ konvergiert, dann gilt $n a_n \to 0$ als $n \to \infty$. Hinweis: Verwende den Cauchy'schen Verdichtungssatz. 
+\end{ex}
+
+
+\begin{solution} Da $\sum a_n$ konvergiert, gilt gemäss dem Cauchy'schen Verdichtungssatz auch, dass $\sum 2^n a_{2^n}$ konvergiert. Also muss $2^na_{2^n}$ eine Nullfolge sein, das heisst 
+\begin{align*}
+2^n a_{2^n} \xrightarrow{n \to \infty} 0. 
+\end{align*}
+Sei nun $k \in \mathbb{N}$ sodass $2^n < k <2^{n+1}$, da $(a_n)_{n \in \mathbb{N}}$ monoton fallend ist folgt dann
+\begin{align*}
+2^n a_{2^{n+1}} \leq k a_k \leq 2^{n+1} a_{2^n}.
+\end{align*}
+Für $k \to \infty$ gilt automatisch $2^n, 2^{n+1} \to \infty$ und die Aussage folgt dank dem Sandwich-Lemma. 
+\end{solution}
 
 \begin{ex} Verwenden Sie den Cauchy'schen Verdichtungssatz (Kondensationssatz) um zu zeigen, dass die nachfolgenden Reihen divergieren respektive konvergieren:
 \begin{enumerate}[i)]
@@ -926,6 +967,61 @@ Da $s>1$ und wir erneut eine geometrische Reihe erhalten mit $0 \leq r = 2^{1-s}
 
 \end{solution}
 
+
+\begin{ex} \  \begin{enumerate}[i)]
+\item Sei $(a_n)_{n \in \mathbb{N}}$ monoton wachsend,  $a_n >0$. Zeige, die Reihe 
+\begin{align*}
+\sum_n \left( \frac{a_{n+1}}{a_n}-1 \right)
+\end{align*}
+konvergiert genau dann, wenn $(a_n)_{n \in \mathbb{N}}$ beschränkt ist.
+\item Es sei $(a_n)_{n \in \mathbb{N}}$ eine monoton fallende Nullfolge. Zeige dass gilt:
+\begin{align*}
+\sum_{n=1}^\infty \frac{a_n}{1+na_n} < \infty \iff \sum_{n=1}^\infty a_n < \infty. 
+\end{align*} 
+Hinweis: Verwende Aufgabe \ref{ex:Olivier}.
+\end{enumerate}
+\end{ex}
+
+\begin{solution} 
+\begin{enumerate}[i)]
+\item Nehme zum Widerspruch an, dass $(a_n)_{n \in \mathbb{N}}$ unbeschränkt ist. Da $(a_n)_{n \in \mathbb{N}}$ monoton wächst, gilt für $m >n$:
+\begin{align*}
+\sum_{k=n}^m \left( \frac{a_{k+1}}{a_k}-1 \right) & = \frac{a_{m+1}-a_m}{a_m} + \dots + \frac{a_{n+1}-a_n}{a_n} \\
+& \geq \frac{1}{a_m}[ (a_{m+1}-a_m) + \dots + (a_{n+1}-a_n)] \\
+& = \frac{1}{a_m}(a_{m+1}-a_n) \geq 1 - \frac{a_n}{a_m}.
+\end{align*}
+Da $(a_n)_{n \in \mathbb{N}}$ unbeschränkt ist, gibt es zu jedem $a_n$ ein $m>n$ mit $a_m > 2a_n$, also mit $1- \frac{a_n}{a_m}> \frac{1}{2}$. Also gibt es zu jedem $n$ ein $m>n$ mit der Eigenschaft
+\begin{align*}
+\sum_{k=n}^m \left( \frac{a_{k+1}}{a_k}-1 \right) > \frac{1}{2}.
+\end{align*}
+Mit dem Cauchy-Kriterium folgt, dass die Divergenz der Reihe 
+\begin{align*}
+\sum_n \left( \frac{a_{n+1}}{a_n}-1 \right)
+\end{align*}
+was ein Widerspruch ist. 
+\\\\
+Sei nun andererseits $(a_n)_{n \in \mathbb{N}}$ monoton wachsend und beschränkt. Dann ist $\sum (a_{n+1}-a_n)$ eine konvergente Teleskop-Reihe. Wegen
+\begin{align*}
+0 \leq \frac{a_{n+1}}{a_n}-1 = \frac{a_{n+1}-a_n}{a_n} \leq \frac{1}{a_1}(a_{n+1}-a_n)
+\end{align*}
+folgt die Konvergenz der Reihe $\sum \left( \frac{a_{n+1}}{a_n}-1 \right)$ aus dem Majoranten-Kriterium. 
+\item Es konvergiere $\sum_n a_n $. Wegen $0 \leq \frac{a_n}{1+na_n} \leq a_n$ $(a_n \geq 0)$ folgt also die "$\Longleftarrow$" Implikation aus dem Majorantenkriterium. 
+\\\\
+Es gelte andererseits, dass $\sum_{n=1}^\infty \frac{a_n}{1+na_n}$ konvergiere. Sobald ein $a_{n_0}=0$ ist, so sind von dort an alle $a_n=0$ und die Behauptung ist trivial, es seien also alle $a_n >0$. Da $(a_n)_{n \in \mathbb{N}}$ monoton fallend ist, ist $1/a_n$ monoton wachsend und wir schliessen dass 
+\begin{align*}
+\frac{a_n}{1+na_n}= \frac{1}{n+ 1/a_n}
+\end{align*}
+monoton fallend ist. Dank Aufgabe \ref{ex:Olivier} gilt also $b_n:= n \frac{a_n}{1+a_n} \to 0$ als $n \to \infty$ und da 
+\begin{align*}
+na_n = \frac{b_n}{1-b_n}
+\end{align*}
+folgt auch $na_n \to 0$ für $n \to \infty$. Also gilt $0 < na_n < 1$ ab einem Index $n_0$ und daher für alle $n \geq n_0$ 
+\begin{align*}
+\frac{a_n}{1+na_n} \geq \frac{a_n}{2}
+\end{align*} 
+Nach dem Majorantenkriterium folgt nun, dass die Reihe $\sum \frac{a_n}{2}$ und damit auch die Reihe $\sum a_n$ konvergent ist. 
+\end{enumerate}
+\end{solution}
 
 \begin{ex}{$(\star)$}
 Bestimmen Sie f\"ur die folgenden Reihen, ob sie konvergent und ob sie absolut konvergent sind:
