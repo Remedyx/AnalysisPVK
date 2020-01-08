@@ -11,3 +11,7 @@ PVK Analysis 1 - Day 1 Solutions.aux
 PVK Analysis 1 - Day 1 Solutions.log
 PVK Analysis 1 - Day 1 Solutions.out
 PVK Analysis 1 - Day 1 Solutions.synctex.gz
+*.log
+*.aux
+*.out
+*.gz

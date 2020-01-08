@@ -1,0 +1,1036 @@
+\documentclass[a4paper, 20]{exam}
+
+\printanswers % If you want to print answers
+%\noprintanswers % If you don't want to print answers
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{bbm}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{polynom}
+
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{mydef}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{nonexample}{Non-example}
+\newtheorem{ex}{Aufgabe}
+\newtheorem{claim}{Behauptung}
+
+\definecolor{SolutionColor}{rgb}{0.8,0.9,1} % light blue
+%\shadedsolutions % defines the style of the solution environment
+\framedsolutions % defines the style of the solution environment
+% Defines the title of the solution environment:
+\renewcommand{\solutiontitle}{\noindent\textbf{Solution:}\par\noindent}
+
+
+\newcommand\CC{\mathbb{C}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\ZZ{\mathbb{Z}}
+
+\begin{document}
+\title{PVK Analysis I}
+\author{Marco Bertenghi \& Lukas Burch, Vorlage gemäss Severin Schraven}
+\maketitle
+
+Die Verweise auf Theoreme und Propositionen beziehen sich auf das Skript der Vorlesung, welches Sie $\href{http://www.math.uzh.ch/index.php?ve_vo_det&key2=2513&keySemId=31}{hier}$ finden k\"onnen. Die Verweise auf Serien beziehen sich auf das HS 15. Mit (*) markierte Aufgaben, sind im allgemeinen anspruchsvoller.
+
+
+
+
+\section{Topologie: Metrische Räume}
+\begin{ex} Sei $(X,d)$ ein metrischer Raum. Beweise, dass auch $(X,d')$ mit  $d': X \times X \to \mathbb{R}$ spezifiziert als 
+\begin{align*}
+d'(x,y):= \frac{d(x,y)}{1+d(x,y)}
+\end{align*}
+ein metrischer Raum ist.
+\end{ex}
+\begin{solution} Wir müssen lediglich zeigen, dass $d'$ die drei definierenden Eigenschaften einer Metrik erfüllt, wir werden dazu selbstverständlich die Eigenschaft ausnützen, dass $d$ bereits eine Metrik auf $X$ ist. Seien also $x,y,z \in X$ fest aber beliebig:
+\begin{enumerate}
+\item Offensichtlich gilt, $d'(x,y) \geq 0$, weil $d(x,y) \geq 0$. Ausserdem gilt 
+\begin{align*}
+d'(x,y)= \frac{d(x,y)}{1+d(x,y)}=0 \iff d(x,y)=0 \iff x=y
+\end{align*}
+weil $d$ eine Metrik auf $X$ ist. 
+\item Die Symmetrie folgt aus der Eigenschaft weil $d$ eine Metrik ist. Bemerke:
+\begin{align*}
+d'(x,y)= \frac{d(x,y)}{1+d(x,y)}= \frac{d(y,x)}{1+d(y,x)}=d'(y,x).
+\end{align*}
+\item Die Dreiecksungslgleichung ist der schwierigste Teil. Da $d$ eine Metrik auf $X$ ist folgt $d(x,z) \leq d(x,y)+d(y,z)$. Also gilt auch
+\begin{align*}
+d'(x,z) = \frac{d(x,z)}{1+d(x,z)} \leq \frac{d(x,y)+d(y,z)}{1+d(x,z)}.
+\end{align*}
+Wir bemerken, dass die Abbildung $f(r):= \frac{r}{1+r}$ monoton wachsend ist. Seien dazu $r_1 \leq r_2$, wir wollen zeigen, dass $f(r_1) \leq f(r_2)$. Wir bemerken, dass 
+\begin{align*}
+f(r_1) = \frac{r_1}{1+r_1}= 1- \frac{1}{1+r_1}
+\end{align*}
+und wir haben
+\begin{align*}
+1+r_1 \leq 1+r_2 \implies \frac{1}{1+r_1} \geq \frac{1}{1+r_2} \implies - \frac{1}{1+r_1} \leq -\frac{1}{1+r_2}
+\end{align*}
+und daher 
+\begin{align*}
+f(r_1) = 1- \frac{1}{1+r_1} \leq 1 - \frac{1}{1+r_2} = \frac{r_2}{1+r_2}=f(r_2).
+\end{align*}
+Da wir $d(x,z) \leq d(x,y)+d(y,z)$ haben benützen wir obige Ungleichung für $r_1= d(x,z)$ und $r_2=d(x,y)+d(y,z)$. Dies liefert nun 
+\begin{align*}
+d'(x,z)= \frac{d(x,z)}{1+d(x,z)} \leq \frac{d(x,y)+d(y,z)}{1+d(x,y)+d(y,z)} = \frac{d(x,y)}{1+d(x,y)+d(y,z)}+ \frac{d(y,z)}{1+d(x,y)+d(y,z)}.
+\end{align*}
+Nun schätzen wir einzelnen Terme ab. Da $d(x,y) \geq 0$ und $d(y,z) \geq 0$ gilt
+\begin{align*}
+\frac{d(x,y)}{1+d(x,y)+\underbrace{d(y,z)}_{\geq 0}} \leq \frac{d(x,y)}{1+d(x,y)}=d'(x,y)
+\end{align*}
+und analog
+\begin{align*}
+\frac{d(y,z)}{1+\underbrace{d(x,y)}_{ \geq 0}+d(y,z)} \leq \frac{d(y,z)}{1+d(y,z)}=d'(y,z).
+\end{align*}
+Zusammenfassend folgt nun die Dreiecksungleichung $d'(x,z) \leq d'(x,y) + d'(y,z)$. Somit definiert $d'$ eine Metrik auf $X$ und $(X,d'$) ist auch ein metrischer Raum bezüglich $d'$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Sei $X$ eine beliebige nicht leere Menge und definierne $d: X \times X \to \mathbb{R}$ als 
+\begin{align*}
+d(x,y):= \begin{cases} 0 & \text{falls } x=y \\ 1 & \text{falls } x \neq y. \end{cases}
+\end{align*}
+\begin{enumerate}[i)]
+\item Zeige, dass $(X,d)$ ein metrischer Raum ist.
+\item Zeige dass eine Folge $(a_n)_{n \in \mathbb{N}}$ in $X$ genau dann bezgülich $d$ konvergiert, wenn sie konstakt ist ab einem (endlichen) Index $N \in \mathbb{N}$.
+\item Folgere, dass $(X,d)$ vollständig ist
+\item Welche Teilmengen von $X$ sind offen? Welche sind abgeschlossen? Was ist also die Topologie $\tau \subset \mathcal{P}(X)$ auf $X?$
+\item Sei $(M,d')$ ein beliebiger metrischer Raum und $f:X \to M$ eine beliebige Funktion. Zeige, dass $f$ stetig ist.
+\item Zeige dass $K \subset X$ ist kompakt, genau dann wenn $K$ endlich ist. 
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item 
+\begin{enumerate}
+\item Per Definition ist klar, dass $d(x,y) \geq 0$ und $d(x,y)=0$ genau dann wenn $x=y$.
+\item Die Symmetrie ist ebenfalls trivial.
+\item Für die Dreiecksungleichung müssen wir zwei Fälle unterscheiden: 
+\begin{itemize}
+\item Falls $x=z$, dann ist $d(x,z)=0$ und $d(x,z) \leq d(x,y)+d(y,z)$ ist trivial wahr für alle Fälle (es gibt hier zwei weitere Situationen) denn $d(x,y),d(y,z) \in \{0,1\}$.
+\item Falls $x \neq z$, dann ist $d(x,z)=1$ und es gibt 3 Unterfälle:
+\begin{itemize}
+\item $x=y \neq z \implies 1=d(x,z) \leq d(x,y)+d(y,z) = 0+1=1$.
+\item $x \neq y=z \implies 1=d(x,z) \leq d(x,y)+d(y,z) = 1+0 =1$.
+\item $x \neq y \neq z \implies d(x,z) \leq d(x,y)+ d(y,z) = 1+1=2$. 
+\end{itemize} 
+\end{itemize}
+In allen Situationen ist also die Dreiecksungleichung erfüllt. 
+\end{enumerate}
+\item Wir verwenden die Notation "für fast alle $n \in \mathbb{N}$ was soviel bedeutet wie "für alle bis auf endlich viele". Da $d(a_n,a) \in \{0,1\}$ folgt 
+\begin{align*}
+a_n \xrightarrow[n \to \infty]{d} a  \iff d(a_n,a) \xrightarrow[n\to \infty]{} 0 &\iff d(a_n,a)=0 \text{ für fast alle } n \in \mathbb{N} \\
+& \iff a_n = a \text{ für fast alle }n \in \mathbb{N} \\
+& \iff a_n \text{ ist konstant ($=a$) ab einem Index } N \in \mathbb{N}.
+\end{align*}
+\item Sei $(x_n)_{n \in \mathbb{N}}$ eine Cauchy Folge in $X$, dann gibt es zu jedem $\epsilon >0$ ein $N \in \mathbb{N}$ sodass für alle $n,m$ grösser als $N$ gilt $d(x_n,x_m) < \epsilon$. Wähle nun $\epsilon=1/2$, dann gilt $d(x_n,x_m)=0$ und somit muss (analog wie in vorheriger Aufgaben) $x_n$ konstant für $n$ grösser als $N$ sein. Laut vorheriger Teilaufgabe beduetet dies, dass die Folge konvergiert und somit ist jede Cauchy Folge konvergent, also $(X,d)$ ein vollständiger metrischer Raum. 
+\item Sei $A \subset X$ und $x \in A$ beliebig. Für $\epsilon = 1/2$ ist der Ball um $x$ mit Radius $\epsilon$ 
+\begin{align*}
+B_\epsilon(x)= \{ y \in X : d(x,y) < \epsilon\} = \{x\} \subset A.
+\end{align*}
+Damit ist $A$ offen. Also sind alle Teilmengen von $X$ offen und daher auch alle abgeschlossen weil $A^c$ offen impliziert $A$ abgeschlossen. Folglich können wir sagen $\tau = \mathcal{P}(X)$. 
+\item Mittels der topologischen Charakterisierung von Stetigkeit wissen wir: $f$ stetig $\iff f^{-1}(U) \subset X$ offen für alle $U \subset M$ offen. Da aber sowieso alle Teilmengen von $X$ offen sind, insbesondere also auch $f^{-1}(U)$, ist $f$ stetig.
+\item Sei einerseits $K=\{x_1, \dots , x_n\}$ endlich und $K \subset \bigcup_i U_i$ eine offene Überdeckung von $K$. Wähle $U_{i_j}$ sodass $x_j \in U_{i_j}$. Dann ist $K \subset U_{i_1} \cup \dots \cup U_{i_n}$ eine endliche offene Teilüberdeckung. Also ist $K$ kompakt.  \\
+Sei andererseits $K$ kompakt. $K \subset \bigcup_{a \in K} \{a\}$ ist eine offene Überdeckung, da die Singleton-Mengen offen sind (sogar jede Teilmenge ist offen). Diese hat also eine endliche Teilüberdeckung $K \subset \{a_1 \} \cup \dots \cup \{a_n\}$. Also muss $K$ endlich sein. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Zeige, dass für alle $v \in \mathbb{R}^n$ gilt:
+\begin{align*}
+\|v\|_\infty = \lim_{p \to \infty} \|v\|_p.
+\end{align*}
+\end{ex}
+
+\begin{solution} Wir bemerken, dass einerseits.
+\begin{align*}
+\|v\|_\infty = \max_{j=1, \dots ,n} |v_j| = \left( \max_{j=1,  \dots ,n} |v_j|^p \right)^{1/p} \leq \left( |v_1|^p + \dots + |v_n|^p \right)^{1/p} = \|v\|_p.
+\end{align*}
+Andererseits haben wir:
+\begin{align*}
+\|v\|_p = ( |v_1|^p + \dots + |v_n|^p)^{1/p} \leq ( \|v\|_\infty^p + \dots + \|v\|_\infty^p)^{1/p} = n^{1/p} \|v\|_\infty.
+\end{align*}
+Zusammenführend haben wir also gezeigt, dass gilt:
+\begin{align*}
+\|v\|_\infty \leq \|v\|_p \leq n^{1/p} \|v\|_\infty.
+\end{align*}
+Da $\lim_{p \to \infty} n^{1/p}=1$ folgt aus dem Sandwich theorem die Behauptung. 
+\end{solution}
+
+\begin{ex} Beweise die Cauchy-Schwarz Ungleichung, das heisst für alle $v,w \in \mathbb{R}^n$ gilt
+\begin{align*}
+\sum_{i=1}^n |v_i||w_i| \leq \sqrt{\sum_{i=1}^n |v_i|^2} \sqrt{\sum_{i=1}^n |w_i|^2}.
+\end{align*}
+\end{ex}
+
+\begin{solution} Für $v=0$ oder $w=0$ ist die Cauchy-SChwarz-Ungleichung trivialerweise erfüllt. Seien also $v,w \neq 0$ und wir verwenden die (standard) Notation:
+\begin{align*}
+\|v\|_2:= \sqrt{\sum_{i=1}^n |v_i|^2}.
+\end{align*}
+Bemerke, dass $(x-y)^2 \geq 0 \iff 2xy \leq x^2+y^2$. Wir verwenden diese Ungleichung mit 
+\begin{align*}
+x:= \frac{|v_i|}{\|v\|_2}, \text{ und } y:= \frac{|w_i|}{\|w\|_2}.
+\end{align*}
+Wir erhalten:
+\begin{align*}
+2 \frac{|v_i||w_i|}{\|v\|_2\|w\|_2} \leq \frac{|v_i|^2}{\|v\|_2^2}+ \frac{|w_i|^2}{\|w\|_2^2}.
+\end{align*}
+Summation beider Seiten von $i=1, \dots , n$ liefert
+\begin{align*}
+\frac{2}{\|v\|_2 \|w\|_2} \sum_{i=1}^n |v_i| |w_i| \leq \sum_{i=1}^n \frac{|v_i|^2}{\|v\|_2^2} + \sum_{i=1}^n \frac{|w_i|^2}{\|w\|_2^2} = \frac{\|v\|_2^2}{\|v\|_2^2}+ \frac{\|w\|_2^2}{\|w\|_2^2}= 1+1=2.
+\end{align*}
+Also
+\begin{align*}
+\frac{2}{\|v\|_2 \|w\|_2} \sum_{i=1}^n |v_i| |w_i| \leq 2 \implies \sum_{i=1}^n |v_i||w_i| \leq \|v\|_2 \|w\|_2,
+\end{align*}
+ziehen der Wurzel auf beiden Seiten liefert nun die gewünschte Ungleichung von Cauchy-Schwarz. 
+\end{solution}
+
+\begin{ex} Sei $Q$ der Raum der quadratsummierbaren reellen Folgen $(a_n)_{n \in \mathbb{N}}$, d.h. für welche die Reihe $\sum_{n=1}^\infty a_n^2$ konvergiert. Zeige, dass
+\begin{align*}
+d((a_n), (b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2}
+\end{align*}
+eine Metrik auf $Q$ definiert. \\
+Hinweis: Verwende die Cauchy-Schwarz Ungleichung um die Dreiecksungleichung zu beweisen.
+\end{ex}
+
+\begin{solution} Seien $(a_n), (b_n), (c_n) \in Q$ drei beliebige quadratsummierbare Folgen.
+\begin{enumerate}
+\item Offensichtlich gilt $d((a_n), (b_n)) \geq 0$ und es gilt 
+\begin{align*}
+d((a_n),(b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} =0 &\iff (a_n-b_n)^2 =0 \text{ für alle } n \in \mathbb{N} \\
+& \iff a_n=b_n \text{ für alle } n \in \mathbb{N} \\
+& \iff (a_n)=(b_n).
+\end{align*}
+\item Bemerke
+\begin{align*}
+d((a_n),(b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} = \sqrt{\sum_{n=1}^\infty (b_n-a_n)^2} = d((b_n),(a_n)),
+\end{align*}
+und somit ist die Symmetrie erfüllt.
+\item Dies ist der schwierigste Teil der Aufgabe. 
+\begin{align*}
+d((a_n),(c_n))&= \sqrt{ \sum_{n=1}^\infty (a_n-c_n)^2} = \sqrt{ \sum_{n=1}^\infty (a_n-b_n+b_n-c_n)^2} \\
+&= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2 + 2 \sum_{n=1}^\infty (a_n-b_n)(b_n-c_n) + \sum_{n=1}^\infty (b_n-c_n)^2}.
+\end{align*}
+Nun verwenden wir die Cauchy-Schwarz-Ungleichung, um den mittleren Term abzuschätzen:
+\begin{align*}
+\sum_{n=1}^\infty (a_n-b_n)(b_n-c_n) & \leq \sum_{n=1}^\infty |a_n-b_n||b_n-c_n| \\
+& \leq \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2}.
+\end{align*}
+Wir erhalten somit:
+\begin{align*}
+d((a_n),(b_n)) & \leq \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2 + 2 \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} + \sum_{n=1}^\infty (b_n-c_n)^2} \\
+& = \sqrt{ \left( \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} + \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} \right)^2} \\
+&= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} + \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} = d((a_n),(b_n))+ d((b_n),(c_n)).
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Betrachte den $\mathbb{R}^n$ mit der Euklidischen Metrik. Zeige oder widerlege:
+\begin{enumerate}[i)]
+\item $X:= \{(x,y) \in \mathbb{R}^2 \mid x^2-y^2+2xy=5\}$ ist abgeschlossen. \textit{Hinweis}: Urbilder abgeschlossener Mengen unter stetigen Funktionen sind abgeschlossen.
+\item $Y:= \{ \frac{\cos x}{x} \in \mathbb{R} \mid x \in \mathbb{N} \setminus \{0\}\} $ ist abgeschlossen. 
+\end{enumerate}
+\end{ex}
+
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Wahr. Sei $f(x,y)=x^2-y^2+2xy$. Dann ist $f$ stetig als Summe von Produkten stetiger Funktionen. Die Singleton Menge $\{5\}$ ist abgeschlossen in $\mathbb{R}$ und es folgt, dass $X= f^{-1}(\{5\})$ ebenfalls abgeschlossen ist. 
+\item Falsch. Es gilt:
+\begin{align*}
+\left| \frac{\cos (n)}{n} \right| \leq \frac{1}{n} \xrightarrow{n \to \infty} 0.
+\end{align*}
+Wäre $Y$ abgeschlossen, so müsste nach dem Folgenkriterium $0 \in Y$ gelten. Das ist aber nicht der Fall, weil 
+\begin{align*}
+\cos (x)=0 \iff x = n \pi + \frac{\pi}{2}, \quad n \in \mathbb{Z}
+\end{align*}
+und Zahlen der Form $n \pi + \frac{\pi}{2}$ sind irrational, insbesondere also nicht in $Y$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex}
+\begin{enumerate}[i.)]
+\item Sei $(X,d)$ ein metrischer Raum. Zeigen Sie:
+\begin{enumerate}
+\item
+die umgekehrte Dreiecksungleichung
+$$ \vert d(x,y) - d(y, z) \vert \leq d(x, z).$$
+\item
+die verallgemeinerte Dreicksungleichung
+$$ d(x_n, x_1) \leq \sum_{i=1}^{n-1} d(x_{i+1}, x_i) .$$
+\item
+die Vierecksungleichung
+$$ \vert d(x,y) - d(u,v) \vert \leq d(x,u) + d(y,v) .$$
+\end{enumerate}
+
+\item Sei $(Y, \Vert \cdot \Vert)$ ein normierter $\RR$-Vektorraum. Zeigen Sie:
+\begin{enumerate}
+\item
+die umgekehrte Dreiecksungleichung
+$$ \big\vert \ \Vert x \Vert - \Vert y \Vert \ \big\vert \leq \Vert x -y \Vert .$$
+\item
+die verallgemeinerte Dreiecksungleichung
+$$ \Vert x_n - x_1 \Vert \leq \sum_{i=1}^{n-1} \Vert x_{i+1} - x_i \Vert .$$
+\end{enumerate}
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+\begin{enumerate}
+\item
+Die Dreicksungleichung liefert uns f\"ur $x,y,z \in X$:
+$$d(x, y) \leq d(x, z) + d(y,z) \Rightarrow d(x,y) - d(y,z) \leq d(x,z) .$$
+Tauschen wir die Rollen von $x$ und $y$, so erhalten wir $-(d(x,y) - d(y,z)) = d(y,z) - d(x,y) \leq d(x,z)$. Dammit erhalten wir $ \vert d(x,y) - d(y, z) \vert \leq d(x, z).$
+\item
+Wir beweisen dies mit Induktion \"uber $n$. Die Induktionsverankerung $n=2$ ist trivial. Wir nehmen nun an, dass die Behauptung wahr ist f\"ur ein $n\in \NN_{\geq 2}$. Dann gilt
+$$ d(x_{n+1}, x_1) \leq d(x_{n+1}, x_n) + d(x_n, x_1) 
+\stackrel{\text{IV}}{\leq} d(x_{n+1}, x_n) + \sum_{i=1}^{n-1} d(x_{i+1}, x_i) = \sum_{i=1}^{n} d(x_{i+1}, x_i).$$ 
+\item
+Seien $x,y,u, v \in X$. Wir wenden zweimal die Dreicksungleichung an und erhalten
+$$ d(x,y) \leq d(x,u) + d(u,y) \leq  d(x,u) + d(u,v) + d(v, y).$$
+Wir folgern
+$$ d(x,y) - d(u, v) \leq d(x,u) + d(y, v). $$
+Tauschen wir die Rollen von $x$ und $u$ und auch $y$ und $v$, so erhalten wir
+$$- (d(x,y) - d(u, v)) = d(u,v) - d(x,y) \leq  d(x,u) + d(y, v).$$
+Damit erhalten wir $\vert d(x,y) - d(u,v) \vert \leq d(x,u) + d(y,v)$.
+\end{enumerate}
+\item
+Folgt direkt aus $i.)$ mit $d(x,y)= \Vert x -y \Vert$.
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}
+Seien $(M_1, d_1), (M_2, d_2)$ metrische R\"aume. Sei $f: M_1 \rightarrow M_2$ gleichm\"assig stetig. Zeigen Sie:
+Ist $(a_n)_{n\in \NN}$ eine Cauchy-Folge in $M_1$ $\Rightarrow$ $(f(a_n))_{n\in \NN}$ ist eine Cauchy-Folge in $M_2$.
+\end{ex}
+\begin{solution}
+Sei $\epsilon>0$. Da $f$ gleichm\"assig stetig ist, existiert $\delta>0$, sodass
+\begin{align}
+\forall x,y \in M_1: d_1(x,y)<\delta \Rightarrow d_2(f(x),f(y))<\epsilon.
+\end{align}
+Da $(a_n)_{n\in \NN}$ eine Cauchyfolge bez\"uglich $d_1$ ist, gilt
+\begin{align}
+\exists N \in \NN \ \forall n,m\geq N: d_1(a_n, a_m)<\delta.
+\end{align}
+Kombinieren wir $(2)$ und $(3)$, so erhalten wir
+$$ \exists N\in \NN \ \forall n,m \geq N: d_2(f(a_n), f(a_m)) < \epsilon.$$
+Da $\epsilon>0$ beliebig war, folgt, dass $(f(a_n))_{n\in \NN}$ eine Cauchyfolge bez\"uglich $d_2$ ist.
+\end{solution}
+
+\begin{ex} In dieser Aufgabe wollen wir zeigen, dass $\ell_p \subset \ell_q$ für $0 <p \leq q$. 
+\begin{enumerate}[i)]
+\item Zeige zuerst, dass für $0< a \leq 1$ folgende Ungleichung gilt:
+\begin{align*}
+\left( \sum_{n=1}^\infty |a_n| \right)^a \leq \sum_{n=1}^\infty |a_n|^a.
+\end{align*}
+\item Folgere dass $\|a\|_q \leq \|a \|_p$.
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item Die Ungleichung ist trivial für $a=1$. Weiterin ist die Ungleichung trivial falls die Folge $(a_n)_{n \in \mathbb{N}}$ identisch Null ist und dies ist genau der Fall falls 
+\begin{align*}
+\sum_{n=1}^\infty |a_n|=0.
+\end{align*}
+Sei also $\sum_{n=1}^\infty |a_n| \neq 0$. Bemerke weiterhin, dass für $x \in (0,1]$ and $a \in (0,1)$ gilt $x^a \geq x$. Dies ist wahr weil $x =1$ die Ungleichung trivial ist und für $x \in (0,1)$ haben wir
+\begin{align*}
+x^a \geq x \iff  \log (x^a) \geq \log (x) \iff a \log(x) \geq \log (x) \iff a \leq 1.
+\end{align*}
+Es folgt nun
+\begin{align*}
+\frac{\sum_{n=1}^\infty |a_n|^a}{\left( \sum_{k=1}^\infty |a_k|\right)^a} = \sum_{n=1}^\infty \frac{|a_n|^a}{\left( \sum_{k=1}^\infty |a_k|\right)^a} = \sum_{n=1}^\infty \left( \frac{|a_n|}{\sum_{k=1}^\infty |a_k|}\right)^a \geq \sum_{n=1}^\infty \frac{|a_n|}{\sum_{k=1}^\infty |a_k|} = \frac{\sum_{n=1}^\infty |a_n|}{\sum_{k=1}^\infty |a_k|}=1.
+\end{align*}
+Aus obiger Ungleichung folgt nun die Behauptung:
+\begin{align*}
+\left( \sum_{n=1}^\infty |a_n| \right)^a \leq \sum_{n=1}^\infty |a_n|^a.
+\end{align*}
+\item Sei nun $0 < p \leq q$, dann gilt für $a = p/q$ natürlich $0<a \leq 1$. Mit Teilaufgabe i) erhalten wir:
+\begin{align*}
+\left( \sum_n |a_n|^q \right)^{1/q} = \left( \sum_n |a_n|^q \right)^{p/qp}  = \left[\left( \sum_{n} |a_n|^q \right)^a\right]^{1/p} &\overset{i)}\leq \left( \sum_n |a_n|^{aq} \right)^{1/p} \\
+&= \left( \sum_{n} |a_n|^{q (p/q)} \right)^{1/p} \\
+&= \left( \sum_n |a_n|^p \right)^{1/p}.
+\end{align*}
+Dies zeigt nun, dass $\ell_p \subset \ell_q$ für $p \leq q$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Es sei 
+\begin{align*}
+A_n^{(m)}:= \begin{cases} \frac{1}{n} & \text{falls } n \leq m \\ 0 & \text{sonst}. \end{cases}
+\end{align*}
+Betrachten Sie die Folge $(b^{(m)})_{m \in \mathbb{N}} \subset \mathbb{R}^\mathbb{N}$ mit $b^{(m)}:= (A_n^m)_{n \in \mathbb{N}}$. 
+\begin{enumerate}[i)]
+\item Für welche $p \in [1, \infty]$ gilt $b^{(m)} \in \ell_p$?
+\item Bestimmen Sie die Grenzfolge $b^{( \infty)}$.
+\item Zeigen Sie, dass $(b^{(m)})_{m \in \mathbb{N}}$ bezüglich $\| \cdot \|_p$, wobei $p \in (1, \infty]$ konvergiert. 
+\end{enumerate}
+\end{ex}
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Sei $m \in \mathbb{N}$ fest aber beliebig (insbesondere also endlich). Weil die Folge $b^{(m)}$ nur endlich viele von Null verschiedene Folgenglieder besitzt, gilt $b^{(m)} \in \ell_\infty$. Sei nun $p \in [1, \infty)$. Dann gilt
+\begin{align*}
+\sum_{n=1}^\infty |A_n^{(m)}|^p = \sum_{n=1}^m |A_n^{(m)}|^p < \infty
+\end{align*}
+weil es sich um eine endliche Summe handelt. Also $b^{(m)} \in \ell_p$ und wir schliessen dass somit $b^{(m)} \in \ell_p$ für alle $p \in [1, \infty]$. 
+\item Die Grenzfolge ist gegeben durch 
+\begin{align*}
+b^{( \infty)} = \frac{1}{n}.
+\end{align*}
+\item Sei $p = \infty$ Dann gilt:
+\begin{align*}
+0 \leq \lim_{m \to \infty} \|b^{(m)} - b^{(\infty})\|_\infty = \lim_{m \to \infty} \sup_{\substack{n \in \mathbb{N} \\ n \geq m}} \left| \frac{1}{n}\right| = \lim_{m \to \infty} \sup_{\substack{n \in \mathbb{N} \\ n \geq m}}  \frac{1}{n} = \lim_{m \to \infty} \frac{1}{m} = 0. 
+\end{align*}
+Sei nun $p \in (1, \infty)$, dann gilt 
+\begin{align*}
+0 \leq \lim_{m \to \infty} \|b^{(m)}- b^{( \infty)} \|_p = \lim_{m \to \infty} \left( \sum_{n=m+1}^\infty \left| \frac{1}{n}\right|^p \right)^{1/p} =\lim_{m \to \infty} \left( \sum_{n=m+1}^\infty  \frac{1}{n^p} \right)^{1/p}= 0,
+\end{align*}
+weil für alle $p > 1$ (Achtung $p$ muss strikt grösser als $1$ sein!) gilt
+\begin{align*}
+\sum_{n=1}^\infty \frac{1}{n^p}< \infty
+\end{align*}
+und somit muss der Tail d.h. $\sum_{n=m+1}^\infty \frac{1}{n^p}$ für $m \to \infty$  gegen Null konvergieren (siehe auch Nullfolgenkriterium). 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Es sei für $n,m \in \mathbb{N}_{ \geq 2}$:
+\begin{align*}
+A_n^{(m)}:= \frac{m}{m+n^{3/4}}.
+\end{align*}
+Betrachten Sie die Folge $(b^{(m)})_{m \in \mathbb{N}_{ \geq 2}} \subset \mathbb{R}^\mathbb{N}$ mit $b^{(m)}:= A_n^{(m)}$. 
+\begin{enumerate}[i)]
+\item Zeigen Sie $\|b^{(m)}\|_{ \ell_\infty} < \infty$ für alle $m \in \mathbb{N}_{ \geq 2}$. 
+\item Zeigen Sie $\| b^{(m)}\|_{ \ell_2} < \infty$ für alle $m \in \mathbb{N}_{ \geq 2}$. 
+\item Zeigen Sie $b^{(m)} \notin \ell_1$ für alle $m \in \mathbb{N}_{ \geq 2}$. Hinweis: Verwenden Sie für alle $a,b \in \mathbb{R}_{ \geq 1}$ gilt  $\frac{a}{a+b} > \frac{1}{b}.$
+\end{enumerate}
+\end{ex}
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Es gilt:
+\begin{align*}
+\|b^{(m)}\|_{ \ell_\infty} = \sup_{n \in \mathbb{N}_{ \geq 2}} \left| \frac{m}{m+n^{3/4}}\right| = \sup_{n \in \mathbb{N}_{ \geq 2}} \frac{m}{m+n^{3/4}} \overset{(*)}= \frac{m}{m+2^{3/4}}<1< \infty \text{ für alle }m \in \mathbb{N}_{ \geq 2}.
+\end{align*}
+Wobei wir in (*) verwendet haben, dass die Folge $\frac{m}{m+n^{3/4}}$ für fixes $m$ monoton fallend in $n \in \mathbb{N}_{ \geq 2}$ ist. 
+\item Wir haben 
+\begin{align*}
+\|b^{(m)}\|_{ \ell_2}^2 = \sum_{n=2}^\infty \left| \frac{m}{m+n^{3/4}}\right|^2 = \sum_{n=2}^\infty \left( \frac{m}{m+n^{3/4}}\right)^2 \leq m^2 \sum_{n=1}^\infty \frac{1}{(m+n^{3/4})^2}< m^2 \sum_{n=1}^\infty \frac{1}{n^{3/2}}< \infty.
+\end{align*}
+Wobei wir im letzten Schritt verwendet haben dass die Riemann'sche Zeta-Reihe mit $s=3/2 >1$ konvergiert. 
+\item Wir verwenden den Hinweis, dass für alle $a,b \in \mathbb{R}_{ \geq 1}$ die Ungleichung $\frac{a}{a+b}> \frac{1}{b}$ gilt. Damit erhalten wir nun:
+\begin{align*}
+\|b^{(m)}\|_{ \ell_1} = \sum_{n=2}^\infty \left| \frac{m}{m+n^{3/4}}\right| = \sum_{n=2}^\infty \frac{m}{m+n^{3/4}}> \sum_{n=2}^\infty \frac{1}{n^{3/4}} = \infty
+\end{align*}
+Wobei wir verwendet haben, dass die Riemann'sche Zeta-Reihe mit $s=3/4 < 1$ divergent ist. Die Behauptung erfolgt nun durch das Minorantenkriterium. 
+\end{enumerate}
+\end{solution}
+
+\newpage
+
+
+\section{Stetigkeit und Grenzwerte von Funktionen}
+
+
+\begin{ex}
+Zeigen Sie, mit Hilfe der Definition der Stetigkeit, dass die folgende Funktion in $x=1$ stetig ist:
+\begin{align*}
+h: \begin{cases} \mathbb{R} \setminus \lbrace -1 \rbrace & \longrightarrow \mathbb{R} \\
+x & \longmapsto \frac{x^2+x+1}{x+1}. \end{cases}
+\end{align*}
+\end{ex}
+
+
+\begin{solution}
+Sei $ \epsilon >0$ fest aber beliebig, es sei $\delta$ sodass $0< |x-1| < \delta$, und wir können stets ohne Einschränkung annehmen, dass $\delta < 1$. Wir betrachten den Ausdruck:
+\begin{align*}
+|h(x)-h(1)| &= \left| \frac{x^2 + x +1}{x+1} - \frac{3}{2} \right| = \left| \frac{2x^2+2x+2-3x-3}{2(x+1)} \right| = \left| \frac{x^2- \frac{1}{2}x- \frac{1}{2}}{x+1} \right| \\
+& = \left| \frac{ \left( x + \frac{1}{2}\right) (x-1)}{x+1} \right| = \frac{ \left| x + \frac{1}{2}\right| |x-1|}{|x+1|} < \frac{\left|x + \frac{1}{2} \right|}{|x+1|} \delta.
+\end{align*}
+Wir wollen also die Terme $x+ \frac{1}{2}$ und $x+1$ kontrollieren. Aus $|x-1| < \delta$ erhalten wir jedoch sofort:
+\begin{align*}
+\left| x + \frac{1}{2} \right| = \left| x -1 +1 + \frac{1}{2} \right| \leq |x-1| + \frac{3}{2} < \delta + \frac{3}{2}< \frac{5}{2}.
+\end{align*}
+Es bleibt also nur noch der Ausdruck $|x+1|$. Da wir per Annahme $0 < |x-1| < \delta$ haben,  also $x$ sich beliebig nahe an $1$ befindet, muss sich $x+1$ beliebig Nahe an $2$ befinden, also haben wir:
+\begin{align*}
+2 -\delta < |x+1| < 2 + \delta.
+\end{align*}
+und da $\delta <1$ haben wir $|x+1| >1$, also erhalten wir:
+\begin{align*}
+|h(x)-h(1)| < \frac{\left| x + \frac{1}{2} \right|}{|x+1|} \delta < \frac{5}{2} \delta \overset{!}< \epsilon \iff \delta < \epsilon \frac{2}{5}.
+\end{align*} 
+Wir wählen also für ein beliebiges $\epsilon >0$ ein $\delta$ derart, dass $0 < \delta < \min \lbrace \frac{2\epsilon}{5},1 \rbrace$ und erhalten dass dann $h$ stetig an der Stelle $x=1$ ist, d.h. wir haben formal gezeigt, dass:
+\begin{align*}
+\lim_{x \rightarrow 1} h(x) = \lim_{x \rightarrow 1} \frac{x^2 + x+1}{x+1} = \frac{3}{2}.
+\end{align*}
+\end{solution}
+
+
+\begin{ex} Sind die 3 nachfolgenden Funktionen Lipschitz-stetig?
+\begin{enumerate}[i)]
+\item $f:(0, \infty) \longrightarrow \mathbb{R}, \ x \longmapsto \frac{1}{1+x^2}$.
+\item $f:(0,1) \longrightarrow \mathbb{R}, \ x \longmapsto \sqrt{x}$ .
+\item $f: \mathbb{R} \longrightarrow \mathbb{R}, \ x \longmapsto \sin x$.
+\item Finden Sie eine Funktion, welche gleichmässig stetig, aber nicht Lipschitz-stetig ist.
+\item Finden Sie eine Funktion, die Lipschitz-stetig, aber nicht differenzierbar ist.
+
+\end{enumerate}
+
+\end{ex}
+
+
+\begin{solution} 
+\begin{enumerate}[i)]
+
+\item \begin{align*}
+|f'(x)| = \left| \frac{-2x}{(1+x^2)^2}\right| \leq 1 \implies \text{ Ableitung beschränkt} \implies f \text{ ist Lipschitz-stetig}.
+\end{align*}
+Wir haben hierbei verwendet, dass gemäss Bernoulli Ungleichung $(1+x^2)^2 \geq 1 + 2x^2$. Desweiteren gilt $1+2x^2 \geq 2x$ weil $1-2x+2x^2 = (1-x)^2 + x^2 \geq 0$. Somit haben wir gezeigt, dass $(1+x^2)^2 \geq 2x$ und folglich die Behauptung. 
+\item Für den Grenzwert der Ableitung an der Stelle $x=0^+$ gilt:
+\begin{align*}
+\lim_{x \rightarrow 0^+} |f'(x)| = \lim_{x \rightarrow 0^+} \left| \frac{1}{2 \sqrt{x}} \right| = \infty.
+\end{align*}
+Also ist die Ableitung an der Stelle $x=0^+$ unbeschränkt und somit ist $f$ nicht Lipschitz-stetig.
+\item Offensichtlich ist die Ableitung durch die $\cos$ Funktion gegeben, welche durch $1$ beschränkt ist und somit ist $f$ Lipschitz-stetig.
+\item Wir definieren $f: [0,1] \longrightarrow \mathbb{R}, \ x \longmapsto \sqrt{x}$, dann ist $f$ gleichmässig stetig, aber nicht Lipschitz.
+\item Die Betragsfunktion $f: \mathbb{R} \longrightarrow \mathbb{R}, \ x \longmapsto |x|$ ist ein möglicher Kandidat. 
+\end{enumerate}
+
+
+\end{solution}
+
+
+\begin{ex}
+Beweisen Sie, falls $f:\RR \longrightarrow \RR$ stetig und injektiv ist, dann ist $f$ streng monoton.
+\end{ex}
+\begin{solution}
+Wir nehmen an, dass $f$ nicht streng monoton ist. Dann existieren $x_1 < x_2 < x_3$, sodass $f(x_1) \leq f(x_2) \geq f(x_3)$ oder $f(x_1)\geq f(x_2) \leq f(x_3)$. Es gibt nun de facto vier F\"alle, die man untersuchen muss. Man kann es mittels \"Uberlegen auf einen Fall reduzieren. Falls jemandem dieses "ohne Beschr\"ankung der Allgemeinheit" nicht zusagt, so soll er dies in Gedanken durch "man zeigt analog" ersetzen und es zeigen. Dies ist eine gute \"Ubung.\\
+Ohne Beschr\"ankung der Allgemeinheit k\"onnen wir annehmen, dass gilt $f(x_1) \leq f(x_2) \geq f(x_3)$. Falls dies nicht der Fall ist, betrachten wir $g: \RR \longrightarrow \RR,~ g(x):=\ -f(x)$. $g$ ist stetig und injektiv, desweiteren ist $g$ genau dann streng monoton, wenn $f$ es ist.\\
+Desweiteren k\"onnen wir ohne Beschr\"ankung der Allgemeinheit annehmen, dass $f(x_1) \leq f(x_3)$, dies ist wahr weil $f$ per Annahme stetig ist, also können wir $x_3$ nahe genug an $x_2$ wählen sodass $f(x_1) \leq f(x_3)$.\\
+Wir haben nun alles auf den Fall $f(x_1)\leq f(x_3) \leq f(x_2)$ reduziert. Aus dem Zwischenwertsatz (Satz 6.16) folgt, dass es ein $\xi \in (x_1, x_2)$ gibt, sodass $f(x_3)= f(\xi)$, dies steht im Widerspruch, dass $f$ injektiv ist.
+\end{solution} 
+
+
+\begin{ex}{$(\star)$}
+Sei $f_n:[0,1] \longrightarrow \RR$ eine Funktionenfolge und $f:[0,1] \longrightarrow \RR$. Entscheiden Sie f\"ur jede der folgenden Aussagen, ob sie wahr oder falsch ist:
+\begin{enumerate}[i.)]
+\item
+Alle $f_n$ sind stetig und $f_n \longrightarrow f$ punktweise $\Longrightarrow$ $f$ ist stetig. 
+\item
+Alle $f_n$ sind stetig und $f_n \longrightarrow f$ gleichm\"assig $\Longrightarrow$ $f$ ist stetig. 
+\item
+Alle $f_n$ sind differenzierbar auf $(0,1)$ und $f_n \longrightarrow f$ gleichm\"assig $\Longrightarrow$ $f$ ist differenzierbar auf $(0,1)$. 
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Falsch. Gegenbeispiel, $f_n(x)=x^n$ und $f(x)=\begin{cases} 1, \quad x=1 \\ 0,\quad x \neq 1. \end{cases}$
+\item
+Wahr, Prop. 6.24.
+\item
+Falsch. Gegenbeispiel, $f_n(x):= \sqrt{(x-1/2)^2+1/n}$ konvergiert gleichmässig gegen die nicht differenzierbare Funkton $f(x):= |x-1/2|.$ \\
+\end{enumerate}
+\end{solution}
+
+
+
+
+
+\begin{ex}
+Beweisen Sie, falls $f:\RR \longrightarrow \RR$ stetig und beschr\"ankt ist, dann besitzt $f$ einen Fixpunkt.
+\end{ex}
+\begin{solution}
+Wir definieren $a:=\inf_{x\in \RR} f(x)$ und $b:=\sup_{x\in \RR} f(x)$. Dann gilt $Im(f) \subseteq [a,b]$ und wir k\"onnen $f$ einschr\"anken auf $f:[a,b] \longrightarrow [a,b]$. Da $f$ stetig ist, folgt die Behauptung aus dem Fixpunktsatz.
+\end{solution}
+
+
+\begin{ex}{$(\star)$}
+Sei $f:(0,1] \longrightarrow \RR$ gleichm\"assig stetig.
+Zeigen Sie: Es existiert ein $c\in \RR$, sodass f\"ur jede Folge $(x_n)_{n\in \NN}$ in $(0,1]$ mit $x_n \longrightarrow 0$ gilt:
+$$ f(x_n) \longrightarrow c  \quad \text{ f\"ur } n \longrightarrow \infty.$$
+Bemerkung (nicht Teil der Aufgabe): Das bedeutet, dass $\lim_{x \downarrow 0}f(x) = c$.
+\end{ex}
+\begin{solution}
+Sei $(x_n)_{n \in \NN}\subseteq (0,1]$ mit $x_n \longrightarrow 0$. Dann ist $(x_n)_{n \in \NN}$ eine Cauchyfolge (da sie konvergiert). Da $f$ gleichm\"assig stetig ist, ist $(f(x_n))_{n\in \NN}$ ebenfalls eine Cauchyfolge. Da $\RR$ vollst\"andig ist (Satz 3.23), existiert ein $c\in \RR$, sodass $f(x_n) \longrightarrow c$. Sei nun $(y_n)_{n\in \NN}\subseteq (0,1]$, sodass $y_n \longrightarrow 0$. Wir definieren f\"ur $n\in \NN$:
+$$z_{2n}:=x_n \quad \text{ und } \quad z_{2n+1}:= y_n.$$
+Dann gilt $z_n \longrightarrow 0$. Mit der gleichen Argumentation wie oben, erhalten wir, dass $(f(z_n))_{n\in \NN}$ konvergiert und damit gilt:
+$$\lim_{n \rightarrow \infty} f(y_n) = \lim_{n \rightarrow \infty} f(z_{2n+1})
+= \lim_{n \rightarrow \infty} f(z_n) = \lim_{n \rightarrow \infty} f(z_{2n})
+= \lim_{n \rightarrow \infty} f(x_n) = c.$$
+\end{solution}
+
+\begin{ex} Berechnen Sie die folgenden Grenzwerte:
+\begin{enumerate}[i)]
+\item
+$$\lim_{x \rightarrow 0} \frac{\sin(ax)}{x}.$$
+
+\item
+$$\lim_{x \rightarrow \infty} \frac{e^x x^5}{x^x}.$$
+
+\item
+
+$$ \lim_{x\rightarrow \infty} \big( x^2+3-\sqrt{x^4+6x^2}  \big)x^2.$$
+\end{enumerate}
+
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i)]
+\item
+Es gibt mehrere M\"oglichkeiten dies zu zeigen:
+
+$ \underline{\text{M\"oglichkeit } 1: \text{ Potenzreihe:}} $
+
+Es gilt:
+$$ \frac{\sin(ax)}{x} = \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} x^{2j}.$$
+
+Wir berechnen:
+
+$$ \bigg\vert \frac{(-1)^j a^{2j+1}}{(2j+1)!}  \bigg\vert^{\frac{1}{2j}}
+= \frac{\vert a \vert^{1+\frac{1}{2j}}}{((2j+1)!)^{\frac{1}{j}}} 
+\longrightarrow \vert a \vert \cdot 0= 0, \quad \text{ f\"ur } j\longrightarrow \infty.$$
+
+Die restlichen Koeffizienten von $\sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} z^{2j}$ sind $0$. Damit ist der Konvergenzradius $\rho= \infty$. Wir setzten:
+$$ f(z)= \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} z^{2j} .$$
+Nach Satz 7.2 ist $f$ stetig. Damit gilt:
+
+$$ \lim_{x\rightarrow 0} \frac{sin(ax)}{x} = \lim_{x\rightarrow 0} f(x) = f(0)
+= \sum_{j\geq 0} \frac{(-1)^j a^{2j+1}}{(2j+1)!} 0^{2j} 
+= \frac{(-1)^0 a^{2\cdot 0+1}}{(2\cdot 0+1)!} = a.$$
+
+$ \underline{\text{M\"oglichkeit } 2: \text{L'Hôpital:} } $
+
+Es gilt $\lim_{x\rightarrow 0} \sin(ax)= 0 = \lim_{x\rightarrow 0} x$. Nenner und Z\"ahler sind beide differenzierbar. Mit dem Satz von Hôpital (Satz 8.14) folgt:
+
+$$ \lim_{x\rightarrow 0} \frac{\sin(ax)}{x} = \lim_{x\rightarrow 0} \frac{a \cdot \cos(ax)}{1}
+= a \cdot \cos(0)= a.$$
+Wobei wir benutzt haben, dass $\cos$ stetig ist und $\cos(0)=1$.
+\item
+Wir berechnen:
+$$ \frac{e^x x^5}{x^x} = e^5 \frac{e^{x-5}}{x^{x-5}}= e^5 \bigg(\frac{e}{x}\bigg)^{x-5}.$$
+
+F\"ur $x\geq 2e$ gilt:
+
+$$0 \leq e^5  \bigg(\frac{e}{x}\bigg)^{x-5} \leq e^5 \bigg(\frac{1}{2}\bigg)^{x-5} \longrightarrow 0,
+\quad \text{ f\"ur } x\longrightarrow \infty.$$
+
+Wobei wir benutzt haben, dass $2^{x-5} \longrightarrow \infty$ f\"ur $x\longrightarrow \infty$. Damit gilt $\lim_{x\rightarrow \infty} \frac{e^x x^5}{x^x}= 0$.
+
+\item
+Wir berechnen:
+
+$$\big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 
+= \frac{\big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)\big(x^2 + 3 + \sqrt{x^4 + 6x^2}\big)x^2}{x^2 + 3 + \sqrt{x^4 + 6x^2}}$$
+
+$$ = \frac{9x^2}{x^2 + 3 + \sqrt{x^4 + 6x^2}} 
+= \frac{9}{1 + \frac{3}{x^2} + \sqrt{1 + \frac{6}{x^2}}} \longrightarrow \frac{9}{2}, \quad \text{ f\"ur } x \longrightarrow \infty.$$
+Also $\lim_{x\rightarrow \infty} \big(x^2 + 3 - \sqrt{x^4 + 6x^2}\big)x^2 = \frac{9}{2}$.
+
+\end{enumerate}
+\end{solution}
+
+ 
+
+\begin{ex} Berechnen Sie die folgenden Grenzwerte (möglicherweise $\pm \infty$):
+\begin{enumerate}[i)]
+\item  \begin{align*}
+\lim_{x \rightarrow 0 } x^2 \sin \left( \frac{1}{x} \right) .
+\end{align*}
+\item \begin{align*}
+\lim_{x \rightarrow \infty} \frac{2- \cos x}{x+3}.
+\end{align*}
+\item \begin{align*}
+\lim_{x \rightarrow \infty} \frac{x^2 (2+ \sin^2x)}{x+100}.
+\end{align*}
+\item \begin{align*}
+\lim_{x \rightarrow 0 } x^2 e^{ \sin^3 \left( \frac{1}{x}\right) } .
+\end{align*}
+\end{enumerate}
+\end{ex}
+
+\begin{solution} Wir verwenden in allen Lösungen, dass die trigonometrischen Funktionen von oben durch $1$ und von unten durch $-1$ beschränkt sind. Wir erhalten dann:
+\begin{enumerate}[i)]
+\item \begin{align*}
+0 \longleftarrow -x^2 \leq x^2 \sin \left( \frac{1}{x} \right) \leq x^2 \longrightarrow 0, \text{ falls } x \longrightarrow 0. 
+\end{align*}
+da $x^2 \geq 0$.
+\item Wir haben $-1 \leq \cos (x) \leq 1$ und somit $ 1 \geq - \cos(x) \geq -1 $ also:
+\begin{align*}
+0 \longleftarrow \frac{1}{x+3} \leq \frac{2- \cos x}{x+3} \leq \frac{3}{x + 3} \longrightarrow 0  \text{ falls } x \longrightarrow \infty.
+\end{align*}
+\item Es genügt die untere Abschätzung zu betrachten, wir erkennen dass: 
+\begin{align*}
+\frac{x^2}{x+100} \leq \frac{x^2 (2+ \sin^2 x)}{x+100}.
+\end{align*}
+und da die untere Schranke gegen unendlich divergiert, muss auch die obere Schranke nach unendlich divergieren. 
+\item Da die Exponential Funktion monoton wachsend auf $\mathbb{R}$ ist erhalten wir: 
+\begin{align*}
+0 \longleftarrow x^2 e^{-1} \leq x^2 \exp \left(  \sin^3 \left( \frac{1}{x} \right) \right) \leq x^2 e^1 \longrightarrow 0, \text{ falls } x \longrightarrow 0.
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex} Berechnen Sie die folgenden Grenzwerte:
+\begin{enumerate}[i)]
+\item \begin{align*}
+ \lim_{x \rightarrow 0^+} \left( \sqrt{x^2 +1} \right)^{ \frac{1}{\sin^2 x}} .
+\end{align*}
+\item \begin{align*}
+\lim_{x \rightarrow 0^+} x^{ \sqrt{x+4}-2}.
+\end{align*}
+\end{enumerate}
+
+\end{ex}
+
+
+
+\begin{solution} Wir verwenden den $e^{\log}$-Trick um diese beiden Aufgaben zu lösen: 
+\begin{enumerate}[i)] 
+\item 
+\begin{align*}
+ \lim_{x \rightarrow 0^+} \left( \sqrt{x^2 +1} \right)^{ \frac{1}{\sin^2 x}} = \lim_{ x \rightarrow 0^+} \exp \left( \log \left[ \left( \sqrt{x^2+1}\right)^\frac{1}{\sin^2x} \right] \right) = \lim_{x \rightarrow 0^+} \exp \left( \frac{\log \sqrt{x^2+1}}{\sin^2 x} \right). 
+\end{align*}
+Da die Exponentialfunktion stetig ist, dürfen wir den Grenzwert mit der $\exp$-Funktion vertauschen (i.e. in ihr Argument hereinziehen). Für den Grenzwert der Funktion im Exponenten erhalten wir mit Hilfe des Satzes von Bernoulli De L'Hopital, dass:
+\begin{align*}
+\lim_{x \rightarrow 0+} \frac{\log ( \sqrt{x^2+1}}{\sin^2x} = \lim_{x \rightarrow 0^+} \frac{\log(x^2+1)}{2 \sin^2 x} = \lim_{x \rightarrow 0^+} \frac{\frac{2x}{1+x^2}}{4 \sin x \cos x} &= \lim_{x \rightarrow 0^+} \underbrace{\frac{x}{2 \sin x}}_{ \longrightarrow 1/2} \cdot \underbrace{\frac{1}{(1+x^2) \cos x}}_{ \longrightarrow 1}   
+\\ & = \frac{1}{2}.
+\end{align*}
+und somit erhalten wir für den Grenzwert $e^{1/2}$. 
+
+\item 
+\begin{align*}
+\lim_{x \rightarrow 0^+} x^{ \sqrt{x+4}-2} = \lim_{x \rightarrow 0^+} \exp \left( \log \left( x^{ \sqrt{x+4}-2} \right) \right) = \lim_{x \rightarrow 0^+} \exp \left( (\sqrt{x+4}-2) \log(x) \right). 
+\end{align*}
+Dann berechnen wir den Grenzwert für die Funktion im Exponenten, erneut mit Hilfe des Satzes von Bernoulli- de L'Hopital:
+\begin{align*}
+\lim_{ x \rightarrow 0^+} ( \sqrt{4+x}-2) \log(x) & = \lim_{x \rightarrow 0^+} \frac{\log (x)}{\frac{1}{\sqrt{x+4}-2}} = \lim_{x \rightarrow 0^+} \frac{\frac{1}{x}}{\frac{- \frac{1}{2 \sqrt{x+4}}}{(\sqrt{x+4}-2)^2}} \\
+&= \lim_{x \rightarrow 0^+} \frac{-2 \cdot \sqrt{x+4} \cdot ( \sqrt{x+4}-2)^2}{x} \\
+&=  \lim_{x \rightarrow 0^+} \frac{-4 ( \sqrt{x+4}-2)^2}{x} = \lim_{x \rightarrow 0^+} \frac{-8( \sqrt{x+4}-2) \frac{1}{2 \sqrt{x+4}}}{1} \\
+= & \lim_{x \rightarrow 0^+} -8 \underbrace{( \sqrt{x+4}-2)}_{ \longrightarrow 0} \cdot \underbrace{\frac{1}{2 \sqrt{x+4}}}_{ \longrightarrow 1/4}  = 0 .
+\end{align*}
+Also erhalten wir als Grenzwert $e^0=1$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Berechnen Sie den folgenden Grenzwert: 
+\begin{align*}
+\lim_{x \rightarrow 0} \frac{1}{x} \int_0^{\tan x} \log(2+t)dt.
+\end{align*}
+\begin{solution} Wir haben den Typ $"0/0"$ da $\lim_{x \rightarrow 0} \int_0^{ \tan x} \log (2 +t) dt =0$. Dank dem Hauptsatz der Integralrechnung erhalten wir:
+\begin{align*}
+\lim_{x \rightarrow 0} \frac{1}{x} \int_0^{\tan x} \log(2+t)dt = \lim_{x \rightarrow 0} \frac{\log(2 + \tan (x)) \cdot \frac{1}{\cos^2 (x)}}{1} = \lim_{x \rightarrow 0} \frac{\log(2 + \tan(x))}{\cos^2 (x)}= \log(2).
+\end{align*}
+\end{solution}
+\end{ex}
+
+
+\begin{ex} Berechnen Sie den folgenden Grenzwert: Tipp: Verwenden sie einen Fundamentallimes.
+
+\begin{align*}
+\lim_{x \rightarrow \infty} \left( \frac{x^2 +2x}{x^2-3x+2}\right)^{ \frac{x^2 +1}{x-3}}.
+\end{align*}
+
+\end{ex}
+
+
+\begin{solution} Wir verwenden den Fundamentallimes $\lim_{x \rightarrow \infty} \left( 1+\frac{1}{x}\right)^x= e$. Wir berechnen also: 
+\begin{align*}
+\lim_{x \rightarrow \infty} \left( \frac{x^2 +2x}{x^2-3x+2}\right)^{ \frac{x^2 +1}{x-3}} &= \lim_{x \rightarrow \infty} \left( \frac{x^2-3x+2+3x-2+2x}{x^2-3x+2} \right)^\frac{x^2+1}{x-3} \\
+&= \lim_{x \rightarrow \infty} \left( 1 + \frac{5x-2}{x^2-3x+2} \right)^\frac{x^2+1}{x-3} \\
+&= \lim_{x \rightarrow \infty} \left[ \left( 1 + \frac{1}{\frac{x^2-3x+2}{5x-2}}\right)^\frac{x^2-3x+2}{5x-2}\right]^{ \frac{5x-2}{x^2-3x+2} \frac{x^2+1}{x-3}}.
+\end{align*}
+Der Ausdruck in den eckigen Klammern [.] konvergiert gemäss Fundamentallimes gegen $e$, also betrachten wir nurnoch den Exponenten, dieser kann jedoch wie folgt vereinfacht werden:
+\begin{align*}
+\frac{5x-2}{x^2-3x+2} \frac{x^2+1}{x-3} =\frac{5x^3-2x^2+5x-2}{x^3-6x^2+12x-6} \longrightarrow 5 \text{ falls } x \longrightarrow \infty.
+\end{align*}
+Da die höchst auftretenden Potenzen beide Grad $3$ aufweisen. Wir erhalten also den Grenzwert $e^5$. Als kleine Bemerkung, wir haben verwendet, dass wir eine Funktion der folgenden Form betrachten:
+\begin{align*}
+\lim_{x \rightarrow \infty} f(x)^{g(x)} = \lim_{x \rightarrow \infty} f(x)^{\lim g(x)}. 
+\end{align*}
+unter der Annahme, dass die beiden Grenzwerte $\lim f(x)$ und $\lim g(x)$ existieren. Dies gilt gemäss dem $e^{\log}$-Trick. In der Tat wir betrachten:
+\begin{align*}
+\lim_{x \rightarrow \infty} f(x)^{g(x)} = \lim_{x \rightarrow \infty} \exp \left( \log \left( f(x)^{g(x)} \right) \right) = \lim_{x \rightarrow \infty} \exp \left( g(x) \log(f(x)) \right) = \exp( \lim g(x) \log ( \lim f(x)))  \\
+= \lim f(x)^{\lim g(x)}.
+\end{align*}
+Da sowohl $\exp$ als auch $\log$ stetig sind. 
+\end{solution}
+
+\newpage
+
+
+\section{Potenzreihen}
+
+
+
+\begin{ex}
+Sei $f:\RR_{> -1} \longrightarrow \RR, \ f(x)=\log(1+x)$.
+\begin{enumerate}[i.)]
+\item
+Bestimmen Sie die Taylorreihe von $f$ um $x_0=0$. Bestimmen Sie den Konvergenzradius $\rho$ dieser Reihe.
+\item
+Sei $R_2 f(x)$ das Restglied des Taylorpolynoms zweiter Ordnung. Zeigen Sie:
+$$ R_2 f(x) \geq 0, \quad \forall \ 0\leq x < \rho. $$
+\item
+Zeigen Sie f\"ur alle $n>1$:
+$$ 1 - \left(1+\frac{1}{n}\right)^{-1}\left(1+ \log\left(1+\frac{1}{n}\right)\right) \leq \frac{1}{2n^2}.$$
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wir zeigen, dass:
+$$ \log(1+x)= \sum_{n\geq 1} \frac{(-1)^{n+1}}{n} \ x^n, \quad x\in (-1,1).$$
+Zuerst zeigen wir die folgende
+
+\begin{claim}
+$$f^{(n)}(x)= \frac{(-1)^{n+1}(n-1)!}{(1+x)^n}, \quad x\in \RR_{>-1} \text{ und } n \in \NN_{\geq 1}.$$
+\end{claim}
+\begin{proof}
+Wir beweisen dies mittels Induktion \"uber $n$. Zuerst zeigen wir die Induktionsverankerung $n=1$:
+
+$$ f'(x) = \frac{1}{1+x} = \frac{(-1)^2(1-1)!}{(1+x)^1}.$$
+Wir nehmen nun an, dass die Behauptung f\"ur ein $n\in \NN$ wahr ist. Dann berechnen wir:
+$$f^{(n+1)}(x)=  \bigg(\frac{(-1)^{n+1}(n-1)!}{(1+x)^n} \bigg)'
+= (-1)^{n+1}(n-1)! \bigg((1+x)^{-n} \bigg)' $$
+
+$$= (-1)^{n+1}(n-1)!(-n) (1+x)^{-n-1}
+=\frac{(-1)^{(n+1)+1}((n+1)-1)!}{(1+x)^{n+1}}.$$
+\end{proof}
+Zus\"atzlich gilt $f^{(0)}(0)= f(0)= \log(1)=0$.
+Damit erhalten wir f\"ur die Taylorreihe von $f$ in $x_0=0$ den folgenden Ausdruck:
+$$ \sum_{n\geq 0} \frac{f^{(n)}(0)}{n!} \ (x-0)^n
+= \sum_{n\geq 1} \frac{(-1)^{n+1}(n-1)!}{n!(1+0)^n} \ x^n 
+= \sum_{n\geq 1} \frac{(-1)^{n+1}}{n} \ x^n.$$
+
+Der Konvergenzradius ist gegeben durch:
+
+$$ \rho = \frac{1}{\limsup_{n \rightarrow \infty} (1/n)^{1/n}} = \frac{1}{1}= 1.$$
+\item
+$\underline{\text{M\"oglichkeit } 1: \text{ Taylorreihe}}$
+
+Das Restglied des Taylorpolynoms zweiter Ordnung ist f\"ur $0\leq x < 1$ gegeben durch:
+
+$$ R_2 f(x) = \sum_{k\geq 3} \frac{(-1)^{k+1}}{k} \ x^k 
+=\lim_{n \rightarrow \infty} \sum_{k=3}^{2n} \frac{(-1)^{k+1}}{k} \ x^k \geq 0.$$
+Wobei wir benutzt haben, dass:
+$$ \sum_{k=3}^{2n} \frac{(-1)^{k+1}}{k} \ x^k 
+= \sum_{k=1}^{n-1} \bigg(\frac{(-1)^{(2k+1)+1}}{2k+1} \ x^{2k+1} + \frac{(-1)^{(2k+2)+1}}{2k+2} \ x^{2k+2}\bigg)$$
+
+$$= \sum_{k=1}^{n-1} \bigg(\frac{1}{2k+1} \ x^{2k+1} - \frac{1}{2k+2} \ x^{2k+2}\bigg) 
+= \sum_{k=1}^{n-1} \underbrace{\bigg(\frac{1}{2k+1}  - \frac{1}{2k+2} \ x\bigg)}_{\geq 0} \underbrace{ x^{2k+1}}_{\geq 0} \geq 0.$$
+
+$\underline{\text{M\"oglichkeit } 2: \text{ Lagrange Restglied}}$
+
+Alternativ kann man das Restglied von Lagrange (Satz 8.25) verwenden. Es existiert ein $\xi_x \in (0,x)$, sodass:
+$$ R_2f(x) = \frac{f^{(3)}(\xi_x)}{3!}x^3 
+\stackrel{\text{Behauptung 5}}{=} \frac{2!(-1)^4}{3!(1+\xi_x)^3}x^3
+= \frac{1}{3} \cdot \underbrace{\frac{x^3}{(1+\xi_x)^3}}_{\geq 0, \text{ da } x\geq 0 ,\xi_x\geq 0} \geq 0.$$
+\item
+F\"ur $n>1$ gilt $0<\frac{1}{n} <1$. Wir k\"onnen also schreiben:
+$$ \log\bigg(1+\frac{1}{n}\bigg) = f\bigg(\frac{1}{n}\bigg) = \frac{1}{n} - \frac{\left( \frac{1}{n} \right)^2}{2} + R_2 f\bigg(\frac{1}{n}\bigg).$$
+Wenn wir diese Identit\"at einsetzen erhalten wir:
+$$ 1 - \bigg(1+\frac{1}{n}\bigg)^{-1}\bigg(1+ \log(1+\frac{1}{n})\bigg) 
+= 1 - \bigg(1+\frac{1}{n}\bigg)^{-1}\bigg(1+ \frac{1}{n} - \frac{1}{2}\big(\frac{1}{n}\big)^2 + R_2f(\frac{1}{n})\bigg)  $$
+
+$$= \bigg(1+\frac{1}{n}\bigg)^{-1} \frac{1}{2n^2} - 
+\underbrace{\bigg(1+\frac{1}{n}\bigg)^{-1}}_{> 0} \underbrace{R_2 f(\frac{1}{n})}_{\geq 0, \text{ wegen } ii.)}  
+\leq \bigg(1+\frac{1}{n}\bigg)^{-1} \frac{1}{2n^2} = \frac{n}{n+1} \cdot \frac{1}{2n^2}
+\leq \frac{1}{2n^2}.$$
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}
+Es sei $f_n : [1, \infty) \longrightarrow \RR, \ f_n(x)= 2n \left( \left(2x \right)^{1/n} -1 \right)$.
+\begin{enumerate}[i.)]
+\item
+Zeigen Sie, dass $(f_n)_{n\in \NN}$ punktweise konvergiert und bestimmen Sie den Grenzwert 
+$f:[1, \infty) \longrightarrow \RR$.
+
+Hinweise: Schreiben Sie $\left(2x \right)^{1/n}= \exp\left( 1/n \cdot \log(2x) \right)$.
+\item
+Zeigen Sie, dass die Konvergenz auf dem Intervall $[1,2]$ gleichm\"assig ist.
+\item
+Ist die Konvergenz gleichm\"assig auf $[1, \infty)$?
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Sei $x \geq 1$. Wir wenden den Satz \"uber die Taylorapproximation mit Langrange'schem Restglied (Satz 8.25) an. Dann existiert ein $\xi_x \in (0, 1/n \log(2x))$, sodass:
+$$ \exp\left( \frac{1}{n} \cdot \log(2x) \right) 
+= e^0 + e^0\frac{1}{n} \cdot \log(2x) + \frac{e^{\xi_x}}{2} \left( \frac{1}{n} \cdot \log(2x) \right)^2$$
+
+$$= 1 + \frac{1}{n} \cdot \log(2x) + \frac{e^{\xi_x}}{2} \left( \frac{1}{n} \cdot \log(2x) \right)^2.$$
+
+Damit gilt:
+
+$$ 2n \left( \left(2x \right)^{1/n} -1 \right)
+= 2n \left( \exp\left( \frac{1}{n} \cdot \log(2x) \right) -1 \right) $$
+ 
+$$= 2\cdot \log(2x) + \frac{e^{\xi_x}}{2n} \log(2x)^2 \longrightarrow 2\log(2x)=:f(x), \quad
+ \text{ f\"ur } n\longrightarrow \infty.$$
+ 
+\item
+Aus $i.)$ wissen wir, dass es f\"ur jedes $x\in [1,2]$ ein $\xi_x \in (0, 1/n \log(2x))$ gibt, sodass:
+$$ \vert f_n(x) - f(x) \vert 
+= \bigg\vert 2\cdot \log(2x) + \frac{e^{\xi_x}}{2n} \log(2x)^2 - f(x) \bigg\vert
+= \bigg\vert \frac{e^{\xi_x}}{2n} \log(2x)^2 \bigg\vert.$$
+
+Da die Exponentialfunktion und der Logarithmus auf unserem Bereich monoton steigend und nichtnegativ sind, gilt:
+$$ \sup_{x\in [1,2]} \vert f_n(x) - f(x) \vert
+\leq \frac{e^{\frac{1}{n}\log(4)}}{2n} \log(4)^2
+\leq \frac{e^{\log(4)}}{2n} \log(4)^2
+= \frac{2 \cdot \log(4)^2}{ n} \longrightarrow 0, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+\item
+Nein.
+ $$\bigg\vert f_n\left(\frac{n^n}{2}\right) - f\left(\frac{n^n}{2}\right) \bigg\vert
+ = \vert 2n \left( n - 1 \right) - 2\log(n^n) \vert
+ = \vert 2n (n-1 - \log(n)) \vert \longrightarrow \infty, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+ Also: 
+ $$\sup_{x\in [1, \infty)} \vert f_n(x) - f(x) \vert \longrightarrow \infty, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}{$(\star)$}
+Bestimmen Sie die Konvergenzradien der folgenden Potenzreihen in $z\in \CC$:
+\begin{enumerate}[i.)]
+\item
+$$ \sum_{m\geq 1} \bigg( \sum_{j=1}^m \frac{1}{j} \bigg) z^m.$$
+\item
+$$ \sum_{k\geq 0} 4k^5 3^k z^{k^2}.$$
+\item
+$$ \sum_{n\geq 1} \bigg(5- \frac{2}{n} \bigg)^n z^n.$$
+\item
+$$ \sum_{n\geq 0} i^{n-1}n^n z^n. $$
+\item
+$$ \sum_{n\geq 0} \frac{2^n}{n!} z^n. $$
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+$$ 1 = 1^n = \left( n \cdot \frac{1}{n}\right)^{1/n} 
+\leq \bigg\vert \sum_{j=1}^{n} \frac{1}{j} \bigg\vert^{1/n}
+\leq n^{1/n} \longrightarrow 1, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+Damit gilt 
+$\lim_{n \rightarrow \infty} \bigg\vert \sum_{j=1}^{n} \frac{1}{j} \bigg\vert^{1/n} =1$ 
+und damit:
+$$ \rho 
+= \frac{1}{\limsup_{n\rightarrow \infty} \bigg\vert \sum_{j=1}^{n} \frac{1}{j} \bigg\vert^{1/n} } 
+= \frac{1}{\lim_{n\rightarrow \infty} \bigg\vert \sum_{j=1}^{n} \frac{1}{j} \bigg\vert^{1/n} }
+= \frac{1}{1}=1.$$
+\item
+Die Koeffizienten sind:
+$$ a_n = \begin{cases} 0, \qquad \qquad \ n \text{ keine Quadratzahl} \\ 4n^{5/2} 3^{\sqrt{n}}, \quad n \text{ Quadratzahl.}   \end{cases} $$
+Wir berechnen:
+$$ \vert a_{n^2} \vert^{1/n} =\vert 4n^{5/2}\cdot 3^{\sqrt{n}} \vert^{1/n}
+= \underbrace{4^{1/n}}_{\longrightarrow 1} \cdot \underbrace{\left( n^{1/n} \right)^{5/2}}_{\longrightarrow 1^{5/2}=1} \cdot \underbrace{e^{\log(3)/\sqrt{n}}}_{\longrightarrow e^0=1} \longrightarrow 1, \quad \text{ f\"ur } n \longrightarrow \infty.$$
+Damit erhalten wir:
+$$ \rho = \frac{1}{\limsup_{n \rightarrow \infty} \vert a_n \vert^{1/n}} 
+= \frac{1}{\limsup_{n \rightarrow \infty} \vert a_{n^2} \vert^{1/n^2}} 
+= \frac{1}{1}= 1.$$
+\item
+Wir berechnen:
+$$ \rho 
+= \frac{1}{\limsup_{n \rightarrow \infty} \bigg\vert \left( 5 - \frac{2}{n}\right)^n \bigg\vert^{1/n}}
+= \frac{1}{\limsup_{n \rightarrow \infty} \left( 5 - \frac{2}{n}\right)}
+= \frac{1}{5}.$$
+\item
+Wir berechnen:
+$$\limsup_{n \rightarrow \infty} \vert i^{n-1}n^n \vert^{1/n}  
+\stackrel{\vert i \vert = 1}{=} \limsup_{n \rightarrow \infty} n = \infty.$$
+Damit gilt:
+$$\rho = 0.$$
+\item
+Sei $k\in \NN$, dann gilt f\"ur $n\geq k$:
+$$ \left( n! \right)^{1/n} 
+\geq \left(1\cdot 2 \cdot \cdot 3 \cdot \dots (k-1) \cdot k \cdot \underbrace{k \cdot \dots \cdot k}_{n-k \text{ mal}} \right)^{1/n}
+\geq k^{(n-k)/n} = k^{1- k/n}.$$
+Damit gilt:
+$$ \limsup_{n\rightarrow \infty} (n!)^{1/n} \geq \limsup_{n\rightarrow \infty} k^{1- k/n} = k.$$
+Da $k\in \NN$ beliebig war, gilt $\limsup_{n\rightarrow \infty} (n!)^{1/n}= \infty$. Es folgt:
+$$ \limsup_{n \rightarrow \infty} \bigg\vert \frac{2^n}{n!} \bigg\vert^{1/n}
+= \limsup_{n \rightarrow \infty} \frac{2}{(n!)^{1/n}} =0.$$
+Also gilt:
+$$ \rho= \infty. $$
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}{$(\star)$}
+Entscheiden Sie f\"ur die folgenden Aussagen, ob sie wahr oder falsch sind:
+\begin{enumerate}[i.)]
+\item
+Sei $\rho>0$ der Konvergenzradius von $f(z)= \sum_{n\geq 0} a_n z^n$. Dann ist $f$ auf
+$\{ z \in \CC \ : \ \vert z \vert < \rho  \}$ stetig.
+\item
+Sei $\rho>0$ der Konvergenzradius von $f(z)= \sum_{n\geq 0} a_n z^n$. Dann
+
+$p_m(z)= \sum_{n=0}^m a_n z^n \longrightarrow f(z)$ gleichm\"assig auf $\{ z \in \CC \ : \ \vert z \vert \leq r  \}$ f\"ur alle $r<\rho$.
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+Wahr, Satz 8.30.
+\item
+Sei $0\leq r < \rho$. Nach Satz 7.2 konvergiert $\sum_{n\geq 0} \vert a_n \vert \cdot r^n$. Insbesondere gilt $\sum_{n\geq m+1} \vert a_n \vert \cdot r^n \longrightarrow 0$ f\"ur $m\longrightarrow \infty$. Die folgende Rechnung zeigt die gleichm\"assige Konvergenz auf $\{ z \in \CC \ : \ \vert z \vert \leq r  \}$:
+
+$$ \sup_{\vert z \vert \leq r} \vert f(z) - p_m(z) \vert 
+= \sup_{\vert z \vert \leq r} \vert \sum_{n\geq m+1} a_n z^n \vert
+\leq \sup_{\vert z \vert \leq r}  \sum_{n\geq m+1} \vert a_n \vert \cdot \vert z^n \vert$$
+
+$$= \sum_{n\geq m+1} \vert a_n \vert \cdot r^n \longrightarrow 0, \quad \text{ f\"ur } m \longrightarrow \infty.$$
+
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex} Berechnen Sie den folgenden Grenzwert mit Hilfe der Lagrange'schen Fehlerabschätzung: $$ \lim_{x \rightarrow 0} \bigg( \frac{1}{e^x-1} - \frac{1}{x} \bigg).$$
+\end{ex}
+
+\begin{solution}
+Aus dem Satz \"uber das Lagrang'sche Restglied (Satz 8.25) wissen wir, dass gilt:
+$$ e^x= 1 + x + \frac{x^2}{2} + e^{\xi_x} \cdot \frac{x^3}{6},$$
+wobei $\xi_x \in [0,x]$ f\"ur $x>0$ und $\xi_x \in [x,0]$ f\"ur $x<0$. Damit folgt:
+$$  \frac{1}{e^x-1} - \frac{1}{x} 
+=  \frac{1}{x + \frac{x^2}{2} + e^{\xi_x} \cdot \frac{x^3}{6}} - \frac{1}{x} 
+= \frac{1}{x} \bigg( \frac{1}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} - 1 \bigg)
+= \frac{1}{x} \bigg( \frac{-\frac{x}{2} - e^{\xi_x} \cdot \frac{x^2}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} \bigg)$$
+
+$$=  \frac{-\frac{1}{2} - e^{\xi_x} \cdot \frac{x}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}}.$$
+Da $\vert \xi_x \vert\leq \vert x \vert$, gilt $\xi_x \longrightarrow 0$ f\"ur $x \longrightarrow 0$. Damit erhalten wir mit der Stetigkeit der Exponentialfunktion:
+$$ \lim_{x \rightarrow 0} \bigg( \frac{1}{e^x-1} - \frac{1}{x} \bigg)
+=   \lim_{x \rightarrow 0}  \frac{-\frac{1}{2} - e^{\xi_x} \cdot \frac{x}{6}}{1 + \frac{x}{2} + e^{\xi_x} \cdot \frac{x^2}{6}} 
+=  \frac{-\frac{1}{2}- e^0\cdot 0}{1+ \frac{0}{2} + e^0\cdot \frac{0^2}{6} }
+= -\frac{1}{2}.$$
+\end{solution}
+
+\newpage 
+
+
+
+
+
+\end{document}
