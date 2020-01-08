@@ -1569,6 +1569,77 @@ Dies zeigt nun, dass $\ell_p \subset \ell_q$ für $p \leq q$.
 \end{enumerate}
 \end{solution}
 
+\begin{ex} Es sei 
+\begin{align*}
+A_n^{(m)}:= \begin{cases} \frac{1}{n} & \text{falls } n \leq m \\ 0 & \text{sonst}. \end{cases}
+\end{align*}
+Betrachten Sie die Folge $(b^{(m)})_{m \in \mathbb{N}} \subset \mathbb{R}^\mathbb{N}$ mit $b^{(m)}:= (A_n^m)_{n \in \mathbb{N}}$. 
+\begin{enumerate}[i)]
+\item Für welche $p \in [1, \infty]$ gilt $b^{(m)} \in \ell_p$?
+\item Bestimmen Sie die Grenzfolge $b^{( \infty)}$.
+\item Zeigen Sie, dass $(b^{(m)})_{m \in \mathbb{N}}$ bezüglich $\| \cdot \|_p$, wobei $p \in (1, \infty]$ konvergiert. 
+\end{enumerate}
+\end{ex}
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Sei $m \in \mathbb{N}$ fest aber beliebig (insbesondere also endlich). Weil die Folge $b^{(m)}$ nur endlich viele von Null verschiedene Folgenglieder besitzt, gilt $b^{(m)} \in \ell_\infty$. Sei nun $p \in [1, \infty)$. Dann gilt
+\begin{align*}
+\sum_{n=1}^\infty |A_n^{(m)}|^p = \sum_{n=1}^m |A_n^{(m)}|^p < \infty
+\end{align*}
+weil es sich um eine endliche Summe handelt. Also $b^{(m)} \in \ell_p$ und wir schliessen dass somit $b^{(m)} \in \ell_p$ für alle $p \in [1, \infty]$. 
+\item Die Grenzfolge ist gegeben durch 
+\begin{align*}
+b^{( \infty)} = \frac{1}{n}.
+\end{align*}
+\item Sei $p = \infty$ Dann gilt:
+\begin{align*}
+0 \leq \lim_{m \to \infty} \|b^{(m)} - b^{(\infty})\|_\infty = \lim_{m \to \infty} \sup_{\substack{n \in \mathbb{N} \\ n \geq m}} \left| \frac{1}{n}\right| = \lim_{m \to \infty} \sup_{\substack{n \in \mathbb{N} \\ n \geq m}}  \frac{1}{n} = \lim_{m \to \infty} \frac{1}{m} = 0. 
+\end{align*}
+Sei nun $p \in (1, \infty)$, dann gilt 
+\begin{align*}
+0 \leq \lim_{m \to \infty} \|b^{(m)}- b^{( \infty)} \|_p = \lim_{m \to \infty} \left( \sum_{n=m+1}^\infty \left| \frac{1}{n}\right|^p \right)^{1/p} =\lim_{m \to \infty} \left( \sum_{n=m+1}^\infty  \frac{1}{n^p} \right)^{1/p}= 0,
+\end{align*}
+weil für alle $p > 1$ (Achtung $p$ muss strikt grösser als $1$ sein!) gilt
+\begin{align*}
+\sum_{n=1}^\infty \frac{1}{n^p}< \infty
+\end{align*}
+und somit muss der Tail d.h. $\sum_{n=m+1}^\infty \frac{1}{n^p}$ für $m \to \infty$  gegen Null konvergieren (siehe auch Nullfolgenkriterium). 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Es sei für $n,m \in \mathbb{N}_{ \geq 2}$:
+\begin{align*}
+A_n^{(m)}:= \frac{m}{m+n^{3/4}}.
+\end{align*}
+Betrachten Sie die Folge $(b^{(m)})_{m \in \mathbb{N}_{ \geq 2}} \subset \mathbb{R}^\mathbb{N}$ mit $b^{(m)}:= A_n^{(m)}$. 
+\begin{enumerate}[i)]
+\item Zeigen Sie $\|b^{(m)}\|_{ \ell_\infty} < \infty$ für alle $m \in \mathbb{N}_{ \geq 2}$. 
+\item Zeigen Sie $\| b^{(m)}\|_{ \ell_2} < \infty$ für alle $m \in \mathbb{N}_{ \geq 2}$. 
+\item Zeigen Sie $b^{(m)} \notin \ell_1$ für alle $m \in \mathbb{N}_{ \geq 2}$. Hinweis: Verwenden Sie für alle $a,b \in \mathbb{R}_{ \geq 1}$ gilt  $\frac{a}{a+b} > \frac{1}{b}.$
+\end{enumerate}
+\end{ex}
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Es gilt:
+\begin{align*}
+\|b^{(m)}\|_{ \ell_\infty} = \sup_{n \in \mathbb{N}_{ \geq 2}} \left| \frac{m}{m+n^{3/4}}\right| = \sup_{n \in \mathbb{N}_{ \geq 2}} \frac{m}{m+n^{3/4}} \overset{(*)}= \frac{m}{m+2^{3/4}}<1< \infty \text{ für alle }m \in \mathbb{N}_{ \geq 2}.
+\end{align*}
+Wobei wir in (*) verwendet haben, dass die Folge $\frac{m}{m+n^{3/4}}$ für fixes $m$ monoton fallend in $n \in \mathbb{N}_{ \geq 2}$ ist. 
+\item Wir haben 
+\begin{align*}
+\|b^{(m)}\|_{ \ell_2}^2 = \sum_{n=2}^\infty \left| \frac{m}{m+n^{3/4}}\right|^2 = \sum_{n=2}^\infty \left( \frac{m}{m+n^{3/4}}\right)^2 \leq m^2 \sum_{n=1}^\infty \frac{1}{(m+n^{3/4})^2}< m^2 \sum_{n=1}^\infty \frac{1}{n^{3/2}}< \infty.
+\end{align*}
+Wobei wir im letzten Schritt verwendet haben dass die Riemann'sche Zeta-Reihe mit $s=3/2 >1$ konvergiert. 
+\item Wir verwenden den Hinweis, dass für alle $a,b \in \mathbb{R}_{ \geq 1}$ die Ungleichung $\frac{a}{a+b}> \frac{1}{b}$ gilt. Damit erhalten wir nun:
+\begin{align*}
+\|b^{(m)}\|_{ \ell_1} = \sum_{n=2}^\infty \left| \frac{m}{m+n^{3/4}}\right| = \sum_{n=2}^\infty \frac{m}{m+n^{3/4}}> \sum_{n=2}^\infty \frac{1}{n^{3/4}} = \infty
+\end{align*}
+Wobei wir verwendet haben, dass die Riemann'sche Zeta-Reihe mit $s=3/4 < 1$ divergent ist. Die Behauptung erfolgt nun durch das Minorantenkriterium. 
+\end{enumerate}
+\end{solution}
+
 \newpage
 
 
