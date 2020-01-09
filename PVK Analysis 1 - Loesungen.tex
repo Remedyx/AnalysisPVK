@@ -1285,7 +1285,7 @@ Da wir $d(x,z) \leq d(x,y)+d(y,z)$ haben benützen wir obige Ungleichung für $r
 \begin{align*}
 d'(x,z)= \frac{d(x,z)}{1+d(x,z)} \leq \frac{d(x,y)+d(y,z)}{1+d(x,y)+d(y,z)} = \frac{d(x,y)}{1+d(x,y)+d(y,z)}+ \frac{d(y,z)}{1+d(x,y)+d(y,z)}.
 \end{align*}
-Nun schätzen wir einzelnen Terme ab. Da $d(x,y) \geq 0$ und $d(y,z) \geq 0$ gilt
+Nun schätzen wir einzeln die Terme ab. Da $d(x,y) \geq 0$ und $d(y,z) \geq 0$ gilt
 \begin{align*}
 \frac{d(x,y)}{1+d(x,y)+\underbrace{d(y,z)}_{\geq 0}} \leq \frac{d(x,y)}{1+d(x,y)}=d'(x,y)
 \end{align*}
@@ -1303,7 +1303,7 @@ d(x,y):= \begin{cases} 0 & \text{falls } x=y \\ 1 & \text{falls } x \neq y. \end
 \end{align*}
 \begin{enumerate}[i)]
 \item Zeige, dass $(X,d)$ ein metrischer Raum ist.
-\item Zeige dass eine Folge $(a_n)_{n \in \mathbb{N}}$ in $X$ genau dann bezgülich $d$ konvergiert, wenn sie konstant ist ab einem (endlichen) Index $N \in \mathbb{N}$.
+\item Zeige dass eine Folge $(a_n)_{n \in \mathbb{N}}$ in $X$ genau dann bezüglich $d$ konvergiert, wenn sie konstant ist ab einem (endlichen) Index $N \in \mathbb{N}$.
 \item Folgere, dass $(X,d)$ vollständig ist.
 \item Welche Teilmengen von $X$ sind offen? Welche sind abgeschlossen? Was ist also die Topologie $\tau \subset \mathcal{P}(X)$ auf $X?$
 \item Sei $(M,d')$ ein beliebiger metrischer Raum und $f:X \to M$ eine beliebige Funktion. Zeige, dass $f$ stetig ist.
@@ -1540,7 +1540,7 @@ Da $\epsilon>0$ beliebig war, folgt, dass $(f(a_n))_{n\in \NN}$ eine Cauchyfolge
 
 \begin{solution}
 \begin{enumerate}[i)]
-\item Die Ungleichung ist trivial für $a=1$. Weiterin ist die Ungleichung trivial falls die Folge $(a_n)_{n \in \mathbb{N}}$ identisch Null ist und dies ist genau der Fall falls 
+\item Die Ungleichung ist trivial für $a=1$. Weiterhin ist die Ungleichung trivial falls die Folge $(a_n)_{n \in \mathbb{N}}$ identisch Null ist und dies ist genau der Fall falls 
 \begin{align*}
 \sum_{n=1}^\infty |a_n|=0.
 \end{align*}
