@@ -741,7 +741,7 @@ Damit gilt $\lim_{n\rightarrow \infty} a_n = a = x^2=  \frac{25}{4}$.
 \end{align*}
 \end{ex}
 
-\begin{solution} Per Definition ist die Exponential gegeben als 
+\begin{solution} Per Definition ist die Exponentialfunktion gegeben als 
 \begin{align*}
 e^x = \sum_{n=0}^\infty \frac{x^n}{n!}.
 \end{align*}
@@ -846,7 +846,7 @@ Zeigen Sie, dass dies eine Cauchy Folge ist. Verwenden Sie Teil i).
 
 \begin{solution}
 \begin{enumerate}[i)]
-\item Sei $ \epsilon >0$ fest aber beliebig. Seien $m \leq n$ beliebige natürliche Zahlen, wir setzen $k= n-m \geq 0$ und betrachten den Ausdruck $|a_m-a_{m+k}|$, falls $k=1$ dann wissen wir bereits, dass $|a_m-a_{m+k}| \leq 2^{-m}$. Verwenden wir nun sukzessive die Dreicksungleichung erhalten wir:
+\item Sei $ \epsilon >0$ fest aber beliebig. Seien $m \leq n$ beliebige natürliche Zahlen, wir setzen $k= n-m \geq 0$ und betrachten den Ausdruck $|a_m-a_{m+k}|$, falls $k=1$ dann wissen wir bereits, dass $|a_m-a_{m+k}| \leq 2^{-m}$. Verwenden wir nun sukzessive die Dreiecksungleichung erhalten wir:
 \begin{align*}
 |a_m-a_{m+k}| &= |(a_m-a_{m+1}) + (a_{m+1}-a_{m+2}) + \dots + (a_{m+k-1}-a_{m+k})| \\
 & \leq |a_m-a_{m+1}| + |a_{m+1}-a_{m+2}| + \dots + |a_{m+k-1}-a_{m+k}|\\
@@ -884,6 +884,47 @@ Lassen wir nun $n \longrightarrow \infty$ streben und verwenden die Geometrische
 \newpage
 \section{Reihen}
 
+\begin{ex} Wir wollen den Cauchy'schen Verdichtungssatz (Kondensationssatz von Cauchy) beweisen. 
+Sei $(a_n)_{n \in \mathbb{N}}$ eine nicht-negative Folge von monoton fallenden Termen. Zeige, dass 
+\begin{align*}
+\sum_{n=1}^\infty a_n < \infty \iff \sum_{n=1}^\infty 2^n a_{2^n} < \infty.
+\end{align*}
+\end{ex}
+
+\begin{solution} Es sei $\sum_{n=1}^\infty a_n$ konvergent. Dann gilt, weil $(a_n)_{n \in \mathbb{N}}$ nicht-negativ und monoton fallend ist:
+\begin{align*}
+a_1 + \frac{1}{2} \sum_{n=1}^K 2^n a_{2^n} &= a_1 + a_2 + 2a_4 + 4 a_8 + \dots + 2^{K-1} a_{2^K} \\
+& \leq a_1 + a_2 + a_3 + a_4 + \dots + a_{2^{K-1}+1} + \dots + a_{2^K-1} + a_{2^K} \\
+& \leq \sum_{n=1}^\infty a_n < \infty. 
+\end{align*}
+Um obige Ungleichung besser zu verstehen,  bemerke dass $2a_4 = a_4 + a_4 \leq a_3 + a_4$, analog $4a_8=a_8 + a_8 + a_8 + a_8 \leq a_5 + a_6 + a_7 + a_8$ usw. Für $K \to \infty$ zeigt dies, dass 
+\begin{align*}
+\sum_{n=1}^\infty 2^n a_{2^n} < \infty. 
+\end{align*}
+Nehme nun an, dass $\sum_{n=1}^\infty 2^n a_{2^n}$ konvergent ist. Wir erhalten 
+\begin{align*}
+\sum_{n=1}^N a_n& = a_1 +a_2 + a_3 + \dots + a_N \\
+& \leq a_1 + (a_2 + a_3) + (a_4 + a_5 + a_6 + a_7) + \dots + (a_{2^N} + \dots + a_{2^{N+1}-1}) \\ 
+& \leq a_1 +2 a_2 + 4a_4 + \dots + 2^N a_{2^N} \\
+& \leq a_1 + \sum_{n=1}^\infty 2^n a_{2^n}< \infty.
+\end{align*}
+Lassen wir nun $N \to \infty$ so folgt die Behauptung. 
+\end{solution}
+
+\begin{ex}\label{ex:Olivier} Es sei $(a_n)_{n \in \mathbb{N}}$ eine Folge monoton fallender, nicht-negativer reellen Zahlen. Zeige dass falls $\sum_{n=1}^\infty a_n $ konvergiert, dann gilt $n a_n \to 0$ als $n \to \infty$. Hinweis: Verwende den Cauchy'schen Verdichtungssatz. 
+\end{ex}
+
+
+\begin{solution} Da $\sum a_n$ konvergiert, gilt gemäss dem Cauchy'schen Verdichtungssatz auch, dass $\sum 2^n a_{2^n}$ konvergiert. Also muss $2^na_{2^n}$ eine Nullfolge sein, das heisst 
+\begin{align*}
+2^n a_{2^n} \xrightarrow{n \to \infty} 0. \tag{$\star$}
+\end{align*}
+Sei nun $k \in \mathbb{N}$ sodass $2^n < k <2^{n+1}$, da $(a_n)_{n \in \mathbb{N}}$ monoton fallend ist folgt dann
+\begin{align*}
+2^n a_{2^{n+1}} \leq k a_k \leq 2^{n+1} a_{2^n}.
+\end{align*}
+Für $n \to \infty$ strebt auch $k \to \infty$ und aus obiger Ungleichung folgt mit dem Sandwich Theorem und ($\star$) die Behauptung. 
+\end{solution}
 
 \begin{ex} Verwenden Sie den Cauchy'schen Verdichtungssatz (Kondensationssatz) um zu zeigen, dass die nachfolgenden Reihen divergieren respektive konvergieren:
 \begin{enumerate}[i)]
@@ -926,6 +967,61 @@ Da $s>1$ und wir erneut eine geometrische Reihe erhalten mit $0 \leq r = 2^{1-s}
 
 \end{solution}
 
+
+\begin{ex} \  \begin{enumerate}[i)]
+\item Sei $(a_n)_{n \in \mathbb{N}}$ monoton wachsend,  $a_n >0$. Zeige, die Reihe 
+\begin{align*}
+\sum_n \left( \frac{a_{n+1}}{a_n}-1 \right)
+\end{align*}
+konvergiert genau dann, wenn $(a_n)_{n \in \mathbb{N}}$ beschränkt ist.
+\item Es sei $(a_n)_{n \in \mathbb{N}}$ eine monoton fallende Nullfolge. Zeige dass gilt:
+\begin{align*}
+\sum_{n=1}^\infty \frac{a_n}{1+na_n} < \infty \iff \sum_{n=1}^\infty a_n < \infty. 
+\end{align*} 
+Hinweis: Verwende Aufgabe \ref{ex:Olivier}.
+\end{enumerate}
+\end{ex}
+
+\begin{solution} 
+\begin{enumerate}[i)]
+\item Nehme zum Widerspruch an, dass $(a_n)_{n \in \mathbb{N}}$ unbeschränkt ist. Da $(a_n)_{n \in \mathbb{N}}$ monoton wächst, gilt für $m >n$:
+\begin{align*}
+\sum_{k=n}^m \left( \frac{a_{k+1}}{a_k}-1 \right) & = \frac{a_{m+1}-a_m}{a_m} + \dots + \frac{a_{n+1}-a_n}{a_n} \\
+& \geq \frac{1}{a_m}[ (a_{m+1}-a_m) + \dots + (a_{n+1}-a_n)] \\
+& = \frac{1}{a_m}(a_{m+1}-a_n) \geq 1 - \frac{a_n}{a_m}.
+\end{align*}
+Da $(a_n)_{n \in \mathbb{N}}$ unbeschränkt ist, gibt es zu jedem $a_n$ ein $m>n$ mit $a_m > 2a_n$, also mit $1- \frac{a_n}{a_m}> \frac{1}{2}$. Also gibt es zu jedem $n$ ein $m>n$ mit der Eigenschaft
+\begin{align*}
+\sum_{k=n}^m \left( \frac{a_{k+1}}{a_k}-1 \right) > \frac{1}{2}.
+\end{align*}
+Mit dem Cauchy-Kriterium folgt, dass die Divergenz der Reihe 
+\begin{align*}
+\sum_n \left( \frac{a_{n+1}}{a_n}-1 \right)
+\end{align*}
+was ein Widerspruch ist. 
+\\\\
+Sei nun andererseits $(a_n)_{n \in \mathbb{N}}$ monoton wachsend und beschränkt. Dann ist $\sum (a_{n+1}-a_n)$ eine konvergente Teleskop-Reihe. Wegen
+\begin{align*}
+0 \leq \frac{a_{n+1}}{a_n}-1 = \frac{a_{n+1}-a_n}{a_n} \leq \frac{1}{a_1}(a_{n+1}-a_n)
+\end{align*}
+folgt die Konvergenz der Reihe $\sum \left( \frac{a_{n+1}}{a_n}-1 \right)$ aus dem Majoranten-Kriterium. 
+\item Es konvergiere $\sum_n a_n $. Wegen $0 \leq \frac{a_n}{1+na_n} \leq a_n$ $(a_n \geq 0)$ folgt also die "$\Longleftarrow$" Implikation aus dem Majorantenkriterium. 
+\\\\
+Es gelte andererseits, dass $\sum_{n=1}^\infty \frac{a_n}{1+na_n}$ konvergiere. Sobald ein $a_{n_0}=0$ ist, so sind von dort an alle $a_n=0$ und die Behauptung ist trivial, es seien also alle $a_n >0$. Da $(a_n)_{n \in \mathbb{N}}$ monoton fallend ist, ist $1/a_n$ monoton wachsend und wir schliessen dass 
+\begin{align*}
+\frac{a_n}{1+na_n}= \frac{1}{n+ 1/a_n}
+\end{align*}
+monoton fallend ist. Dank Aufgabe \ref{ex:Olivier} gilt also $b_n:= n \frac{a_n}{1+a_n} \to 0$ als $n \to \infty$ und da 
+\begin{align*}
+na_n = \frac{b_n}{1-b_n}
+\end{align*}
+folgt auch $na_n \to 0$ für $n \to \infty$. Also gilt $0 < na_n < 1$ ab einem Index $n_0$ und daher für alle $n \geq n_0$ 
+\begin{align*}
+\frac{a_n}{1+na_n} \geq \frac{a_n}{2}
+\end{align*} 
+Nach dem Majorantenkriterium folgt nun, dass die Reihe $\sum \frac{a_n}{2}$ und damit auch die Reihe $\sum a_n$ konvergent ist. 
+\end{enumerate}
+\end{solution}
 
 \begin{ex}{$(\star)$}
 Bestimmen Sie f\"ur die folgenden Reihen, ob sie konvergent und ob sie absolut konvergent sind:
@@ -1149,6 +1245,398 @@ Also konvergiert die Reihe, was zu zeigen war.
 \end{align*}
 und folglich konvergiert die Reihe. 
 \end{solution}
+\newpage
+
+\section{Topologie: Metrische Räume}
+\begin{ex} Sei $(X,d)$ ein metrischer Raum. Beweise, dass auch $(X,d')$ mit  $d': X \times X \to \mathbb{R}$ spezifiziert als 
+\begin{align*}
+d'(x,y):= \frac{d(x,y)}{1+d(x,y)}
+\end{align*}
+ein metrischer Raum ist.
+\end{ex}
+\begin{solution} Wir müssen lediglich zeigen, dass $d'$ die drei definierenden Eigenschaften einer Metrik erfüllt, wir werden dazu selbstverständlich die Eigenschaft ausnützen, dass $d$ bereits eine Metrik auf $X$ ist. Seien also $x,y,z \in X$ fest aber beliebig:
+\begin{enumerate}
+\item Offensichtlich gilt, $d'(x,y) \geq 0$, weil $d(x,y) \geq 0$. Ausserdem gilt 
+\begin{align*}
+d'(x,y)= \frac{d(x,y)}{1+d(x,y)}=0 \iff d(x,y)=0 \iff x=y
+\end{align*}
+weil $d$ eine Metrik auf $X$ ist. 
+\item Die Symmetrie folgt aus der Eigenschaft weil $d$ eine Metrik ist. Bemerke:
+\begin{align*}
+d'(x,y)= \frac{d(x,y)}{1+d(x,y)}= \frac{d(y,x)}{1+d(y,x)}=d'(y,x).
+\end{align*}
+\item Die Dreiecksungleichung ist der schwierigste Teil. Da $d$ eine Metrik auf $X$ ist folgt $d(x,z) \leq d(x,y)+d(y,z)$. Also gilt auch
+\begin{align*}
+d'(x,z) = \frac{d(x,z)}{1+d(x,z)} \leq \frac{d(x,y)+d(y,z)}{1+d(x,z)}.
+\end{align*}
+Wir bemerken, dass die Abbildung $f(r):= \frac{r}{1+r}$ monoton wachsend ist. Seien dazu $r_1 \leq r_2$, wir wollen zeigen, dass $f(r_1) \leq f(r_2)$. Wir bemerken, dass 
+\begin{align*}
+f(r_1) = \frac{r_1}{1+r_1}= 1- \frac{1}{1+r_1}
+\end{align*}
+und wir haben
+\begin{align*}
+1+r_1 \leq 1+r_2 \implies \frac{1}{1+r_1} \geq \frac{1}{1+r_2} \implies - \frac{1}{1+r_1} \leq -\frac{1}{1+r_2}
+\end{align*}
+und daher 
+\begin{align*}
+f(r_1) = 1- \frac{1}{1+r_1} \leq 1 - \frac{1}{1+r_2} = \frac{r_2}{1+r_2}=f(r_2).
+\end{align*}
+Da wir $d(x,z) \leq d(x,y)+d(y,z)$ haben benützen wir obige Ungleichung für $r_1= d(x,z)$ und $r_2=d(x,y)+d(y,z)$. Dies liefert nun 
+\begin{align*}
+d'(x,z)= \frac{d(x,z)}{1+d(x,z)} \leq \frac{d(x,y)+d(y,z)}{1+d(x,y)+d(y,z)} = \frac{d(x,y)}{1+d(x,y)+d(y,z)}+ \frac{d(y,z)}{1+d(x,y)+d(y,z)}.
+\end{align*}
+Nun schätzen wir einzeln die Terme ab. Da $d(x,y) \geq 0$ und $d(y,z) \geq 0$ gilt
+\begin{align*}
+\frac{d(x,y)}{1+d(x,y)+\underbrace{d(y,z)}_{\geq 0}} \leq \frac{d(x,y)}{1+d(x,y)}=d'(x,y)
+\end{align*}
+und analog
+\begin{align*}
+\frac{d(y,z)}{1+\underbrace{d(x,y)}_{ \geq 0}+d(y,z)} \leq \frac{d(y,z)}{1+d(y,z)}=d'(y,z).
+\end{align*}
+Zusammenfassend folgt nun die Dreiecksungleichung $d'(x,z) \leq d'(x,y) + d'(y,z)$. Somit definiert $d'$ eine Metrik auf $X$ und $(X,d'$) ist auch ein metrischer Raum bezüglich $d'$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Sei $X$ eine beliebige nicht leere Menge und definiere $d: X \times X \to \mathbb{R}$ als 
+\begin{align*}
+d(x,y):= \begin{cases} 0 & \text{falls } x=y \\ 1 & \text{falls } x \neq y. \end{cases}
+\end{align*}
+\begin{enumerate}[i)]
+\item Zeige, dass $(X,d)$ ein metrischer Raum ist.
+\item Zeige dass eine Folge $(a_n)_{n \in \mathbb{N}}$ in $X$ genau dann bezüglich $d$ konvergiert, wenn sie konstant ist ab einem (endlichen) Index $N \in \mathbb{N}$.
+\item Folgere, dass $(X,d)$ vollständig ist.
+\item Welche Teilmengen von $X$ sind offen? Welche sind abgeschlossen? Was ist also die Topologie $\tau \subset \mathcal{P}(X)$ auf $X?$
+\item Sei $(M,d')$ ein beliebiger metrischer Raum und $f:X \to M$ eine beliebige Funktion. Zeige, dass $f$ stetig ist.
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item 
+\begin{enumerate}
+\item Per Definition ist klar, dass $d(x,y) \geq 0$ und $d(x,y)=0$ genau dann wenn $x=y$.
+\item Die Symmetrie ist ebenfalls trivial.
+\item Für die Dreiecksungleichung müssen wir zwei Fälle unterscheiden: 
+\begin{itemize}
+\item Falls $x=z$, dann ist $d(x,z)=0$ und $d(x,z) \leq d(x,y)+d(y,z)$ ist trivial wahr für alle Fälle (es gibt hier zwei weitere Situationen) denn $d(x,y),d(y,z) \in \{0,1\}$.
+\item Falls $x \neq z$, dann ist $d(x,z)=1$ und es gibt 3 Unterfälle:
+\begin{itemize}
+\item $x=y \neq z \implies 1=d(x,z) \leq d(x,y)+d(y,z) = 0+1=1$.
+\item $x \neq y=z \implies 1=d(x,z) \leq d(x,y)+d(y,z) = 1+0 =1$.
+\item $x \neq y \neq z \implies d(x,z) \leq d(x,y)+ d(y,z) = 1+1=2$. 
+\end{itemize} 
+\end{itemize}
+In allen Situationen ist also die Dreiecksungleichung erfüllt. 
+\end{enumerate}
+\item Wir verwenden die Notation "für fast alle $n \in \mathbb{N}$" was soviel bedeutet wie "für alle bis auf endlich viele". Da $d(a_n,a) \in \{0,1\}$ folgt 
+\begin{align*}
+a_n \xrightarrow[n \to \infty]{d} a  \iff d(a_n,a) \xrightarrow[n\to \infty]{} 0 &\iff d(a_n,a)=0 \text{ für fast alle } n \in \mathbb{N} \\
+& \iff a_n = a \text{ für fast alle }n \in \mathbb{N} \\
+& \iff a_n \text{ ist konstant ($=a$) ab einem Index } N \in \mathbb{N}.
+\end{align*}
+\item Sei $(x_n)_{n \in \mathbb{N}}$ eine Cauchy Folge in $X$, dann gibt es zu jedem $\epsilon >0$ ein $N \in \mathbb{N}$ sodass für alle $n,m$ grösser als $N$ gilt $d(x_n,x_m) < \epsilon$. Wähle nun $\epsilon=1/2$, dann gilt $d(x_n,x_m)=0$ und somit muss (analog wie in vorheriger Aufgabe) $x_n$ konstant für $n$ grösser als $N$ sein. Laut vorheriger Teilaufgabe bedeutet dies, dass die Folge konvergiert und somit ist jede Cauchy Folge konvergent, also $(X,d)$ ein vollständiger metrischer Raum. 
+\item Sei $A \subset X$ und $x \in A$ beliebig. Für $\epsilon = 1/2$ ist der Ball um $x$ mit Radius $\epsilon$ 
+\begin{align*}
+B_\epsilon(x)= \{ y \in X : d(x,y) < \epsilon\} = \{x\} \subset A.
+\end{align*}
+Damit ist $A$ offen. Also sind alle Teilmengen von $X$ offen und daher auch alle abgeschlossen weil $A^c$ offen impliziert $A$ abgeschlossen. Folglich können wir sagen $\tau = \mathcal{P}(X)$. 
+\item Mittels der topologischen Charakterisierung von Stetigkeit wissen wir: $f$ stetig $\iff f^{-1}(U) \subset X$ offen für alle $U \subset M$ offen. Da aber sowieso alle Teilmengen von $X$ offen sind, insbesondere also auch $f^{-1}(U)$, ist $f$ stetig. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Zeige, dass für alle $v \in \mathbb{R}^n$ gilt:
+\begin{align*}
+\|v\|_\infty = \lim_{p \to \infty} \|v\|_p.
+\end{align*}
+\end{ex}
+
+\begin{solution} Wir bemerken, dass einerseits.
+\begin{align*}
+\|v\|_\infty = \max_{j=1, \dots ,n} |v_j| = \left( \max_{j=1,  \dots ,n} |v_j|^p \right)^{1/p} \leq \left( |v_1|^p + \dots + |v_n|^p \right)^{1/p} = \|v\|_p.
+\end{align*}
+Andererseits haben wir:
+\begin{align*}
+\|v\|_p = ( |v_1|^p + \dots + |v_n|^p)^{1/p} \leq ( \|v\|_\infty^p + \dots + \|v\|_\infty^p)^{1/p} = n^{1/p} \|v\|_\infty.
+\end{align*}
+Zusammenführend haben wir also gezeigt, dass gilt:
+\begin{align*}
+\|v\|_\infty \leq \|v\|_p \leq n^{1/p} \|v\|_\infty.
+\end{align*}
+Da $\lim_{p \to \infty} n^{1/p}=1$ folgt aus dem Sandwich theorem die Behauptung. 
+\end{solution}
+
+\begin{ex} Beweise die Cauchy-Schwarz Ungleichung, das heisst für alle $v,w \in \mathbb{R}^n$ gilt
+\begin{align*}
+\sum_{i=1}^n |v_i||w_i| \leq \sqrt{\sum_{i=1}^n |v_i|^2} \sqrt{\sum_{i=1}^n |w_i|^2}.
+\end{align*}
+\end{ex}
+
+\begin{solution} Für $v=0$ oder $w=0$ ist die Cauchy-Schwarz-Ungleichung trivialerweise erfüllt. Seien also $v,w \neq 0$ und wir verwenden die (standard) Notation:
+\begin{align*}
+\|v\|_2:= \sqrt{\sum_{i=1}^n |v_i|^2}.
+\end{align*}
+Bemerke, dass $(x-y)^2 \geq 0 \iff 2xy \leq x^2+y^2$. Wir verwenden diese Ungleichung mit 
+\begin{align*}
+x:= \frac{|v_i|}{\|v\|_2}, \text{ und } y:= \frac{|w_i|}{\|w\|_2}.
+\end{align*}
+Wir erhalten:
+\begin{align*}
+2 \frac{|v_i||w_i|}{\|v\|_2\|w\|_2} \leq \frac{|v_i|^2}{\|v\|_2^2}+ \frac{|w_i|^2}{\|w\|_2^2}.
+\end{align*}
+Summation beider Seiten von $i=1, \dots , n$ liefert
+\begin{align*}
+\frac{2}{\|v\|_2 \|w\|_2} \sum_{i=1}^n |v_i| |w_i| \leq \sum_{i=1}^n \frac{|v_i|^2}{\|v\|_2^2} + \sum_{i=1}^n \frac{|w_i|^2}{\|w\|_2^2} = \frac{\|v\|_2^2}{\|v\|_2^2}+ \frac{\|w\|_2^2}{\|w\|_2^2}= 1+1=2.
+\end{align*}
+Also
+\begin{align*}
+\frac{2}{\|v\|_2 \|w\|_2} \sum_{i=1}^n |v_i| |w_i| \leq 2 \implies \sum_{i=1}^n |v_i||w_i| \leq \|v\|_2 \|w\|_2,
+\end{align*}
+ziehen der Wurzel auf beiden Seiten liefert nun die gewünschte Ungleichung von Cauchy-Schwarz. 
+\end{solution}
+
+\begin{ex} Sei $\ell_2$ der Raum der quadratsummierbaren reellen Folgen $(a_n)_{n \in \mathbb{N}}$, d.h. für welche die Reihe $\sum_{n=1}^\infty a_n^2$ konvergiert. Zeige, dass
+\begin{align*}
+d((a_n), (b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2}
+\end{align*}
+eine Metrik auf $\ell_2$ definiert. \\
+Hinweis: Verwende die Cauchy-Schwarz Ungleichung um die Dreiecksungleichung zu beweisen.
+\end{ex}
+
+\begin{solution} Seien $(a_n), (b_n), (c_n) \in \ell_2$ drei beliebige quadratsummierbare Folgen.
+\begin{enumerate}
+\item Offensichtlich gilt $d((a_n), (b_n)) \geq 0$ und es gilt 
+\begin{align*}
+d((a_n),(b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} =0 &\iff (a_n-b_n)^2 =0 \text{ für alle } n \in \mathbb{N} \\
+& \iff a_n=b_n \text{ für alle } n \in \mathbb{N} \\
+& \iff (a_n)=(b_n).
+\end{align*}
+\item Bemerke
+\begin{align*}
+d((a_n),(b_n))= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} = \sqrt{\sum_{n=1}^\infty (b_n-a_n)^2} = d((b_n),(a_n)),
+\end{align*}
+und somit ist die Symmetrie erfüllt.
+\item Dies ist der schwierigste Teil der Aufgabe. 
+\begin{align*}
+d((a_n),(c_n))&= \sqrt{ \sum_{n=1}^\infty (a_n-c_n)^2} = \sqrt{ \sum_{n=1}^\infty (a_n-b_n+b_n-c_n)^2} \\
+&= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2 + 2 \sum_{n=1}^\infty (a_n-b_n)(b_n-c_n) + \sum_{n=1}^\infty (b_n-c_n)^2}.
+\end{align*}
+Nun verwenden wir die Cauchy-Schwarz-Ungleichung, um den mittleren Term abzuschätzen:
+\begin{align*}
+\sum_{n=1}^\infty (a_n-b_n)(b_n-c_n) & \leq \sum_{n=1}^\infty |a_n-b_n||b_n-c_n| \\
+& \leq \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2}.
+\end{align*}
+Wir erhalten somit:
+\begin{align*}
+d((a_n),(b_n)) & \leq \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2 + 2 \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} + \sum_{n=1}^\infty (b_n-c_n)^2} \\
+& = \sqrt{ \left( \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} + \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} \right)^2} \\
+&= \sqrt{ \sum_{n=1}^\infty (a_n-b_n)^2} + \sqrt{ \sum_{n=1}^\infty (b_n-c_n)^2} = d((a_n),(b_n))+ d((b_n),(c_n)).
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Betrachte den $\mathbb{R}^n$ mit der Euklidischen Metrik. Zeige oder widerlege:
+\begin{enumerate}[i)]
+\item $X:= \{(x,y) \in \mathbb{R}^2 \mid x^2-y^2+2xy=5\}$ ist abgeschlossen. 
+\item $Y:= \{ \frac{\cos x}{x} \in \mathbb{R} \mid x \in \mathbb{N} \setminus \{0\}\} $ ist abgeschlossen. 
+\end{enumerate}
+\end{ex}
+
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Wahr. Sei $f(x,y)=x^2-y^2+2xy$. Dann ist $f$ stetig als Summe von Produkten stetiger Funktionen. Die Singleton Menge $\{5\}$ ist abgeschlossen in $\mathbb{R}$ und es folgt, dass $X= f^{-1}(\{5\})$ ebenfalls abgeschlossen ist. 
+\item Falsch. Es gilt:
+\begin{align*}
+\left| \frac{\cos (n)}{n} \right| \leq \frac{1}{n} \xrightarrow{n \to \infty} 0.
+\end{align*}
+Wäre $Y$ abgeschlossen, so müsste nach dem Folgenkriterium $0 \in Y$ gelten. Das ist aber nicht der Fall, weil 
+\begin{align*}
+\cos (x)=0 \iff x = n \pi + \frac{\pi}{2}, \quad n \in \mathbb{Z}
+\end{align*}
+und Zahlen der Form $n \pi + \frac{\pi}{2}$ sind irrational, insbesondere also nicht in $Y$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex}
+\begin{enumerate}[i.)]
+\item Sei $(X,d)$ ein metrischer Raum. Zeigen Sie:
+\begin{enumerate}
+\item
+die umgekehrte Dreiecksungleichung
+$$ \vert d(x,y) - d(y, z) \vert \leq d(x, z).$$
+\item
+die verallgemeinerte Dreiecksungleichung
+$$ d(x_n, x_1) \leq \sum_{i=1}^{n-1} d(x_{i+1}, x_i) .$$
+\item
+die Vierecksungleichung
+$$ \vert d(x,y) - d(u,v) \vert \leq d(x,u) + d(y,v) .$$
+\end{enumerate}
+
+\item Sei $(Y, \Vert \cdot \Vert)$ ein normierter $\RR$-Vektorraum. Zeigen Sie:
+\begin{enumerate}
+\item
+die umgekehrte Dreiecksungleichung
+$$ \big\vert \ \Vert x \Vert - \Vert y \Vert \ \big\vert \leq \Vert x -y \Vert .$$
+\item
+die verallgemeinerte Dreiecksungleichung
+$$ \Vert x_n - x_1 \Vert \leq \sum_{i=1}^{n-1} \Vert x_{i+1} - x_i \Vert .$$
+\end{enumerate}
+\end{enumerate}
+\end{ex}
+\begin{solution}
+\begin{enumerate}[i.)]
+\item
+\begin{enumerate}
+\item
+Die Dreiecksungleichung liefert uns f\"ur $x,y,z \in X$:
+$$d(x, y) \leq d(x, z) + d(y,z) \Rightarrow d(x,y) - d(y,z) \leq d(x,z) .$$
+Tauschen wir die Rollen von $x$ und $y$, so erhalten wir $-(d(x,y) - d(y,z)) = d(y,z) - d(x,y) \leq d(x,z)$. Dammit erhalten wir $ \vert d(x,y) - d(y, z) \vert \leq d(x, z).$
+\item
+Wir beweisen dies mit Induktion \"uber $n$. Die Induktionsverankerung $n=2$ ist trivial. Wir nehmen nun an, dass die Behauptung wahr ist f\"ur ein $n\in \NN_{\geq 2}$. Dann gilt
+$$ d(x_{n+1}, x_1) \leq d(x_{n+1}, x_n) + d(x_n, x_1) 
+\stackrel{\text{IV}}{\leq} d(x_{n+1}, x_n) + \sum_{i=1}^{n-1} d(x_{i+1}, x_i) = \sum_{i=1}^{n} d(x_{i+1}, x_i).$$ 
+\item
+Seien $x,y,u, v \in X$. Wir wenden zweimal die Dreiecksungleichung an und erhalten
+$$ d(x,y) \leq d(x,u) + d(u,y) \leq  d(x,u) + d(u,v) + d(v, y).$$
+Wir folgern
+$$ d(x,y) - d(u, v) \leq d(x,u) + d(y, v). $$
+Tauschen wir die Rollen von $x$ und $u$ und auch $y$ und $v$, so erhalten wir
+$$- (d(x,y) - d(u, v)) = d(u,v) - d(x,y) \leq  d(x,u) + d(y, v).$$
+Damit erhalten wir $\vert d(x,y) - d(u,v) \vert \leq d(x,u) + d(y,v)$.
+\end{enumerate}
+\item
+Folgt direkt aus $i.)$ mit $d(x,y)= \Vert x -y \Vert$.
+\end{enumerate}
+\end{solution}
+
+
+\begin{ex}
+Seien $(M_1, d_1), (M_2, d_2)$ metrische R\"aume. Sei $f: M_1 \rightarrow M_2$ gleichm\"assig stetig. Zeigen Sie:
+Ist $(a_n)_{n\in \NN}$ eine Cauchy-Folge in $M_1$ $\Rightarrow$ $(f(a_n))_{n\in \NN}$ ist eine Cauchy-Folge in $M_2$.
+\end{ex}
+\begin{solution}
+Sei $\epsilon>0$. Da $f$ gleichm\"assig stetig ist, existiert $\delta>0$, sodass
+\begin{align}
+\forall x,y \in M_1: d_1(x,y)<\delta \Rightarrow d_2(f(x),f(y))<\epsilon.
+\end{align}
+Da $(a_n)_{n\in \NN}$ eine Cauchyfolge bez\"uglich $d_1$ ist, gilt
+\begin{align}
+\exists N \in \NN \ \forall n,m\geq N: d_1(a_n, a_m)<\delta.
+\end{align}
+Kombinieren wir $(2)$ und $(3)$, so erhalten wir
+$$ \exists N\in \NN \ \forall n,m \geq N: d_2(f(a_n), f(a_m)) < \epsilon.$$
+Da $\epsilon>0$ beliebig war, folgt, dass $(f(a_n))_{n\in \NN}$ eine Cauchyfolge bez\"uglich $d_2$ ist.
+\end{solution}
+
+\begin{ex} In dieser Aufgabe wollen wir zeigen, dass $\ell_p \subset \ell_q$ für $0 <p \leq q$. 
+\begin{enumerate}[i)]
+\item Zeige zuerst, dass für $0< a \leq 1$ folgende Ungleichung gilt:
+\begin{align*}
+\left( \sum_{n=1}^\infty |a_n| \right)^a \leq \sum_{n=1}^\infty |a_n|^a.
+\end{align*}
+\item Folgere dass $\|a\|_q \leq \|a \|_p$.
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item Die Ungleichung ist trivial für $a=1$. Weiterhin ist die Ungleichung trivial falls die Folge $(a_n)_{n \in \mathbb{N}}$ identisch Null ist und dies ist genau der Fall falls 
+\begin{align*}
+\sum_{n=1}^\infty |a_n|=0.
+\end{align*}
+Sei also $\sum_{n=1}^\infty |a_n| \neq 0$. Bemerke weiterhin, dass für $x \in (0,1]$ and $a \in (0,1)$ gilt $x^a \geq x$. Dies ist wahr weil $x =1$ die Ungleichung trivial ist und für $x \in (0,1)$ haben wir
+\begin{align*}
+x^a \geq x \iff  \log (x^a) \geq \log (x) \iff a \log(x) \geq \log (x) \iff a \leq 1.
+\end{align*}
+Es folgt nun
+\begin{align*}
+\frac{\sum_{n=1}^\infty |a_n|^a}{\left( \sum_{k=1}^\infty |a_k|\right)^a} = \sum_{n=1}^\infty \frac{|a_n|^a}{\left( \sum_{k=1}^\infty |a_k|\right)^a} = \sum_{n=1}^\infty \left( \frac{|a_n|}{\sum_{k=1}^\infty |a_k|}\right)^a \geq \sum_{n=1}^\infty \frac{|a_n|}{\sum_{k=1}^\infty |a_k|} = \frac{\sum_{n=1}^\infty |a_n|}{\sum_{k=1}^\infty |a_k|}=1.
+\end{align*}
+Aus obiger Ungleichung folgt nun die Behauptung:
+\begin{align*}
+\left( \sum_{n=1}^\infty |a_n| \right)^a \leq \sum_{n=1}^\infty |a_n|^a.
+\end{align*}
+\item Sei nun $0 < p \leq q$, dann gilt für $a = p/q$ natürlich $0<a \leq 1$. Mit Teilaufgabe i) erhalten wir:
+\begin{align*}
+\left( \sum_n |a_n|^q \right)^{1/q} = \left( \sum_n |a_n|^q \right)^{p/qp}  = \left[\left( \sum_{n} |a_n|^q \right)^a\right]^{1/p} &\overset{i)}\leq \left( \sum_n |a_n|^{aq} \right)^{1/p} \\
+&= \left( \sum_{n} |a_n|^{q (p/q)} \right)^{1/p} \\
+&= \left( \sum_n |a_n|^p \right)^{1/p}.
+\end{align*}
+Dies zeigt nun, dass $\ell_p \subset \ell_q$ für $p \leq q$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Es sei 
+\begin{align*}
+A_n^{(m)}:= \begin{cases} \frac{1}{n} & \text{falls } n \leq m \\ 0 & \text{sonst}. \end{cases}
+\end{align*}
+Betrachten Sie die Folge $(b^{(m)})_{m \in \mathbb{N}} \subset \mathbb{R}^\mathbb{N}$ mit $b^{(m)}:= (A_n^m)_{n \in \mathbb{N}}$. 
+\begin{enumerate}[i)]
+\item Für welche $p \in [1, \infty]$ gilt $b^{(m)} \in \ell_p$?
+\item Bestimmen Sie die Grenzfolge $b^{( \infty)}$.
+\item Zeigen Sie, dass $(b^{(m)})_{m \in \mathbb{N}}$ bezüglich $\| \cdot \|_p$, wobei $p \in (1, \infty]$ konvergiert. 
+\end{enumerate}
+\end{ex}
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Sei $m \in \mathbb{N}$ fest aber beliebig (insbesondere also endlich). Weil die Folge $b^{(m)}$ nur endlich viele von Null verschiedene Folgenglieder besitzt, gilt $b^{(m)} \in \ell_\infty$. Sei nun $p \in [1, \infty)$. Dann gilt
+\begin{align*}
+\sum_{n=1}^\infty |A_n^{(m)}|^p = \sum_{n=1}^m |A_n^{(m)}|^p < \infty
+\end{align*}
+weil es sich um eine endliche Summe handelt. Also $b^{(m)} \in \ell_p$ und wir schliessen dass somit $b^{(m)} \in \ell_p$ für alle $p \in [1, \infty]$. 
+\item Die Grenzfolge ist gegeben durch 
+\begin{align*}
+b^{( \infty)} = \frac{1}{n}.
+\end{align*}
+\item Sei $p = \infty$ Dann gilt:
+\begin{align*}
+0 \leq \lim_{m \to \infty} \|b^{(m)} - b^{(\infty)}\|_\infty = \lim_{m \to \infty} \sup_{\substack{n \in \mathbb{N} \\ n \geq m}} \left| \frac{1}{n}\right| = \lim_{m \to \infty} \sup_{\substack{n \in \mathbb{N} \\ n \geq m}}  \frac{1}{n} = \lim_{m \to \infty} \frac{1}{m} = 0. 
+\end{align*}
+Sei nun $p \in (1, \infty)$, dann gilt 
+\begin{align*}
+0 \leq \lim_{m \to \infty} \|b^{(m)}- b^{( \infty)} \|_p = \lim_{m \to \infty} \left( \sum_{n=m+1}^\infty \left| \frac{1}{n}\right|^p \right)^{1/p} =\lim_{m \to \infty} \left( \sum_{n=m+1}^\infty  \frac{1}{n^p} \right)^{1/p}= 0,
+\end{align*}
+weil für alle $p > 1$ (Achtung $p$ muss strikt grösser als $1$ sein!) gilt
+\begin{align*}
+\sum_{n=1}^\infty \frac{1}{n^p}< \infty
+\end{align*}
+und somit muss der Tail d.h. $\sum_{n=m+1}^\infty \frac{1}{n^p}$ für $m \to \infty$  gegen Null konvergieren (siehe auch Nullfolgenkriterium). 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Es sei für $n,m \in \mathbb{N}_{ \geq 2}$:
+\begin{align*}
+A_n^{(m)}:= \frac{m}{m+n^{3/4}}.
+\end{align*}
+Betrachten Sie die Folge $(b^{(m)})_{m \in \mathbb{N}_{ \geq 2}} \subset \mathbb{R}^\mathbb{N}$ mit $b^{(m)}:= A_n^{(m)}$. 
+\begin{enumerate}[i)]
+\item Zeigen Sie $\|b^{(m)}\|_{ \ell_\infty} < \infty$ für alle $m \in \mathbb{N}_{ \geq 2}$. 
+\item Zeigen Sie $\| b^{(m)}\|_{ \ell_2} < \infty$ für alle $m \in \mathbb{N}_{ \geq 2}$. 
+\item Zeigen Sie $b^{(m)} \notin \ell_1$ für alle $m \in \mathbb{N}_{ \geq 2}$. Hinweis: Verwenden Sie für alle $a,b \in \mathbb{R}_{ \geq 2}$ gilt  $\frac{a}{a+b} > \frac{1}{b}.$
+\end{enumerate}
+\end{ex}
+
+\begin{solution} \
+\begin{enumerate}[i)]
+\item Es gilt:
+\begin{align*}
+\|b^{(m)}\|_{ \ell_\infty} = \sup_{n \in \mathbb{N}_{ \geq 2}} \left| \frac{m}{m+n^{3/4}}\right| = \sup_{n \in \mathbb{N}_{ \geq 2}} \frac{m}{m+n^{3/4}} \overset{(*)}= \frac{m}{m+2^{3/4}}<1< \infty \text{ für alle }m \in \mathbb{N}_{ \geq 2}.
+\end{align*}
+Wobei wir in (*) verwendet haben, dass die Folge $\frac{m}{m+n^{3/4}}$ für fixes $m$ monoton fallend in $n \in \mathbb{N}_{ \geq 2}$ ist. 
+\item Wir haben 
+\begin{align*}
+\|b^{(m)}\|_{ \ell_2}^2 = \sum_{n=2}^\infty \left| \frac{m}{m+n^{3/4}}\right|^2 = \sum_{n=2}^\infty \left( \frac{m}{m+n^{3/4}}\right)^2 \leq m^2 \sum_{n=1}^\infty \frac{1}{(m+n^{3/4})^2}< m^2 \sum_{n=1}^\infty \frac{1}{n^{3/2}}< \infty.
+\end{align*}
+Wobei wir im letzten Schritt verwendet haben dass die Riemann'sche Zeta-Reihe mit $s=3/2 >1$ konvergiert. 
+\item Wir verwenden den Hinweis, dass für alle $a,b \in \mathbb{R}_{ \geq 2}$ die Ungleichung $\frac{a}{a+b}> \frac{1}{b}$ gilt. Damit erhalten wir nun:
+\begin{align*}
+\|b^{(m)}\|_{ \ell_1} = \sum_{n=2}^\infty \left| \frac{m}{m+n^{3/4}}\right| = \sum_{n=2}^\infty \frac{m}{m+n^{3/4}}> \sum_{n=2}^\infty \frac{1}{n^{3/4}} = \infty
+\end{align*}
+Wobei wir verwendet haben, dass die Riemann'sche Zeta-Reihe mit $s=3/4 < 1$ divergent ist. Die Behauptung erfolgt nun durch das Minorantenkriterium. 
+\end{enumerate}
+\end{solution}
+
 \newpage
 
 
@@ -2501,4 +2989,62 @@ Nun liefert die Integration über die Grenzen schliesslich:
 \end{solution}
 
 
+\section{Anhang}
+
+Dieser Anhang beinhaltet zusätzliche Aufgaben. Die Aufgaben haben Lösungen, welche jedoch nicht ausführlich sind. Es handelt sich bei allen Aufgaben um \textit{kurze Rechnungsaufgaben}.
+\begin{ex} Führen Sie folgende Polynomdivisionen durch, das heisst berechnen Sie $f(x)/g(x)$:
+\begin{enumerate}[i)]
+\item $f(x)= x^3-2x^2-5x+6$, $g(x)=x-1$.
+\item $f(x)=3x^3-10x^2+7x-12$, $g(x)=x-3$.
+\item $f(x)=x^3-6x^2-x+6$, $g(x)=x-1$.
+\item $f(x)=2x^3-x^2-8x+4,$ $g(x)=x^2-4$.
+\item $f(x)=x^3-tx^2-2x+2t$, $g(x)=x^2-2$ wobei $t \in \mathbb{R}$.
+\item $f(x)=x^5+x^4-8x^3+26x^2-29x+21$, $g(x)=x^2-2x+3$.
+\item $f(x)=x^3-3x^2-6x+8$, $g(x)=x+1$.
+\item $f(x)=2x^3-3x+1$, $g(x)=2x-1$.
+\item $f(x)=6a^6+a^4b+25b^3$, $g(x)=3a^2 + 5b$.
+\item $f(x)=\frac{1}{2}x^3- \frac{3}{2}x^2-2x+6$, $g(x)=x-2$. 
+\end{enumerate}
+\end{ex}
+
+\begin{solution} In folgender Lösung werden wir nur das Resultat auflisten:
+\begin{enumerate}[i)]
+\item $x^2-x-6$.
+\item $3x^2-x+4$.
+\item $x^2-5x-6.$
+\item $2x-1$.
+\item $x-t.$
+\item $x^3+3x^2-5x+7$.
+\item $x^2-4x-2 + \frac{10}{x+1}$.
+\item $x^2+ \frac{1}{2}x- \frac{5}{4}- \frac{1}{4(2x-1)}.$
+\item $2a^4-3a^2b+ 5b^2$.
+\item $ \frac{1}{2}x^2- \frac{1}{2}x-3$. 
+\end{enumerate}
+\end{solution}
+
+\begin{ex} Führen Sie die Partialbruchzerlegung folgender Funktionen durch:
+\begin{enumerate}[i)]
+\item $f(x) = \frac{x}{x^2-1}$.
+\item $f(x) = \frac{x^2}{x^2-2x+1}.$
+\item $f(x) = \frac{5x^2+2x+1}{x^3+x}.$
+\item $f(x) = \frac{4x^2-5x-3}{2x^3+3x^2-1}.$
+\item $f(x) = \frac{5x^2+8x+9}{x^3+3x^2+6x+4}$.
+\item $f(x) = \frac{6x^2-5x-5}{x^3-2x^2-x+2}$.
+\item $f(x)= \frac{6x^2-4x-7}{x^3-3x-2}.$
+\item $f(x) = \frac{30}{x^3-x}$.
+\end{enumerate}
+\end{ex}
+
+\begin{solution}
+\begin{enumerate}[i)]
+\item $\frac{1}{2} \frac{1}{(x-1)}+ \frac{1}{2} \frac{1}{(x+1)}$.
+\item $1 + \frac{2}{x-1} + \frac{1}{(x-1)^2}$.
+\item $\frac{1}{x}+ \frac{4x+2}{x^2+1}$.
+\item $\frac{3}{x+1}- \frac{2}{(x+1)^2}- \frac{2}{2x-1}$.
+\item $\frac{2}{(x+1)}+ \frac{3x+1}{x^2+2x+4}$.
+\item $\frac{2}{x-1} + \frac{1}{x+1}+ \frac{3}{x-2}$.
+\item $\frac{1}{x+1}+ \frac{4x+3}{(x+1)^2} + \frac{1}{x-2}$.
+\item $\frac{-30}{x} + \frac{15}{x+1}+ \frac{15}{x-1}$.
+\end{enumerate}
+\end{solution}
 \end{document}
